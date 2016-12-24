@@ -1,0 +1,37 @@
+/*
+ * @(#)$Id: leq3,v 1.2 1996/06/11 17:04:51 img Exp $
+ *
+ * $Log: leq3,v $
+ * Revision 1.2  1996/06/11 17:04:51  img
+ * Correct equations for these predicates.
+ *
+% Revision 1.1  1994/09/16  09:38:16  dream
+% Initial revision
+%
+ */
+
+problem([]==>x:pnat=>y:pnat=>leq(s(x),s(y))=leq(x,y)in u(1),
+repeat intro then wfftacs,lambda(x,lambda(y,_7646)),
+[problem([x:pnat,y:pnat]==>leq(s(x),s(y))=leq(x,y)in u(1),
+ compute([[1]]=_7695 in _7692),_7655,
+ [problem([x:pnat,y:pnat]==>term_of(leq)of s(x)of s(y)=leq(x,y)in u(1),
+  compute([[1]]of _7759 of _7756=_7753 in _7750),_7708,
+  [problem([x:pnat,y:pnat]==>lambda(x,p_ind(x,lambda(~,{true}),[~,v1,lambda(y,p_ind(y,void,[v2,~,v1 of v2]))]))of s(x)of s(y)=leq(x,y)in u(1),
+   beta_reduce,_7772,
+   [problem([x:pnat,y:pnat]==>p_ind(s(x),lambda(~,{true}),[~,v1,lambda(y,p_ind(y,void,[v2,~,v1 of v2]))])of s(y)=leq(x,y)in u(1),
+    compute([[1]]of _7924=_7921 in _7918),_7850,
+    [problem([x:pnat,y:pnat]==>lambda(y,p_ind(y,void,[v2,~,p_ind(x,lambda(~,{true}),[~,v1,lambda(y,p_ind(y,void,[v2,~,v1 of v2]))])of v2]))of s(y)=leq(x,y)in u(1),
+     beta_reduce,_7937,
+     [problem([x:pnat,y:pnat]==>p_ind(s(y),void,[v2,~,p_ind(x,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of v2])=leq(x,y)in u(1),
+      compute([[1]]=_8102 in _8099),_8023,
+      [problem([x:pnat,y:pnat]==>p_ind(x,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of y=leq(x,y)in u(1),
+       simplify then intro(using(pnat=>u(1)))then wfftacs,axiom,
+       [
+       ]) ext _8023
+      ]) ext _7937
+     ]) ext _7850
+    ]) ext _7772
+   ]) ext _7708
+  ]) ext _7655
+ ]) ext _7646
+]).

@@ -1,0 +1,19 @@
+/*
+ * @(#)$Id: prod2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: prod2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:pnat=>t:pnat list=>prod(h::t)=times(h,prod(t))in pnat,
+repeat intro then wfftacs,lambda(h,lambda(t,_3082)),
+[problem([h:pnat,t:pnat list]==>prod(h::t)=times(h,prod(t))in pnat,
+ compute([[2]]=_3131 in _3128),_3091,
+ [problem([h:pnat,t:pnat list]==>times(h,list_ind(t,s(0),[h_,t_,k,times(h_,k)]))=times(h,prod(t))in pnat,
+  simplify then identity,axiom,
+  [
+  ]) ext _3091
+ ]) ext _3082
+]).

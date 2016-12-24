@@ -1,0 +1,107 @@
+/*
+ * @(#)$Id: normal,v 1.2 1998/09/15 16:00:40 img Exp $
+ *
+ * $Log: normal,v $
+ * Revision 1.2  1998/09/15 16:00:40  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.1  1996/12/11 14:08:45  img
+ * Merge mthd and smth libraries.
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ *
+ */
+
+	% NORMALISE SUBMETHODS: performs a series of normalisation
+	% steps. Current repertoire is:
+	% /* - apply intro rule to X:A=>B goals. */
+	% - apply intro rule to A=>B goals.
+	% /* - apply intro rule to universally quantified A=>B goals. */
+	% - eliminate existential quantifiers from the hyps
+	% - eliminate implications A=>B from the hyps if A is provable
+	%   by lemma and hyps
+	%   (this also when goal preceded by universal quantifiers).
+	% - eliminate hyps of the form a#b
+	%
+	% Of course, this set is always open to extensions.
+	%
+	% All these submethods are combined together in an iterating
+	% methodical called normalize/1.
+
+
+method(normal(univ_intro),
+          H==>Var:A=>B,
+          [],
+          [((hfree([Var],H),NewVar=Var,NewGoal=B)
+            orelse
+            (hfree([NewVar],H),replace_all(Var,NewVar,B,NewGoal))),
+	   append(H, [NewVar:A], NewH)],
+          [NewH==>NewGoal],
+          normal(univ_intro)).
+
+method(normal(imply_intro),
+          H==>A=>B,
+          [],
+          [hfree([NewVar],H),
+           append(H, [NewVar:A], NewH)],
+          [NewH==>B],
+          normal(imply_intro)
+         ).
+
+method(normal(conjunct_elim(HName,[New1,New2])),
+          H==>G,
+          [hyp(HName:A#B,H)],
+          [hfree([New1,New2],H),
+           del_hyp(HName:A#B,H,HThin)
+          ],
+          [[New1:A,New2:B|HThin]==>G],
+          normal(conjuct_elim(HName,[New1,New2]))
+         ).
+
+/*   The following submethod's are only used in the prime factorisation
+     proof, which, since it cannot be got going in a principled way without
+     a lot more work, makes them pretty redundant for the time being.
+
+method(normal(univ_imply_intro),
+          H==>G,
+          [matrix(Vars,A=>B,G)],
+          [findall(V:T, (member(V:T,Vars),exp_at(A,_,V)),AVars),
+           subtract(Vars,AVars,BVars),
+           matrix(BVars,B,NewGoal),
+           hfree([NewH],H),
+           append(AVars,[NewH:A|H],NewHyps)
+          ],
+          [NewHyps==>NewGoal],
+          normal(univ_imply_intro(V:T))
+         ).
+
+method(normal(exist_elim(HName)),
+          H==>G,
+          [hyp(HName:V:T#H1,H)],
+          [hfree([NewV,NewHName],H),
+           replace_all(V,NewV,H1,NewH1),
+           del_hyp(HName:V:T#H1,H,HThin)
+          ],
+          [[NewV:T,
+            NewHName:NewH1
+            |HThin]==>G],
+          normal(exist_elim)
+         ).        
+method(normal(imply_elim(HName,Lemma)),
+          H==>G,
+          [hyp(HName:A=>B,H),
+           (hyp(Lemma:A,H)
+            v applicable(H==>A,apply_lemma(Lemma))
+            v applicable(H==>A,backchain_lemma(Lemma))         
+           )
+          ],
+          [hfree([NewH],H),
+           del_hyp(HName:A=>B,H,HThin)
+          ],
+          [[NewH:B|HThin]==>G],
+          normal(imply_elim(Lemma))
+         ).
+
+
+*/

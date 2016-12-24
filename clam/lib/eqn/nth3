@@ -1,0 +1,37 @@
+/*
+ * @(#)$Id: nth3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: nth3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:pnat=>h:int=>t:int list=>nth(s(n),h::t)=nth(n,t)in int list,
+repeat intro,lambda(n,lambda(h,lambda(t,_7757))),
+[problem([n:pnat,h:int,t:int list]==>nth(s(n),h::t)=nth(n,t)in int list,
+ compute([[1]]=_7814 in _7811),_7766,
+ [problem([n:pnat,h:int,t:int list]==>term_of(nth)of s(n)of (h::t)=nth(n,t)in int list,
+  compute([[1]]of _7886 of _7883=_7880 in _7877),_7827,
+  [problem([n:pnat,h:int,t:int list]==>lambda(n,p_ind(n,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))]))of s(n)of (h::t)=nth(n,t)in int list,
+   beta_reduce,_7899,
+   [problem([n:pnat,h:int,t:int list]==>p_ind(s(n),lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of (h::t)=nth(n,t)in int list,
+    compute([[1]]of _8067=_8064 in _8061),_7985,
+    [problem([n:pnat,h:int,t:int list]==>lambda(l,list_ind(l,nil,[~,v3,~,p_ind(n,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of v3]))of (h::t)=nth(n,t)in int list,
+     beta_reduce,_8080,
+     [problem([n:pnat,h:int,t:int list]==>list_ind(h::t,nil,[~,v3,~,p_ind(n,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of v3])=nth(n,t)in int list,
+      compute([[1]]=_8265 in _8262),_8176,
+      [problem([n:pnat,h:int,t:int list]==>p_ind(n,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of t=nth(n,t)in int list,
+       simplify then repeat intro,axiom,
+       [problem([n:pnat,h:int,t:int list]==>p_ind(n,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of t in int list,
+        intro(using(int list=>int list))then repeat intro,axiom,
+        [
+        ]) ext _8354
+       ]) ext _8176
+      ]) ext _8080
+     ]) ext _7985
+    ]) ext _7899
+   ]) ext _7827
+  ]) ext _7766
+ ]) ext _7757
+]).

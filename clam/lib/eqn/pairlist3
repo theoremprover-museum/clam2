@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: pairlist3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: pairlist3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h1:int=>t1:int list=>h2:int=>t2:int list=>pairlist(h1::t1,h2::t2)=(h1::h2::nil)::pairlist(t1,t2)in int list,_,_,_).

@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: less,v 1.2 1998/07/27 13:10:52 img Exp $
+ *
+ * $Log: less,v $
+ * Revision 1.2  1998/07/27 13:10:52  img
+ * *** empty log message ***
+ *
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+less(x,y)<==>term_of(less)of x of y.

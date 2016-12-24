@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: ordered,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: ordered,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+ordered(x)<==>term_of(ordered)of x.

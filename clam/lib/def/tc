@@ -1,0 +1,2 @@
+tc(t,r) <==> lambda(u,lambda(v,x:pnat#tci(t,x,r) of u of v)).
+

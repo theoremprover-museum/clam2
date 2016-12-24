@@ -1,0 +1,921 @@
+\def\rcsid{$Id: general.tex,v 1.15 1999/04/30 14:42:32 img Exp $}
+\input header
+
+\chapter {Rippling and Reduction}
+\label {ch:gen}
+
+This chapter provides general background material on the two basic
+forms of rewriting provided by \clam.  
+
+
+
+
+\section {Introduction}
+One of the basic logical manipulations that \clam{} uses is \inx{term
+rewriting}.  Where possible, \clam{} ensures that the rewriting is
+terminating\index {termination}, and to this end, \clam supports two
+different types are termination argument: {\em rippling\/} and {\em
+reduction}.   Rippling is outlined in
+section~\reference{sec:annotation} and reduction
+in~\reference{sec:reduction}.  Both of these are based on the standard 
+notion of rewrite rule, which is treated in section~\reference{sec:rewriting}
+
+\paragraph {Notation}
+
+We use the following notation when describing rewriting.
+
+$\mimplies$ is \clam's meta-level implication; $\oimplies$ is
+object-level implication; $\oequiv$ is object-level biimplication; $=$
+is object-level equality.\footnote {Equality in Oyster is typed but
+these types are elided in this chapter.}  We write $\overline{t_n}$
+rather than $t_1,\ldots,t_n$, for $n\geq 0$.
+
+A set $R$ of rewrite rules consists of conditional rules of the form
+$c\mimplies l\rew r$ where the
+union of the free variables in the condition $c$ and the right-hand
+side $r$ is a subset of the free variables on the left-hand side,
+$l$, and finally, $l$ is not a variable.  When the condition on a rule
+is vacuous that rule will be written with the condition elided, as
+$l\rew r$.
+
+
+\section {Rewriting}
+\label{sec:rewriting}
+
+\subsection {Polarity}
+\label{sec:rrpol}
+\clam's various rewrite rules are extracted automatically from lemmas
+(equalities, equivalences and implications).  Since \clam rewrites
+both propositions and terms it is necessary to account for
+\index*{polarity}---rewrite rules derived from
+implication~($\oimplies$) are distinguished from those derived from
+equality~($=$) and equivalence~($\oequiv$) since they may only be used
+at positions of certain (logical) polarity.
+
+The user has a fair degree of control as to exactly which lemmas are
+to be used as rewrites, but it is convenient to define a set of {\em
+general rewrites}, $\Rewrite$, from which \clam's reduction and
+wave-rules are extracted.  Any rewrite to be used as a reduction rule
+or wave-rule must belong to $\Rewrite$.
+
+\begin{defn}[Polarity]
+A proposition $p$ appearing in the conclusion $q$ of a sequent
+$\Gamma\vdash q$ has a {\em polarity\/} that is either positive ($+$),
+negative ($-$) or both (${\pm }$).  In a sequent $\Gamma \vdash G$, $G$
+has positive polarity, written $G^+$.
+
+The complement of a polarity $p$ is written $\bar{p}$, defined to be
+$\bar{+}=-$, $\bar{-}=+$ and $\bar{\pm}=\pm$.  
+
+Polarity is defined inductively over the structure of propositions:
+$(A^{\bar{p}}\oimplies B^p)^p$, $(A^p\oand B^p)^p$, $(A^p\oor B^p)^p$
+and $(\oneg{A^{\bar{p}}})^p$; the polarity of non-propositional terms
+is $\pm$.  Propositions beneath an equivalence can have either
+polarity: $(A^\pm\oequiv B^\pm)^p$.
+\end{defn}
+
+\clam uses polarity to ensure that rewriting withing propositional
+structure is sound:  when rewriting with respect to equality ($=$) or
+biimplication ($\oequiv$) the polarity of the term being rewritten is
+immaterial to soundness.  When rewriting with respect to implications, 
+the polarity of the term being rewritten must be either $+$ or $-$,
+depending on the direction of the implication.  These notions are made 
+precise by {\em polarized TRS\/}s.
+
+\begin{defn}[Polarized TRS]
+A polarized TRS $T$ consists of rewrite rules $l\rew_p r$ where
+$p$ is a polarity annotation, one of $+$, $-$.
+\end{defn}
+
+\begin{defn}[Polarized term rewriting]
+\label{def:poltr}
+Given a polarized TRS $T$, a term $u$ rewrites in one step
+to $\sigma r$, written $u\rew_T \sigma r$, iff there is a
+subterm $t$ of $u$ at polarity $p$, and one of the
+following two (not exclusive) conditions holds:
+
+\begin{enumerate}
+\item $u\rew_p v\in T$, or, 
+\item $p$ is $\pm$ and rules for both $+$ and $-$ are available, that
+is, {\em both\/} of the following hold:
+\[u\rew_+ v\in T \qquad\qquad u\rew_- v\in T
+\]
+\end{enumerate}
+\end{defn}
+
+\subsection {\clam's rewrite rules}
+In the current \clam{} implementation, rewrites based on equivalences 
+are in fact stored separately rather than being stored separately as
+$+$ and $-$ parts.
+
+Rewrites are collected from formulae as and when they are loaded into
+the environment.  Rewrite rules are all stored in the Prolog database, 
+and can be examined using \p{rewrite-rule/5}.
+
+
+variables become the variables of the rewrite rule; conditions of
+conditional rules derived from propositional structure.  
+
+\begin{defn}[$\Rewrite$]
+We define the following polarized TRSs:
+\begin{eqnarray*}
+  \Rewrite_+ &\subseteq& \left\{ c\mimplies l\rew_+ r \left|
+			\mbox{\ any of\ }\begin{array}{ll}
+			c\oimplies l\oimplies r\\
+			c\oimplies l=r & c\oimplies r=l\\
+			c\oimplies l\oequiv r & c\oimplies r\oequiv l
+			\end{array}\right.\right\}\\
+  \Rewrite_- &\subseteq& \left\{ c\mimplies l\rew_- r \left|
+			\mbox{\ any of\ }\begin{array}{ll}
+			c\oimplies r\oimplies l\\
+			c\oimplies l=r & c\oimplies r=l\\
+			c\oimplies l\oequiv r & c\oimplies r\oequiv l
+			\end{array}\right.\right\}\\
+  \Rewrite & \eqdef &  {\Rewrite_+} \cup {\Rewrite_-}
+\end{eqnarray*}
+where the set comprehension is taken over all provable universally
+quantified object-level
+formulae. (The left- and right-hand sides of the rules must satisfy the 
+usual restrictions that $l$ is not a variable and that the free
+variables in $r$ appear free in $l$.)
+\end{defn}
+The intention is that $\Rewrite_+$ are the rewrites that are sound at
+positions of positive polarity, $\Rewrite_-$ sound at negative
+positions, and $\Rewrite_\pm$ sound at either. $\Rewrite$ is the union 
+of all of these.  As we shall see below, both wave-rules and reduction 
+rules are chosen from these sets.
+
+For example, the formula $\forall x.\forall y. x\not=h\oimplies x\in
+h::t\oequiv x\in t$ yields the following rewrite-rules (using
+uppercase symbols to denote variables):
+\begin{eqnarray*}
+X\not=H \mimplies X\in H::T &\rew_+ & X\in T\\
+X\not=H \mimplies X\in H::T &\rew_- & X\in T\\
+                  X\in H::T\oequiv X\in T &\rew_- & X\not=H\\
+\end{eqnarray*}
+
+\section {Annotations and rippling}
+\label{sec:annotation}
+\index{annotation}
+
+\subsection {Syntax of well-annotated terms}
+\label{wave-fronts}
+\index{annotation}
+\index{annotation!wave-front}
+\index{annotation!wave-hole}
+\index{annotation!sink}
+\index{annotation!annotation=$\wf{\cdots{\wh{\quad}}\cdots}$}
+
+Annotations\defindex{annotation} provide a mechanism for
+controlling the search among rewrite operations in inductive
+proofs. \cite{pub567} gives motivation and outlines basic properties
+of annotated terms.
+
+Here we give a formal definitions of: syntax of annotated terms,
+skeletons, erasure, annotated rewriting, well-founded measures on
+terms, weakening, and touch on some aspects of the implementation.
+Much of this material is taken from~\cite{BasinWalsh96}.
+
+\begin{defn}[\WAT/\WATS]
+We assume a set $\TERM$ of unannotated first-order terms over some
+signature $\Sigma$  (which does not include the symbols
+$\{\wfoutsym,\wfinsym,\whsym,\sinksym\}$), and set of variables $V$.
+\begin{itemize}
+\item $\WAT\subset\WATS$.
+\item $u\in \WAT$ if $u\in \TERM$.
+\item $\sinksym(u)\in \WATS$ if $u\in \TERM$.
+\item $\wfoutsym(f(\overline{t_n}))\in\WAT$ iff $f\in\Sigma$ is of arity
+$n$, and for some $i$, $t_i=\whsym(s_i)$ and for each $i$ where
+$t_i=\whsym(s_i)$, $s_i\in\WAT$, and for each $i$ where
+$t_i\not=\whsym(s_i)$, $t_i\in \TERM$.
+\item
+	$\wfinsym(f(\overline{t_n}))\in\WAT$ under similar conditions to
+	the case above.
+\item $f(\overline{t_n})\in\WAT$ if $f\in\Sigma$ and each $t_i\in \TERM$ for
+	all $i$.
+\end{itemize}
+\end{defn}
+The set $\WAT$ and $\WATS$ differ only in that the latter contains
+sinks, whilst former does not.
+
+\begin{remark}
+A sink is not permitted to contain an  annotated term in this version
+of \clam.  
+\end{remark}
+
+\begin{remark}
+In the sequel, $\wfoutsym(\cdot)$ will be depicted as $\wfout{\cdot}$,
+$\wfinsym(\cdot)$ as $\wfin{\cdot}$, $\whsym(\cdot)$ as
+$\wh{\cdot}$, and $\sinksym(\cdot)$ as $\sink{\cdot}$.
+\end{remark}
+
+\begin{ex}
+The following are thus annotated terms:
+\[
+	\wfout{s(\wh{plus(x,\sink{x})})}\quad
+plus(\wfin{s(\wh{\sink{x}})},\sink{x})
+\]
+\end{ex}
+
+\begin{defn}[$\skels:\WATS\rightarrow2^\TERM$]
+is defined recursively over well-annotated terms:
+\[\begin{array}{rcl}
+   \skels(u) &=& \{u\}\qquad\mbox{for all $u\in V$}\\
+	\skels(\wfout{f(\overline{t_n})}) &=&
+		\{s \mid \mbox{for some $i$,}\;t_i=\wh{t'_i}\land s\in \skels(t'_i)\}
+			\qquad\mbox{$f\in\Sigma$}\\
+	\skels(\wfin{f(\overline{t_n})}) &=&
+		\{s \mid t_i=\wh{t'_i}\land s\in
+			   \skels(t'_i)\}\qquad\mbox{$f\in\Sigma$}\\
+	\skels(\sink{t}) &=& v\quad\mbox{where $v$ is a fresh variable} \\
+	\skels(f(\overline{t_n})) &=&
+		\{f(\overline{s_n})\mid \mbox{for all $i$,}\;s_i\in\skels(t_i)\}
+  \end{array}\]
+\end{defn}
+Functions over annotated terms will generally be defined over $\WATS$: 
+the restriction of these functions to $\WAT$ is trivial and we shall
+not be formal about it.
+
+The skeleton of a sink term is defined to be some fresh variable: it
+stands for a `wild-card'.
+
+\begin{remark}
+When $\skels$ is singleton, we often refer to {\em the\/} skeleton.
+\end{remark}
+
+The following notion of skeleton equality is defined over singleton
+skeletons. We are quite informal here.
+\begin{defn}[Equality of skeletons]
+Let $a$ and $b$ be $\WATS$, such that $skels(a)=\{s_a\}$ and
+$skels(b)=\{s_b\}$ for some $\TERM$s $s_a$ and $s_b$.  These skeletons 
+are equal, $s_a=s_b$ iff there exists some substitution over the
+wild-cards appearing in $s_a$ and $s_b$ such that
+\[
+	s_a\sigma \mbox{\ is identical to\ }s_b\sigma
+\]
+\end{defn}
+The intention is that the skeletons two annotated terms are equal
+providing the only disagreement between those skeletons occurs at
+sink positions.
+
+\begin{ex}
+The skeleton of the first example above is $\{plus(x,w_1)\}$, the
+skeleton of the second example is $\{plus(w_2,w_3)\}$.
+
+Notice that these skeletons are identical modulo instantiation of the
+`wild-card' variables $w_1$, $w_2$ and $w_3$.
+\end{ex}
+
+The erasure of a well-annotated term is computed by $\erase$.
+ \begin{defn}[$\erase:\WATS\rightarrow\TERM$]
+is defined recursively over well-annotated terms:
+\[\begin{array}{rcl}
+   \erase(u) &=& u\quad\mbox{for all $u\in V$}\\
+   \erase(\wfout{f(\overline{t_n})}) &=&
+		f(\overline{s_n})\quad\mbox{where if $t_i=\wh{t'_i}$,
+			   $s_i=erase(t'_i)$ else $s_i=t_i$}  \\
+   \erase(\wfout{f(\overline{t_n})}) &=&
+		f(\overline{s_n})\quad\mbox{where if $t_i=\wh{t'_i}$,
+			   $s_i=erase(t'_i)$ else $s_i=t_i$}  \\
+   \erase(\sink{t}) &=& t\\
+   \erase(f(\overline{t_n})) &=&
+		f(\overline{s_n})\quad\mbox{where $s_i=erase(t_i)$}
+  \end{array}\]
+\end{defn}
+
+\subsection {Wave-rules and rippling}
+\index{measure}\index{termination of
+rippling}\index{rippling!termination}
+\index{wave-rule}\index{rippling}
+Here we define $>$ which is a well-founded relation over
+$\WATS$.   
+
+\begin{defn}[$\partial^\star$]
+$\partial^\star$ is an annotated reduction ordering on $\WAT$s.
+See~\cite{BasinWalsh96}.
+\end{defn}
+
+\noindent{\em Wave-rules\/} are rewrite rules defined over annotated terms, as follows:
+\begin{defn}[Wave-rule]
+
+For $c\in\TERM$, $l,r\in\WAT$,  $c\mimplies l\rewrip_p r$ is a
+(polarized) wave-rule iff the following three conditions hold:
+\begin{description}
+\item [Soundness]
+\[
+c\mimplies  erase(l)\rew_p erase(r) \quad\in\quad \Rewrite
+\]
+\item [Skeleton preserving]
+\[
+	skels(l) = skels(r)
+\]
+\item [Termination]
+\[
+	 l\partial^\star r
+\]
+\end{description}
+That is, a wave-rule is an annotated, measure-reducing, skeleton-preserving,
+sink-free,  conditional polarized rewrite-rule.
+\end{defn}
+The definition of annotated substitution can be found
+in~\cite{BasinWalsh96}, along with a notion of wave-rewriting.  We
+shall make do here with an informal definition:
+
+\begin{defn}[Rippling]
+A term $s$ ripples to a term $t$ if one or more wave-rules rewrites
+$s$ to $t$, i.e., $s\rewrip^+t$ where $\rewrip^+$ is the irreflexive
+transitive closure of the congruence induced by $\rewrip$.
+\end{defn}
+
+\subsection {Rippling in \clam}
+\index{rippling} \index{rippling!rewriting records}
+Rules which rewrite $\WAT$s are called {\em \inx{wave-rule}s},
+they are computed {\em \inx {rewrite rule}s\/} according to the
+definition above 
+(see also~\S\reference{rewrite-records}) as needed during
+proof-planning.  The rewrite database provides the stock of \inx
+{rewrite rules} from which these wave-rules can be dynamically
+constructed---hence the term {\em \inx {dynamic
+rippling}}.\index{rippling!dynamic}
+
+As stated above, rippling is the repeated application of wave-rules:
+normally in \clam{} wave-rules are applied to an annotated term until
+no more wave-rules apply.
+
+There are two basic types of rippling: static and dynamic.  Static
+rippling is what is defined in the previous section.  The
+distinction concerns the manner in which the various conditions on
+rippling are enforced.  \clam supports only static rippling but
+we describe dynamic rippling here too for completeness.
+
+The important point is that static and dynamic rippling are {\em
+different\/} rewriting relations: in fact, the dynamic rippling
+relation is strictly larger than the static rippling relation.
+\footnote{Interested readers may like to know that at the time of writing,
+$\lambda$Clam~\cite{Richardson+98} supports dynamic rippling via
+embeddings~\cite{pub799}.  But, I digress.}
+
+\subsubsection {Static rippling}
+\index{static rippling}
+In static rippling, the annotated rewrite relation is determined by
+the available wave-rules: these rules may be computed in advance of
+being needed  or they may be computed only when required.  
+
+\begin{description}
+\index{eager static parsing}
+\item [Eager Static wave-rule parsing]
+Here a set of rewrite rules is complied into a set of wave-rules.
+Each rewrite rule will be compiled into zero or more wave-rules, so as
+to exhaust all possible ways of extracting a wave-rule from a rewrite rule.   Typically a
+single rewrite rule can be parsed as a wave-rule in many different
+ways.  In many proofs, this is wasteful of both space and time since
+some of these wave-rules may not be used during proof search.
+
+\item [Lazy Static wave-rule parsing]
+\index{lazy static parsing}
+This differs from eager static rippling only in that wave-rules are not
+compiled in advance of their use.  The idea of lazy parsing of rewrite
+rules is to avoid over-generation of rules that are not used during
+proof search.
+\end{description}
+It is important to note that both of these approaches compute the {\em
+same\/} ripple relation: that is, if $s$ lazy static ripples to $t$
+then so does it eager static ripple to $t$, and vice versa.  The
+difference is a practical one: lazy parsing is much more efficient.
+
+(It is worth pointing out that some authors, notably Basin and Walsh,
+refer to the eager/lazy distinction as static/dynamic.)
+
+
+\subsubsection {Dynamic rippling}
+\index{dynamic rippling}
+Dynamic rippling prime characteristic is that it is not easily
+characterized as a rewrite relation, and that it is certainly
+different from static rippling.  
+
+I will not say anything more on this for the moment.
+
+\subsection {Role of sinks}
+\label{sinks}
+\index{annotation!sink}\index{annotation!sink=$\sink{\cdot}$}
+\inxx{sideways rippling} Sinks provide a mechanism for controlling
+sideways rippling\index{rippling!sideways}\index{rippling!into sinks},
+and for allowing a more liberal notion of \index* {skeleton
+preservation}.\index{rippling!skeleton preservation modulo sinks} A
+sink marks the occurrence of a term within the induction conclusion
+whose position is the same as the position of a \index* {universally
+quantified variable} in the induction hypothesis.  A
+precondition\index{rippling!precondition} of a sideways ripple is
+that a sink occurs at or below the position to which a wave-front is
+moved. 
+
+Since the sink corresponds to a universal variable in the hypothesis,
+it is permissible, indeed, useful, for the skeleton to be corrupted
+below the sink position.  
+
+\paragraph {Example.} The following wave-rule helps to illustrate the
+need for skeleton preservation modulo sinks.\example{rippling!skeleton
+preservation modulo sinks}  The rewrite rule
+\[
+            split\_list(A::X,W) \rew W::split\_list(X,A),
+\]
+cannot be applied to the  annotated goal
+\[
+            \forall w.split\_list(\wf{h::\wh{t}},\sink{w}) 
+\]
+unless the skeleton is allowed to change at the sink position.  With
+skeleton preservation modulo sinks, we can ripple to
+\[
+            \forall w.\wf{w::\wh{split\_list(t,\sink{a})}}.
+\]
+Notice that the contents of the sink has changed, yet the skeletons
+are equal.  
+
+\section {Reduction}
+\label {sec:reduction}
+\index {reduction}
+\index {reduction rule}
+\index {terminating term rewriting}
+Outside of inductive branches, where there is no requirement for
+skeleton preservation, a different kind of terminating rewriting may
+be desirable.   
+
+This section describes the termination ordering used in \clam for {\em
+\inx {reduction rule}s}.  Reduction rules are a subset of rewrite
+rules (i.e., taken from the set $\Rewrite$) which can be oriented into
+a terminating reduction ordering (a simplification ordering, as we
+shall see below).  See~\S\reference{reduction-records} for more
+information on the reduction rule database.
+
+\subsection {Simplification orderings}
+
+\defindex {simplification ordering}
+A partial ordering  $\greater$ is a {\em simplification ordering\/} iff
+\begin{eqnarray*}
+s\greater t &\mbox{\rm\ implies\ }& 
+                f(\cdots s\cdots)\greater f(\cdots t\cdots)\\
+&&f(\cdots t\cdots) \greater t
+\end{eqnarray*}
+for any terms $s$ and $t$ and function symbol $f$. We assume
+stability under substitution.
+
+We can show that a rewrite system is terminating under a stable
+simplification ordering $\greater$ by showing that for each rule
+$s\rew t\in R$ that $s\greater t$.
+
+\subsection {Recursive path ordering with status (RPOS)}
+\index {recursive path ordering with status}
+\index {RPOS}
+
+Recursive path ordering (RPO) is a simplification ordering (due to
+Dershowitz) that is parametrized by a {\em quasi precedence\/}
+relation $\quasi$ on function symbols.\defindex {quasi
+precedence}\index {$\quasi$} We
+can instantiate the precedence relation to make a particular instance
+of the RPO, and thus obtain a simplification ordering.  RPO with
+status (RPOS), due to Kamin and Levy, is additionally parametrized by
+a status function $\tau$. Together, these two parameters are called a
+{\em registry}\index {registry}, denoted
+$\rho=\langle\quasi,\tau\rangle$.  The ordering is thus written
+$\greater_\rho$ (the strict part) and  $\greaterequal_\rho$, when we
+want to include equivalence.  (This are defined formally later.)
+
+As is well-known in the rewriting community (the idea was pioneered by
+Lescanne from what I can gather; the references I used are
+Forgaard~\cite{Forgaard84} and Steinbach~\cite{Steinbach94}),
+registries can be computed incrementally.  This means that it is not
+necessary to work out the registry in advance: a new reduction rule can
+be added to a reduction system and the registry extended as and when
+necessary (if this is possible)\index
+{registry!extension} to maintain termination.
+
+\clam's library mechanism (see \S\reference{library}) ensures that the
+registry is extended (if possible) as and when new reduction rules are
+loaded.
+
+
+\subsubsection {Precedence, status and registry}
+\label{quasi-def}
+\label{quasi-consistent}
+\defindex {registry}
+\defindex {registry!precedence}
+\defindex {registry!status function}
+
+A {\em precedence\/} $\quasi$\defindex {$\quasi$}is a transitive, irreflexive binary
+relation on terms.  $s \Equiv t$ means $s\quasi t$ and $t\quasi s$.
+The induced partial ordering $s\partial t$\defindex {$\partial$} is
+$s \quasi t$ and $s\not\Equiv t$.  
+
+The following are also used:
+\begin{eqnarray}
+s \Equiv t &\mbox{\ means\ }& s\quasi t \mbox{\ and\ } t\quasi s\\
+s \partial t &\mbox{\ means\ }& s\quasi t \mbox{\ and\ } t\not\Equiv t s
+\end{eqnarray}
+
+A {\em \inx{status function}\/} is a mapping from function symbols to one of
+two\footnote {In fact this can be generalized significantly.} status
+indicators: $\Multi$ or $\delta$.  These indicators are used to
+flag how the arguments of that function symbol are to be compared.
+$\Multi$ means use the multiset extension.  $\delta$ means use a
+lexicographic extension---$\delta$ is a permutation function on the
+arguments.  
+
+Additionally, we allow an undefined status, $\Undef$, to allow us to
+express that the status of a particular function is undecided, and can
+be set as required.  Typically we can make do with only two
+permutations: from left to right and from right to left.  We will
+adopt this restriction and denote them by $\Left$ and $\Right$
+respectively.  So we think of $\tau$ mapping into
+$\{\Multi,\Left,\Right,\Undef\}$.\index {$\Undef$}
+
+
+The following functions are used in connection with status (where
+$\vec{t_n}$ abbreviates $t_1,\ldots,t_n$).
+\begin{defn}[Status functions]
+\begin{eqnarray*}
+\tuple{\vec{t_n}}^\Left&=&\tuple{\vec{t_n}}\\
+\tuple{\vec{t_n}}^\Right&=&\tuple{t_n,\ldots,t_1}\\
+\tuple{\vec{t_n}}^\Multi&=&\{\vec{t_n}\}
+\end{eqnarray*}
+\defindex {$\tuple{\vec{t_n}}^\Left$}
+\defindex {$\tuple{\vec{t_n}}^\Right$}
+\defindex {$\tuple{\vec{t_n}}^\Multi$}
+where the set on the last line is a multiset.
+\end{defn}
+
+\begin{defn}[Consistency]
+A registry $\rho=\tuple{\quasi,\tau}$ is \emph{consistent}\index
+{registry!consistency} iff
+\begin{enumerate}
+\item $f\Equiv g$ implies $\tau(f)=\tau(g)$, when $f$ and $g$ have a
+defined status, and,
+\item if $f\quasi g$ and $g \quasi h$ and $f\not\Equiv g$ or
+$g\not\Equiv h$ then $f\not\Equiv h$.
+\end{enumerate}
+\end{defn}
+
+
+
+\begin{defn}[$\RPOS_\rho$, $\RPOSeq_\rho$]
+\defindex {$\RPOS_\rho$}\defindex {$\RPOSeq_\rho$}
+Given a consistent registry $\rho=\langle \quasi,\tau\rangle$ we
+define $\RPOS_\rho$ over $\TERM$ by four disjunctive cases as follows.
+
+\[\begin{array}{l}
+  s=f(\vec{s_n}) \RPOSeq_\rho t=g(\vec{t_m}) \quad\mbox {iff} \\[2ex]
+\qquad\begin{array}{ll}
+s_i \RPOSeq_\rho t	&\mbox {for some $s_i$}		\\
+s\RPOS_\rho t_i 	&\mbox {if $f\partial g$}	\\
+s\RPOS_\rho^* t 	&\mbox {if $f\Equiv g$}  	\\
+s\RPOS_\rho^* t		&\mbox {if $f\quasi g$ and $s\RPOS_\rho t_i$
+for all $t_i$}
+\end{array}\end{array}\]
+
+Where
+\[
+  s\RPOSeq_\rho t \quad\mbox {iff}\quad		
+	s\RPOS_\rho t \mbox{\ or\ } s\Equiv_\rho t.
+\]
+\end{defn}
+
+(For details of the congruence $\Equiv_\rho$,\defindex {$\Equiv_\rho$}
+readers are referred to~\cite{Forgaard84,Steinbach94}: roughly it is
+the smallest relation extending $\quasi$ to a congruence on terms,
+accounting for the status function.)
+
+Note that $s\RPOS_\rho^* t$ is common to the third and forth clauses,
+and that $s\RPOS_\rho t_i$ is common to the second and forth.
+
+The reader familiar with (the original) RPOS may spot that the last
+clause is not normally present.  It is part of the extension\index
+{registry extension} to allow
+$\quasi$ to be computed incrementally.  It simply says that we can
+proceed on the basis of partial information $f\quasi g$, rather than
+making a commitment to $f\Equiv g$ or $f\partial g$, providing that
+{\em both\/} of these are viable.  In the case of the $\Equiv$
+extension, we can see that we are reduced to the case dealt with by
+the third clause; in the case of $\partial$, the second clause.  These
+are conjoined in the last clause.
+
+
+\iffalse
+\footnote {\clam currently does not make use of this aspect of
+extensibility: see \p{prove/5}.}
+\fi
+
+I have introduced $\RPOS^*$ here (and defined it below) to try to make
+the presentation slightly clearer, since it is defined by cases,
+according to the status of $s$ and $t$.  To compare $s$ and $t$
+according to the multiset extension, the root function symbol of $s$
+and $t$ must have status $\Multi$.  To compare lexicographically, the
+status must be $\Left$ or $\Right$.  Such statuses are {\em
+compatible}.
+
+\begin{defn}[$\RPOS_\rho^*$ (extension)]
+\defindex {$\RPOS_\rho^*$}
+We define the multiset and lexicographic extension of $\RPOS_\rho$
+(for consistent $\rho$) by two cases, depending on the status of the
+heads of the terms under comparison.
+\[\begin{array}{l}
+  s=f(\vec{s_n}) \RPOS_\rho^* t=g(\vec{t_m}) \quad\mbox{iff}\\[2ex]
+\begin{array}{rl}
+\{\vec{s_n}\} \RPOS_\rho \{\vec{t_m}\} &\mbox {if $\tau(f)=\Multi$}\\[1ex]
+\tuple{\vec{s_n}}^{\tau(f)} \RPOSeq_\rho \tuple{\vec{t_m}}^{\tau(g)}
+	&\mbox{if $\tau(f),\tau(g)\in\{\Left,\Right\}$ and $s\RPOS_\rho t_i$
+for all $t_i$}
+\end{array}\end{array}\]
+which cover the multiset extension and lexicographic extension
+respectively.
+\end{defn}
+
+\paragraph {Remark.} In the case of the lexicographic comparison, it
+might seem strange to insist upon the condition $s\RPOS_\rho t_i$,
+namely that $s$ is greater than all the arguments of $t$.  This is
+necessary since $s$ might otherwise be a subterm of $t$. For example,
+we do not want that $f(h(x),x)\greater f(x,f(h(x),x))$ simply because
+$h(x)\greater x$, in a left-to-right lexicographic comparison.
+
+\subsubsection {Lifting RPOS}
+\label {lifting}
+\index {RPOS lifting}
+
+$\RPOS_\rho$ etc.\ are lifted to a stable ordering on non-ground terms by
+treating all variables $x$ appearing as distinguished
+constants that are unrelated under $\rho$. That is, $x\Equiv x$,
+$\tau(x)=\Multi$ and $x$ and $y$ are incomparable under $\quasi$, for
+distinct variables $x$ and $y$.
+
+\subsection {Computing the registry dynamically}
+\index {registry extension}
+\index {dynamic registry extension}
+
+We start with some initial registry and dynamically extend it with
+assignments of status to function symbols where no status is present,
+and/or with extensions to $\quasi$.  Initially, $\tau$ is set to
+$\Undef$ for all function symbols (excepting the nullary functions
+which represent variables) and $\quasi$ is empty.  The registry
+may only be extended in such a way as to preserve consistency.
+
+The choice points in proof search arise when (i)~we can choose either
+$f\Equiv g$ or $f\partial g$, or (ii)~assigning some status to $f$ and
+$g$.  Clearly, there may be more than one possible extension.  There
+is a notion of minimality here which can be used to bias the search.
+An extension $e_1$ of the registry is smaller than $e_2$ if $e_1$ can
+be extended further to $e_2$.  Computing the minimal extension is
+expensive, so in practice, the bias is  something cruder---try
+to extend $\quasi$ before $\tau$.
+
+The rules above treat the partial information case $\quasi$ as a
+conjunction of the two cases for $\Equiv$ and $\partial$.  Similarly, the
+treatment for $\Undef$ status is a conjunction of
+$\{\Multi,\Left,\Right\}$.  In either case if the conjunction cannot
+be established, a commitment is needed for the proof to proceed.
+
+
+\subsubsection {Rewriting, polarity and reduction rules}
+\index {reduction rule!polarity}
+\index {polarity}
+\index {rewriting}
+
+
+In \clam there are two TRSs, one for \inx{positive polarity}, and one
+for negative,\inxx{negative polarity} with a registry for the ordering
+in each case.  These sets are called $\Reduction_+$, $\Reduction_-$;
+the termination of each is justified by a registry, $\rho_+$ and
+$\rho_-$, respectively.  These two TRSs collectively define \clam's
+reduction TRS, $\Reduction$.
+
+We take subsets of $\Rewrite$ that satisfy the termination ordering
+appropriate to reduction:
+
+\begin{defn}[$\Reduction$]
+\begin{eqnarray*}
+	\Reduction_+ &=& {\Rewrite_+} \cap {\RPOS_+} \\
+	\Reduction_- &=& {\Rewrite_-} \cap {\RPOS_-} \\
+	\Reduction &=& {\Rewrite_+} \cup {\Reduction_-}
+\end{eqnarray*}
+\end{defn}
+The polarized reduction relation is defined analogous to the polarized 
+rewrite relation (definition~\reference{def:poltr}).
+
+\begin{remark}
+As in the case of $\Rewrite$, \clam does record explicitly those
+reduction rules which are derived from equality and biimplication.  
+\end{remark}
+
+
+\def\UNLABEL{\mbox{\sf Unlabel}}
+\def\TICK{\mbox{\sf V-L}}
+\def\t#1{#1^{\_}}
+\def\tc#1#2{#2^{#1}}
+
+\section {Labelled term rewriting}
+\label {labelled}
+\index {labelled term rewriting} \index {rewriting!labelled}
+\def\nf{{\sf nf}} The rewriting engine in \clam attempts to improve
+efficiency of reduction (the repeated replacement of a redex by a
+reduct) by manipulating \index*{labelled terms} rather than regular
+terms.  The idea is very simple: labelled terms implement a memo-table
+that improves efficiency of rewriting.
+
+
+Labelled terms are terms decorated by markers: each node in the term
+tree is marked with the token `\nf' or with {\em label-variables\/}
+$l_1$, $l_2$.  The intended meaning is that a term whose root is
+labelled with the token \nf{} is in normal form, and all a variable
+labelling indicates that it is not known if that term is in normal
+form.  When the name of a label-variable doesn't matter, it will be
+written anonymously, $\_$
+
+\begin{defn}[Well-labelled]
+A labelled term $t$ is {\em well-labelled\/} iff for every subterm $s$ 
+of $t$ that is labelled with \nf{}, all subterms of $s$ are labelled
+with \nf{}.
+\end{defn}
+Since a term is either labelled with \nf{} or with a label-variable,
+it follows that for a well-labelled term $t$, all superterms of some
+subterm of $t$ labelled with a label-variable will be labelled with a
+label-variable.
+
+An example well-labelled term is $plus^{l_1}(s^{l_2}(x^{l_3}),0^\nf)$.
+Notice that $0$ is labelled as being in normal form and the other
+subterms are labelled with label-variables, meaning `not known to be
+in normal form'.  Substitutions over labelled variables are as one
+expects.
+
+Labelled terms are a convenient representation of a memo-table
+for computing normal forms: terms labelled by \nf{} need not be
+searched (traversed) when looking for a redex.  
+
+We make some simple definitions:
+\begin{defn}[\UNLABEL]
+The function $\UNLABEL$ from labelled terms to terms yields the term in
+which all labelling is deleted:
+\[
+\UNLABEL(f^X(t_1,\ldots,t_n)) =_{\rm def} f(\UNLABEL(t_1),\ldots,\UNLABEL(t_n))
+\]
+for $0\leq n$.
+\end{defn}
+
+\begin{defn}[\TICK]
+The function $\TICK$ from terms to labelled terms yields the labelled term in
+which all nodes are labelled with a distinct label-variable.
+\[
+\TICK(f(t_1,\ldots,t_n)) =_{\rm def} \t{f}(\TICK(t_1),\ldots,\TICK(t_n))
+\]
+for $0\leq n$.
+\end{defn}
+(The term $\TICK(t)$ is the representation of the term $t$ with an
+`empty' memo-table.)
+
+\subsection {Labelled rewrite system}
+A labelled rewrite system is a rewrite system over labelled terms.
+There is no restriction that label-variables of the RHS are a subset
+of the label-variables on the LHS (and so labelled rewrite systems and 
+rewrite systems are not equivalent).
+
+To propagate labellings through reduction, we label the rules in a set
+$R$ of rewrite rules to yield a labelled system $LR$.  $l\rightarrow
+r\in R$ iff $l'\rightarrow r'\in LR$, where $l=\UNLABEL(l')$ and
+$r=\UNLABEL(r')$, and:
+
+\begin{enumerate}
+\item
+All distinct, non-identical subterms of $l'$ are assigned a fresh
+label-variable; all occurrences of identical subterms are assigned the
+{\em same\/} label-variable.  Notice in particular that all
+occurrences of some variable $V$ in $l'$ are assigned the same
+label-variable.  (Typically, rules do not normally share non-variable
+subterms, but sometimes they do.)
+
+\item Subterms of $r$ identical to subterms of $l$ are labelled
+similarly in $r'$ and $l'$. (In particular, variables in $r'$ are
+labelled with the same label-variable as similar variables in $l'$.)
+\end{enumerate}
+(The current \clam implementation does not meet this specification:
+only {\em variable\/} subterms are considered: non-identical subterms
+are labelled with distinct label-variables.)
+
+Notice in particular that $l'$ will be labelled with a
+label-variable. 
+
+
+For example the rewrite derived from the definition of $plus$,
+\[plus(s(X),Y) \rew s(plus(X,Y))\] becomes the labelled rewrite rule
+\[plus^{l_3}(s^{l_4}(X^{l_1}),Y^{l_2}) \rew s^{l_5}(plus^{l_6}(X^{l_1},Y^{l_2}))\]
+
+Notice that the sharing of label-variable for occurrences of a
+variable in the rule means that the labelling of the term to which a
+variable is instantiated is propagated (if necessary) from the redex to the
+reduct. The memo-table update corresponding to the reduct is computed
+simply by applying the labelled rewrite.
+
+\subsection {Labelled term rewriting (LTR)}
+{\bf This section is incomplete, and it is more than likely to be
+incorrect.}
+
+Rewriting with labelled terms is much as before, with the following
+additional proviso on the labelling of the term to be reduced:
+
+\begin{defn}[Labelled term rewriting]
+The labelled rewrite relation $\rightarrow_{LR}$ is defined over
+well-labelled terms as follows:
+\[
+s^\alpha[u^\beta]\rightarrow_{LR} s^\alpha[\tc{l_2}b\sigma]\mbox{ iff }
+		a^{l_1}\rightarrow \tc{l_2}b\in LR \mbox{ and } a^{l_1}\sigma=u^\beta\sigma
+\] 
+for some mgu $\sigma$.
+\end{defn}
+Notice from the above that all redexes in LTR are labelled with a
+label-variable and that $\sigma$ is a unifier (it may instantiate
+label-variables appearing in both $u$ and $a$).
+
+From the definition of well-labelled, and definition of LTR, one can
+see that each superterm of a redex is labelled with a label-variable
+(hence $s$ itself must be labelled with a label-variable).  Therefore,
+when the reduction is made the labelling on the rest of the term need
+not be altered.
+
+\subsection {Reduction strategy}
+The term traversal algorithm used by the rewriting checks to see if
+the term is a labelled term. If it is, and the node is labelled with
+\nf, that term and its subterms are not searched.  If a term is
+labelled with a variable, then it is searched.  If no redex is found,
+the label-variable at its root is set to `\nf'.  
+
+Thus label-variable is instantiated to \nf{} when all subterms are
+shown to be irreducible (the reduction mechanism must ensure that
+well-labelling is preserved) or by unification during rewriting.
+
+\paragraph {Soundness} is trivial since labelled rewriting is a
+restriction of normal rewriting.
+
+\paragraph {Completeness} The relations $\rightarrow_{LR}$ and
+$\rightarrow_R$ are different since labellings (even well-labellings)
+can be added arbitrarily.  We need a more general statement.
+
+The claim is that for the terms $t$ and $\TICK(t)$ we have:
+\[
+	t\rightarrow_R^* s\mbox{ iff }
+		\TICK(t)\rightarrow_{LR}^* s'
+\]
+where $s'$ is some labelling of $s$, and $*$ means reflexive
+transitive closure.  We can even make a stronger statement that the
+reduction sequence in each case is the same.   {\bf This section is
+incomplete! Need to formalize  and do the proofs.}
+
+Of course soundness and completeness says nothing of efficiency, but
+empirical evidence suggests that LTR is faster.
+
+
+
+\clam uses labelled term rewriting in the implementation of some of
+the reduction rule code.  The main advantage is that for conditional
+rewriting it may be expensive to determine that a term is not a redex
+because of the effort expended in trying to establish the condition.
+
+
+
+\chapter {Decision procedures}
+\clam\ contains two decision procedures.  
+
+\section {Intuitionistic propositional logic}
+
+The predicate \p{propositional/2} is a decider for intuitionistic
+propositional sequent calculus.  The algorithm implemented is that due
+to Dyckhoff~\cite{Dyckhoff92}.  
+
+This decider builds tactics when the goal is provable which can be
+applied to give an object-level proof.
+
+\section {Presburger arithmetic}
+\label{presburger}
+The predicate \p{cooper/1} is a decision procedure for Presburger
+integer arithmetic~\cite{Presburger30}.   The algorithm  implemented is that due to
+Cooper~\cite{Cooper72}.   
+
+The argument to \p{cooper/1} is a sentence of Presburger arithmetic,
+as defined by the following grammatical elements:
+
+\begin{itemize}
+\item universal quantification over integers and natural numbers ({\tt x:int=>...}
+and {\tt x:pnat=>...}).
+\item existential quantification over integers and natural numbers ({\tt x:int\#...}
+and {\tt x:pnat\#...}).
+\item propositional connectives ({\tt \#}, \verb|\|, {\tt =>}, {\tt <=>}).
+\item propositions: {\tt {true}}, {\tt void}.
+\item the following term constructors: {\tt 0}, {\tt s}, {\tt plus},
+{\tt times(a,b)} (where at least one of $a$ or $b$ is a ground term),
+and the integers, {\tt -1}, {\tt 1}, {\tt -2}, {\tt 2}, {\tt -3}, {\tt
+3},  etc.
+\item the following predicates: {\tt leq}, {\tt geq}, {\tt greater},
+{\tt less}, {\tt \_ = \_ in pnat}, {\tt \_ = \_ in int}.
+\end{itemize}
+\notnice This grammar is hard-wired.  There is an implicit assumption
+that this grammar agrees with the definitions of appearing in the
+\clam library.  Even worse, the same symbols are used for both integer
+and natural numbers.  Quantification over the natural numbers is
+internally translated into restricted quantification over the integers.
+
+The algorithm does not as yet build object-level proofs.
+\input footer

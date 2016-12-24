@@ -1,0 +1,86 @@
+/* -*- Prolog -*-
+ * @(#)$Id: normalize_term,v 1.6 1998/09/15 16:01:09 img Exp $
+ *
+ * $Log: normalize_term,v $
+ * Revision 1.6  1998/09/15 16:01:09  img
+ * *** empty log message ***
+ *
+ * Revision 1.5  1998/09/15 16:00:40  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.4  1998/06/10 09:31:00  img
+ * clause for rewriting with definitional eqns
+ *
+ * Revision 1.3  1997/10/09 17:18:10  img
+ * new clause for cancellation (disabled)
+ *
+ * Revision 1.2  1997/04/07 11:04:01  img
+ * Document condition on annotation
+ *
+ * Revision 1.1  1996/12/11 14:08:46  img
+ * Merge mthd and smth libraries.
+ *
+ * Revision 1.1  1996/06/12  10:48:43  img
+ * Normalize the goal using nf_plus/4 (which used labelled term
+ * rewriting).
+ *
+ */
+
+/* Normalize the goal by exhaustive application of rewrite rules from
+   a terminating rewrite system (as described by the reduction rule
+   database).  Uses labelled rewriting for speed; flattens rule
+   application into a single tactic invocation.  Conditions are
+   decided inside reduction_tc/4.
+   
+   This method will fail if the goal is already in normal form.
+
+   The goal is assumed to be unannotated.  */
+method(normalize_term(Tactic),
+       H==>G,
+       [matrix(Vars,Matrix,G), append(H,Vars,Context),
+	reduction_tc(Matrix,MatrixNF,Tactic,Context)],
+       [matrix(Vars,MatrixNF,NewG) ],
+       [H==>NewG],
+       normalize_term(Tactic) ).
+
+
+/* This clause deals with terms of the form f(X) = f(Y) --> X = Y.
+   Note that this rule is terminating under any simplification
+   ordering: it cannot be oriented from right-to-left under any
+   registry, and it can be oriented from left-to-right under the empty
+   registry.  Deals only with unary f.  */
+/*
+method(normalize_term(Tac),
+       H==>Goal,
+       [matrix(GVs,G,Goal),
+	exp_at(G,Pos,Term1 = Term2 in Type),
+	Term1 =.. [F,A1], Term2 =.. [F,A2],
+	append(GVs,H,GVsH),
+	once(((type_of(GVsH,A1,Atype), ground(Atype));
+	      (type_of(GVsH,A1,Atype), ground(Atype)))),
+	Tac = cancel(Pos,Term1 = Term2 in Type, A1 = A2 in Atype) ],
+       [replace(Pos,A1 = A2 in Atype, G,NewG),
+	matrix(GVs,NewG,NewGoal) ],
+       [H==>NewGoal],
+       normalize_term(Tac) ).
+*/
+
+/* Use definitional rewrite rules 
+method(normalize_term(blank),
+       H==>G,
+       [matrix(Vars,Matrix,G), append(H,Vars,Context),
+        exp_at(Matrix,Pos,Exp),
+	\+ Pos = [0|_],				%don't eval functors
+        not metavar(Exp),			%or meta-variables
+	rewrite_rule(Exp,NewExp,C,equ(_,left),Origin,Rule,_),
+	\+ Origin == Rule,			% force use of defs from left-right
+        polarity_compatible(Matrix, Pos, Dir),
+        immediate(Context==>C)
+       ],
+       [% Once have applied a base-case ignore wave-fronts
+        replace(Pos,NewExp,Matrix,NewMatrix),
+        matrix(Vars,NewMatrix,NewG) ],
+       [H==>NewG],
+       normalize_term(blank)
+      ).
+*/

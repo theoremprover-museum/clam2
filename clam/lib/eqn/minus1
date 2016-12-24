@@ -1,0 +1,7 @@
+problem([]==>x:pnat=>minus(x,0)=x in pnat,
+simplify,_3015,
+[problem([]==>x:pnat=>x=x in pnat,
+ elementary(dequantify_once then identity),lambda(x,axiom),
+ [
+ ]) ext _3015
+]).

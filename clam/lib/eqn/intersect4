@@ -1,0 +1,328 @@
+/*
+ * @(#)$Id: intersect4,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: intersect4,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>t:int list=>l2:int list=> (member(h,l2)=>void)=>intersect(h::t,l2)=intersect(t,l2)in int list,
+repeat dequantify_once,lambda(h,lambda(t,lambda(l2,_7473))),
+[problem([h:int,t:int list,l2:int list]==> (member(h,l2)=>void)=>intersect(h::t,l2)=intersect(t,l2)in int list,
+ elim(l2),list_ind(l2,_7536,[v0,v1,v2,_7544]),
+ [problem([h:int,t:int list,l2:int list]==> (member(h,nil)=>void)=>intersect(h::t,nil)=intersect(t,nil)in int list,
+  intro,lambda(v0,_7606),
+  [problem([h:int,t:int list,l2:int list,v0:member(h,nil)=>void]==>intersect(h::t,nil)=intersect(t,nil)in int list,
+   elim(t),list_ind(t,_7671,[v1,v2,v3,_7679]),
+   [problem([h:int,t:int list,l2:int list,v0:member(h,nil)=>void]==>intersect(h::nil,nil)=intersect(nil,nil)in int list,
+    simplify then repeat intro,axiom,
+    [
+    ]) ext _7671,
+    problem([h:int,t:int list,l2:int list,v0:member(h,nil)=>void,v1:int,v2:int list,v3:intersect(h::v2,nil)=intersect(v2,nil)in int list]==>intersect(h::v1::v2,nil)=intersect(v1::v2,nil)in int list,
+    simplify then repeat intro,axiom,
+    [
+    ]) ext _7679
+   ]) ext _7606,
+   problem([h:int,t:int list,l2:int list]==> (member(h,nil)=>void)in u(1),
+   simplify then repeat intro,axiom,
+   [
+   ])
+  ]) ext _7536,
+  problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list]==> (member(h,v0::v1)=>void)=>intersect(h::t,v0::v1)=intersect(t,v0::v1)in int list,
+  intro,lambda(v3,_8008),
+  [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>intersect(h::t,v0::v1)=intersect(t,v0::v1)in int list,
+   compute([[unfold]]=_8131 in _8128)then expand then repeat beta_reduce,_8017,
+   [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>list_ind(h::t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0 of l2,[~,v0::v2 of l2],[~,v2 of l2])]))])of (v0::v1)=intersect(t,v0::v1)in int list,
+    compute([[simplify]]=_8319 in _8316),_8149,
+    [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>decide(int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])),[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list,
+     seq(int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),new[v4]),lambda(v4,_8682)of _8679,
+     [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),
+      reduce(false),axiom,
+      [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>inl(h)in (int\int=>int),
+       repeat intro,axiom,
+       [
+       ]),
+       problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),
+       repeat intro,axiom,
+       [
+       ]),
+       problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>h=v0 in int=>void,
+       lemma(memberlem3),su(_9159,[term_of(memberlem3)],[v4]),
+       [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:e:int=>h:int=>t:int list=> (member(e,h::t)=>void)=>e=h in int=>void]==>h=v0 in int=>void,
+        elim(v4,on(h),new[v5])then[wfftacs,thin([v4])then elist_(v5,[v0,v1],v5)],su(su(su(_9353,[v4 of v1],[v5]),[v5 of v0],[v4]),[v4 of h],[v5]),
+        [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void]==>h=v0 in int=>void,
+         elim(v5)then[intro,intro],su(v4,[v5 of v3],[v4]),
+         [
+         ]) ext _9353
+        ]) ext _9159
+       ])
+      ]) ext _8679,
+      problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int)]==>decide(int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])),[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list,
+      subst(over(v5,decide(v5,[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list),int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int))then[univ_elim(v4),idtac,wfftacs],_9529,
+      [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int)]==>v1 in int list,
+       intro,axiom,
+       [
+       ]) ext _10119,
+       problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int)]==>inr(lambda(v1_,v1_))in (int\int=>int),
+       repeat intro,axiom,
+       [
+       ]) ext _10285,
+       problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int,v6:int list,v7:int\int=>int]==>int_eq(h,v5,inl(h),v7)in (int\int=>int),
+       repeat intro,axiom,
+       [
+       ]) ext _10462,
+       problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int)]==>decide(list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]),[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list,
+       thin([v4])then seq(member(h,v1)=>void),lambda(v4,_11024)of _11021,
+       [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void]==>member(h,v1)=>void,
+        lemma(memberlem3),su(_11123,[term_of(memberlem3)],[v4]),
+        [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:e:int=>h:int=>t:int list=> (member(e,h::t)=>void)=>e=h in int=>void]==>member(h,v1)=>void,
+         elim(v4,on(h),new[v5])then[wfftacs,thin([v4])then elist_(v5,[v0,v1],v5)],su(su(su(_11314,[v4 of v1],[v5]),[v5 of v0],[v4]),[v4 of h],[v5]),
+         [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void]==>member(h,v1)=>void,
+          elim(v5)then[intro,idtac],su(_11469,[v5 of v3],[v4]),
+          [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void,v4:h=v0 in int=>void]==>member(h,v1)=>void,
+           lemma(member3),su(_11617,[term_of(member3)],[v6]),
+           [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void,v4:h=v0 in int=>void,v6:el:int=>h:int=>l:int list=> (el=h in int=>void)=>member(el,h::l)=member(el,l)in u(1)]==>member(h,v1)=>void,
+            elim(v6,on(h),new[v7])then[wfftacs,thin([v6])then elist_(v7,[v0,v1],v7)],su(su(su(_11856,[v6 of v1],[v7]),[v7 of v0],[v6]),[v6 of h],[v7]),
+            [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void,v4:h=v0 in int=>void,v7: (h=v0 in int=>void)=>member(h,v0::v1)=member(h,v1)in u(1)]==>member(h,v1)=>void,
+             elim(v7)then[intro,idtac],su(_12059,[v7 of v4],[v6]),
+             [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void,v4:h=v0 in int=>void,v7: (h=v0 in int=>void)=>member(h,v0::v1)=member(h,v1)in u(1),v6:member(h,v0::v1)=member(h,v1)in u(1)]==>member(h,v1)=>void,
+              subst(hyp(v3),over(z,z=>void),member(h,v0::v1)=member(h,v1)in u(1)),_12077,
+              [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void,v4:h=v0 in int=>void,v7: (h=v0 in int=>void)=>member(h,v0::v1)=member(h,v1)in u(1),v6:member(h,v0::v1)=member(h,v1)in u(1)]==>member(h,v0::v1)=member(h,v1)in u(1),
+               intro,v6,
+               [
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void,v4:h=v0 in int=>void,v7: (h=v0 in int=>void)=>member(h,v0::v1)=member(h,v1)in u(1),v6:member(h,v0::v1)=member(h,v1)in u(1)]==>member(h,v1)=>void,
+               intro,v3,
+               [
+               ]) ext _12077,
+               problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v1)=>void,v5: (member(h,v0::v1)=>void)=>h=v0 in int=>void,v4:h=v0 in int=>void,v7: (h=v0 in int=>void)=>member(h,v0::v1)=member(h,v1)in u(1),v6:member(h,v0::v1)=member(h,v1)in u(1),z:u(1)]==> (z=>void)in u(1),
+               repeat intro,axiom,
+               [
+               ])
+              ]) ext _12059
+             ]) ext _11856
+            ]) ext _11617
+           ]) ext _11469
+          ]) ext _11314
+         ]) ext _11123
+        ]) ext _11021,
+        problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void]==>decide(list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]),[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list,
+        elim(v2),su(_13158,[v2 of _13165],[v5]),
+        [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void]==>member(h,v1)=>void,
+         intro,v4,
+         [
+         ]) ext _13165,
+         problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list]==>decide(list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]),[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list,
+         seq(list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),new[v6]),lambda(v6,_13632)of _13629,
+         [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list]==>list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),
+          lemma(memberlem),su(_13799,[term_of(memberlem)],[v6]),
+          [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int)]==>list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),
+           elim(v6,on(h),new[v7])then[wfftacs,thin([v6])then elist_(v7,[v1],v6)],su(su(_14059,[v7 of v1],[v6]),[v6 of h],[v7]),
+           [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6: (member(h,v1)=>void)=>term_of(memberdec)of h of v1=inr(lambda(u,u))in (int\int=>int)]==>list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),
+            elim(v6),su(_14281,[v6 of _14288],[v7]),
+            [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6: (member(h,v1)=>void)=>term_of(memberdec)of h of v1=inr(lambda(u,u))in (int\int=>int)]==>member(h,v1)=>void,
+             intro,v4,
+             [
+             ]) ext _14288,
+             problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6: (member(h,v1)=>void)=>term_of(memberdec)of h of v1=inr(lambda(u,u))in (int\int=>int),v7:term_of(memberdec)of h of v1=inr(lambda(u,u))in (int\int=>int)]==>list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),
+             compute(hyp(v7),[[simplify]]),_14466,
+             [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6: (member(h,v1)=>void)=>term_of(memberdec)of h of v1=inr(lambda(u,u))in (int\int=>int),v7:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),
+              intro,v7,
+              [
+              ]) ext _14466
+             ]) ext _14281
+            ]) ext _14059
+           ]) ext _13799
+          ]) ext _13629,
+          problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>decide(list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]),[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list,
+          subst(over(v7,decide(v7,[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int))then[univ_elim(v6),idtac,wfftacs],_14955,
+          [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>v1 in int list,
+           intro,axiom,
+           [
+           ]) ext _15519,
+           problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>inr(lambda(v1_,v1_))in (int\int=>int),
+           repeat intro,axiom,
+           [
+           ]) ext _15692,
+           problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int,v8:int list,v9:int\int=>int]==>int_eq(h,v7,inl(h),v9)in (int\int=>int),
+           repeat intro,axiom,
+           [
+           ]) ext _164382,
+           problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>decide(inr(lambda(u,u)),[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=intersect(t,v0::v1)in int list,
+           simplify then repeat beta_reduce,_164595,
+           [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)=list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0 of l2,[~,v0::v2 of l2],[~,v2 of l2])]))])of (v0::v1)in int list,
+            repeat intro,axiom,
+            [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)in int list,
+             intro(using(int list=>int list)),axiom,
+             [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])in (int list=>int list),
+              repeat intro,axiom,
+              [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int,v8:int list,v9:int list=>int list,v10:int list,v11:int,v12:int list,v13:int list]==>decide(term_of(memberdec)of v7 of v10,[~,v7::v9 of v10],[~,v9 of v10])in int list,
+               simplify,_165725,
+               [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int,v8:int list,v9:int list=>int list,v10:int list,v11:int,v12:int list,v13:int list]==>decide(list_ind(v10,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v7,v1,inl(v7),v3)]),[~,v7::v9 of v10],[~,v9 of v10])in int list,
+                intro(using(int\int=>int))then repeat intro,axiom,
+                [
+                ]) ext _165725
+               ]) ext _165721
+              ]),
+              problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int)]==>v0::v1 in int list,
+              repeat intro,axiom,
+              [
+              ]),
+              problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int list]==>v7 in int list,
+              intro,axiom,
+              [
+              ])
+             ]) ext _165236
+            ]) ext _164595
+           ]) ext _14955,
+           problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int]==>decide(v7,[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,lambda(v6,decide(v6,[~,v0::v2 of l2],[~,v2 of l2]))of (term_of(memberdec)of v0 of l2)]))])of (v0::v1)in int list in u(1),
+           repeat intro,axiom,
+           [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v10:v7=inl(v8)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)in int list,
+            intro(using(int list=>int list)),axiom,
+            [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v10:v7=inl(v8)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])in (int list=>int list),
+             repeat intro,axiom,
+             [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v10:v7=inl(v8)in int\int=>int,v9:int,v11:int list,v12:int list=>int list,v13:int list,v14:int,v15:int list,v16:int list]==>decide(term_of(memberdec)of v9 of v13,[~,v9::v12 of v13],[~,v12 of v13])in int list,
+              simplify,_167577,
+              [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v10:v7=inl(v8)in int\int=>int,v9:int,v11:int list,v12:int list=>int list,v13:int list,v14:int,v15:int list,v16:int list]==>decide(list_ind(v13,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v9,v1,inl(v9),v3)]),[~,v9::v12 of v13],[~,v12 of v13])in int list,
+               intro(using(int\int=>int))then repeat intro,axiom,
+               [
+               ]) ext _167577
+              ]) ext _167573
+             ]),
+             problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v10:v7=inl(v8)in int\int=>int]==>v0::v1 in int list,
+             repeat intro,axiom,
+             [
+             ]),
+             problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v10:v7=inl(v8)in int\int=>int,v9:int list]==>v9 in int list,
+             intro,axiom,
+             [
+             ])
+            ]) ext _167018,
+            problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v9:int=>int,v10:v7=inr(v9)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)in int list,
+            intro(using(int list=>int list)),axiom,
+            [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v9:int=>int,v10:v7=inr(v9)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])in (int list=>int list),
+             repeat intro,axiom,
+             [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v9:int=>int,v10:v7=inr(v9)in int\int=>int,v8:int,v11:int list,v12:int list=>int list,v13:int list,v14:int,v15:int list,v16:int list]==>decide(term_of(memberdec)of v8 of v13,[~,v8::v12 of v13],[~,v12 of v13])in int list,
+              simplify,_169165,
+              [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v9:int=>int,v10:v7=inr(v9)in int\int=>int,v8:int,v11:int list,v12:int list=>int list,v13:int list,v14:int,v15:int list,v16:int list]==>decide(list_ind(v13,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v8,v1,inl(v8),v3)]),[~,v8::v12 of v13],[~,v12 of v13])in int list,
+               intro(using(int\int=>int))then repeat intro,axiom,
+               [
+               ]) ext _169165
+              ]) ext _169161
+             ]),
+             problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v9:int=>int,v10:v7=inr(v9)in int\int=>int]==>v0::v1 in int list,
+             repeat intro,axiom,
+             [
+             ]),
+             problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v9:int=>int,v10:v7=inr(v9)in int\int=>int,v8:int list]==>v8 in int list,
+             intro,axiom,
+             [
+             ])
+            ]) ext _168600,
+            problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int]==>list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,lambda(v6,decide(v6,[~,v0::v2 of l2],[~,v2 of l2]))of (term_of(memberdec)of v0 of l2)]))])of (v0::v1)in int list,
+            intro(using(int list=>int list)),axiom,
+            [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int]==>list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,lambda(v6,decide(v6,[~,v0::v2 of l2],[~,v2 of l2]))of (term_of(memberdec)of v0 of l2)]))])in (int list=>int list),
+             repeat intro,axiom,
+             [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v9:int list,v10:int list=>int list,v11:int list,v12:int,v13:int list,v14:int list]==>lambda(v6,decide(v6,[~,v8::v10 of v11],[~,v10 of v11]))of (term_of(memberdec)of v8 of v11)in int list,
+              simplify,_170723,
+              [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int,v9:int list,v10:int list=>int list,v11:int list,v12:int,v13:int list,v14:int list]==>decide(list_ind(v11,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v8,v1,inl(v8),v3)]),[~,v8::v10 of v11],[~,v10 of v11])in int list,
+               intro(using(int\int=>int))then repeat intro,axiom,
+               [
+               ]) ext _170723
+              ]) ext _170719
+             ]),
+             problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int]==>v0::v1 in int list,
+             repeat intro,axiom,
+             [
+             ]),
+             problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:member(h,v1)=>void,v5:intersect(h::t,v1)=intersect(t,v1)in int list,v6:list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])=inr(lambda(u,u))in (int\int=>int),v7:int\int=>int,v8:int list]==>v8 in int list,
+             intro,axiom,
+             [
+             ])
+            ]) ext _170200
+           ]) ext _166608
+          ]) ext _13632
+         ]) ext _13158
+        ]) ext _11024
+       ]) ext _9529,
+       problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int]==>decide(v5,[~,h::list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)],[~,list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)])=list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,lambda(v6,decide(v6,[~,v0::v2 of l2],[~,v2 of l2]))of (term_of(memberdec)of v0 of l2)]))])of (v0::v1)in int list in u(1),
+       repeat intro,axiom,
+       [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)in int list,
+        intro(using(int list=>int list)),axiom,
+        [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])in (int list=>int list),
+         repeat intro,axiom,
+         [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int,v9:int list,v10:int list=>int list,v11:int list,v12:int,v13:int list,v14:int list]==>decide(term_of(memberdec)of v7 of v11,[~,v7::v10 of v11],[~,v10 of v11])in int list,
+          simplify,_172604,
+          [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int,v9:int list,v10:int list=>int list,v11:int list,v12:int,v13:int list,v14:int list]==>decide(list_ind(v11,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v7,v1,inl(v7),v3)]),[~,v7::v10 of v11],[~,v10 of v11])in int list,
+           intro(using(int\int=>int))then repeat intro,axiom,
+           [
+           ]) ext _172604
+          ]) ext _172600
+         ]),
+         problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int]==>v0::v1 in int list,
+         repeat intro,axiom,
+         [
+         ]),
+         problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int list]==>v7 in int list,
+         intro,axiom,
+         [
+         ])
+        ]) ext _172059,
+        problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])of (v0::v1)in int list,
+        intro(using(int list=>int list)),axiom,
+        [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int]==>list_ind(t,lambda(~,nil),[v0_,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0_ of l2,[~,v0_::v2 of l2],[~,v2 of l2])]))])in (int list=>int list),
+         repeat intro,axiom,
+         [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int,v9:int list,v10:int list=>int list,v11:int list,v12:int,v13:int list,v14:int list]==>decide(term_of(memberdec)of v6 of v11,[~,v6::v10 of v11],[~,v10 of v11])in int list,
+          simplify,_174150,
+          [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int,v9:int list,v10:int list=>int list,v11:int list,v12:int,v13:int list,v14:int list]==>decide(list_ind(v11,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)]),[~,v6::v10 of v11],[~,v10 of v11])in int list,
+           intro(using(int\int=>int))then repeat intro,axiom,
+           [
+           ]) ext _174150
+          ]) ext _174146
+         ]),
+         problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int]==>v0::v1 in int list,
+         repeat intro,axiom,
+         [
+         ]),
+         problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int list]==>v6 in int list,
+         intro,axiom,
+         [
+         ])
+        ]) ext _173599,
+        problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int]==>list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,lambda(v6,decide(v6,[~,v0::v2 of l2],[~,v2 of l2]))of (term_of(memberdec)of v0 of l2)]))])of (v0::v1)in int list,
+        compute(list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,[[1]]]))])of (v0::v1)in int list),_175161,
+        [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int]==>list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0 of l2,[~,v0::v2 of l2],[~,v2 of l2])]))])of (v0::v1)in int list,
+         intro(using(int list=>int list)),axiom,
+         [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int]==>list_ind(t,lambda(~,nil),[v0,~,v2,lambda(l2,list_ind(l2,nil,[~,~,~,decide(term_of(memberdec)of v0 of l2,[~,v0::v2 of l2],[~,v2 of l2])]))])in (int list=>int list),
+          repeat intro,axiom,
+          [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v7:int list,v8:int list=>int list,v9:int list,v10:int,v11:int list,v12:int list]==>decide(term_of(memberdec)of v6 of v9,[~,v6::v8 of v9],[~,v8 of v9])in int list,
+           simplify,_175949,
+           [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int,v7:int list,v8:int list=>int list,v9:int list,v10:int,v11:int list,v12:int list]==>decide(list_ind(v9,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)]),[~,v6::v8 of v9],[~,v8 of v9])in int list,
+            intro(using(int\int=>int))then repeat intro,axiom,
+            [
+            ]) ext _175949
+           ]) ext _175945
+          ]),
+          problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int]==>v0::v1 in int list,
+          repeat intro,axiom,
+          [
+          ]),
+          problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list,v3:member(h,v0::v1)=>void,v4:int_eq(h,v0,inl(h),list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)]))=list_ind(v1,inr(lambda(v1_,v1_)),[v1_,v2,v3,int_eq(h,v1_,inl(h),v3)])in (int\int=>int),v5:int\int=>int,v6:int list]==>v6 in int list,
+          intro,axiom,
+          [
+          ])
+         ]) ext _175161
+        ]) ext _175157
+       ]) ext _171656
+      ]) ext _8682
+     ]) ext _8149
+    ]) ext _8017
+   ]) ext _8008,
+   problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2: (member(h,v1)=>void)=>intersect(h::t,v1)=intersect(t,v1)in int list]==> (member(h,v0::v1)=>void)in u(1),
+   simplify then repeat intro then simplify then repeat intro,axiom,
+   [
+   ])
+  ]) ext _7544
+ ]) ext _7473
+]).

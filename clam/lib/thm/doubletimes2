@@ -1,0 +1,10 @@
+problem([]==>n:pnat=>double(n)=times(n,s(s(0)))in pnat,
+ind_strat(induction(lemma(pnat_primitive)-[(n:pnat)-s(v0)])then[base_case(normalize_term([reduction([1,1],[double1,equ(pnat,left)]),reduction([2,1],[times1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[2,1],[times2,equ(pnat,left)],[])then[wave(direction_out,[1,1],[double2,equ(pnat,left)],[])])then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(right,in,[1],v1)]))then[idtac]))])]),lambda(n,p_ind(n,su(su(su(axiom,[times1 of s(s(0))],[v0]),[term_of(times1)],[times1]),[term_of(double1)],[double1]),[v0,v1,su(su(su(su(su(_135449,[double2 of v0],[v2]),[term_of(double2)],[double2]),[v2 of s(s(0))],[v3]),[times2 of v0],[v2]),[term_of(times2)],[times2])])),
+[problem([n:pnat,v0:pnat,v1:double(v0)=times(v0,s(s(0)))in pnat]==>s(s(double(v0)))=plus(double(v0),s(s(0)))in pnat,
+ generalise(double(v0),v2:pnat),lambda(v2,su(v3,[v2 of double(v0)],[v3]))of _135338,
+ [problem([n:pnat,v0:pnat,v1:double(v0)=times(v0,s(s(0)))in pnat]==>v2:pnat=>s(s(v2))=plus(v2,s(s(0)))in pnat,
+  ind_strat(induction(lemma(pnat_primitive)-[(v2:pnat)-s(v3)])then[base_case(normalize_term([reduction([2,1],[plus1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[2,1],[plus2,equ(pnat,left)],[])then[unblock_then_wave(direction_out,unblock_lazy([unblock(meta_ripple,unused,unused),unblock(meta_ripple,unused,unused),idtac])then wave(direction_out,[],[cnc_s,imp(right)],[]))])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,pwf_then_fertilize(strong,fertilization_strong(v4))))])]),lambda(v2,p_ind(v2,su(su(axiom,[plus1 of s(s(0))],[v3]),[term_of(plus1)],[plus1]),[v3,v4,su(su(su(su(su(su(su(v5,[v6 of v4],[v5]),[v5 of plus(v3,s(s(0)))],[v6]),[cnc_s of s(s(v3))],[v5]),[term_of(cnc_s)],[cnc_s]),[v5 of s(s(0))],[v6]),[plus2 of v3],[v5]),[term_of(plus2)],[plus2])])),
+  [
+  ]) ext _135338
+ ]) ext _135449
+]).

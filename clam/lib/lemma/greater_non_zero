@@ -1,0 +1,35 @@
+problem([]==>x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,
+intro,lambda(x,_1223),
+[problem([x:pnat]==>greater(x,0)=>y:pnat#x=s(y)in pnat,
+ elim(x),p_ind(x,_1266,[v0,v1,_1272]),
+ [problem([x:pnat]==>greater(0,0)=>y:pnat#0=s(y)in pnat,
+  simplify then repeat intro,lambda(v0,_1319),
+  [problem([x:pnat,v0:void]==>y:pnat#0=s(y)in pnat,
+   elim(v0),any(v0),
+   [
+   ]) ext _1319
+  ]) ext _1266,
+  problem([x:pnat,v0:pnat,v1:greater(v0,0)=>y:pnat#v0=s(y)in pnat]==>greater(s(v0),0)=>y:pnat#s(v0)=s(y)in pnat,
+  simplify then repeat intro,lambda(v2,_1440),
+  [problem([x:pnat,v0:pnat,v1:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v2:int]==>y:pnat#s(v0)=s(y)in pnat,
+   intro(v0),v0&_1514,
+   [problem([x:pnat,v0:pnat,v1:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v2:int]==>v0 in pnat,
+    intro,axiom,
+    [
+    ]),
+    problem([x:pnat,v0:pnat,v1:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v2:int]==>s(v0)=s(v0)in pnat,
+    equality then try wfftacs,axiom,
+    [
+    ]) ext _1514,
+    problem([x:pnat,v0:pnat,v1:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v2:int,y:pnat]==>s(v0)=s(y)in pnat in u(1),
+    repeat wfftac,axiom,
+    [
+    ])
+   ]) ext _1440
+  ]) ext _1272
+ ]) ext _1223,
+ problem([]==>pnat in u(1),
+ intro,axiom,
+ [
+ ])
+]).

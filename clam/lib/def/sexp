@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: sexp,v 1.2 1997/10/09 17:08:29 img Exp $
+ *
+ * $Log: sexp,v $
+ * Revision 1.2  1997/10/09 17:08:29  img
+ * fixes
+ *
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+{sexp} <==> rec(z,atom \ z # z).

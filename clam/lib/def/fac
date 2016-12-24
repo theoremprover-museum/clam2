@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: fac,v 1.1 1995/05/15 17:31:25 img Exp $
+ *
+ * $Log: fac,v $
+ * Revision 1.1  1995/05/15 17:31:25  img
+ * 	* factorial
+ *
+ */
+
+fac(n) <==> p_ind(n,s(0),[p,r,times(s(p),r)]).

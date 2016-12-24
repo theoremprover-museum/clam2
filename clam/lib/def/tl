@@ -1,0 +1,12 @@
+/*
+ * @(#)$Id: tl,v 1.2 1998/03/04 14:32:42 img Exp $
+ *
+ * $Log: tl,v $
+ * Revision 1.2  1998/03/04 14:32:42  img
+ * *** empty log message ***
+ *
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ */
+
+tl(l)<==>list_ind(l,nil,[~,t,~,t]).

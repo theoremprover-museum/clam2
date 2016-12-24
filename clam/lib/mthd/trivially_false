@@ -1,0 +1,14 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: trivially_false,v 1.1 1998/09/15 15:57:38 img Exp $
+ */
+
+method(trivially_false,
+       H==>G,
+       [matrix(Vars,Matrix,G),
+	append(H,Vars,Context),
+	trivially_falsifiable(Context,G)],
+       [],
+       [[]==>void],
+       trivially_false).
+
+

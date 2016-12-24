@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: pi1,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: pi1,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+pi1(x)<==>spread(x,[a,~,a]).

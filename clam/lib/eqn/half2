@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: half2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: half2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>half(s(0))=0 in pnat,
+simplify,_7453,
+[problem([]==>0=0 in pnat,
+ identity,axiom,
+ [
+ ]) ext _7453
+]).

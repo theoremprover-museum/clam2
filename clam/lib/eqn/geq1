@@ -1,0 +1,43 @@
+/*
+ * @(#)$Id: geq1,v 1.2 1996/06/11 17:04:37 img Exp $
+ *
+ * $Log: geq1,v $
+ * Revision 1.2  1996/06/11 17:04:37  img
+ * Correct equations for these predicates.
+ *
+% Revision 1.1  1994/09/16  09:38:16  dream
+% Initial revision
+%
+ */
+
+problem([]==>x:pnat=>geq(x,0)={true} in u(1),
+intro,lambda(x,_7448),
+[problem([x:pnat]==>{true}=>geq(x,0),
+ intro,lambda(v0,_7477),
+ [problem([x:pnat,v0:{true}]==>geq(x,0),
+  elim(x),p_ind(x,_7510,[v1,v2,_7516]),
+  [problem([x:pnat,v0:{true}]==>geq(0,0),
+   simplify,_7526,
+   [problem([x:pnat,v0:{true}]==>int,
+    intro(0),0,
+    [
+    ]) ext _7526
+   ]) ext _7510,
+   problem([x:pnat,v0:{true},v1:pnat,v2:geq(v1,0)]==>geq(s(v1),0),
+   simplify,_7581,
+   [problem([x:pnat,v0:{true},v1:pnat,v2:geq(v1,0)]==>int,
+    intro(0),0,
+    [
+    ]) ext _7581
+   ]) ext _7516
+  ]) ext _7477,
+  problem([x:pnat]==>{true}in u(1),
+  repeat wfftac,axiom,
+  [
+  ])
+ ]) ext _7448,
+ problem([]==>pnat in u(1),
+ repeat wfftac,axiom,
+ [
+ ])
+]).

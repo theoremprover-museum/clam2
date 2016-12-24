@@ -1,0 +1,7 @@
+problem([]==>n:pnat=>half(double(n))=n in pnat,
+ind_strat(induction(lemma(pnat_primitive)-[(n:pnat)-s(v0)])then[base_case(normalize_term([reduction([1,1,1],[double1,equ(pnat,left)]),reduction([1,1],[half1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[1,1,1],[double2,equ(pnat,left)],[])then[wave(direction_out,[1,1],[half3,equ(pnat,left)],[])])then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,in,[1],v1)]))then[idtac]))])]),lambda(n,p_ind(n,su(su(axiom,[term_of(half1)],[half1]),[term_of(double1)],[double1]),[v0,v1,su(su(su(su(_163575,[half3 of double(v0)],[v2]),[term_of(half3)],[half3]),[double2 of v0],[v2]),[term_of(double2)],[double2])])),
+[problem([n:pnat,v0:pnat,v1:half(double(v0))=v0 in pnat]==>s(v0)=s(v0)in pnat,
+ elementary(unfold_iff then identity),axiom,
+ [
+ ]) ext _163575
+]).

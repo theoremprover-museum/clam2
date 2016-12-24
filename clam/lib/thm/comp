@@ -1,0 +1,17 @@
+problem([]==>a:pnat=>b:pnat=>plus(a,b)=plus(b,a)in pnat,
+ind_strat(induction(lemma(pnat_primitive)-[(a:pnat)-s(v0)])then[base_case(normalize_term([reduction([1,1],[plus1,equ(pnat,left)])])),step_case(ripple(direction_out,wave(direction_out,[1,1],[plus2,equ(pnat,left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,in,[1],v1)]))then[idtac]))])]),lambda(a,p_ind(a,lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of _161110,[plus1 of v0],[v1]),[term_of(plus1)],[plus1])),[v0,v1,lambda(v2,su(su(su(lambda(v3,su(v4,[v3 of v2],[v4]))of lambda(v2,su(lambda(v3,su(v4,[v3 of v2],[v4]))of _161035,[v1 of v2],[v3])),[v3 of v2],[v4]),[plus2 of v0],[v3]),[term_of(plus2)],[plus2]))])),
+[problem([a:pnat]==>b:pnat=>b=plus(b,0)in pnat,
+ ind_strat(induction(lemma(pnat_primitive)-[(b:pnat)-s(v0)])then[base_case(normalize_term([reduction([2,1],[plus1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[2,1],[plus2,equ(pnat,left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(right,in,[1],v1)]))then[idtac]))])]),lambda(b,p_ind(b,su(su(axiom,[plus1 of 0],[v0]),[term_of(plus1)],[plus1]),[v0,v1,su(su(su(_160800,[v2 of 0],[v3]),[plus2 of v0],[v2]),[term_of(plus2)],[plus2])])),
+ [problem([a:pnat,b:pnat,v0:pnat,v1:v0=plus(v0,0)in pnat]==>s(v0)=s(v0)in pnat,
+  elementary(unfold_iff then identity),axiom,
+  [
+  ]) ext _160800
+ ]) ext _161110,
+ problem([a:pnat,v0:pnat,v1:b:pnat=>plus(v0,b)=plus(b,v0)in pnat]==>b:pnat=>s(plus(b,v0))=plus(b,s(v0))in pnat,
+ ind_strat(induction(lemma(pnat_primitive)-[(b:pnat)-s(v2)])then[base_case(normalize_term([reduction([1,1,1],[plus1,equ(pnat,left)]),reduction([2,1],[plus1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[2,1],[plus2,equ(pnat,left)],[])then[wave(direction_out,[1,1,1],[plus2,equ(pnat,left)],[])])then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(right,in,[1],v3)]))then[idtac]))])]),lambda(b,p_ind(b,su(su(su(su(axiom,[plus1 of s(v0)],[v2]),[term_of(plus1)],[plus1]),[plus1 of v0],[v2]),[term_of(plus1)],[plus1]),[v2,v3,su(su(su(su(su(su(_160419,[v4 of v0],[v5]),[plus2 of v2],[v4]),[term_of(plus2)],[plus2]),[v4 of s(v0)],[v5]),[plus2 of v2],[v4]),[term_of(plus2)],[plus2])])),
+ [problem([a:pnat,v0:pnat,v1:b:pnat=>plus(v0,b)=plus(b,v0)in pnat,b:pnat,v2:pnat,v3:s(plus(v2,v0))=plus(v2,s(v0))in pnat]==>s(s(plus(v2,v0)))=s(s(plus(v2,v0)))in pnat,
+  elementary(unfold_iff then identity),axiom,
+  [
+  ]) ext _160419
+ ]) ext _161035
+]).

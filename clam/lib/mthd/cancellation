@@ -1,0 +1,26 @@
+/*
+ * @(#)$Id: cancellation,v 1.2 1998/09/15 16:00:31 img Exp $
+ *
+ * $Log: cancellation,v $
+ * Revision 1.2  1998/09/15 16:00:31  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.1  1996/12/11 15:09:16  img
+ * Merge of mthd and smthd libraries.
+ *
+ * Revision 1.1  1994/09/16 09:34:27  dream
+ * Initial revision
+ */
+
+method(cancellation([],Rule),
+       H==>G,
+       [matrix(Vars,Matrix,G),
+	wave_fronts(Exp,WSpec,Matrix),
+	cancel_rule(Exp,Rule:PC=>Exp:=>NewExp),
+	object_level_term(Exp),
+	immediate(H==>PC)],
+       [modify_wave_ann(WSpec,WWSpec),
+	wave_fronts(NewExp,WWSpec,NewMatrix),
+	matrix(Vars,NewMatrix,NewG) ],
+       [H==>NewG],
+       cancellation([],Rule)).

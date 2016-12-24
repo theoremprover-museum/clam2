@@ -1,0 +1,490 @@
+\def\rcsid{$Id: summary.tex,v 1.6 1999/03/31 13:38:06 img Exp $}
+\input header
+
+\iffalse
+\section {Summary of top-level predicates}
+\label{top-level-preds}
+
+
+{\small
+
+\begin{supertabular}{@{}lp{.5\textwidth}@{}}
+{\tt method(?M,?I,?Pr,?Po,?O,?T)} & Tries to find the specified method in
+		the method-database.\\
+{\tt submethod/6} & As {\tt method/6} but for the the submethod-database.\\\hline
+{\tt applicable(+S,?M)} & Method {\tt M} is applicable to sequent {\tt S}.\\
+{\tt applicable(?M)} & Method {\tt M} is applicable to the current sequent. \\
+{\tt applicable(+S,?M,?P,?O)} & Method {\tt M} is applicable to {
+		\tt S}, with postconditions-slot {\tt P} and
+		output-slot {\tt O}. \\ 
+{\tt applicable(?M,?P,?O)} & {\tt M} is
+		applicable to the current sequent, with
+		postconditions-slot {\tt P} and output-slot {\tt O}.\\
+{\tt applicable-submethod} & As 
+		{\tt applicable/[1;2;3;4]} predicate, but for submethods.\\
+{\tt applicable-anymethod} & As 
+		{\tt applicable/[1;2;3;4]} predicate, but for
+		both methods and submethods.\\ 
+\hline
+{\tt dplan(+S,?P,?O)} & {\tt P} is a plan that, when applied to
+		sequent {\tt S} generates output sequents {\tt O}.
+		{\tt P} is constructed by depth-first search. \\
+{\tt dplan(+S,?P)} & {\tt P} is a plan that, when applied to sequent {
+		\tt S} generates no output sequents.
+		{\tt P} is constructed by depth-first search. \\
+{\tt dplan(?P)} & {\tt P} is a plan that, when applied to the current
+		sequent generates no output sequents.
+		{\tt P} is constructed by depth-first search. \\
+{\tt dplan} & Constructs a plan that, when applied to the current
+		sequent generates no output sequents, and pretty-prints the
+		resulting plan.
+		{\tt P} is constructed by depth-first search.\\
+{\tt plan(+T)}  & {\tt T} is the name of a conjecture which is
+                  loaded and planned for (depth first). \\
+{\tt bplan/[0;1;2;3]} & As {\tt dplan/[0;1;2;3]}, but using
+		breadth-first search. \\
+{\tt idplan/[0;1;2;3]} & As {\tt dplan/[0;1;2;3]}, but using
+		iterative deepening search. \\
+{\tt viplan/[0;1;2;3]} & As {\tt idplan/[0;1;2;3]}, but giving interesting
+		visual feedback about traversal of search space. \\
+{\tt hint(?M,?I,?Pr,?Po,?O,?T)} & Tries to find the specified hint-method in
+                the hint-method-database.\\
+{\tt dhtplan(+H,+S,?P,?O)} & {\tt P} is a plan that, when applied to
+                sequent {\tt S} generates output sequents {\tt O}.
+                {\tt P} is constructed by depth-first search using the
+                hints in H. \\
+{\tt dhtplan(+H,+S,?P)} & {\tt P} is a plan that, when applied to sequent {
+                \tt S} generates no output sequents.
+                {\tt P} is constructed by depth-first search using the
+                hints in H. \\
+{\tt dhtplan(+H,?P)} & {\tt P} is a plan that, when applied to the current
+                sequent generates no output sequents.
+                {\tt P} is constructed by depth-first search using the
+                hints in H. \\
+{\tt dhtplan(+H)} & Constructs a plan that, when applied to the current
+                sequent generates no output sequents, and pretty-prints the
+                resulting plan.
+                {\tt P} is constructed by depth-first search using the
+                hints in H.\\
+{\tt idhtplan/[1;2;3;4]} & As {\tt dhtplan/[1;2;3;4]}, but using
+                iterative deepening search. \\
+{\tt gdhtplan/[1;2;3;4]} & As {\tt dhtplan/[0;1;2;3;4]}, but using
+                best-first search. \\
+{\tt bound(-B)} & Used to generate increasing values for the cut-off
+		depth used by {\tt idplan/[0;1;2;3]}.\\
+{\tt gdplan/[0;1;2;3]} & As {\tt dplan/[0;1;2;3]}, but using
+		best-first search. \\
+{\tt select-method(+S,?M,?O)} & Method {\tt M} should be applied to
+		sequent {\tt S} giving output-slot {\tt O}. This is
+		the user-programmable hook to modify the behaviour
+		of {\tt gdplan/[0;1;2;3]}.\\
+{\tt print-plan(+Plan)} & Pretty prints {\tt Plan}.\\
+{\tt print-plan} & Pretty prints the current proof tree.\\
+{\tt trace-plan(?C,?N)} & Unifies {\tt C} with the  current tracing
+		level, and {\tt N} with the new tracing level. \\
+{\tt apply-plan(+Plan)} & Apply {\tt Plan} with each method in {\tt Plan} as
+		a single refinement step.\\
+{\tt apply-plan-check(+Plan)} & as {\tt apply-plan/1}, but checks that
+		each method results in the output sequents specified
+		in its output-slot. \\
+{\tt apply-ext(+Args)}  &  provides a simple interface for applying Oyster
+                           extract terms. {\tt Args} denotes a list of
+                           arguments to which the extract from the current
+                           Oyster proof is to be applied. \\
+{\tt prove(+T)}  & {\tt T} is the name of a conjecture which is
+                   planned for (depth-first). The resulting plan 
+                   is executed. \\
+{\tt apply-ext(+Args)} & Apply the extract term from the current proof tree
+                         to the argument list {\tt Args}. \\ \hline
+{\tt slct/[0;1]} & As Oyster's {\tt select/[0;1]}, except that this
+		also takes care of installing the right code for {\tt
+		wfftac/0}.\\	\hline
+{\tt make/[0;1]} & Reload/recompile all recently changed source files.
+\end{supertabular}}
+\fi
+
+\section {Summary of library predicates}
+\label{library-preds}
+{\small
+\begin{supertabular}{@{}lp{.5\textwidth}@{}}
+{\tt needs(+O,+L)} & Typed logical object {\tt O} requires all the
+		typed logical objects in {\tt L}.\\
+{\tt needed(?N1,?N2)} & Transitive closure of {\tt needs/2}.\\
+{\tt lib-load(+T(+O),+Dir)} & Typed logical object {\tt T(O)} will be
+		loaded from directory {\tt Dir}.\\
+{\tt lib-load(+T(+O))} & As {\tt lib-load/2}, from 
+		{\tt \~oyster/clam/lib}.\\
+{\tt lib-load(mthd(+M/+A),+L,+D)} & Loads method {\tt M/A} from file in
+		directory {\tt D} into the method database at location {\tt L}.
+		Similarly for submethods if first argument is
+		{\tt smthd(M/A)}.\\
+{\tt lib-load(mthd(+M/+A),+L)} & As {\tt lib-load/3}, loaded from the
+		default library directory.\\
+{\tt lib-delete(?T(?O))} & Remove typed logical object {\tt T(O)} from the
+		current environment.\\
+{\tt lib-present(?T(?O))} & Succeeds if typed logical object {\tt T(O)}
+		is presently loaded in the current environment.\\
+{\tt lib-save(+T(+O),+Dir)} & Save logical object {\tt T(O)} in the
+		appropriately named file in directory {\tt Dir}.\\
+{\tt lib-save(+T(+O))} & As {\tt lib-save/2}, in the default saving
+		directory.\\
+{\tt lib-dir(?Path)} & {\tt Path} is unified with the pathname of the default
+		library search path, for loading logical objects using the
+		library mechanism. \\
+{\tt lib-dir-system(?D)} & {\tt D} is the directory under which the
+	default \clam{}  library is to be found. \\
+{\tt lib-edit(+M)} & Edit (sub)method {\tt M} in the library directory,
+		and reload the (sub)method afterwards. \\
+{\tt lib-edit(+M,+Dir)} & As {\tt lib-edit/1}, but locate {\tt M} in
+		directory {\tt Dir} instead of the library directory.\\
+{\tt lib-set(+P)} & Set the value of library parameter P (currently either
+		{\tt dir(+D)} or {\tt editor(+E)}).\\
+{\tt list-methods(?L)} & {\tt L} will be unified with the list
+of methods currently loaded in the method database.\\
+{\tt list-methods} & Prints the list of methods currently loaded in
+		the method database.\\
+{\tt list-submethods/[0;1]} & As {\tt list-methods/[0;1]}, but for the
+		submethod database.\\
+{\tt list-hints(?L)} & {\tt L} will be unified with the list
+of hint-methods currently loaded in the hint-method database.\\
+{\tt list-hints} & Prints the list of hint-methods currently loaded in
+                the hint-method database.\\
+{\tt hint} & Hint-method (argument is of form {\tt Name/Arity}).\\
+\end{supertabular}}
+
+\subsection {Types of logical objects}
+
+{\small\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+{\tt thm} & Theorem (to be proved by \clam). \\
+{\tt lemma} & Lemmas (to be used but not proved by \clam).\\
+{\tt synth} & Synthetic definition for definition by extract term.
+ 	(to be used but not proved by \clam).\\
+{\tt scheme} & Induction scheme (to be used but not proved by \clam).\\
+{\tt wave} & wave-rule (to be used but generally also first proved by \clam).\\
+{\tt def} & Oyster definition ({\tt <==>}) (to be used by \clam).\\
+{\tt eqn} & Recursion equation corresponding to a {\tt def}.
+	(to be used but not proved by \clam).\\
+{\tt red} & Reduction rule (to be used but generally also first proved by
+	\clam).\\
+{\tt mthd} & Method (argument is of form {\tt Name/Arity}).\\
+{\tt smthd} & Submethod (argument is of form {\tt Name/Arity}).\\
+{\tt hint} & Hint-method (argument is of form {\tt Name/Arity}).\\
+{\tt plan} & Proof-plan (argument is name of theorem).
+\end{tabularx}}
+
+\def\tentry#1#2{\vtop{\hbox{\tt #1}\vskip1ex\hbox{\qquad\tt #2}}}
+\def\tentrytt#1#2{{\tt #1#2}}
+
+\iffalse
+\section {Summary of predicates in the method language}
+\label{method-ling-predicates-summary}
+
+(Predicate name and arguments are on separate lines to save space!)
+
+{\small
+
+\begin{supertabular}{@{}lp{.5\textwidth}@{}}
+\tentry{adjust-existential-vars}{(+EVs,+VB,-NEVs,-SL)} &
+{\tt EVs} encodes instantiations for existential variables.
+Instantiation may be partial so additional existential variables
+may be introduced. To prevent the introduction of name clashes
+the list of current bindings, {\tt VB}, is required.
+{\tt NEVs} and {\tt SL} denote the refined list of existential 
+variables and the substitution list for the partially instantiated 
+existential variables respectively.\\
+\tentry{adjust-ind-hyps}{(+RHIs,+IHs,+P,-VIHs,-CRHIs)} &
+Constructs the set of viable induction hypotheses {\tt VIHs}
+that results when the term at position {\tt P} in the induction
+conclusion is rewritten by applying a wave-rule whose skeleton right
+hand side instances are {\tt RHIs}. \\
+\tentry{skeleton-position}{(+GPos,+G,-HPos)} &
+Given the position {\tt GPos} within the unquantified goal {\tt G} the
+corresponding position (if it exists), {\tt HPos}, in the induction hypothesis is calculated. \\
+\tentry{cancel-rule}{(?Exp,?RuleName:?Rule)} &
+{\tt RuleName} is the name of rule structure {\tt Rule} which carries
+out a cancellation with respect to the term {\tt Exp}. \\
+\tentrytt{canonical}{(?Term,?Type)} & {\tt Term} is a canonical element of
+		{\tt Type}.\\
+\tentrytt{canonical-form}{(+Exp,+Rules,?New)} & {\tt New} is the
+		canonical form of {\tt Exp} using all rewrite rules
+		{\tt Rules}.\\
+\tentry{complementary-rewrite}{(?Exp,?Dir,?RnName:?Rewrite)} &
+{\tt Exp} is the skeleton term structure corresponding to the  left hand side of
+the rewrite {\tt Rewrite} with orientation {\tt Dir} and name {\tt RnName}. 
+Members of a complementary set
+of rewrites which are not wave-rules are classified as complementary rewrites. \\
+\tentrytt{condition-set}{(+Term,-Conds)} &
+{\tt Term} is a wave-term where the wave-function is conditionally
+defined and {\tt Conds} is the list of its associated conditions. \\
+\tentrytt{constant}{(?C,?T)} & {\tt C} is a constant of type {\tt T}.\\
+\tentrytt{copy}{(+Term,-NewTerm)} &
+{\tt Term} and {\tt NewTerm} are identical except for the
+renaming of Prolog variables. \\
+\tentry{correct-wave-vars}{(?Pattern,+Instance)} &
+The term {\tt Pattern} unifies against the term {\tt Instance}, correcting
+for the possibility that wave-fronts in {\tt Pattern} may have less wave-holes
+than the corresponding wave-fronts in {\tt Instance}.\\
+\tentrytt{exp-at}{(+Exp,?Pos,?SubExp)} & {\tt SubExp} is the subexpression in 
+		{\tt Exp} at position {\tt Pos}\\ 
+\tentry{exp-at}{(+Exp,?Pos,?SubExp,?SupExp)} & As {\tt exp-at/3}, with the
+		additional fourth argument bound to the expression
+		immediately surrounding {\tt SubExp}.\\
+\tentry{equal-rule}{(?Exp,?RuleName:?Rule)} & 
+The left hand side of the rule structure {\tt Rule}, with
+name {\tt RuleName}, matches with the skeleton structure {\tt Exp}. \\
+\tentry{func-defeqn}{(?Exp,?Dir,?Func:?Rewrite)} &
+{\tt Rewrite} is the defining rewrite, with name {\tt Func}, 
+orientation {\tt Dir} and with associated skeleton structure {\tt Exp}. \\
+\tentrytt{groundp}{(+Term)} & {\tt Term} is ground (does not contain meta-variables).\\ 
+\tentry{ground-sinks}{(+Instan,+Lhs,+Rhs,?SubTerm)} &
+For all members of {\tt Instan} which are Prolog variables an instantiation
+is calculated using {\tt Lhs} and {\tt Rhs}, the left and right hand
+sides of the current goal. {\tt SubTerm} is a subexpression of
+{\tt Rhs} in which uninstantiated sinks may occur. \\
+\tentry{in-order}{(?Var:?T-?Scheme,+ScoreList)} &
+The predicate {\tt in-order} selects members of {\tt ScoreList} in order of
+decreasing {\tt Score} values. \\
+\tentrytt{hyp}{(?Hyp,?HypList)} & {\tt Hyp} is a member of {\tt HypList}.\\
+\tentry{induction-suggestion}{(+H,+G,?Sch)} & Ripple analysis proposes
+{\tt Sch} induction on {\tt G}.\\
+\tentry{instantiate}{(+G1,?G2,?G2Vals)} & {\tt G2} is obtained by
+		instantiating all universally quantified variables
+		in {\tt G1} with the values {\tt G2Vals}. \\ 
+\tentry{instantiate}{(+Frees,+G1,?G2,?G2Vals)} & As {\tt
+instantiate/3}, but {\tt Frees} is a list of object level terms which
+are to be used to instantiate  (some variables of) {\tt G1} when it
+can be instantiated to {\tt G2} without otherwise instantiating all of
+its variables.\\
+\tentry{join-wave-fronts}{(+T1,?P,?T2)} & {\tt T2} is as 
+		{\tt T1}, but with a number of small wave-fronts
+		joined into larger ones.  {\tt P} contains the positions
+		of the wave-fronts in {\tt T} which were joined.\\
+\tentry{mark-potential-waves}{(+Goal,-NewGoal)} &
+{\tt Goal} and {\tt NewGoal} are identical except that all existential 
+variables in {\tt NewGoal} are annotated as potential wave-fronts. \\
+\tentry{mark-sinks}{(+Bindings,+Term,-NewTerm)} &
+{\tt Bindings} is a list of bindings. The {\tt Term} and {\tt NewTerm}
+are identical except that all variables in {\tt Bindings} which occur
+in {\tt Term} are annotated as sinks in {\tt NewTerm}. \\
+\tentrytt{matrix}{(?Vs,?M,?F)} & {\tt M} is the matrix of
+		{\tt F}, with {\tt Vs} containing all universal
+		variables in {\tt F}.\\ 
+\tentrytt{matches}{(?S,?T)} & {\tt T} matches {\tt S}.\\ 
+\tentrytt{matrix}{(?Vs,?EVs,?M,?F)} &
+As {\tt matrix/3} except deals with existential quantifiers. \\
+\tentrytt{metavar}{(?Var)} & {\tt Var} is a meta-variable.\\
+\tentrytt{minimal}{(+Ss,?S)} & {\tt S} is the minimal scheme among the list of schemes
+		{\tt Ss}.\\
+\tentrytt{minimally-subsumes}{(?S,+Ss)} & {\tt S} is the smallest scheme that
+		subsumes all schemes in {\tt Ss}.\\	
+\tentry{modify-wave-ann}{(+WaveSpec,-NewWaveSpec)} &
+{\tt WaveSpec} is a list of wave-front specifications. {\tt NewWaveSpec} is a 
+a modified version of {\tt WaveSpec} which takes into account the cancellation
+of the outermost constructors.\\
+\tentrytt{nr-of-occ}{(?SubExp,+SupExp,?N)} & {\tt SubExp} occurs exactly {\tt N}
+ 		times in {\tt SupExp}. \\
+\tentrytt{object-level-term}{(+Term)} & Succeeds if {\tt Term} does not
+		contain meta-(Prolog) variables or wave-fronts. \\
+\tentrytt{occ}{(+T,?SubT,?Pos,?F)} & {\tt SubT} occurs in {\tt T}
+		at {\tt Pos}, immediately surrounded by term {\tt F}.\\
+\tentrytt{polarity}{(?O1,?O2,?F,?N,?P)} & {\tt F} has polarity {\tt P} in
+		argument number {\tt N} under orderings {\tt O1} and
+		{\tt O2}.\\
+\tentry{polarity-compatible}{(+G,+P,?D)} & The subexpression at position {\tt P}
+                                      within {\tt G} is compatible with the
+                                      rewrite orientation {\tt D}. \\
+\tentry{precon-matrix}{(?VTs,?Cs=>?T1,?T2)} &
+{\tt T1} is the matrix of {\tt T2}, where {\tt Cs} is
+unified with a list of  conditions. {\tt VTs} is
+associated list of bindings.\\
+\tentrytt{recursive}{(?Term,?Ns,?Schemes)} & {\tt Term} is a function
+		that is recursive in its {\tt N}ths arguments according to
+		recursion {\tt Schemes}. \\
+\tentrytt{recursive}{(?Term,?Ns,?Ss,?Cs)} & As {\tt recursive/3},
+		but {\tt Cs} is the list of conditions on the step
+		equations of {\tt Term}. \\
+\tentry{reduction-rule}{(?Exp,?Rule,?Pos)} & {\tt Rule} is a reduction rule
+		which rewrites {\tt Exp} at {\tt Pos}.\\
+\tentrytt{replace}{(+Pos,?Sub,+Old,?New)} & Expression {\tt New} is the
+		result of replacing the subexpression in {\tt Old} at
+		position {\tt Pos} with {\tt Sub}. \\
+\tentrytt{replace-all}{(+S1,+S2,+Old,?New)} & Expression {\tt New}
+		is the result of replacing all occurrences of {\tt S1}
+		with {\tt S2} in {\tt Old}.\\
+\tentrytt{rewrite}{(?Pos,+Rule,?Exp,?New)} & Expression {\tt New} is the
+		result of rewriting the subexpression in {\tt Exp} at
+		position {\tt Pos} using equation {\tt Rule}. \\ 
+\tentry{scheme}{(?Lemma,?S,?Schema)} & {\tt
+		Schema} is a schematic presentation of an induction
+scheme (justified by scheme lemma {\tt Lemma}), and indexed by {\tt S}.\\
+\tentry{scheme}{(+Source,+S,+Seq,?BSeqs,SSeqs)} & {\tt
+		BSeqs} and {\tt SSeq} are the lists of
+		base-sequents and step-sequents produced by
+		applying induction scheme {\tt S} to {\tt Seq}.
+		{\tt Source} is the source of the scheme.\\ 
+\tentrytt{simplify-rules}{(?Rules)} & {\tt Rules} is the set of all base-, step-
+		and wave equations. \\
+\tentrytt{sinks}{(?T1,?SinksSpec,?T2)} &
+{\tt T2} is as {\tt T1}, except that {\tt T2} has sinks in the
+positions specified by, {\tt SinksSpec}, a list of term positions.\\
+\tentrytt{sink-proper}{(?T1,?T2)} & 
+{\tt T1} is identical to {\tt T2} except that {\tt T1} is
+enclosed in a sink.\\
+\tentry{split-into-cases}{(+CaseAnal,+Goal,-SplitGoal)} &
+{\tt CaseAnal} is a case-analysis and {\tt Goal} is a goal formula.
+{\tt SplitGoal} is the list of goals generated by applying {\tt CaseAnal}
+to {\tt Goal}.\\
+\tentrytt{split-wave-fronts}{(+T1,?P,?T2)} & {\tt T2} is as
+		{\tt T}, but with a number of complex wave-fronts
+		split into smaller ones. {\tt P} contains the
+		positions of the wave-fronts in {\tt T1} which were split.\\
+\tentrytt{strip-meta-annotations}{(+T1,-T2)} &
+{\tt T1} and {\tt T2} are identical except that all meta-level annotations
+(sinks and waves) which appear in {\tt T1} are eliminated from {\tt T2}. \\
+\tentrytt{strip-redundant-sinks}{(+T1,-T2)} &
+{\tt T1} and {\tt T2} are lists of goal sequents. The corresponding goal
+sequents from each list are identical except that for each goal in {\tt T1}
+which contains sinks but no wave-fronts the associated goal in {\tt T2}
+contains no sinks. \\
+\tentrytt{strip-redundant-waves}{(+T1,-T2)} &
+{\tt T1} and {\tt T2} are lists of goal sequents. The corresponding goal
+sequents from each list are identical except that for each goal in {\tt T1}
+for which a nested induction would not be profitable then the wave-fronts
+in the associated goal in {\tt T2} are not present. \\
+\tentrytt{subsumes}{(+S1,+S2)} & Induction scheme {\tt S1} subsumes induction
+		scheme {\tt S2}. \\
+\tentrytt{theorem}{(?T,?G)} & The theorem named {\tt T} has top-level goal {\tt G}.\\
+\tentrytt{type-of}{(+Exp,?Type)} & {\tt Type} is a reasonable guess for the type
+		of {\tt Exp}.\\
+\tentrytt{unannotated-hyps}{(+T1,-T2)} &
+{\tt T1} and {\tt T2} are identical hypothesis lists except that
+wave-fronts have been eliminated from the hypotheses in {\tt T2}. \\
+\tentrytt{unifiable}{(?S,?T)} &  {\tt S} and {\tt T} unify.\\
+\tentrytt{unify}{(?S,?T)} & Unify {\tt S} and {\tt T}.\\
+\tentrytt{universal-var}{(+Seq,?Var)} & {\tt Var} is a universal
+		variable in sequent {\tt Seq}.\\
+\tentrytt{wave-fronts}{(?T1,?Fs,?T2)} & {\tt T2} is as {\tt T1}, except that
+		{\tt T2} has wave-fronts specified as the list of the
+		wave-front specifiers {\tt Fs}.\\
+\tentry{wave-front-proper}{(+Wave,-SubWave)} &
+{\tt Wave} and {\tt SubWave} are identical except that the surrounding
+wave-front of {\tt Wave} has been removed from {\tt SubWave}. \\
+\tentrytt{wave-rule}{(?RuleName)}  & Displays all the wave-rules associated 
+                              with {\tt RuleName}. \\
+\tentry{wave-rule}{(?RuleName,?Type,?Rule)} & {\tt RuleName} is the name of
+		rule structure {\tt Rule} which is a wave-rule. {\tt Type}
+		provides orientation information together with information
+                on the meta-level annotations on the right-hand-side of {\tt Rule}.\\
+\tentrytt{wave-rule}{(+T,?N,?W,?Rn:Rule)} & {\tt Rn} is
+		the name of \inx{wave-rule} {\tt Rule} with wave variable
+		{\tt W}, whose left hand side matches {\tt T} in
+		the {\tt N}th argument.\\
+\tentrytt{wave-rules}{(?Rules)} & {\tt Rules} is the set of all wave equations.\\
+\tentry{wave-rule-match}{(?RuleName,?Type,?Rule)} & As {\tt wave-rule/3} except
+                ensures that meta-variables within the left-hand-side {\tt Rule}
+		are only instantiated to well-annotated terms. \\
+\tentry{wave-terms-at}{(+Term,?Pos,?SubTerm)} &
+{\tt SubTerm} is a subterm of {\tt Term} at position {\tt Pos}
+such that {\tt SubTerm} is a wave-term or contains wave-term(s).
+\end{supertabular}}
+
+\section {Summary of connectives in the method language}
+\label{method-ling-connectives-summary}
+
+{\small\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+{\tt G1 andpossibly G2}{} & Flexible conjunction Tries to satisfy both {
+		\tt G1} and {\tt G2}. If this cannot be done, tries to
+		satisfy {\tt G1} alone.\\ 
+{\tt thereis \{?Var$\backslash$+List\}+Pred}{} & {\tt Pred} holds for {
+		\tt Var} bound to some element of {\tt List}. \\ 
+{\tt thereis \{?Var$\backslash$+Pred1\}+Pred2}{} & {\tt Pred2} holds some
+		element in the set of values for {\tt Var} specified
+		by {\tt Pred1}. \\
+{thereis \{?Var\}:+Pred}{} & {\tt Pred} holds for some value of {\tt Var}.\\
+{\tt forall \{?Var$\backslash$+List\}+Pred}{} & {\tt Pred} holds for {
+		\tt Var} bound to any element of {\tt List}\\
+{\tt forall \{?Var$\backslash$+Pred1\}+Pred2}{} & {\tt Pred2} holds for all
+		elements in the set of values {\tt for} Var specified
+		by {\tt Pred1}.\\
+\tentry{listof}{(+T,+P,?Ts)} & As {\tt setof/3}, except that {\tt listof/3} can
+		succeed with {\tt Ts} bound to {\tt []} instead of failing.\\
+\tentry{map-list}{(?L1,+E1:=>E2,+Pred,?L2)} & Maps {\tt L1} into {\tt
+		L2} by applying {\tt Pred} to each element {\tt E1} {
+		\tt of} L1 to produce elements {\tt E2} of {\tt L2}. \\ 
+{\tt not G} & Negation by failure.\\
+{\tt G1 orelse G2} & Committed disjunction. Tries to satisfy {\tt G1}. If
+		this fails, tries {\tt G2}. If G1 succeeds, will never
+		try {\tt G2}. \\
+{\tt G1 v G2} & Disjunction. First tries to satisfy {\tt G1} and on
+		failure (or backtracking) tries to satisfy {\tt G2}.
+\end{tabularx}}
+
+\fi
+
+\section {Summary of current repertoire of methods}
+\label{repertoire-summary}
+
+{\small\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+\tentrytt{apply-lemma}{(L)} & Finds a lemma {\tt L} whose top-level goal is a
+		universally quantified version of the current goal.\\
+\tentrytt{backchain-lemma}{(L)} & Finds a lemma {\tt L} that instantiates to {\tt
+		C=>G}, with {\tt G} the current goal and {\tt C} a
+		formula that occurs among the hypotheses. \\
+\tentrytt{base-case}{(P)} & Constructs a plan {\tt P} using \m{sym-eval/1}
+                   and \m{elementary/1}. \\
+\tentrytt{cancellation}{(Pos,Rule)} & Apply cancellation {\tt Rule} at position {\tt Pos}.\\
+\tentrytt{casesplit}{(Conds)} & Use a complementary set of wave-rules to
+		introduce a case split.\\
+\tentrytt{elementary}{(P)} & Constructs a plan {\tt P} using a tautology checker
+                and additional uniqueness properties for elementary data types.\\
+\tentrytt{equal}{(Eq,Dir)} & Use an equality hypothesis {\tt Eq} as a global
+		substitution rule in direction {\tt Dir}. \\
+\tentrytt{eval-def}{(Pos,[Rule,Dir])} & Symbolically evaluates a term in the goal
+			   by applying one of its defining equations.\\
+\tentrytt{existential}{(Var:Type, Value)} & Replace an existentially
+		quantified variable by a meta-variable.\\
+\tentrytt{fertilization-strong}{(Hyp,Pos)} & Match a hypothesis {\tt Hyp} with the expression at
+   		position {\tt Pos} within the current goal.\\
+\tentrytt{fertilization-weak}{(P)} & Exploit the induction hypotheses as rewrite rules.\\
+\tentrytt{fertilize}{(Type,P)} & Embodies both strong and weak fertilization.\\
+\tentrytt{fertilize-left-or-right}{(Dir,Ms)} & Disjunction of {\tt weak-fertilize-right/1},
+		{\tt -left/1} and {\tt -impl/1}, each of which iterates a clause of {\tt weak-fertilize/4}.\\
+\tentrytt{fertilize-then-ripple}{(P)} & Performs weak fertilization followed by 
+		the post-fertilization ripple strategy. \\
+\tentrytt{generalise}{(Exp,Var:Type)} & Replace a common subterm in both halves of an
+		equality or an implication by a new universal variable
+		{\tt Var} of {\tt Type}.\\
+\tentrytt{induction}{(Scheme, VarTyps)} & Apply induction according to {\tt
+		Scheme} on variables specified by {\tt VarTyps}.\\
+\tentrytt{ind-strat}{(SubMethods)} & The {\tt SubMethods} are a sequence as
+		specified in the ``induction strategy''.\\
+{\tt identity} & Finishes proof branches of the form {\tt X=X in T}.\\
+\tentrytt{normalize}{(N)} & Apply a series of normalization
+		operations, by iterating the {\tt normal/1} submethod.\\
+\tentrytt{normal}{(N)} & Performs a limited set of normalizations. \\
+{\tt propositional} & Applies if the current goal is a propositional tautology.\\
+\tentrytt{reduction}{(Pos,Rule)} & Apply reduction {\tt Rule} at position {\tt Pos}.\\
+\tentrytt{ripple}{(?Dir,?FertKind,?SubPlan)} & 
+		Iterated version of \m{wave/4}, \m{casesplit/1}
+		and \m{unblock/3}; Arguments control the type of rippling and
+		fertilization required.\\
+\tentrytt{step-case}{(P)} & Constructs a plan using \m{ripple/3} followed by
+                     {\tt fertilize/2} or else {\tt base-case/1}. \\
+\tentrytt{sym-eval}{(S)} & Iterate the following methods over the current
+		sequent: \m{equal/1}, \m{reduction/2}, \m{eval-def/2}
+		and {\tt existential/2}.
+\end{tabularx}}
+
+{\small\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X@{}}
+\tentrytt{unblock}{(Type,Pos,Rule)} & Performs wave-front manipulations, reductions
+                and cancellations in order to unblock rippling.\\
+\tentrytt{wave}{(Kind,Pos,[Rule,Dir],SubsL)} & Applies wave-rule  {\tt
+		Rule} of type {\tt Kind} to
+		position {\tt Pos} with orientation {\tt Dir} in the current goal.
+                The substitution list, {\tt SubsL}, is relates to existential
+                rippling where the existential witness is calculated incrementally.\\
+\tentry{weak-fertilize}{(?Dir,?Connective,?Pos,?Hyp)} & Do a single weak fertilization.
+\end{tabularx}}
+
+
+\input footer

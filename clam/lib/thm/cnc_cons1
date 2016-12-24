@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: cnc_cons1,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: cnc_cons1,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>t1:int list=>t2:int list=>t1=t2 in int list=>h::t1=h::t2 in int list,
+normalize([normal(univ_intro),normal(univ_intro),normal(univ_intro),normal(imply_intro)]),lambda(h,lambda(t1,lambda(t2,lambda(v0,_7823)))),
+[problem([h:int,t1:int list,t2:int list,v0:t1=t2 in int list]==>h::t1=h::t2 in int list,
+ step_case(tautology(_7889)or (sym_eval([equal(v0,left)])then try tautology(identity))),axiom,
+ [
+ ]) ext _7823
+]).

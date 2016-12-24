@@ -1,0 +1,4 @@
+problem([]==>n:int=>rev(n::nil)=n::nil in int list,
+normalize_term([reduction([1,1],[rev2,equ(int list,left)]),reduction([1,1,1],[rev1,equ(int list,left)]),reduction([1,1],[app1,equ(int list,left)])])then[elementary((intro(new[n])then wfftacs)then unfold_iff then identity)],lambda(v0,su(su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(v0,su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(n,axiom),[app1 of(v0::nil)],[v1]),[term_of(app1)],[app1])),[term_of(rev1)],[rev1])),[v1 of nil],[v2]),[rev2 of v0],[v1]),[term_of(rev2)],[rev2])),
+[
+]).

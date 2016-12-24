@@ -1,0 +1,18 @@
+problem([]==>x:pnat=>x<*0=>void,
+intro,lambda(x,_8685),
+[problem([x:pnat]==>x<*0=>void,
+ elim(x),p_ind(x,_8714,[v0,v1,_8720]),
+ [problem([x:pnat]==>0<*0=>void,
+  apply(arith(<*))then wfftacs,lambda(v0,v0),
+  [
+  ]) ext _8714,
+  problem([x:pnat,v0:pnat,v1:v0<*0=>void]==>s(v0)<*0=>void,
+  apply(arith(<*))then wfftacs,lambda(v2,v2),
+  [
+  ]) ext _8720
+ ]) ext _8685,
+ problem([]==>pnat in u(1),
+ repeat wfftac,axiom,
+ [
+ ])
+]).

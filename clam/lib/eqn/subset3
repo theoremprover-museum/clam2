@@ -1,0 +1,86 @@
+/*
+ * @(#)$Id: subset3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: subset3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>x:int list=>y:int list=>member(h,y)=>subset(h::x,y)=subset(x,y)in u(1),
+repeat dequantify_once,lambda(h,lambda(x,lambda(y,_8648))),
+[problem([h:int,x:int list,y:int list]==>member(h,y)=>subset(h::x,y)=subset(x,y)in u(1),
+ intro,lambda(v0,_8706),
+ [problem([h:int,x:int list,y:int list,v0:member(h,y)]==>subset(h::x,y)=subset(x,y)in u(1),
+  compute([[unfold]]=_8771 in _8768),_8715,
+  [problem([h:int,x:int list,y:int list,v0:member(h,y)]==>term_of(subset)of (h::x)of y=subset(x,y)in u(1),
+   expand then repeat beta_reduce then apply(lemma(memberlem2)),su(_8851,[term_of(memberlem2)],[v1]),
+   [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:e:int=>l:int list=>member(e,l)=>term_of(memberdec)of e of l=inl(e)in (int\int=>int)]==>list_ind(h::x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])=subset(x,y)in u(1),
+    compute([[1]]=_9002 in _8999),_8868,
+    [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:e:int=>l:int list=>member(e,l)=>term_of(memberdec)of e of l=inl(e)in (int\int=>int)]==>decide(term_of(memberdec)of h of y,[~,list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])],[~,void])=subset(x,y)in u(1),
+     elim(v1,on(h),new[v2])then[wfftacs,thin([v1])then elist_(v2,[y],v1)],su(su(_9194,[v2 of y],[v1]),[v1 of h],[v2]),
+     [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int)]==>decide(term_of(memberdec)of h of y,[~,list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])],[~,void])=subset(x,y)in u(1),
+      elim(v1)then[intro,idtac],su(_9359,[v1 of v0],[v2]),
+      [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int)]==>decide(term_of(memberdec)of h of y,[~,list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])],[~,void])=subset(x,y)in u(1),
+       subst(at(2),over(v3,decide(v3,[~,list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])],[~,void])=subset(x,y)in u(1)),term_of(memberdec)of h of y=inl(h)in (int\int=>int)),_9377,
+       [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int)]==>term_of(memberdec)of h of y=inl(h)in (int\int=>int),
+        intro,v2,
+        [
+        ]),
+        problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int)]==>decide(inl(h),[~,list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])],[~,void])=subset(x,y)in u(1),
+        simplify,_9749,
+        [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int)]==>list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])=list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])in u(1),
+         equality then repeat intro then simplify then try expand then repeat intro,axiom,
+         [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int,v4:int list,v5:u(1)]==>decide(list_ind(y,inr(lambda(v1,v1)),[v1,v2,v3_,int_eq(v3,v1,inl(v3),v3_)]),[~,v5],[~,void])in u(1),
+          intro(using(int\int=>int))then repeat intro,axiom,
+          [
+          ]) ext _10098,
+          problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int,v4:int list,v5:u(1)]==>decide(list_ind(y,inr(lambda(v1,v1)),[v1,v2,v3_,int_eq(v3,v1,inl(v3),v3_)]),[~,v5],[~,void])in u(1),
+          intro(using(int\int=>int))then repeat intro,axiom,
+          [
+          ]) ext _10273
+         ]) ext _9749
+        ]) ext _9377,
+        problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int]==>decide(v3,[~,list_ind(x,{true},[v0,~,v2,decide(term_of(memberdec)of v0 of y,[~,v2],[~,void])])],[~,void])=subset(x,y)in u(1)in u(2),
+        repeat intro,axiom,
+        [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int,v4:int,v6:v3=inl(v4)in int\int=>int]==>{true}in u(1),
+         simplify then intro,axiom,
+         [
+         ]) ext _10620,
+         problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int,v4:int,v6:v3=inl(v4)in int\int=>int,v5:int,v7:int list,v8:u(1)]==>decide(term_of(memberdec)of v5 of y,[~,v8],[~,void])in u(1),
+         expand then repeat beta_reduce then repeat intro,_10769,
+         [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int,v4:int,v6:v3=inl(v4)in int\int=>int,v5:int,v7:int list,v8:u(1)]==>decide(list_ind(y,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)]),[~,v8],[~,void])in u(1),
+          intro(using(int\int=>int))then repeat intro,axiom,
+          [
+          ]) ext _10769
+         ]) ext _10765,
+         problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int]==>subset(x,y)in u(1),
+         simplify then repeat intro,axiom,
+         [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int]==>{true}in u(1),
+          simplify then intro,axiom,
+          [
+          ]) ext _11288,
+          problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int,v4:int,v5:int list,v6:u(1)]==>decide(term_of(memberdec)of v4 of y,[~,v6],[~,void])in u(1),
+          expand then repeat beta_reduce then repeat intro,_11413,
+          [problem([h:int,x:int list,y:int list,v0:member(h,y),v1:member(h,y)=>term_of(memberdec)of h of y=inl(h)in (int\int=>int),v2:term_of(memberdec)of h of y=inl(h)in (int\int=>int),v3:int\int=>int,v4:int,v5:int list,v6:u(1)]==>decide(list_ind(y,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v4,v1,inl(v4),v3)]),[~,v6],[~,void])in u(1),
+           intro(using(int\int=>int))then repeat intro,axiom,
+           [
+           ]) ext _11413
+          ]) ext _11409
+         ]) ext _11164
+        ])
+       ]) ext _9359
+      ]) ext _9194
+     ]) ext _8868
+    ]) ext _8851
+   ]) ext _8715
+  ]) ext _8706,
+  problem([h:int,x:int list,y:int list]==>member(h,y)in u(1),
+  simplify then repeat intro,axiom,
+  [problem([h:int,x:int list,y:int list,v0:int,v1:int list,v2:u(1),v3:h=v0 in int]==>{true}in u(1),
+   simplify then intro,axiom,
+   [
+   ]) ext _11802
+  ])
+ ]) ext _8648
+]).

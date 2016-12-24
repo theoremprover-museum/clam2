@@ -1,0 +1,32 @@
+/*
+ * @(#)$Id: nth2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: nth2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:pnat=>nth(n,nil)=nil in int list,
+repeat intro,lambda(n,_7699),
+[problem([n:pnat]==>nth(n,nil)=nil in int list,
+ simplify,_7708,
+ [problem([n:pnat]==>p_ind(n,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of nil=nil in int list,
+  elim(n),p_ind(n,_7793,[v0,v1,_7799]),
+  [problem([n:pnat]==>p_ind(0,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of nil=nil in int list,
+   simplify then intro then wfftacs,axiom,
+   [
+   ]) ext _7793,
+   problem([n:pnat,v0:pnat,v1:p_ind(v0,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of nil=nil in int list]==>p_ind(s(v0),lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of nil=nil in int list,
+   compute([[1]]of _7991=_7988 in _7985),_7875,
+   [problem([n:pnat,v0:pnat,v1:p_ind(v0,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of nil=nil in int list]==>lambda(l,list_ind(l,nil,[~,v3,~,p_ind(v0,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of v3]))of nil=nil in int list,
+    beta_reduce,_8004,
+    [problem([n:pnat,v0:pnat,v1:p_ind(v0,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of nil=nil in int list]==>list_ind(nil,nil,[~,v3,~,p_ind(v0,lambda(l,l),[~,v1,lambda(l,list_ind(l,nil,[~,v3,~,v1 of v3]))])of v3])=nil in int list,
+     simplify then intro then wfftacs,axiom,
+     [
+     ]) ext _8004
+    ]) ext _7875
+   ]) ext _7799
+  ]) ext _7708
+ ]) ext _7699
+]).

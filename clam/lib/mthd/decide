@@ -1,0 +1,26 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: decide,v 1.3 1997/05/09 15:23:11 img Exp $
+ *
+ * $Log: decide,v $
+ * Revision 1.3  1997/05/09 15:23:11  img
+ * Added universal_closure/3
+ *
+ * Revision 1.2  1997/05/09 15:06:04  img
+ * Use extended PA
+ *
+ * Revision 1.1  1997/05/09 14:02:35  img
+ * Decision procedures
+ */
+
+method(decide(Scheme),
+       H==>GA,
+       [strip_meta_annotations(GA,G),
+	universal_closure(H,G,Gclosed),
+	cooper_extended(Gclosed,V),
+	(V == yes
+	     -> Seqs = []
+	     ;  (clam_warning('This is not a theorem!'),
+		 Seqs = [[]==>{false}]))],
+       [true],
+       Seqs,
+       decide(Scheme)).

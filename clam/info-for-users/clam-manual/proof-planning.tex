@@ -1,0 +1,1832 @@
+\input header
+\chapter [Proof-planning] {Proof-planning and methods}
+
+\section {Simple Methods}
+\label{methods}
+\index {method}
+Methods are the basic stuff that make up proof-plans. They are
+specifications of tactics, which are procedures which execute a
+(large) number of proof steps as a single operation. As described in
+\cite{pub349}, a method\defindex {method} is a structure with 6 ``slots'':
+\begin{enumerate}
+\item
+A {\em \inx{name-slot}\/} giving the method its name, and specifying
+the arguments to the method.
+\item
+An {\em \inx{input-slot}}, specifying the object-level formula to
+which the method is applicable.
+\item
+A {\em \inx{preconditions-slot}}, specifying conditions that must be
+true for the method to be applicable.
+\item
+A {\em \inx{postconditions-slot}}, specifying conditions that will be
+true after the method has applied successfully.
+\item
+An {\em \inx{output-slot}}, specifying the object-level formulae that
+will be produced as subgoals when the method has applied successfully.
+\item
+A {\em \inx{tactic-slot}}, giving the name of the tactic for which
+this method is a specification.
+\end{enumerate}
+These structures are represented as a Prolog \p{method/6} term.  Each
+of the slots corresponds to an argument of the \p{method/6} term, in
+the order listed above. The general form of a \p{method/6} term is
+shown in figure \ref{method-fig}.
+
+\begin{figure}[tb]
+\hrule \vspace{1ex}
+{\small\begin{verbatim}
+method(name(...Args...),      % name slot: Prolog term 
+       H==>G,                 % input slot: sequent 
+       [...Preconditions...], % preconditions-slot: list of conjuncts
+       [...Postconditions...],% postconditions-slot: list of conjuncts
+       [...Outputs...],       % output slot: list of sequents
+       tactic(...Args...)     % tactic slot: Prolog term
+      ).
+\end{verbatim}
+} \caption{The general form of a {\tt method/6}
+term.\index{method!general form}}
+\predinxx {method/6}
+\label{method-fig}
+\vspace{1ex} \hrule
+\end{figure}
+
+\begin{enumerate}
+\item
+The {\em \inx{name-slot}\/} is a Prolog term of the form {\tt
+name(\ldots args \ldots)}, corresponding to the name and the arguments
+of the method.
+\item
+The \inx{input-slot} is a Prolog term that should unify with the
+\inx{sequent} to which the method applies. Sequents are represented as
+terms {\tt H$==>$G} where {\tt H} unifies with the hypothesis-list of
+the input sequent and G with the goal of the input sequent.
+\item
+The \inx{preconditions-slot} is a list of Prolog goals, each of which
+should succeed after the input-slot has been unified with the input
+sequent. A method is said to be {\em
+applicable\/}\index{applicable}\index{applicable method} if the input-slot
+unifies with the input-sequent and all of the preconditions are true.
+\item
+The \inx{postconditions-slot} is a list of Prolog goals, specifying
+properties that will hold after the method has applied successfully.
+It is an error when the postconditions do not succeed if the method is
+applicable.
+\item
+The \inx{output-slot} is a list of sequents that are the subgoals
+which remain to be proved after the method has been applied to the
+input sequent. Again, each of these output sequents is represented as
+a term {\tt H==>G} with {\tt H} representing the hypothesis list and
+{\tt G} representing the goal of the sequent.
+\item
+The \inx{tactic-slot} is a Prolog term of the form {\tt tactic(\ldots
+args \ldots)}, corresponding to the name and the arguments of the
+method. Although this is not strictly necessary, at the moment the
+name of a method and the name of the corresponding tactic are
+identical. Thus, the name-slot and the tactic-slot will be the same
+Prolog term. This is not strictly necessary but makes execution of
+proof-plans easier, since we don't have to dereference the method-name
+to the tactic-name, because they are the same.
+\end{enumerate}
+
+Thus, a method defines a mapping from an input sequent to a list of
+output sequents. Notice that this is different from the discussion in
+\cite{pub349}, where methods were described as mappings from formulae
+to formulae.
+
+\inxx{applicable method} The applicability of a method is specified by
+the input- and preconditions-slots, and the results of a method are
+specified by the output- and postconditions-slots. The input- and
+output-slots are {\em schematic representations\/} of conditions on
+the input and output of a method, and the preconditions- and
+postconditions-slots are {\em linguistic representations\/} of
+conditions on the input and output of a method.
+
+An example of a particular method (the \m{eval-def/2} method, which
+will be further discussed in \S\reference{repertoire}) is shown
+in figure~\reference{eval-def-fig}.
+
+\begin{figure}[tb]
+\hrule\vspace{1ex}
+{\small
+\verbatiminput{\mthddir/eval_def}}
+\caption{The {\tt eval-def/2} method.} \examplemethod{eval-def/2}
+\label{eval-def-fig}
+\vspace{1ex} \hrule
+\end{figure}
+
+All slots can share Prolog variables. In particular, variables which
+are bound while unifying the input-slot with the input sequent can be
+referred to in the pre- and postconditions-slots (and of course in the
+other slots if so desired). Similarly, variables which become bound
+during the execution of the pre- and postconditions can be referred to
+in the subsequent slots. In order to understand the binding rules for
+Prolog variables in the slots of a \p{method/6} term it is important
+to understand how these slots are used when a planner tests for the
+applicability of a method: \inxx{applicable method}
+\begin{enumerate}
+\item
+First the \inx{input-slot} is unified with the input sequent.
+\item
+Then the \inx{preconditions-slot} is evaluated.
+\item
+Then the \inx{postconditions-slot} is evaluated.
+\item
+Then the \inx{output-slot} is constructed using the variable bindings
+resulting from the preceding operations.
+\end{enumerate}
+Thus, the preconditions-slot will never be evaluated without the
+input-slot having been unified with the input sequent. Similarly, the
+postconditions will never be evaluated without the preconditions
+having been evaluated.
+
+An important distinction can be made between terminating and
+non-terminating methods. \inxx{terminating method} A method is said to
+be {\em terminating\/} if it does not produce any further subgoals
+(i.e., its output slot is the empty list). If a method produces
+further subgoals (i.e., its output slot is a non-empty list) it is
+said to be {\em non-terminating}. It is encouraged programming style
+to indicate as much as possible in the formulation of a method whether
+or not the method is terminating. Thus, if at all possible,
+\inx{output-slot}s should not consist of just a Prolog variable, which
+will be instantiated to a (possibly empty) list of sequents after
+evaluation of pre- and post-conditions. Instead, an output-slot should
+be a term which indicates whether the list of output sequents can
+possibly be empty or not. An example of this usage is shown in the
+\m{eval-def/2} method of figure \ref{eval-def-fig}, where the output
+slot is indicated to be a non-empty list of sequents. This makes it
+much cheaper to recognise this method as a non-terminating one than
+when the output list could only be computed after evaluation of
+preconditions and postconditions.
+
+\input method_lang.tex
+ 
+\section {The method database}
+\index{method!database} \clam\ provides a database for storing methods
+and submethods.  Methods and submethods can be individually loaded and
+stored in the database.  The distinction between methods and
+submethods only arises when they are loaded into the database.  As
+stored in the library, and as described in this manual, there are no
+submethods.  However, a method may be loaded in such a way that it
+enters the database as a submethod.
+
+The order of the database can be changed by the user,
+and the contents of the database can be inspected. It is also possible
+to remove methods from the database. The manipulation of the
+(sub)methods databases (adding and deleting methods) is integrated 
+with {\clam}'s general library mechanism, and is described in more
+detail in \S\reference{library}.   
+
+The order in which the methods occur in the database is significant. A
+number of planners (for instance the depth-first planner, see
+\S\reference{depth-first-planner}) try to apply methods in the order
+in which they appear in the database. As a result, methods which are
+cheap should occur at the top of the database. Cheap can mean a number
+of things, for instance that the preconditions are easily tested, or
+that the preconditions lead to failure quickly if the method is not
+applicable. Another reason for putting methods early in the database
+used to be when they lead to termination of plans. Such methods are in
+general a good thing to choose if they are applicable, and thus should
+be tried early on in the search for applicable methods. However, most
+planners described in \S\ref{planners} are smart enough to first
+look for terminating methods themselves before looking for other
+methods, so that the place of terminating methods in the database no
+longer matters.
+
+Some methods assume the presence of other methods, and not all
+combinations of methods are meaningful or effective. The dependencies
+between methods can be expressed using the \p{needs/2}\index{needs
+file}\index{library!needs file} predicate that
+is provided by the {\clam}'s library mechanism (see \S\ref{library}). 
+
+Apart from the general library predicates, the following predicates
+are available for inspecting\index{method!inspecting} the current
+databases for methods and submethods:
+
+\begin{predicate}{method/6}{method(?M,?I,?Pre,?Post,?O,?T)}%
+This is the main predicate for accessing the elements in the database
+of methods:
+{\tt M} is a method with input sequent {\tt I}, preconditions {\tt Pre},
+postconditions {\tt Post} and output sequent list {\tt O}. {\tt T} is the
+tactic associated with {\tt M}. (Current convention is that {\tt M==T}).
+\end{predicate}
+
+\begin{predicate}{submethod/6}{submethod(?M,?I,?Pre,?Post,?O,?T)}%
+As the \p{method/6} predicate, but for the database of submethods.
+\end{predicate}
+
+\begin{predicate}{list-methods/1}{list-methods(?L)}%
+Unifies {\tt L} with a list representing the current order of methods
+in the database. Each element of {\tt L} is a \inx{method specification}
+of the form {\tt Functor/Arity}.
+\end{predicate}
+
+\begin{predicate}{list-methods/0}{list-methods}%
+As \p{list-methods/1}, but instead prints the result on the current
+output stream.
+\end{predicate}
+
+\begin{predicate}{list-submethods/[0;1]}{list-submethods(?L)}%
+As \p{list-methods/[0;1]}, but for the database of submethods.
+\end{predicate}
+
+\subsection {Current repertoire of (sub)methods}
+\label{repertoire}
+
+
+\index{method!current repertoire}
+This section will briefly described the current set of methods in
+\clam. The purpose of describing the current set of methods is instead
+to give a brief introduction-by-example into the art of
+method-writing.
+
+\begin{method}{elementary/1}{elementary(I)}%
+{\tiny\verbatiminput{\mthddir/elementary}
+}
+
+This terminating method deals with simple goals via
+(\p{elementary/1}), and terminates the plan iff this succeeds; {\tt I}
+will become bound to the sequence of Oyster inference rules which are
+needed to prove the input sequent. Because this sequence becomes very
+long and boring very quickly, {\clam}'s \inx{pretty-printer} (see
+\S\reference{pretty-printer}) treats the term {\tt elementary(I)}
+specially, and prints the {\tt I} as {\tt \ldots}.  See
+\p{elementary/2} for more details.
+\end{method}
+
+\begin{method}{propositional/1}{propositional(I)}%
+{\tiny\verbatiminput{\mthddir/propositional}
+}
+This terminating method calls a \inx{decision procedure} for
+intuitionistic propositional logic.  (Quantification over propositions
+is removed if present.)  The predicate that does all the work is
+\m{propositional/2}, which is an implementation of Dyckhoff's
+algorithm.
+
+If the method is applicable, {\tt I} will become bound to the sequence
+of Oyster inference rules which are needed to prove the input
+sequent. Because this sequence becomes very long and boring very
+quickly, {\clam}'s \inx{pretty-printer} (see
+\S\reference{pretty-printer}) treats the term {\tt propositional(I)}
+specially, and prints the {\tt I} as {\tt \ldots}.
+
+Notice that we need to remove meta-level annotations from the formula
+before running the decision procedure.
+\end{method}
+
+\begin{method}{equal/2}{equal(HName,Dir)}%
+{\tiny\verbatiminput{\mthddir/equal}
+}
+This method checks if there is any equality among the hypotheses.
+If so, we use the equality to rewrite all hypotheses and the goal. To
+give the equality a unique direction as a rewrite rule, we always
+rewrite towards the alphabetically lowest term (using the Prolog
+term-comparison predicate \verb'@<'). After this rewriting is done, we
+can throw away the equality. This is essentially the same approach to
+equalities as taken in \cite{boyerbook}.
+
+This method is normally applied as part of the \m{sym-eval/1}
+iterator. 
+\end{method}
+
+\begin{method}{reduction/2}{reduction(Pos,[Thm,Dir])}%
+{\tiny\verbatiminput{\mthddir/reduction}
+}
+This method attempts to apply reduction rules.  If an applicable
+reduction rule cannot be found in the current environment, an attempt
+is made, providing \p{extending-registry/0} succeeds, to extend the
+set of reduction rules.  This is done by proving that a rewrite rule
+is measure decreasing under RPOS---if this is successful, the new rule
+is added to the reduction rule database.
+
+See~\p{extend-registry-prove/4} for more details on extending the
+reduction rule database.  See~\S\ref{reduction-records}
+and~\S\ref{sec:reduction} for more information.
+\end{method}
+
+\begin{method}{eval-def/2}{eval-def(Pos, Rule)}%
+{\tiny\verbatiminput{\mthddir/eval_def}
+}
+This method looks for applicable base and step-equations
+instead of wave-rules. Furthermore, we require that the expression 
+to be rewritten does not contain any wave-fronts, and does not consist 
+solely of a meta-variable. This is not strictly logically needed (applying 
+a base or step rule to a meta-variable can produce a legal proof step), but is
+introduced to restrict the applicability of this method. Without this
+restriction, every base and step rule will always apply to every occurrence of
+every meta-variable in {\tt G}, thus exploding the number of possible
+applications of this method.
+\end{method}
+
+\begin{method}{existential/2}{existential(Var:Type, Value)}%
+The existential method is designed to deal with existentially
+quantified base case proof obligations and form part of the
+\m{sym-eval/1} iterator. \notnice As they stand this submethods is not
+very general. Ideally the submethods \m{equal/2}, \m{reduction/2} and
+\m{eval-def/2} should be modified to deal with rewriting within
+existential quantification in the same way rippling has been extended.
+
+\m{existential/2} deals with existentially
+quantified equalities where the existential variable occurs
+isolated on one side of the equality:
+{\tiny\verbatiminput{\mthddir/existential}
+}
+\end{method}
+
+\begin{method}{normalize-term/1}{normalize-term(Tac)}%
+Normalize\index{normalization} the goal by exhaustive application of
+rewrite rules from a terminating rewrite system (as described by the
+\inx {reduction rule} database).  Uses \inx {labelled rewriting} for
+speed; flattens rule application into a single tactic invocation.
+Conditions are decided inside \p{reduction-tc/4}.
+   
+This method will fail if the goal is already in normal form. 
+{\tiny\verbatiminput{\mthddir/normalize_term}
+}
+The second clause is a generalized cancellation method.  Goals of the
+form $f(x)=f(y)$ are reduced to $x=y$.  This is disabled by default.
+\end{method}
+
+
+\begin{method}{sym-eval/1}{sym-eval(SymEvals)}%
+This method is an iterator over submethods that effects symbolic
+evaluation.   
+{\tiny\verbatiminput{\mthddir/sym_eval}
+}
+\end{method}
+
+\begin{method}{base-case/1}{base-case(Plan)}%
+The \m{base-case/1} method constructs a plan for base
+case proof obligations using the submethods 
+\m{elementary/1} and \m{sym-eval/1}. 
+{\tiny\verbatiminput{\mthddir/base_case}
+}
+\end{method}
+
+\begin{method}{wave/4}{wave(Pos, Rule, Subst)}%
+\paragraph {Rippling.}  The first clause of the {\tt wave}
+method deals with rippling.\index{rippling!lazy static} {\tt Type}
+restricts the rippling to outwards\index{rippling!out} wave-fronts
+(\verb"direction_out"), inwards\index{rippling!in}
+(\verb"direction_in") or either of these (\verb"direction_in_or_out").
+This control may be useful when writing plans.  Note that \p{ripple/6}
+carries out a check on the sink-ability of any inward fronts in {\tt
+NewWaveTerm} and so this does not need to be checked here.
+
+We may only rewrite annotated terms: skeleton
+preserving\index{method!skeleton preservation} steps are {\em not\/}
+sufficient since they do not guarantee \inx {termination}.  One
+example of this would be rewriting beneath a \inx {sink}, inside a
+wave-front etc.  These are all `unblocking' operations (cf.\@
+\m{unblock/3}) since they require a termination justification from
+something other than the wave-rule measure.
+{\tiny\verbatiminput{\mthddir/wave}
+}
+The third argument of \m{wave/4} is used to record the incremental
+instantiation of existential variables during the application of
+existential wave-rules---here it is unused. 
+
+\end{method}
+
+\begin{method}{wave/4}{wave(Pos, Rule, Subst)}%
+\paragraph {Complementary rewriting.} The second clause of the {\tt
+wave} method (see~\m{wave/4} above) deals with the initial rewriting
+of non-inductive branches of a casesplit using {\em \inx{complementary
+rewrite rules}}.\index {rewrite rules!complementary}
+
+ Complementary rewrite rules are not skeleton preserving and so the
+   postconditions remove all annotation from the each subgoal.
+   Really, all this method has to do is identify sequents which are in
+   the non-recursive branches of rippling proofs, and it does this via
+   \p{complementary-set/1}.  It would be sufficient to leave the
+   sequent untouched, but for removing annotation; however, since it
+   is cheap to apply a rewrite (the right-hand-sides are in {\tt
+   Cases}, we do that here as well.
+\end{method}
+
+\begin{method}{casesplit/1}{casesplit(Conds)}%
+{\tiny\verbatiminput{\mthddir/casesplit}
+}
+This method introduces a casesplit in a proof, based on the notion of
+\inx{complementary set}s (cf.~\p{complementary-set/1}). In the
+preconditions, we test if there is a conditional
+wave-rule\index{wave-rule!conditional} that could be applicable,
+except that it comes from a complementary set of conditional rules,
+none of whose preconditions holds. This is then sign to introduce a
+casesplit in the proof, based on the preconditions from the
+complementary set.  We have to take care to remove any universally
+quantified variables from the goal which are involved in the
+conditions of the casesplit.
+
+Repeated application of casesplit is prevented by the test in the
+preconditions that none of the cases are already provable.
+
+In order to justify a casesplit we need a {\em \inx{complementary}
+set\/} of wave-rules, that is: a set of wave-rules whose conditions
+disjunctively amount to `true'.  (However, this condition is not
+checked at the proof-planning level.)
+\end{method}
+
+\begin{method}{unblock/3}{unblock(Typ,Loc,Rewrite)}%
+The \m{unblock/2} method provides a conservative set of rewrites
+for \inx{unblocking} rippling\index{rippling!unblocking}.  There are a
+number of variants, all embodied in the following method:
+{\tiny\verbatiminput{\mthddir/unblock}
+}
+
+\begin{description}
+\item[{\tt unblock(weaken, Pos, [])}]
+Weakens\index {weakening} some wave-front in the annotated term at
+position {\tt Pos}.  {\em Weakening\/}\defindex{weakening} is the
+removal of one (or more) wave-holes from a wave-front. This is subject
+to the condition that at least one wave-hole remains in the weakened
+term.  This method is not active by default because weakening is
+covered by {\tt unblock(meta-ripple,\_,\_)}.
+
+% \item[{\tt unblock(equal-hyp, HName, Lemma)}] Rewrites wave-fronts
+% with some equality hypothesis.
+
+\item[{\tt unblock(meta-ripple, Pos, [])}]
+{\em Meta-rippling\/}\defindex {meta-rippling}\defindex{rippling!meta-rippling}
+is the rewriting of an annotated term $t$ with the (object-level)
+rewrite rule $t\Rightarrow t'$, such that (i)~$t$ and $t'$ differ only
+in their annotation (i.e., they are the same when annotations are
+erased), and, (ii)~they have the same skeleton, and finally,
+(iii)~${t'}$ is smaller in the measure than ${t}$.
+
+\paragraph {When meta-rippling is
+needed.}\example{meta-rippling}\example{rippling!meta-rippling} In a
+proof that $half(x)\leq x$, $s(s(x'))/x$ induction gives a step-case
+residue of $x' \leq s(x')$.  $s(x'')$ induction on $x'$ is required
+but rippling analysis finds that both occurrences of
+$\wf{s(\wh{x''})}$ in
+\begin{eqnarray*}
+        &\wf{s(\wh{x''})} \leq s(\wf{s(\wh{x''})})
+\end{eqnarray*}
+are flawed.\footnote {I think there is little sense here in saying
+that the first occurrence is unflawed, although one could imagine
+pursuing that distinction.} The reason is that the wave-rule for
+$\leq$:
+\[
+        \wf{s(\wh{X})} \leq \wf{s(\wh{X})}\Rightarrow X \leq \wf{s(\wh{X})}
+\]
+doesn't match.  It is necessary to meta-ripple the above term so that
+the wave-front of the double successor is moved up the term.  Then the
+$\leq$ wave-rule matches.
+
+The meta-rippling rule is created dynamically as needed.  For the
+standard wave-rule measure, $t'$ can be `smaller' than $t$ if at least
+one of the following hold:
+
+\begin{enumerate}
+\item $t'$ is weakening of $t$.  Weakening is very expensive when
+there are multiple numbers of multi-hole wave-fronts because there is
+a combinatorial problem.  Coloured rippling flattens the combinatorial
+problem since then all terms are effectively single-holed
+(see~\cite{colouredrippling} for more on coloured rippling).  
+
+\item Wave-fronts in $t'$ are moved up the term tree (or down for
+inward fronts) in comparison with the corresponding fronts in $t$.
+This is less expensive to carry out but we have to ensure skeleton
+preservation.  This can be expensive unless some partial evaluation
+goes on.  (For example, some of the skeleton remains unchanged.)
+Often, skeleton preservation is trivial since the wave-fronts are
+identical, e.g., $s(\wf{s(\wh{x})})\Rightarrow \wf{s(\wh{s(x)})}$.
+
+\item Outward wave-fronts become inward wave-fronts. (For the purposes
+of this version of \clam this type of meta-rippling is not needed
+since it is part of \inx {rippling}.)
+\end{enumerate}
+\end{description}
+
+See also \m{unblock-lazy/1}.
+\end{method}
+
+\begin{method}{unblock-lazy/1}{unblock-lazy(Plan)}%
+This iterating method applies the \m{unblock/3} method lazily.  
+{\tiny\verbatiminput{\mthddir/unblock_lazy}
+}
+It succeeds first with zero applications of \m{unblock/3}, then with
+1 application on backtracking, then 2 and so on.   
+\end{method}
+
+\begin{method}{ripple/2}{ripple(Dir,SubPlan)}%
+The \m{ripple/2} builds possibly branching proofs using \m{wave/4},
+\m{casesplit/1} and \m{unblock-then-wave/2}.  The {\tt Dir} parameter
+is passed to \m{wave/4} to control the type of rippling.
+
+
+{\tiny\verbatiminput{\mthddir/ripple}
+}
+\end{method}
+
+
+\begin{method}{cancellation/2}{cancellation([],Rule)}%
+{\tiny\verbatiminput{\mthddir/cancellation}
+}
+This method controls the cancellation of outer term structure
+during \inx{post-fertilization rippling}.  
+\end{method}
+
+\begin{method}{fertilize/2}{fertilize(Type,Ms)}%
+\inxx{fertilization}
+{\tiny\verbatiminput{\mthddir/fertilize}
+}
+This method controls the use of induction hypotheses once rippling
+has terminated. 
+\end{method}
+
+\begin{method}{fertilization-strong/1}{fertilization-strong(Hyp)}%
+\inxx{fertilization}\index{fertilization!strong}
+{\tiny\verbatiminput{\mthddir/fertilization_strong}
+}
+This terminating method will trigger when the current goal has been
+rewritten to match with one of the hypotheses (typically an induction
+hypothesis), possibly after
+instantiating\index{fertilization!instance} some universally
+quantified variables.
+\end{method}
+
+\begin{method}{fertilization-weak/1}{fertilization-weak(Plan)}%
+When strong
+fertilization\inxx{fertilization}\index{fertilization!weak}\index{fertilization!instance}
+does not apply, we attempt weak fertilization.  This consists of using
+the induction hypothesis to rewrite all the wave terms inside a
+wave-front when that wave-front is the only one present, and it has
+bubbled all the way up to the top of one side of the formula:
+
+{\tiny\verbatiminput{\mthddir/fertilization_weak}
+}
+\end{method}
+
+\begin{method}{fertilize-then-ripple/1}{fertilize-then-ripple(Plan)}%
+\index{fertilization!post-fertilization rippling}
+Once the fertilization process is complete post-fertilization rippling
+is attempted. Post-fertilization rippling has been shown to be a
+useful lemma conjecturing mechanism. (For further details refer
+to~\cite{pub567}.)
+
+\begin{quote}
+\bf This is not yet fully implemented in this version of \clam.
+\end{quote}
+
+{\tiny\verbatiminput{\mthddir/fertilize_then_ripple}
+}
+\end{method}
+
+\begin{method}{ripple-and-cancel/1}{ripple-and-cancel(Plan)}%
+{\tiny\verbatiminput{\mthddir/ripple_and_cancel}
+}
+\end{method}
+
+
+\begin{method}{fertilize-left-or-right/2}{fertilize-left-or-right(Dir,Ms)}%
+\index{fertilization}
+Since there can be more than one wave-term (or: wave-hole) in the top 
+wave-front, we construct a method that rewrites
+just one of the wave terms, and a method that iterates this method
+in order to rewrite all of the wave terms. Since the rewriting can be
+done either left to right or right to left, the iterating method
+distinguishes these two cases in a disjunction, and looks as follows:
+{\tiny\verbatiminput{\mthddir/fertilize_left_or_right}
+}
+The methods \m{weak-fertilize-right/1} and \m{weak-fertilize-left/1}
+iterate the submethod that does the actual rewriting on single wave
+fronts.
+\end{method}
+
+\begin{method}{weak-fertilize/4}{weak-fertilize(Dir,Conn,Pos,Hyp)}%
+\index{fertilization}
+This method, called iteratively from \m{weak-fertilize/2} via
+\m{weak-fertilize-left/1} or \m{weak-fertilize-right/1},\footnote {To enforce a
+uniform direction.} performs the actual rewrite on one of the wave
+terms (wave variables) inside a wave-front that has bubbled all the
+way up to the top of one side of the formula. It gets called
+iteratively to do the operation on all wave terms in the wave-front.
+A special case is when the wave-front hasn't been rippled to the top
+of one side of the formula, but has been rippled right out of one
+side.  In that case we can do fertilization on the whole side of that
+formula (the case where $S$ below is empty). Although fertilization
+was originally invented only for equalities, and later patched for
+implications, \cite{bb538} generalised the operation to arbitrary
+\inx{transitive functions}: fertilization performs the following
+transformations on sequents, where $\sim$ is a transitive predicate:
+\begin{eqnarray*}
+&& L \sim R \vdash X \sim S(R)\ into\ L \sim R \vdash X \sim S(L)
+\ if\ R\ occurs\ positive\ in\ S,\ or\ \\
+&& L \sim R \vdash S(L) \sim X\ into\ L \sim R \vdash S(R) \sim X
+\ if\ L\ occurs\ positive\ in\ S,\ or\ \\
+&& L \sim R \vdash X \sim S(L)\ into\ L \sim R \vdash X \sim S(R)
+\ if\ L\ occurs\ negative\ in\ S,\ or\ \\
+&& L \sim R \vdash S(R) \sim X\ into\ L \sim R \vdash S(L) \sim X
+\ if\ R\ occurs\ negative\ in\ S.
+\end{eqnarray*}
+where the wave-fronts must be $\wf{S(\wh{R})}$ or $\wf{S(\wh{L})}$
+where appropriate.\inxx{positive occurrence} \inxx{negative occurrence}
+
+A term ``occurs positively'' in a function if that function is
+monotonic in that argument. A function $f$ is monotonic\defindex{monotonic}
+monotonic in argument $x$ if:
+\[
+x_1 \preceq_D x_2 \rightarrow f(x_1) \preceq_{CD} f(x_2)
+\]
+where $\preceq_D$ and $\preceq_{CD}$ are partial orderings on the
+domain and codomain of $f$ respectively.
+A term occurs $x$ positively in a set of nested functions
+$f_1(\ldots(f_n(x))\ldots)$ if either $x$ occurs positively in $f_n$
+and or $x$ occurs negatively in $f_n$ and $f_n(x)$ occurs negatively in
+$f_1(\ldots(f_{n-1}(\_))\ldots)$.
+\inxx{symmetrical functions}
+If $\sim$ is also symmetrical, we can drop the requirements on
+\inx{polarity} (as is the case with equalities, for instance).
+
+After all this, the code for the \m{weak-fertilize/4} method that
+does these operations is as follows:
+{\tiny\verbatiminput{\mthddir/weak_fertilize}
+}
+
+This method only implements positive weak fertilization (when $L$
+occurs positive in $S$). The negative weak fertilization is not \notnice
+implemented, but cannot be very difficult to do, either with an
+additional clause for this method, or by extending the current
+method.
+
+Notice that {\tt in} is used instead of {\tt =} to represent
+{\tt \_=\_ in \_}, since it makes the code below more uniform (in
+particular, it allows the {\tt exp-at(\_,[0],\_)} expression).
+
+For this method to work, the system of course needs to know which
+functions are transitive, and what the \inx{monotonicity} properties of
+functions are. Currently, these properties are hardwired into \clam\
+for certain function symbols: the \inx{transitive functions} are explicitly
+mentioned in the method (second predicate in the preconditions) and
+the \inx{polarity} is explicitly encoded in the \p{polarity/5} predicate.
+Both of these mechanisms violate the {\em \inx{theory free}\/}
+requirement formulated in \S\reference{theory free}. See that
+section for a sermon on this topic, and also for suggestions on how to
+remove these violations of the theory free requirement from \clam.
+\end{method}
+
+\begin{method}{step-case/1}{step-case(Plan)}%
+The \m{step-case/1} method constructs a plan for step
+case proof obligations.   Here is an outline of that plan:
+\begin{itemize}
+\item [(1)] Ripple out as much as possible, giving subgoals
+$S_1,\ldots,S_N$, and plans $P_1,\ldots,P_N$.
+\item [(2)] Try fertilize and base-case on $S_1,\ldots,S_N$.  If this
+is not possible stop. 
+\item [(3)] For each $S_i$ for which fertilization and base-case are
+inapplicable: 
+\item [(3.1)] Try to ripple the $S_i$ using rippling in, taking care
+not to ripple beyond the point of a fertilization, giving 
+                $S_{i_1},\ldots,S_{i_{M_i}}$ and $P_{i_1},\ldots,P_{i_{M_i}}$.
+    \item [(3.2)] Try fertilize/base-case on each of the $S_{i_{M_i}}$.
+\end{itemize}
+The subgoals of this plan are the subgoals remaining from each phase.  
+{\tt Plan} is the composition of all the plans for each of these subgoals.
+
+{\tiny \verbatiminput{\mthddir/step_case}
+}
+\end{method}
+
+\begin{method}{generalise/2}{generalise(Exp,Var:Type)}%
+{\tiny\verbatiminput{\mthddir/generalise}
+}
+Replace a common subterm {\tt Exp} in both halves of an equality or
+implication or inequality by a new universal variable {\tt Var} of
+{\tt Type}.  Disallow generalising over object-level variables (not
+very useful), over constants (not very useful), over terms containing
+meta-level variables (too dangerous), and over terms containing
+wave-fronts (messes up the rippling process).
+
+The last 3 conjuncts of the preconditions will always succeed, and are
+\notnice not really needed for applicability test, so they could go in
+the postconditions, but we have them here to get the second arg of the
+method instantiated even without running the postconditions\ldots
+\end{method}
+
+\begin{method}{induction/1}{induction(Lemma-Scheme)}%
+{\tiny\verbatiminput{\mthddir/induction}
+}
+Do an induction defined by {\tt Scheme} (see \p{schemes/5} for a
+description of a scheme).  For example, {\tt
+induction(lemma(plusind)-[(x:pnat)-plus(v0,v1)])} is {\tt plus}
+induction on {\tt x}.
+\end{method}
+
+\begin{method}{ind-strat/1}{ind-strat(Submethods)}%
+{\tiny\verbatiminput{\mthddir/ind_strat}
+}
+This method has played an important role in the development of the
+idea of proof-plans, since it was the first large scale method of any
+significance to be developed (\cite{pub349}).  Note that the
+preconditions are exactly those of the \m{induction/1} method.  The
+method constructs its postconditions by explicitly following the way
+the method is constructed out of smaller methods: After applying the
+\p{scheme/5} predicate to determine the step- and base-cases after
+induction, we apply the \m{base-case/1} method to the base-cases and
+we apply the \m{step-case/1} method to the step-cases. The single
+argument of the \m{ind-strat/1} method will be bound to the structure
+representing the chain of constituent methods built up during the
+application of the larger method. Since this structure is usually very
+long-winded, {\clam}'s \inx{pretty-printer} treats it specially, and
+suppresses it to indicate just the induction scheme and variable
+(making it look very much like the induction method).
+
+\end{method}
+
+\begin{method}{normalize/1}{normalize(Normalisation)}%
+The \m{normalize/1} method is a compound method, which is built as an
+iterator over a number of \m{normal/1} methods. Rather than listing
+the rather straightforward code of all of these methods, we just
+summarise their actions:
+\begin{description}
+
+\item[{\tt normal(univ-intro)}]
+Removes a universal quantifier from the front of the current goal
+(corresponds to the Oyster {\tt intro}-rule for the \inx{dependent
+function type}).
+
+\item[{\tt normal(imply-intro)}]
+Removes an implication from the front of the current goal (corresponds
+to the Oyster {\tt intro}-rule for the \inx{function type}).
+
+\item[{\tt normal(conjunct-elim(HName,[New1,New2]))}]
+Replaces a \inx{conjunctive hypothesis} by two new hypotheses for each
+of the separate conjuncts.
+\end{description}
+At various points we also experimented with other normalisation
+operations, which are at the moment not included in the code. 
+These are:
+\begin{description}
+\item[{\tt normal(univ-imply-intro)}] This is as {\tt imply-intro}, but works 
+for universally quantified goals.
+
+\item[{\tt normal(exist-elim(H))}]
+Removes an existentially quantified hypothesis {\tt H:x:T\#P}
+(and adds {\tt P[x0/x]} to the hypothesis list) by picking a witness
+{\tt x0} (corresponds to the Oyster {\tt elim}-rule 
+for the \inx{dependent product type}).
+
+\item[{\tt normal(imply-elim(H,Lemma))}]
+Removes an implication {\tt H:A=>B} from the hypothesis list (and
+adds {\tt B} to the hypothesis list) if {\tt A} is provable using only
+a lemma or is trivially true (corresponds to the Oyster {\tt elim}-rule 
+for the \inx{function type}).
+
+\end{description}
+This set of normalisation operations is by no means exhaustive, and
+can (should) be extended in the future when the need arises. 
+\end{method}
+
+\begin{method}{identity/0}{identity}%
+{\tiny\verbatiminput{\mthddir/identity}
+}
+This terminating method simply checks if the goal is of the form
+{\tt X=X in Type}, and terminates the plan. Almost no preconditions, no
+postconditions, no output-formula.
+
+This method illustrates that some operations we would like to do via \notnice
+matching (such as ignoring the universal quantifiers) cannot in fact be
+done through matching, and must be explicitly encoded in the
+preconditions. It would maybe be nice if we had a more powerful
+pattern matching language which would allow us operations like this. 
+\end{method}
+
+\begin{method}{apply-lemma/1}{apply-lemma(Lemma)}%
+{\tiny\verbatiminput{\mthddir/apply_lemma}
+}
+This terminating method checks if there is a lemma which 
+is a universally quantified version of the current goal (i.e., a lemma
+that can be instantiated to the current goal).
+\notnice
+Notice the particular
+hack to spot lemmas which happen to be of the right form, except that
+they have the right- and left-hand side of an equality swapped. Not
+very nice\ldots 
+\end{method}
+
+\begin{method}{backchain-lemma/1}{backchain-lemma(Lemma)}%
+{\tiny\verbatiminput{\mthddir/backchain_lemma}
+}
+This terminating method looks for universally quantified lemmas that
+instantiate to {\tt Cond=>Matrix} where {\tt Matrix} is the matrix of 
+the current goal {\tt G} and {\tt Cond} a formula that is trivially true. 
+Thus, this method applies one step of {\em \inx{backward-chaining}}.
+\notnice
+Same hack with commutativity of {\tt =}
+as with the \m{apply-lemma/1} method above.
+\end{method}
+
+\begin{method}{pwf-then-fertilize/2}{pwf-then-fertilize(Type,Plan)}%
+{\tiny\verbatiminput{\mthddir/pwf_then_fertilize}
+}
+This method implements \index*{piecewise fertilization} (see Blue Book 
+note~1286 for a description of piecewise fertilization).
+\end{method}
+
+\begin{method}{pwf/1}{pwf(Rule)}%
+{\tiny\verbatiminput{\mthddir/pwf}
+}
+This is part of \index*{piecewise fertilization}.
+\end{method}
+
+
+\subsection {Default configuration of methods and submethods}
+
+Although methods can be loaded into and deleted from the system (see
+\S\reference{library}), the system starts up with a \inx{default
+configuration} of methods and submethods, as follows.  Recall that
+only methods are stored in the library---submethods are simply methods
+that have been loaded as such.  (See \p{lib-load/1} for more
+information on load methods and submethods.)
+
+The contents of the methods database can be found with the command
+\p{list-methods/0}; on normal \clam startup this is
+
+\noindent
+\begin{tabular}{ll}
+    \m{base-case/1}   & \m{generalise/2}\\
+    \m{normalize/1}   & \m{ind-strat/1}
+\end{tabular}
+This configuration is chosen in such a way that, when using the
+depth-first planner (see \S\reference{depth-first-planner}),
+the systems combines methods as prescribed in the induction strategy
+encoded in the \m{ind-strat/1} method.
+
+A number of methods are also loaded as submethods by default, since
+they are needed by the methods above. Since these submethods are not
+directly used by planners (but only called from within methods), the
+order of the submethods database is largely irrelevant.  They can be
+found via \p{list-submethods/0}:
+
+\noindent
+\begin{tabular}{lll} 
+\m{equal/2} & \m{normalize-term/1} & \m{casesplit/1}\\
+\m{existential/2} & \m{sym-eval/1} & \m{apply-lemma/1}\\
+\m{backchain-lemma/1}&\m{normal/1}&\m{induction/1}\\
+\m{base-case/1}&\m{wave/4}&\m{unblock/3}\\
+\m{unblock-lazy/1}&\m{unblock-then-wave/2}&\m{ripple/2}\\
+\m{unblock-fertilize-lazy/1}&\m{fertilization-strong/1}&\m{weak-fertilize/4}\\
+\m{weak-fertilize-left/1}&\m{weak-fertilize-right/1}&\m{fertilize-left-or-right/2}\\
+\m{cancellation/2}&\m{ripple-and-cancel/1}&\m{fertilize-then-ripple/1}\\
+\m{fertilization-weak/1}&\m{fertilize/2}&\m{unblock-then-fertilize/2}\\
+\m{step-case/1}&\m{elementary/1}
+\end{tabular}
+
+
+
+
+\section {The basic planners}
+\label{planners}
+\index {planners}
+This section will discuss the planners that are part of \clam\, and
+which can be used to construct proof-plans for a given theorem, using
+the available methods. The first subsection will discuss the general
+mechanism of the planners, and the essential predicates which are
+common to all planners. The other subsections each discuss one type of
+planner in more detail. This is of course not meant to suggest that
+the current set of planners is in any way final or optimal. Together
+with the formulation of more and better methods, the formulation of
+more and better planners is a major research topic in \clam.
+
+\subsection {The basic planning mechanism}
+\label{planning-mech}
+
+All planners currently employed in \clam\ are \inx{forward chaining}
+planners: every planner starts by looking at the top sequent of the
+theorem to be proved, and then tries to find out which methods are
+applicable (i.e., which methods have a matching \inx{input-slot} and a
+succeeding \inx{preconditions-slot}). After picking one of these
+\inx{applicable method}s the planner computes the output sequent
+by evaluating the \inx{postconditions-slot} of the chosen method. This
+output sequent will then serve as the input sequent for the next
+recursive cycle of the planner, until a method has been found which
+terminates the plan (in other words: until a \inx{terminating method}
+(a method with an empty output-slot) has been found).
+
+In this description of the planning process, a number of \inx{choice points}
+occur: often more than one method will be applicable to the input
+sequent, and one method may apply in more than one way (i.e., its
+preconditions may be satisfied in more than one way). The planners
+described below differ in the way they behave at these choice points
+(in other words: they differ in the way they traverse the \inx{search space}
+generated by the applicability of the methods). This search space for
+the planners is also called the {\em \inx{planning space}}.
+Some of them will make a rather uninformed but cheap
+choice, some will try to make a more informed choice; some of them
+will make sure that choice gets equal treatment, others will favour
+one choice over others, etc.
+
+The plans that are produced by {\clam}'s planners are not just sequences
+of methods. Remember that the \inx{output-slot} of a method is a list
+of sequents. Thus, the application of one method can generate a number
+of output-sequents, and further methods will have to be applied
+to each of these sequents. These methods are chained together using
+Oyster's \p{then/2} connective. An expression of the form
+$M_1 {\tt \ then\ } [M_{1,1}\ldots M_{1,n}]$ denotes the application of
+method $M_1$, followed by the application of methods
+$M_{1,1}\ldots M_{1,n}$ to the resulting $n$ subgoals. As a result, a
+\inx{plan} produced by \clam\ is a tree-structured object, with as the
+elements of the tree the methods that are applied as part of the plan.
+Figure \ref{assp-plan} shows an example of a simple plan produced by
+\clam. A tree-structured plan is called a {\em \inx{branching plan}}. 
+
+\sloppypar
+The \clam\ \inx{pretty-printer} treats the \p{then/2} connective
+specially: Since the expression $M_1 {\tt then} [M_{1,1}]$ is
+equivalent to $M_1 {\tt \ then\ } M_{1,1}$ if $M_1$ only produces one
+subgoal, the unbracketed version will be produced by the
+pretty-printer in that case. This explains why only the subgoals of
+the \m{induction/1} method in figure \ref{assp-plan} appear to be
+bracketed, since it is the only method in the plan shown there which
+produces more than one subgoal.
+
+\begin{figure}[tb]
+\hrule\vspace{1ex}{\small\begin{verbatim}
+induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)]) then 
+  [base_case([...]),
+   step_case([...])
+  ]
+\end{verbatim}
+}
+\caption{A simple \protect\clam\ plan.\example
+        {proof-plan!for associativity of $plus$}}
+\label{assp-plan}
+\vspace{1ex}
+\hrule
+\end{figure}
+
+The set of planners described below is not in any way complete. Only
+planners with very simple search strategies have been built
+(depth-first, breadth-first, iterative deepening), and so far this has
+proved sufficient because the search space at the planning level has
+been fairly small. However, in the future it might be necessary to add
+more sophisticated planners. An obvious possibility is for instance
+a planner that has access to ``the plan so far''. Such a planner could
+choose steps on the basis of steps chosen earlier in the plan. This
+can for instance be used as an anti-looping device.
+
+All of the planners described below conform to a common interface, and
+can all be called in a similar way. For planner called `{\tt planner}'
+there will be predicates \p{planner/[0;1;2;3]}, as follows:
+
+\begin{predicate}{planner/3}{planner(+Sequent,?Plan,?Output)}%
+Succeeds when {\tt Plan} is a plan (a tree of methods) which, when
+applied to {\tt Sequent}, will result in the output sequents
+{\tt Output}. Although it is possible to use this predicate to
+check the correctness of a given plan (mode {\tt planner(+,+,+)}),
+or to compute the output sequents of a given plan (mode
+{\tt planner(+,+,-)}), it is most often used to generate a plan
+with desired output sequents for a given {\tt Sequent} (mode
+{\tt planner(+,-,+)}). More often than not, the desired out
+sequents will be the empty list (i.e., we will be interested in the
+generation of {\em \inx{complete plan}s}). This is why we have the
+predicate:
+\end{predicate}
+
+\begin{predicate}{planner/2}{planner(?Plan,?Output)}%
+This predicate is as \p{planner/3}, except that the input sequent
+to the planner is taken to be the current Oyster sequent. The predicate can
+be used to check the correctness/completeness of a given plan (mode
+{\tt planner(+,+)}), or (more likely) to generate a plan with given
+outputs for the current sequent (mode {\tt planner(-,+)}). Often, we
+will want to construct a complete plan for the current sequent, which
+is why we have the predicate:
+\end{predicate}
+
+\begin{predicate}{planner/1}{planner(?Plan)}%
+This predicate is as \p{planner/2}, except that it forces the output
+list to be the empty list. In other words, \p{planner/1} only
+produces complete plans. Can be used to check correctness/completeness
+of plans, or to generate plans. 
+\end{predicate}
+
+The final member of the family of predicates that exists for each
+planner is \p{planner/0}:
+
+\begin{predicate}{planner/0}{planner}%
+This predicate is as \p{planner/1}, except that it pretty-prints
+the generated plan on the output stream. \inxx{pretty-printer}
+\end{predicate}
+
+\inxx{applicable method}
+As explained above, a crucial step in the planning process is to find
+out which methods are to a given input sequent.
+For this purpose, all planners use the same predicate, namely the
+predicate \p{applicable/[1;2;3;4]}. The different versions of this
+predicate will be described below, before we continue with the
+description of each of the planners.
+
+\begin{predicate}{applicable/2}{applicable(+Sequent, ?Method)}%
+Succeeds if {\tt Method} is applicable to {\tt Sequent}. 
+The {\tt Method}'s applicability is tested by
+matching its input-slot against the {\tt Sequent} followed by 
+evaluating its preconditions which must succeed.  This predicate can
+be used either to test the applicability of a given {\tt Method}, or
+to generate all applicable {\tt Method}s.
+
+A special case is when {\tt Method} is of the form {\tt try M}.
+In this case \p{applicable/2} succeeds even when {\tt M} is not
+applicable to {\tt Sequent}.
+\end{predicate}
+
+\begin{predicate}{applicable/1}{applicable(?Method)}%
+A version of \p{applicable/2} with the first argument (the {\tt
+Sequent}) defaulting to the {\em current sequent}.  The current
+sequent is the sequent at the current position in an Oyster
+proof tree (as specified by the predicates \p{select/[0;1]},
+\p{slct/[0;1]} and \p{pos/[0;1]}). 
+\end{predicate}
+
+\begin{predicate}{applicable/4}{applicable(+Sequent, ?Method, ?PostConds, ?Outputs)}
+This predicate succeeds if {\tt Method} is applicable to {\tt Sequent} with
+output-slot {\tt Outputs}, while the \inx{postconditions-slot} of
+{\tt Method} evaluates to {\tt PostConds}. Whereas
+\p{applicable/[1;2]} only evaluates a method's
+\inx{preconditions-slot} and matches it against the \inx{input-slot},
+\p{applicable/4} also evaluates the postconditions-slot, and matches
+it against the \inx{output-slot}. Possible usage of this predicate
+includes mode {\tt applicable(+,+,-,-)} to compute the postconditions and
+output-slot of a given method, {\tt applicable(+,-,-,-)} to search for
+applicable methods, and {\tt applicable(+,-,-,+)} or
+{\tt applicable(+,-,+,-)} to search for methods that will give
+certain desired postconditions or output-slot.
+
+A special case is when {\tt Method} is of the form {\tt try M}.
+{\tt try M} behaves exactly as {\tt M} when {\tt M} is applicable to
+{\tt Sequent}. If {\tt M} is not applicable to {\tt Sequent}, then 
+\p{applicable/4} will still succeed with {\tt PostConds=[]}
+{\tt Outputs=[Sequent]}.
+\end{predicate}
+
+The convention in that a the postconditions of methods are not
+allowed to fail if the input-slot matches and the preconditions
+succeed can be expressed by stating that \p{applicable/[3;4]} always
+succeed if \p{applicable/[1;2]} succeed. It is considered an error if
+in some situation \p{applicable/[3;4]} fail but \p{applicable/[1;2]}
+succeed. As a result, \p{applicable/[3;4]}
+subsume \p{applicable/[1;2]}. However, \p{applicable/[1;2]}
+avoids the computation of the {\tt Method}'s postconditions-slot, and
+is therefore much cheaper, so we keep both versions of the predicate
+around. 
+
+\begin{predicate}{applicable/3}{applicable(?Method, ?PostConds, ?Outputs)}%
+This predicate is to \p{applicable/4} what \p{applicable/1} is to
+\p{applicable/2}: It is the same as \p{applicable/4}, but with the
+{\tt Sequent} argument defaulting to the current sequent
+\end{predicate}
+
+\begin{predicate}{applicable-submethod/[1;2;3;4]}{applicable-submethod/[1;2;3;4]}%
+All these predicates are exactly as their \p{applicable/[1;2;3;4]}
+counterparts, except that they test for applicability of
+\inx{submethod}s, instead of methods. 
+\end{predicate}
+
+\begin{predicate}{applicable-anymethod/[1;2;3;4]}{applicable-anymethod[1;2;3;4]}%
+The predicates \p{applicable-anymethod/[1;2;3;4]} is the disjunction of the
+predicates \p{applicable/[1;2;3;4]} and \p{applicable-submethod/[1;2;3;4]}
+\end{predicate}
+
+After all these general predicates, we will now turn to the discussion
+of each of the planners. 
+
+\subsection {The depth-first planner}
+\label{depth-first-planner}
+\begin{predicate}{dplan/[0;1;2;3]}{dplan/[0;1;2;3]}
+The \inx{depth-first planner} is the simplest of {\clam}'s family of
+planners. Whenever it comes to a choice point in the planning
+process, it just pursues all choices in a chronological order. Thus,
+methods are tried in the order in which they are generated by the
+\p{applicable/[1;2;3;4]} predicate, that is, the order 
+in which they occur in the methods database, and choice points in the
+evaluation of pre- and postconditions-slots are determined by Prolog's
+search strategy. 
+
+As a result, this planner is the fastest of all in the sense that it
+does not spend much time considering what choice to make next. On the
+other hand, it is very prone to getting trapped into infinite branches
+in the planning space, or to making very uninformed and obviously
+wrong choices. The only control that the user has over the behaviour
+of the depth-first planner is by reordering the (sub)methods in
+the database, 
+or by re-coding the pre- and postconditions of the methods. By
+carefully ordering the (sub)methods database, a large number of
+theorems can be proved even with a brain damaged planner such as the
+depth-first planner (using suitably chosen methods from \S\reference{repertoire}, all theorems mentioned in \cite{pub413} can be proved
+using the depth-first planner). 
+
+A number of \inx{optimisations} have been made in the code of the
+depth-first planner which make it slightly less brain damaged.
+Both of these optimisations are for the case when we are searching for a
+\inx{complete plan}, that is: a plan with an empty list of output
+sequents. The first optimisation applies to all planners currently part
+of \clam, and I believe it should apply to all planners ever part of
+\clam.  When looking for \inx{applicable method}s, the planners first
+look for terminating applicable methods, that is: applicable
+methods whose output-slot is an empty list of sequents. If any such
+methods can be found, the chronologically first one of these is chosen,
+and the planner terminates.
+
+The second optimisation is a more debatable one, and applies when the
+planner produces a \inx{branching plan}. Due to the depth-first nature
+of the planner, it first tries to fully complete one branch of a plan
+before starting the construction of the next branch. The optimisation
+consists of freezing the computation for a branch once the planner has
+found a \inx{complete plan} for a branch. This means that failure in
+the construction of the $n$-th branch of a plan will never lead to
+re-computation of any of the $n-1$st branches of the plan. This
+optimisation relies essentially on the {\em \inx{linearity
+assumption}\/} for proof-plans, which says that subplans for conjunctive
+branches can always be combined without interference. This assumption
+justifies not re-doing any previously completed branches after failure
+in a later branch. It is not entirely clear whether this linearity
+assumption holds for proof-plans. It does not hold for plans in
+general (see numerous articles in the planning literature on this,
+or \cite{bb421} for the case of proof-plans in particular). 
+\end{predicate}
+
+\begin{predicate}{plan/1}{plan(+Thm)}%
+The \p{plan/1} predicate composes the loading of the 
+definitions relating to the conjecture {\tt Thm} 
+(see \S\reference{library}) with the search for a depth-first 
+plan. 
+\end{predicate}
+
+\begin{predicate}{dplanTeX/[0;1]}{dplanTeX/[0;1]}%
+This behaves as \p{dplan/[0;1]}, only the file \f{clamtrace.tex} is
+automatically created in the startup directory.  This file is a
+complete \index{LaTeX=\LaTeX{}} source of the proof-plan attempt.
+Meta-level annotations are drawn in the `box-and-underline' style;
+sinks and other annotations are also depicted.  \p{portray-level/3}
+affects the \TeX{} output as it does in the non-\TeX{} case.  The
+\inx{style files} require to run \LaTeX{} on the file
+\f{clamtrace.tex} are supplied in the \clam distribution directory
+\f{info-for-users}.
+
+These annotations are produced via a special collection of portray
+predicates, given in \f{proof-planning/portrayTeX.pl}.
+
+NB.  If a planning attempt is interrupted for some reason during {\tt
+dplanTeX}, \clam{} may be left in a state in which it continues
+writing to the trace file.  Terminate \LaTeX{} tracing by calling
+\p{stopoutputTeX/0}.
+\end{predicate}
+
+\subsection {The breadth-first planner}
+\begin{predicate}{bplan/[0;1;2;3]}{bplan/[0;1;2;3]}
+A second planner which follows an uninformed search strategy is the
+\inx{breadth-first} planner. It traverses the planning space in a
+breadth-first way, that is: it first tries to construct a plan of
+size $n$ in all possible ways, before it goes on to investigate any
+plans of size $n+1$. The {\em \inx{size of a plan}\/}
+is defined as the {\em \inx{depth of a plan}}: it is the length of the
+longest branch in the plan, measured from the root-node. For example,
+the plan shown in figure~\reference{assp-plan} has size 6. It would be
+possible (and useful and interesting) to develop breadth-first
+planners that would use different metrics for measuring the size of
+a plan. Another possible metric to investigate would be the
+{\em \inx{weight of a plan}}, which is defined as the total number of
+nodes in a plan. Under this metric, the plan from figure~\reference{assp-plan} would be size 8.
+
+The major advantages of breadth-first planning are that firstly it
+will always find a plan if there is one, and secondly that it will always find
+the shortest possible plan. The combination of these properties is
+generally called {\em \inx{admissibility}}
+
+However, the breadth-first planner is very slow to generate plans for
+two reasons. The first reason is inherent to breadth-first planners in
+general: they exhaustively traverse the planning space (which
+typically grows exponentially at each deeper level), and consequently
+take ages to reach any significant depth. The second reason is more
+specific to \clam: \clam, and all its planners, are implemented in
+Prolog, which is naturally more suited for depth-first than
+breadth-first search strategies. Consequently, the second of the two
+optimisations that have been applied to the depth-first planner (see
+previous section), could not be applied to the breadth-first planner,
+which will therefore spend much more time backtracking through rather
+useless branches in the planning space. The result of this is that the
+breadth-first planner is too slow to generate any but the simplest
+plans. In fact, the only realistic plan ever generated by the
+breadth-first planner is the one shown in figure~\reference{assp-plan}.
+\end{predicate}
+
+\subsection {The iterative-deepening planner}
+\begin{predicate}{idplan/[0;1;2;3]}{idplan/[0;1;2;3]}
+A good compromise between the efficiency of the depth-first planner
+and the exhaustive nature of the breadth-first planner is the last of
+{\clam}'s uninformed planners, the \inx{iterative-deepening planner}.
+This planner performs a depth-first search similar to the depth-first
+planner, but only searches through plans up to a maximum length $n$.
+If no plans can be found up to length $n$, the iterative-deepening
+planner increases the maximum length to $n+1$ and starts again. This
+strategy ensures that the iterative-deepening planner has the
+\inx{admissibility} property of the
+breadth-first planner, but that it can be implemented as an efficient
+depth-first planner (enhanced with a \inx{cut-off depth}).
+
+It might look at first sight that the iterative-deepening planner must
+be really inefficient, since after increasing the cut-off depth from
+$n$ to $n+1$, it re-does all the work up to level $n$ in order to
+investigate the plans of level $n+1$. However, since the planning
+space grows exponentially with $n$, there are as many plans of length
+$<n$ as there are of length $n$ (namely $O(b^n)$ in both cases, where
+$b$ is the \inx{branching factor} of the planning space).
+In fact, it can be shown (e.g., see~\cite{korf}) that among all
+uninformed search strategies which are admissible,
+iterative deepening has the lowest asymptotic complexity in both time
+($O(b^n)$) and space ($O(n)$).  Breadth-first search
+on the other hand is only asymptotically optimal in time and is really
+bad (exponential) in space. The actual complexity of breadth-first
+search is of course lower than that for iterative-deepening (namely by
+the small constant factor $b/b-1$), but this is easily off-set by the
+difference in space-complexity in favour of iterative-deepening. Thus,
+iterative-deepening is asymptotically optimal in both time and space,
+whereas breadth-first is asymptotically optimal only in time and
+really bad in space, and the actual complexities of iterative-deepening and
+breadth-first are very close.
+\end{predicate}
+
+\begin{predicate}{idplanTeX/[0;1]}{idplanTeX/[0;1]}
+This is to \p{idplan/[0;1]} what \p{dplanTeX/[0;1]} is to
+\p{dplan/[0;1]}.  
+\end{predicate}
+
+Two generalisations of the iterative-deepening planner are possible.
+As with the breadth-first planner, it would be interesting to
+investigate the use of other metrics than depth to compute the size of
+a plan. Secondly, there is no reason why we should increase the
+\inx{cut-off depth} by 1 every time. We can in general increase the cut-off
+depth from $n$ to $n+\delta$, where $\delta$ can be any fixed number, or
+even a function of $n$. The behaviour of $\delta$ for the
+iterative-deepening planner is under control of the user via the
+predicate:
+
+\begin{predicate}{bound/1}{bound(-B)}%
+On successive backtracking, {\tt B} should be bound to increasing values
+to be used as the \inx{cut-off depth} for the iterative-deepening
+planner. A possible (and the default) implementation for \p{bound/1} is:
+\begin{verbatim}
+bound(B) :- genint(B).
+\end{verbatim}
+which increases the \inx{cut-off depth} by 1 each time. Alternatively, we
+could define:
+\begin{verbatim}
+bound(B) :- genint(B,n)
+\end{verbatim}
+with {\tt n} any positive integer. This would increase the
+cut-off depth by steps of $n$ each time. An even more flexible
+definition of \p{bound/1} would be:
+\begin{verbatim}
+bound(B) :- genint(N), bound(N,B).
+bound(N,B) :- N>0, N1 is N-1, bound(N1,B1), delta(N,D), B is B1+D.
+delta(1,8).
+delta(2,4).
+delta(3,2).
+delta(N,D) :- N>3,D=1.
+\end{verbatim}
+which increases the cut-off depth by a varying amount, computed by the
+predicate \p{delta/1}. In this example, the cut-off depth would go
+through the sequence $8,12,14,15,16,\ldots$.
+\end{predicate}
+
+\begin{predicate}{viplan/[0;1;2;3]}{viplan/[0;1;2;3]}%
+viplan/[0;1;2;3] is exactly as idplan/[0;1;2;3], but produces
+{\em vi\/}sually attractive output which enables the user to follow the
+planner's path through the search space of applicable methods. Works \notnice
+only on \inx{VT100} look-a-like terminals.
+\end{predicate}
+
+\subsection {The best-first planner}
+\begin{predicate}{gdplan/[0;1;2;3]}{gdplan/[0;1;2;3]}
+The only planner in \clam\ that employs a \inx{heuristic search strategy}
+(that is: a search strategy that is informed by properties of the
+planning space) is the best-first planner. This planner is very
+similar to the depth-first planner, except that its behaviour on
+choice points can be programmed by the user, through the predicate
+\p{select-method/3}.
+\end{predicate}
+
+\begin{predicate}{select-method/3}{select-method(+Sequent,?Method,?Output)}%
+This predicate takes a {\tt Sequent}, and should return the {\tt Method}
+that should be applied at this point in the planning process, and the
+{\tt Output} sequents that this {\tt Method} should produce. On
+backtracking, this predicate should produce further choices for the
+method to be applied to {\tt Sequent} during the planning process. In
+general, this predicate will investigate which methods are applicable
+to the given {\tt Sequent}, and then select one of these {\tt Method}
+for application by the planner. At first sight it would not appear
+necessary to return the list of {\tt Output} sequents (i.e., the
+instantiated output-slot) as well as the chosen method. However, a
+chosen method might be applicable in more than one way (through
+choice-points in the preconditions-slot). By specifying the {\tt
+Output} slot, the user can control not only which {\tt Method} will be
+applied, but also how it will be applied. When writing a particular
+version of the \p{select-method/3} predicate, care should be taken to
+not just blindly generate first all \inx{applicable method}s, and then
+perform some selection procedure. Firstly, generating all applicable
+methods can in general be very expensive, and most of these methods
+will then be ignored by the planning process anyway. Secondly, an
+infinite number of methods might be applicable (or: a method might be
+applicable in an infinite number of ways). This situation,
+corresponding to an infinite branching factor in the planning space,
+would lead to non-termination of the \p{select-method/3} predicate,
+and therefore of the best-first planner. An example implementation of
+\p{select-method/3} is the following trivial version which just mimics
+the chronological behaviour of the \p{applicable/4} predicate, making
+the best-first planner behave as a depth-first planner:
+\begin{verbatim}
+select_method(Sequent, Method, Output) :-
+    applicable(Sequent, Method, _, Output)
+\end{verbatim}
+For the reasons discussed above, this implementation would be
+much better than the following, equivalent, code:
+\begin{verbatim}
+select_method(Sequent, Method, Output) :-
+    findall([Method,Output],
+            applicable(Sequent, Method, _, Output), L),
+    member([Method,Output], L).
+\end{verbatim}
+The search spaces encountered at the planning level have so far been
+so small that we have had no real need for the heuristic planner, and
+as a result, no coherent heuristic strategy is implemented at the
+moment. 
+\end{predicate}
+
+\section {The hint planners}
+\label{hint-planners}
+
+\begin{quote}
+The hint mechanism in \clam \version is unsupported.
+\end{quote}
+This section describes \clam's Hint Mechanism (HM). This
+mechanism provides the user with a means of helping \clam\ build plans for
+proofs by giving it hints like those found in mathematical proofs.
+
+Some proofs require the use of techniques for which we don't
+have the general knowledge required to write a method. \clam\ would be
+unable to find a proof-plan for a theorem whose proof requires the use
+of such techniques just like a student of mathematics would find hard to
+prove some theorems if he or she had not been given a hint to solve a
+particular hard step of the proof.
+
+       Ideally, \clam\ should only use constrained methods and a good
+heuristic function for the Best-first planner which, combined, would
+tell \clam\ the appropriate choices to make at each node of the search
+space.  This way, search would be minimal and \clam\ would find a plan
+quickly for every provable sequent. Unfortunately we don't have yet a
+good uniform heuristic function and all the methods we require to prove
+all theorems and eliminate search.
+
+        What we often have though, is an insight, coming rather from
+experience than from some kind of theory, that tells us what proof
+techniques to follow at certain stages. The central idea behind the HM
+is that this insight can be formalised in a language and incorporated to
+\clam\ in the form of hints.  This enables \clam\ to use the knowledge
+contained in the hints to prove harder theorems.  By doing so, it also
+enables us to use a more versatile environment in which we might
+discover, by experimenting, the underlying theories to develop the
+methods and heuristics required to achieve a fully automatic theorem
+prover.
+
+        Giving hints to \clam\ then, consists of telling it what technique
+it should use to solve a particular sub-problem. The technique can be a
+regular method known to \clam\ or a special kind of method called
+{\em hint-method\/} predefined by the user. When giving regular methods, the
+user simply alters the order in which the methods are tried in the
+search, thus saving \clam\ some work. When giving hint-methods on the
+other hand, the user is introducing a special proof procedure that is
+only applicable to a reduced number of cases. These cases are specified
+outside the hint-methods in pieces of code called {\em hint-contexts}.
+Hint-methods can only be used via the hint mechanism.
+
+        The Hint Mechanism for \clam\ consists of the following parts:
+
+\begin{enumerate}
+
+\item A language to express hints.
+
+\item An extension of the library mechanism to handle a database of
+hints in the same way it handles methods and submethods.
+
+\item A set of planners very similar to the planners described earlier
+but with the facility of using a given set of hints to build the plan.
+
+\end{enumerate}
+
+        Using the hint mechanism we can give \clam\ hints in two ways: in
+{\em batch\/} mode or {\em interactive\/} mode. In the batch mode, the user
+provides the planner, from the start, with a list of all the hints he or
+she considers appropriate and then the planner carries out the standard
+planning process and tries to use the given hints to build the plan. In
+interactive mode, an interactive session with the planner enables the
+user to examine selected parts of the planning process and provide the
+relevant hints ``on the spot''.
+
+        The full description of the development of this mechanism can be
+found in \cite{negrete-msc}.
+
+\subsection {The hint-methods and hint-contexts}
+\label{hint-methods}
+
+        Hint-methods are very similar to methods. They live in a
+separate data base but they are handled in a similar way (see \S\reference{library}).  The main difference is that they are parameterized
+by a predicate called \p{hint-context}\footnote{This is a dynamic
+predicate, so it can be defined in various files and consulted when
+necessary. Currently, there is a file called {\tt hint\_contexts} in
+{\tt meta-level-support/} where all the
+\p{hint-context} clauses are defined.}.  This predicate appears as the
+first precondition of the hint-methods and has two uses. The first one
+is to define different cases (one in each clause) where the
+hint-method is applicable, that is, specific theorems or families of
+theorems. The second use, is to provide the hint-method the
+instantiation of variables required by the rest of the preconditions,
+postconditions and output. For instance, if the hint-method
+generalises subexpressions, the hint-context will indicate what
+theorems need a generalisation, and what the subexpressions to be
+generalised are in each case.
+
+        When the user wants to prove a theorem using a hint, he must
+first decide what hint will be needed and then design a hint-context
+clause for the theorem (family of theorems) before running the planner.
+\p{hint-context} clauses must be loaded just like regular Prolog code.
+When the planner is run, the \p{hint-context} clause must already be
+present in memory for the planner to use it.
+        The  \p{hint-context} clause is defined as follows:
+
+\begin{verbatim}
+hint_context(<hint-method>, <label>, <Input>, <Parameters> ) :-
+    <body>.
+\end{verbatim}
+
+        {\em Hint-method\/} is the name of the hint-method to which the
+context is linked. {\em Label\/} is a constant to distinguish this context
+clause from the rest. {\em Input\/} is the input sequent and {\em
+parameters\/} is a list of parameters to be instantiated in the context.
+{\em Body\/} may be any Prolog code.
+
+        Hint-methods are defined in separate files in the ``hint''
+directory of the library using the following pattern:
+
+\begin{verbatim}
+hint( name( label, ...  ),
+      input,
+      [hint_context(name,label,input,[term1,,...,termn]),...],
+      postconditions,
+      output,
+      tactic  ).
+\end{verbatim}
+
+Figure~\ref{gen-hint} shows an example of a hint-method and
+figure~\ref{contexts} shows some hint-contexts defined for it.
+
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small} 
+\begin{verbatim} 
+% GEN_HINT METHOD:
+%
+% Generalisation Hint Method. 
+%
+% Positions is a list of subexpression's positions to generalise.
+% Var: Variable to be used. 
+% Hint_name: Name of context in which the method should be used.
+
+hint(gen_hint(HintName, Positions, Var:pnat ),       
+       H==>G,
+       [hint_context( gen_hint, HintName, H==>G, [ Positions ] ),
+        matrix(Vs,M,G),
+        % the last 2 conjuncts will always succeed, and are not really
+        % needed for applicability test, so they could go in the
+        % postconds, but we have them here to get the second arg of the
+        % method instantiated even without running the postconds...
+        append(Vs,H,VsH),
+        free([Var],VsH)], 
+       [replace_list(Positions, Var, M, NewM),
+        matrix(Vs,NewM,NewG)],
+       [H==>Var:pnat=>NewG],
+       gen_hint(Positions,Var:pnat,_)).
+\end{verbatim}
+\end{small}
+\end{center}
+\caption{Hint method gen-hint. It is used to generalise variables
+apart}
+\label{gen-hint}
+\vspace{1ex}
+\hrule
+\end{figure}
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small} 
+\begin{verbatim}
+
+% This hint contexts is for the hint method gen_hint.
+
+% This clause is for the theorem x+(x+x)=(x+x)+x in pnat.
+% The parameters are the positions of the variables to be generalised. 
+
+
+hint_context(gen_hint,
+             plus_assoc,             
+             _==>G,
+             [
+              [[1,1,1],
+               [1,1,2,1]]
+             ]
+            ):- matrix(_,plus(X,plus(X,X))=plus(plus(X,X),X) in pnat,G).
+
+% This clause is for the theorem halfpnat.
+% The parameters are the positions of the variables to be generalised.
+
+hint_context(gen_hint,
+             halfpnat,
+             _==>plus(X,s(X))=S in pnat,
+             [
+              [[1,1,1],
+               [1,1,2,1]]
+             ]
+            ):-
+             wave_fronts(s(plus(X,X)),_,S).
+
+\end{verbatim}
+\end{small}
+%}}
+\end{center}
+\caption{Hint contexts for hint methods gen-hint and gen-thm used
+for theorems plus-assoc, halfpnat and rot-length} 
+\label{contexts}
+\hrule
+\end{figure}
+
+\subsection {The hint planners}
+
+        The hint mechanism currently has extensions of the \clam\
+planners described above, to handle hints. The extensions are: dhtplan
+for dplan, idhtplan for idplan and gdhtplan for gdplan. They all work
+with the same arguments as their non-hint cousins except that the first
+argument is now an extra argument where a list of hints is to be passed.
+
+\begin{predicate}{dhtplan/[1;2;3;4]}{dhtplan/[1;2;3;4]}%
+        This is the hint version of dplan/4. The first argument must be
+a list of hints and the rest of the arguments work exactly as in
+dplan/4.  The planner will do a depth-first search to build a plan but,
+before selecting the next applicable method at each decision point, it
+will try to use any of the hints given in the first argument. If the
+list of hints is empty, dhtplan will perform exactly as dplan/4.
+\end{predicate}
+
+\begin{predicate}{idhtplan/[1;2;3;4]}{idhtplan/[1;2;3;4]}%
+
+        This is the hint version of itplan/4. The first argument must be
+a list of hints and the rest of the arguments work exactly as in
+itplan/4.  The planner will do a iterative-deepening search to build a
+plan but, before selecting the next applicable method at each decision
+point, it will try to use any of the hints given in the first argument.
+If the list of hints is empty, dhtplan will perform exactly as itplan/4.
+\end{predicate}
+
+\begin{predicate}{gdhtplan/[1;2;3;4]}{gdhtplan/[1;2;3;4]}%
+
+        This is the hint version of gdplan/4. The first argument must be
+a list of hints and the rest of the arguments work exactly as in
+gdplan/4.  The planner will do a best-first search to build a plan but,
+before using the next method provided by the heuristic function at each
+decision point, it will try to use any of the hints given in the first
+argument. If the list of hints is empty, dhtplan will perform exactly as
+gdplan/4.
+\end{predicate}
+
+\subsection {The definition of hints}
+
+        A hint for \clam\ is a specification of a position in the plan
+tree and an action to perform at that point. There are {\em regular\/}
+hints and {\em always-hints}. Regular hints are used only once in a plan
+and, after they have been used, they are removed from the list of hints.
+The always-hints on the contrary, are used as many times as possible and
+remain in the list of hints. In all, there are four possible kinds of
+hint:
+\begin{predicate}{after/2}{after(<position>, <action>)}%
+
+This is a regular hint that specifies an {\em action\/} to be
+taken when the current node of the partial plan is a descendant of the
+{\em position\/} given in the first argument.
+\end{predicate}
+
+\begin{predicate}{imm-after/2}{imm-after(<position>, <action>)}%
+        This is a regular hint that specifies an action to be taken when the
+current node of the partial plan is a daughter node of the position
+given in the first argument.
+\end{predicate}
+
+\begin{predicate}{alw-after/2}{alw-after(<position>, <action>)}%
+This hint is the ``always'' version of the {\em after\/} hint
+above. It has the same effect but it won't be removed from the hint list
+after it has been used.
+\end{predicate}
+
+\begin{predicate}{alw-imm-after/2}{alw-imm-after(<position>, <action>)}%
+This hint is the ``always'' version of the {\em imm-after\/} hint
+above. It has the same effect but it won't be removed from the hint list
+after it has been used.
+\end{predicate}
+
+
+        A position in a partial plan is given by a {\em path section}.
+This is a sequent of methods with their arguments separated by ``then''.
+For example:
+\begin{verbatim}
+   induction(_) then ..... induction(_) then tautology(_)
+\end{verbatim}
+
+        Methods in a path section may also specify what branch to follow
+after its application (branch extension). For example: 
+
+\begin{verbatim}
+        after( casesplit(_)-2, <action> )
+\end{verbatim}
+
+indicates that {\em action\/} should be performed on the second branch of
+induction (i.e., step case). We can even use an anonymous Prolog variable in
+place of any method where we do not care about what method is used. For
+example:
+
+\begin{verbatim}
+        after(_, <action>)
+\end{verbatim}
+
+indicates that the action is to be taken immediately.
+
+        This mechanism is in general enough to specify a position in
+the plan tree by giving a path section consisting of a single method
+(with possibly a branch extension), but the system allows the use of a
+more general path if it is needed.
+
+
+        Actions may be either a method, a hint-method, a term of the
+form: 
+\begin{verbatim}
+no( <Method | Hint-method> )\end{verbatim}
+ or the constant {\em askme}. If the action proposed is a method or a
+hint-method, the hint suggests that the planner should try applying the
+action when the position in the plan tree has been reached. If the
+action specified is a {\em no\/}-term, the planner will avoid applying
+its argument when the position is reached. Finally, if the action is
+the constant ``askme'', the planner, once the position has been
+reached, will invoke the interactive hint mechanism (see below).
+
+        When using a hint involving ``immediately after'', if the
+position indicated is reached and the action is not applicable, the
+system will start the interactive mode. This will enable the user to
+check why the action could not be performed interactively. If the hint
+does not involve ``immediately after'' then the system will not stop
+when the action is not applicable. This is because the position where
+the planner is supposed to apply the action is more approximate and
+the system would have to stop in too many places before reaching the
+appropriate position.
+
+\subsection {The interactive session}
+
+
+        When the interactive hint mechanism is triggered, a brief menu
+as a prompt is displayed as follows.
+
+\begin{verbatim}
+[ t, pro, seq, pla, c, a, e, sel, r, h ] <?> 
+
+
+        The options of the menu are:
+
+          (t)est method/hint
+          (pro)log,
+          (seq)uent.
+          (pla)n.
+          (c)ontexts.
+          (a)pplicable methods,
+          (e)dit hint list.
+          (sel)ect method.
+          (r)esume
+          (h)elp.
+
+\end{verbatim}
+
+        The (t) option allows the user to test the applicability of a
+method or hint-method. It displays the last instantiation of all the
+succeeding preconditions. That is, the system will try to make all
+preconditions true and in this process it might backtrack finding different
+instantiations for the variables in each case. If it is the case that not
+all the preconditions are satisfied, then the system will display the last
+instantiation of the variables tried. If all preconditions succeeded
+then it displays all succeeding postconditions and the output.
+
+
+        This option is helpful for debugging purposes when the user thought
+a method (hint-method) was applicable at a certain stage, but it was not,
+and he would like to know what went wrong.
+
+        The (pro) option allows the user to send goals directly to
+Prolog. As it is implemented, the metainterpreter will show the
+instantiation of variables if the goal succeeded. All variables in the
+goal will be numbered by order of appearance and will be displayed with
+the corresponding instantiation. Type the goal ``true.'' to return to
+the main menu.
+
+        The (seq) option displays the current sequent in the planning
+process.
+
+        
+        The (pla) option displays the partial plan constructed so far
+by the planner and indicates with $<current>$ the section of the plan
+currently being computed.
+
+        The (c) option displays all hint-context clauses currently in
+memory.
+        The (a) option displays all applicable methods and
+hint-methods to the current sequent having the specified output.
+
+       
+        The (e) option. When a {\em regular\/} hint in the list given
+to the planner is used, it is removed from the list so that it can only
+apply once. When using the interactive hint mechanism, the user may
+want to restore the hint into the list to try applying it again or may
+want to add or delete another hint. This can be done using (e) option.
+When called, this option shows the list of hints and another menu to
+edit it. 
+
+        
+        The (sel) option. The aim of the interactive hint mechanism and
+of hints in general is to help the planner in deciding what to do
+during difficult stages of the planning process. Once the user has
+examined the planning process with the other options of the menu, she
+may use (sel) option to tell the planner what method or hint-method it
+should apply.
+
+        The (r) option terminates interactive session, leaves the askme
+hint in the list, undoes all changes done in the session and continues
+with normal planning. This option is useful when the planner stopped in
+an undesired stage, or if the user just wants to trace what the planner
+is doing. In the latter case, a good hint to try would be:
+
+
+\begin{verbatim}
+       after( _, askme )
+\end{verbatim}
+
+        (h) option displays a longer menu to remind the user what the
+options are.
+
+
+        Before the prompt, the program sometimes gives a notice saying
+what effects it is looking for. In these cases, the planner is
+searching for methods or hint-methods that yield this effects (normally
+[]) in their output. When the prompt is not preceded by any notice, it
+means the system will display or apply any method or hint-method
+without  restrictions on what the output should look like.
+
+
+\subsection {Meta-Hints}
+\begin{itemize}
+
+\item It is a good idea to trace the planning process using
+alw-after(\_,askme). It gives an idea of what the sequent
+looks like at certain stage, what the hypothesis are, etc. This helps
+designing the contexts for a more automatic proof.
+
+\item Remember that almost all output produced by the system is
+``portrayed''. This means that what you see is normally nicer that the
+real representation. Copying literally or using the mouse will seldom
+work. It is therefore very important to bear in mind the arity of methods
+and what the arguments are when trying to make the system apply them.
+
+\item Remember that every time an {\em after\/} or {\em imm-after\/} hint
+is used, it will be removed from the list of hints (unless you use the
+resume option in interactive mode). You may use the (e) option to
+insert more hints, before letting the planner continue if you would
+like to reuse some hint.
+
+\item If you modify the hint list and afterwards you use the (r)
+(resume) option to continue planning, all changes done in the present
+interactive session will disappear so the list of hints will be just as
+it was before the session. If you've modified the hint list and you
+just decided you want to resume planning but you don't want to loose
+your changes, there is a trick you can use. Select (sel) option and
+give it an anonymous Prolog variable. This will keep your changes and
+will select the next applicable method.
+
+\item When using the interactive (askme) hint mechanism, it is worth
+paying attention to the effects the planner is looking for at each
+stage because all processes related to applicability of
+methods/hint-methods will be constrained by this parameter. So, when
+asking for all applicable methods ( option (a) ) the system will show
+all applicable methods to the current sequent with the required
+effects. If you give the system a hint ((sel) option) and it replies it
+is not applicable, check the required effects. If the system stops and
+tells you it is looking for some effects you wouldn't like to deal
+with, use (r) option, the system will immediately look for unrestricted
+methods.
+
+\item Some example theorems proved using hints can be found in \cite{tp8}.
+\end{itemize}
+
+\input footer

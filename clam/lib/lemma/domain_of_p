@@ -1,0 +1,31 @@
+problem([]==>x:pnat=> (x=0 in pnat=>void)=>p(x)in pnat,
+autotactic(idtac),_1219,
+[problem([]==>x:pnat=> (x=0 in pnat=>void)=>p(x)in pnat,
+ intro,lambda(x,_1287),
+ [problem([x:pnat]==> (x=0 in pnat=>void)=>p(x)in pnat,
+  elim(x),p_ind(x,_1327,[v0,v1,_1333]),
+  [problem([x:pnat]==> (0=0 in pnat=>void)=>p(0)in pnat,
+   elementary(intro(new[v0])then[elim(v0)then[identity,elim(v1)],wfftacs]),lambda(v0,su(any(v1),[v0 of axiom],[v1])),
+   [
+   ]) ext _1327,
+   problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>p(v0)in pnat]==> (s(v0)=0 in pnat=>void)=>p(s(v0))in pnat,
+   intro,lambda(v2,_1480),
+   [problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>p(v0)in pnat,v2:s(v0)=0 in pnat=>void]==>p(s(v0))in pnat,
+    simplify,_1489,
+    [problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>p(v0)in pnat,v2:s(v0)=0 in pnat=>void]==>v0 in pnat,
+     intro,axiom,
+     [
+     ]) ext _1489
+    ]) ext _1480,
+    problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>p(v0)in pnat]==> (s(v0)=0 in pnat=>void)in u(1),
+    repeat wfftac,axiom,
+    [
+    ])
+   ]) ext _1333
+  ]) ext _1287,
+  problem([]==>pnat in u(1),
+  intro,axiom,
+  [
+  ])
+ ]) ext _1219
+]).

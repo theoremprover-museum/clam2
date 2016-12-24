@@ -1,0 +1,36 @@
+\expandafter
+ \ifx\csname header.tex\endcsname\relax
+  \expandafter\def\csname header.tex\endcsname{}\newcount
+                                \headerfooter\headerfooter=1
+ \else\advance\headerfooter by 1\endinput\fi
+
+\documentclass[twoside,a4paper]{book}
+%\advance\textwidth by 2cm
+\usepackage{a4}
+\usepackage{index}
+\usepackage{graphics}
+\usepackage{varioref}
+\usepackage{theorem,xspace,tabularx,proof_ian}
+\usepackage[BoxAndHoleAnnotations]{dream}
+\usepackage{clam-manual}
+\usepackage{verbatim}
+\usepackage{fancyheadings,supertabular}
+
+% the following causes \tt\{ to be in cmtt!
+\DeclareTextSymbol{\textbraceleft}{OT1}{'173}
+\DeclareTextSymbol{\textbraceright}{OT1}{'175}
+
+\def\version{2.8.4}
+\lefthyphenmin=3
+
+\newindex{pred}{pred-idx}{pred-ind}{Index of predicates}
+\newindex{mthd}{mthd-idx}{mthd-ind}{Index of methods and methodicals}
+\newindex{file}{file-idx}{file-ind}{Index of Prolog source files}
+\newindex{default}{idx}{ind}{Index}
+
+\begin{document}
+\pagestyle{fancy}
+%\lfoot{\thepage::\rcsid}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\sloppy

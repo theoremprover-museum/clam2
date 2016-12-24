@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: rev1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: rev1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>rev(nil)=nil in int list,
+simplify,axiom,
+[
+]).

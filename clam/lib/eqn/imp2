@@ -1,0 +1,4 @@
+problem([]==>t:u(1)=> (void=>t)<=>{true},
+dequantify then apply(unfold_def_all(_1859435<=>_1859436)then intro then[(intro(new[v0])then wfftacs)then[intro(explicit(0))then simplify then wfftacs],(intro(new[v0])then wfftacs)then[(intro(new[v1])then wfftacs)then[elim(v1)]]]),lambda(t,lambda(v0,0)&lambda(v0,lambda(v1,any(v1)))),
+[
+]).

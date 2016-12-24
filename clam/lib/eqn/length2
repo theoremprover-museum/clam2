@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: length2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: length2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>l:int list=>length(h::l)=s(length(l))in pnat,
+repeat intro then simplify,lambda(h,lambda(l,axiom)),
+[
+]).

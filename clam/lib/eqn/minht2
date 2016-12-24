@@ -1,0 +1,108 @@
+/*
+ * @(#)$Id: minht2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: minht2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l:int tree=>r:int tree=>minht(node(l,r))=s(min(minht(l),minht(r)))in pnat,
+repeat dequantify_once,lambda(l,lambda(r,_7530)),
+[problem([l:int tree,r:int tree]==>minht(node(l,r))=s(min(minht(l),minht(r)))in pnat,
+ compute([[1]]=s(min(minht(l),minht(r)))in pnat),_7539,
+ [problem([l:int tree,r:int tree]==>term_of(minht)of node(l,r)=s(min(minht(l),minht(r)))in pnat,
+  compute([[expand]]of node(l,r)=s(min(minht(l),minht(r)))in pnat),_7607,
+  [problem([l:int tree,r:int tree]==>lambda(t,rec_ind(t,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of node(l,r)=s(min(minht(l),minht(r)))in pnat,
+   compute([[1]]=s(min(minht(l),minht(r)))in pnat),_7684,
+   [problem([l:int tree,r:int tree]==>rec_ind(node(l,r),[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])])=s(min(minht(l),minht(r)))in pnat,
+    compute(rec_ind([[simplify]],[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])])=s(min(minht(l),minht(r)))in pnat),_7797,
+    [problem([l:int tree,r:int tree]==>rec_ind(inr(l&r),[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])])=s(min(minht(l),minht(r)))in pnat,
+     compute([[3]]=s(min(minht(l),minht(r)))in pnat),_7945,
+     [problem([l:int tree,r:int tree]==>s(min(lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r))=s(min(minht(l),minht(r)))in pnat,
+      compute(_8193=s(min([[unfold]],[[unfold]]))in pnat),_8054,
+      [problem([l:int tree,r:int tree]==>s(min(lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r))=s(min(term_of(minht)of l,term_of(minht)of r))in pnat,
+       compute(_8361=s(min([[expand]]of l,[[expand]]of r))in pnat),_8216,
+       [problem([l:int tree,r:int tree]==>s(min(lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r))=s(min(lambda(t,rec_ind(t,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(t,rec_ind(t,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r))in pnat,
+        intro(at(1)),axiom,
+        [problem([l:int tree,r:int tree]==>pnat in u(1),
+         repeat intro,axiom,
+         [
+         ]),
+         problem([l:int tree,r:int tree]==>s(min(lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r))in pnat,
+         compute(hyp(l),[[unfold]])then compute(hyp(r),[[unfold]]),_8653,
+         [problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>s(min(lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r))in pnat,
+          intro,axiom,
+          [problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>min(lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r)in pnat,
+           compute([[unfold]]in _9080),_8943,
+           [problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>pless(lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l,lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r)in pnat,
+            intro,axiom,
+            [problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l in pnat,
+             compute([[1]]in _9414),_9327,
+             [problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>rec_ind(l,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])])in pnat,
+              intro,axiom,
+              [problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:u(1),v1:v3:v0=>v3 in rec(z,int\z#z),v2:v3:v0=>pnat,v3:int\v0#v0]==>decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])in pnat,
+               intro,axiom,
+               [problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:u(1),v1:v3:v0=>v3 in rec(z,int\z#z),v2:v3:v0=>pnat,v3:int\v0#v0]==>v3 in (int\v0#v0),
+                repeat intro,axiom,
+                [
+                ]),
+                problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:u(1),v1:v3:v0=>v3 in rec(z,int\z#z),v2:v3:v0=>pnat,v3:int\v0#v0,v4:int,v6:v3=inl(v4)in int\v0#v0]==>0 in pnat,
+                intro,axiom,
+                [
+                ]),
+                problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:u(1),v1:v3:v0=>v3 in rec(z,int\z#z),v2:v3:v0=>pnat,v3:int\v0#v0,v5:v0#v0,v6:v3=inr(v5)in int\v0#v0]==>spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])in pnat,
+                intro,axiom,
+                [problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:u(1),v1:v3:v0=>v3 in rec(z,int\z#z),v2:v3:v0=>pnat,v3:int\v0#v0,v5:v0#v0,v6:v3=inr(v5)in int\v0#v0]==>v5 in (v0#v0),
+                 intro,axiom,
+                 [
+                 ]),
+                 problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:u(1),v1:v3:v0=>v3 in rec(z,int\z#z),v2:v3:v0=>pnat,v3:int\v0#v0,v5:v0#v0,v6:v3=inr(v5)in int\v0#v0,v4:v0,v7:v0,v8:v5=v4&v7 in (v0#v0)]==>s(min(v2 of v4,v2 of v7))in pnat,
+                 simplify then repeat intro,axiom,
+                 [
+                 ])
+                ])
+               ]),
+               problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>l in rec(z,int\z#z),
+               intro,axiom,
+               [
+               ])
+              ]) ext _9327
+             ]),
+             problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r in pnat,
+             compute([[1]]in _10415),_10328,
+             [problem([l:rec(z,int\z#z),r:rec(z,int\z#z)]==>rec_ind(r,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])])in pnat,
+              repeat intro,axiom,
+              [problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:u(1),v1:v3:v0=>v3 in rec(z,int\z#z),v2:v3:v0=>pnat,v3:int\v0#v0,v5:v0#v0,v6:v3=inr(v5)in int\v0#v0,v4:v0,v7:v0,v8:v5=v4&v7 in (v0#v0)]==>min(v2 of v4,v2 of v7)in pnat,
+               simplify then repeat intro,axiom,
+               [
+               ]) ext _10511
+              ]) ext _10328
+             ]),
+             problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l<*lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r]==>lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l in pnat,
+             compute([[1]]in _10868)then repeat intro,axiom,
+             [problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l<*lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r,v1:u(1),v2:v4:v1=>v4 in rec(z,int\z#z),v3:v4:v1=>pnat,v4:int\v1#v1,v6:v1#v1,v7:v4=inr(v6)in int\v1#v1,v5:v1,v8:v1,v9:v6=v5&v8 in (v1#v1)]==>min(v3 of v5,v3 of v8)in pnat,
+              simplify then repeat intro,axiom,
+              [
+              ]) ext _10879
+             ]),
+             problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l<*lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r=>void]==>lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r in pnat,
+             compute([[1]]in _11341)then repeat intro,axiom,
+             [problem([l:rec(z,int\z#z),r:rec(z,int\z#z),v0:lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of l<*lambda(v0,rec_ind(v0,[v2,v3,decide(v3,[~,0],[v5,spread(v5,[v4,v6,s(min(v2 of v4,v2 of v6))])])]))of r=>void,v1:u(1),v2:v4:v1=>v4 in rec(z,int\z#z),v3:v4:v1=>pnat,v4:int\v1#v1,v6:v1#v1,v7:v4=inr(v6)in int\v1#v1,v5:v1,v8:v1,v9:v6=v5&v8 in (v1#v1)]==>min(v3 of v5,v3 of v8)in pnat,
+              simplify then repeat intro,axiom,
+              [
+              ]) ext _11352
+             ])
+            ]) ext _8943
+           ])
+          ]) ext _8653
+         ])
+        ]) ext _8216
+       ]) ext _8054
+      ]) ext _7945
+     ]) ext _7797
+    ]) ext _7684
+   ]) ext _7607
+  ]) ext _7539
+ ]) ext _7530
+]).

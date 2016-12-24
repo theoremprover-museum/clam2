@@ -1,0 +1,26 @@
+problem([]==>t:u(1)=>r: (t=>t=>u(1))=>l:acc(t,r)=>l in acc(t,tc(t,r)),
+autotactic(wfftacs),_1791,
+[problem([]==>t:u(1)=>r: (t=>t=>u(1))=>l:acc(t,r)=>l in acc(t,tc(t,r)),
+ intro,lambda(t,_1893),
+ [problem([t:u(1)]==>r: (t=>t=>u(1))=>l:acc(t,r)=>l in acc(t,tc(t,r)),
+  pure(intro(at(2))),lambda(r,_1954),
+  [problem([t:u(1),r:t=>t=>u(1)]==>l:acc(t,r)=>l in acc(t,tc(t,r)),
+   intro,lambda(l,_2008),
+   [problem([t:u(1),r:t=>t=>u(1),l:acc(t,r)]==>l in acc(t,tc(t,r)),
+    elim(l,wo),wo_ind(l,[v2,v0,_2069]),
+    [problem([t:u(1),r:t=>t=>u(1),l:acc(t,r),v2:t,v0:v1:{v1:t\r of v1 of v2}=>v1 in acc(t,tc(t,r))]==>v2 in acc(t,tc(t,r)),
+     intro(acc),axiom,
+     [problem([t:u(1),r:t=>t=>u(1),l:acc(t,r),v2:t,v0:v1:{v1:t\r of v1 of v2}=>v1 in acc(t,tc(t,r)),v1:t,v3:tc(t,r)of v1 of v2]==>v1 in acc(t,tc(t,r)),
+      unfold_def(hyp(v3),tc(t,r),[1,1])then beta_normalize(hyp(v3)),_2170,
+      [problem([t:u(1),r:t=>t=>u(1),l:acc(t,r),v2:t,v0:v1:{v1:t\r of v1 of v2}=>v1 in acc(t,tc(t,r)),v1:t,v3:x:pnat#tci(t,x,r)of v1 of v2]==>v1 in acc(t,tc(t,r)),
+       elim(v3),spread(v3,[x,v4,_2414]),
+       [problem([t:u(1),r:t=>t=>u(1),l:acc(t,r),v2:t,v0:v1:{v1:t\r of v1 of v2}=>v1 in acc(t,tc(t,r)),v1:t,v3:x:pnat#tci(t,x,r)of v1 of v2,x:pnat,v4:tci(t,x,r)of v1 of v2,v5:v3=x&v4 in (x:pnat#tci(t,x,r)of v1 of v2)]==>v1 in acc(t,tc(t,r)),_,_,_) ext _2414
+       ]) ext _2170
+      ]) ext _2166
+     ]) ext _2069
+    ]) ext _2008
+   ]) ext _1954,
+   problem([t:u(1)]==> (t=>t=>u(1))in u(2),_,_,_)
+  ]) ext _1893
+ ]) ext _1791
+]).

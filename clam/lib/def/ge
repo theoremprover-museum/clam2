@@ -1,0 +1,2 @@
+/* all elements of l >= x */
+ge(x,l) <==> term_of(ge) of x of l.

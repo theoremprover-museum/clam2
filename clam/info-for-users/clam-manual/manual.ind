@@ -1,0 +1,474 @@
+\begin{theindex}
+
+  \item $+$, 11
+  \item $-$, 11
+  \item $\Equiv _\rho $, 24, \textbf{136}
+  \item $\RPOS _\rho $, 24, \textbf{136}
+  \item $\RPOS _\rho ^*$, \textbf{136}
+  \item $\RPOSeq _\rho $, \textbf{136}
+  \item $\Undef $, 136
+  \item $\partial $, \textbf{135}
+  \item $\quasi $, 135, \textbf{135}
+  \item $\tuple {\vec {t_n}}^\Left $, \textbf{136}
+  \item $\tuple {\vec {t_n}}^\Multi $, \textbf{136}
+  \item $\tuple {\vec {t_n}}^\Right $, \textbf{136}
+  \item ?, 11
+  \item \texttt {<==>}, 93
+
+  \indexspace
+
+  \item admissibility, 75, 76
+  \item after, 102
+  \item annotation, 116, 131, \textbf{131}
+    \subitem $\wf {\cdots {\wh {\quad }}\cdots }$, 131
+    \subitem portraying, 116
+    \subitem sink, 116, 131, 134
+    \subitem $\sink {\cdot }$, 134
+    \subitem wave-front, 116, 131
+    \subitem wave-hole, 131
+    \subitem well-annotated, 116
+  \item anti-monotonic, 22
+  \item applicable, 10
+  \item applicable method, 10, 71, 73, 74, 77
+  \item arithmetic, 34, 88
+  \item autotactic, 87
+
+  \indexspace
+
+  \item backward-chaining, 69
+  \item before, 102
+  \item branchfactor, 123, 124
+  \item branching factor, 76
+  \item branching plan, 72, 74
+  \item breadth-first, 75
+  \item bugs, 143
+
+  \indexspace
+
+  \item caching, 114
+  \item choice points, 71
+  \item collect, 124
+  \item commutativity, 101
+  \item complementary, 51
+  \item complementary rewrite rules, 50, 93
+  \item complementary set, 51, 102
+  \item complete plan, 72, 74
+  \item conditional compilation, 121
+  \item conjunction, 35
+  \item conjunctive hypothesis, 67
+  \item creating definitions, 98
+  \item cut-off depth, 76, 90
+
+  \indexspace
+
+  \item data-type abstraction, 116
+  \item debugging, 125
+  \item DEC10, 123
+  \item decision procedure, 43
+  \item \texttt {def}, 93, 95
+  \item default configuration, 70
+  \item \texttt {defeqn}, 94
+  \item defining equations, 32
+  \item definitions
+    \subitem \clam , 93
+    \subitem \oyster , 93
+  \item deleting reduction rules, 100
+  \item dependencies, 92, 96
+  \item dependency rules, 97
+  \item dependent function type, 67
+  \item dependent product type, 67
+  \item depth of a plan, 75
+  \item depth-first planner, 74
+  \item disjunction, 37
+  \item disjunctive applicability, 40
+  \item dynamic registry extension, 137
+  \item dynamic rippling, 115, 133, 134
+
+  \indexspace
+
+  \item eager static parsing, 134
+  \item eager strict parsing, 27
+  \item editor, 104
+  \item \texttt {eqn}, 93, 95
+  \item \texttt {eqns}, 94
+
+  \indexspace
+
+  \item fail-safe applicability, 40
+  \item fertilization, 56--59
+    \subitem instance, 57
+    \subitem post-fertilization rippling, 58
+    \subitem strong, 56
+    \subitem weak, 57
+  \item file naming convention, 97
+  \item first, 102
+  \item flawed, 13, 18
+  \item forward chaining, 71
+  \item frowny symbol, 4
+  \item function type, 67
+
+  \indexspace
+
+  \item heuristic search strategy, 77
+  \item \texttt {hint}, 95, 96
+  \item hyphen, 4
+
+  \indexspace
+
+  \item implementation, 2
+    \subitem dialect support, 143
+    \subitem Quintus Prolog, 2, 155
+    \subitem reduction rule, 119
+    \subitem registry, 119
+    \subitem release notes, 144
+    \subitem SICStus Prolog, 2, 155
+      \subsubitem sockets, 155
+    \subitem source files, 143
+    \subitem SWI Prolog, 2, 155
+  \item ind-strat, 37
+  \item induction hypotheses, 116
+  \item induction schemes, 109, 127
+  \item induction status
+    \subitem {\tt notraw}, 117
+    \subitem {\tt raw}, 117
+  \item induction term, 112
+  \item input-slot, 9, 10, 71, 73
+  \item iterating method, 38
+  \item iterating methods, 38
+  \item iterative-deepening planner, 76
+  \item iterator, 38, 113, 117, 118
+
+  \indexspace
+
+  \item L, \emph{26}
+  \item labelled rewriting, 46
+  \item labelled term rewriting, 138
+  \item labelled terms, 138
+  \item last, 102
+  \item \LaTeX {}, 34, 75, 143
+  \item lazy static parsing, 134
+  \item lazy strict parsing, 27
+  \item \texttt {lemma}, 92, 95
+  \item lemmas, 35
+  \item library, 28, 92
+    \subitem creating definitions, 98, 99
+    \subitem default search path, 105
+    \subitem deleting reduction rules, 100, \emph{100}
+    \subitem editor, 105
+    \subitem loading methods, 103
+    \subitem logical object, 92
+    \subitem needs file, 42, 96, 105
+    \subitem reduction rules, 91
+    \subitem rewrite rules, 91
+    \subitem saving directory, 105, \emph{105}
+    \subitem search path, \emph{105}, \textbf{105}
+  \item lifting, 120
+  \item linearity assumption, 74
+  \item logical object, 92, 96, 114
+    \subitem def, \texttt{93}
+    \subitem defeqn, \texttt{94}
+    \subitem eqn, \texttt{93}
+    \subitem examples, 95
+    \subitem hint, \texttt{95}
+    \subitem lemma, \texttt{92}
+    \subitem mthd, \texttt{94}
+    \subitem plan, \texttt{92}
+    \subitem red, 94
+    \subitem scheme, \texttt{93}
+    \subitem smthd, \texttt{94}
+    \subitem synth, \texttt{92}
+    \subitem thm, \texttt{92}
+    \subitem trs, \texttt{95}
+    \subitem wave, \texttt{93}
+
+  \indexspace
+
+  \item Makefile, 121
+  \item maximally-joined, 21, 116
+  \item measure, 133
+  \item measure decreasing, 25
+  \item meta-rippling, \emph{54}, \textbf{54}
+  \item meta-variable, 18, 22
+  \item method, 1, 3, 5, 9, \textbf{9}, 38, 117
+    \subitem compound methods, 37
+    \subitem current repertoire, 42
+    \subitem database, 41
+    \subitem example
+      \subsubitem {\tt apply-lemma/1}, \emph{38}, \emph{68}
+      \subsubitem {\tt backchain-lemma/1}, \emph{38}, \emph{68}
+      \subsubitem {\tt base-case/1}, \emph{48}
+      \subsubitem {\tt cancellation/2}, \emph{55}
+      \subsubitem {\tt casesplit/1}, \emph{50}
+      \subsubitem {\tt elementary/1}, \emph{42}
+      \subsubitem {\tt equal/2}, \emph{43}
+      \subsubitem {\tt eval-def/2}, \emph{45}, \emph{84}
+      \subsubitem {\tt existential/2}, \emph{46}
+      \subsubitem {\tt fertilization-strong/1}, \emph{56}
+      \subsubitem {\tt fertilization-weak/1}, \emph{57}
+      \subsubitem {\tt fertilize-left-or-right/2}, \emph{58}
+      \subsubitem {\tt fertilize-then-ripple/1}, \emph{58}
+      \subsubitem {\tt fertilize/2}, \emph{56}
+      \subsubitem {\tt generalise/2}, \emph{64}
+      \subsubitem {\tt identity/0}, \emph{67}
+      \subsubitem {\tt ind-strat/1}, \emph{66}
+      \subsubitem {\tt induction/1}, \emph{65}
+      \subsubitem {\tt normal/1}, \emph{38}
+      \subsubitem {\tt normalize-term/1}, \emph{46}
+      \subsubitem {\tt normalize/1}, \emph{67}
+      \subsubitem {\tt propositional/1}, \emph{43}
+      \subsubitem {\tt pwf-then-fertilize/2}, \emph{69}
+      \subsubitem {\tt pwf/1}, \emph{69}
+      \subsubitem {\tt reduction/2}, \emph{44}
+      \subsubitem {\tt ripple-and-cancel/1}, \emph{58}
+      \subsubitem {\tt ripple/2}, \emph{55}
+      \subsubitem {\tt step-case/1}, \emph{62}
+      \subsubitem {\tt sym-eval/1}, \emph{47}
+      \subsubitem {\tt unblock-lazy/1}, \emph{55}
+      \subsubitem {\tt unblock/3}, \emph{51}
+      \subsubitem {\tt wave/4}, \emph{48}, \emph{50}
+      \subsubitem {\tt weak-fertilize/4}, \emph{59}
+    \subitem general form, 9
+    \subitem inspecting, 42
+    \subitem internal representation, 118
+    \subitem simple methods, 37
+    \subitem skeleton preservation, 48
+  \item method database, 117
+  \item method language, 11
+  \item method specification, 42
+  \item methodical, 113
+  \item methods, 117
+  \item mode annotations, 11
+  \item monotonic, 22, \textbf{59}, 128
+  \item monotonicity, 62
+  \item mthd, 102
+  \item \texttt {mthd}, 94, 96
+
+  \indexspace
+
+  \item name-slot, 9
+  \item needs file, 35, 42, 96
+    \subitem example, 96
+  \item negation, 37
+  \item negative occurrence, 59
+  \item negative polarity, 137
+  \item negative registry, 25
+  \item NIP Prolog, 146
+  \item nodesvisited, 124
+  \item non-decreasing, 128
+  \item non-terminating, 150
+  \item normalization, 46
+  \item not nice, 4, 23, 34, 39, 46, 62, 65, 68, 69, 77, 87, 113, 118, 124, 127, 141
+  \item notation, 4
+  \item {\tt notraw}, 117
+  \item Nuprl, 1
+
+  \indexspace
+
+  \item optimisations, 74
+  \item output-slot, 9--11, 71, 73, 91, 113
+  \item Oyster, 2
+
+  \indexspace
+
+  \item path expressions, 16
+  \item pathnames, 123
+  \item piecewise fertilization, 69, 70, 117
+  \item plan, 72
+  \item \texttt {plan}, 92
+  \item plan execution, 87
+  \item planner, 1
+  \item planners, 71
+  \item planning
+    \subitem tracing, 90
+  \item planning space, 71, 123
+  \item plus induction, 110
+  \item polarity, 25, 59, 62, 127, 129, 137
+  \item polarity theorems, 128
+  \item porting, 123
+  \item portray, 89
+  \item portray level, 89
+  \item portraying
+    \subitem Emacs, 89
+    \subitem normal, 89
+    \subitem \TeX {}, 89
+  \item position specifications, 16
+  \item position specifiers, 25
+  \item positive, 128
+  \item positive occurrence, 59
+  \item positive polarity, 137
+  \item positive registry, 25
+  \item post-fertilization rippling, 56
+  \item postconditions-slot, 9, 10, 71, 73
+  \item preconditions-slot, 9, 10, 71, 73
+  \item pretty-printed, 117
+  \item pretty-printer, 33, 39, 43, 67, 72, 73, 88, 126
+  \item primitive induction, 110
+  \item primitive recursion, 112
+  \item proof by intimidation, 88
+  \item proof-plan, 1
+    \subitem for associativity of $plus$, \emph{85}
+
+  \indexspace
+
+  \item quasi precedence, \textbf{135}
+  \item Quintus Prolog, 2, 3, 11, 121, 123, 124, 126, 143, 146
+
+  \indexspace
+
+  \item {\tt raw}, 117
+  \item record database, 114, 115, 118
+  \item recursion equations, 93
+  \item recursive path ordering with status, 135
+  \item \texttt {red}, 94, 96
+  \item reduction, 135
+  \item reduction record, 115
+  \item reduction rule, 17, 46, 91, 94, 100, 119, 135, 153
+    \subitem adding rules, 100
+    \subitem deleting rules, 100
+    \subitem loading reduction rules, 91
+    \subitem measure decreasing, 25
+    \subitem polarity, 137
+    \subitem polarity considerations, 25
+    \subitem registries, 25
+      \subsubitem negative, 25
+      \subsubitem positive, 25
+    \subitem registries used by \clam , 25
+  \item \texttt {redwave}, 94
+  \item references, 2
+  \item registry, 17, 25, 100, 119, 135, \textbf{135}
+    \subitem consistency, 136
+    \subitem extension, 135
+    \subitem negative, 24, 25
+    \subitem positive, 24, 25
+    \subitem precedence, \textbf{135}
+    \subitem status function, \textbf{135}
+  \item registry extension, 115, 136, 137
+  \item release notes, 144
+  \item repeat, 113
+  \item rewrite rule, 133
+  \item rewrite rule records, 115
+  \item rewrite rules, 133
+    \subitem complementary, 50, 93
+  \item rewrites, 91
+  \item rewriting, 137
+    \subitem labelled, 138
+  \item ripple analysis, 13, 19
+  \item rippling, 54, 133
+    \subitem dynamic, 115, 133
+    \subitem in, 48
+    \subitem into sinks, 134
+    \subitem lazy static, 48
+    \subitem loading rewrite rules, 91
+    \subitem meta-rippling, \emph{54}, \textbf{54}
+    \subitem out, 48
+    \subitem precondition, 134
+    \subitem rewriting records, 133
+    \subitem sideways, 134
+    \subitem skeleton preservation modulo sinks, 134, \emph{134}
+    \subitem termination, 133
+    \subitem unblocking, 51
+    \subitem wave-rule, 115
+  \item RPOS, 115, 135
+  \item RPOS lifting, 137
+  \item rules, 124
+
+  \indexspace
+
+  \item \texttt {scheme}, 93
+  \item search space, 71, 113
+  \item sequent, 10
+  \item sequential combination of methods, 41
+  \item SICStus Prolog, 2, 3, 104, 121, 123, 143
+  \item sideways rippling, 134
+  \item simple prime induction, 111
+  \item simple simultaneous induction, 111
+  \item simplification ordering, \textbf{135}
+  \item simultaneous induction, 111
+  \item sink, 49, 116
+  \item sinks, 19, 116
+  \item size of a plan, 75
+  \item skeletal functor, 39
+  \item skeleton preservation, 134
+  \item smthd, 102
+  \item \texttt {smthd}, 94, 96
+  \item socket support, 155
+  \item static rippling, 134
+  \item statistics package, 123
+  \item status function, 135
+  \item step term, 112
+  \item strong-fertilization, 117
+  \item structural induction, 112
+  \item style files, 75, 143
+  \item submethod, 3, 5, 38, 74, 117, 118
+  \item submethods, 117
+  \item SWI Prolog, 2, 123, 143, 146
+  \item symbolic evaluation, 94
+  \item symmetric, 127
+  \item symmetrical functions, 59
+  \item \texttt {synth}, 92, 95
+  \item synthetic definition, 95
+
+  \indexspace
+
+  \item tactic, 1, 87
+    \subitem autotactic, 87
+  \item tactic-slot, 9, 10
+  \item tactical, 113
+  \item tactics, 87
+  \item term rewriting, 129
+  \item term-instance/3, \emph{32}
+  \item terminating, 150
+  \item terminating method, 11, 71
+  \item terminating term rewriting, 135
+  \item termination, 48, 129
+  \item termination of rippling, 133
+  \item theorem record, 114
+  \item theory free, 62, 127
+  \item \texttt {thm}, 92, 95
+  \item tracing, 90
+    \subitem default level, 91
+    \subitem postconditions, 90
+    \subitem preconditions, 90
+    \subitem tracing level, 90
+  \item tracing level, 90
+  \item tracing package, 125
+  \item transitive, 127, 128
+  \item transitive functions, 59, 62
+  \item transitive predicates, 100
+  \item transitivity, 101
+  \item tree coordinates, 16
+  \item trees, 112
+  \item \texttt {trs}, 95
+  \item two-step induction, 110
+
+  \indexspace
+
+  \item unblocking, 51, 94
+  \item underscore, 4
+  \item unflawed, 13, 18
+  \item universally quantified variable, 134
+  \item {\tt used}, 117
+
+  \indexspace
+
+  \item version, 2
+  \item version control, 4
+  \item version number, 123
+  \item vi, 104
+  \item visual, 104
+  \item VT100, 77
+
+  \indexspace
+
+  \item \texttt {wave}, 93, 96
+  \item wave-front, 16, 116
+  \item wave-rule, 93, 115, 133
+    \subitem conditional, 51
+  \item weak fertilization, 127
+  \item weak-fertilization, 117
+  \item weakening, 54, \textbf{54}
+  \item weight of a plan, 75
+  \item well-annotated, 22, 116
+  \item writef.doc, 127
+
+\end{theindex}

@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: hd,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: hd,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+hd(l)<==>list_ind(l,0,[h,~,~,h]).

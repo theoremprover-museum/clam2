@@ -1,0 +1,117 @@
+problem([]==>t:u(1)=>l:t list=>l in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+repeat dequantify_once,lambda(t,lambda(l,_1296)),
+[problem([t:u(1),l:t list]==>l in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+ intro(acc),axiom,
+ [problem([t:u(1),l:t list,v0:t list,v1:lambda(u,lambda(v,less(length(u),length(v))))of v0 of l]==>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+  seq(v0:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v0 of l=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))),lambda(v2,_1484)of _1481,
+  [problem([t:u(1),l:t list,v0:t list,v1:lambda(u,lambda(v,less(length(u),length(v))))of v0 of l]==>v0:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v0 of l=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+   thin([v0,v1]),_1493,
+   [problem([t:u(1),l:t list]==>v0:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v0 of l=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+    elim(l),list_ind(l,_1682,[v0,v1,v2,_1690]),
+    [problem([t:u(1),l:t list]==>v0:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v0 of nil=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+     repeat beta_reduce_plus,_1700,
+     [problem([t:u(1),l:t list]==>v0:t list=>less(length(v0),length(nil))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+      intro,lambda(v0,_1840),
+      [problem([t:u(1),l:t list,v0:t list]==>less(length(v0),length(nil))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+       intro,lambda(v1,_1908),
+       [problem([t:u(1),l:t list,v0:t list,v1:less(length(v0),length(nil))]==>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+        lemma(length1,new[v2])then elim_on(v2,[],v2)then rewrite_hyp(v2,left,v1)then thin([length1,v2,v2]),su(_2009,[term_of(length1)],[v2]),
+        [problem([t:u(1),l:t list,v0:t list,v1:less(length(v0),0)]==>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+         lemma(less1,new[v2])then elim_on(v2,[length(v0)],v3)then rewrite_hyp(v3,left,v1)then thin([less1,v2,v3]),su(su(_2124,[v2 of length(v0)],[v3]),[term_of(less1)],[v2]),
+         [problem([t:u(1),l:t list,v0:t list,v1:void]==>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+          elim(v1),any(v1),
+          [
+          ]) ext _2124
+         ]) ext _2009
+        ]) ext _1908
+       ]) ext _1840
+      ]) ext _1700
+     ]) ext _1682,
+     problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v0 of v1=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v0_:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v0_ of (v0::v1)=>v0_ in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+     beta_normalize then beta_normalize(hyp(v2)),_2214,
+     [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v0_:t list=>less(length(v0_),length(v0::v1))=>v0_ in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+      intro,lambda(v0_,_2489),
+      [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list]==>less(length(v0_),length(v0::v1))=>v0_ in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+       intro,lambda(v3,_2616),
+       [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1))]==>v0_ in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+        intro(acc),axiom,
+        [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:lambda(u,lambda(v,less(length(u),length(v))))of v4 of v0_]==>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+         seq(v4:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v4 of v0_=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))),lambda(v6,_2960)of _2957,
+         [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:lambda(u,lambda(v,less(length(u),length(v))))of v4 of v0_]==>v4:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v4 of v0_=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+          thin([v4,v5]),_2969,
+          [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1))]==>v4:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v4 of v0_=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+           repeat beta_reduce_plus,_3162,
+           [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1))]==>v4:t list=>less(length(v4),length(v0_))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+            intro,lambda(v4,_3458),
+            [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list]==>less(length(v4),length(v0_))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+             intro,lambda(v5,_3604),
+             [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_))]==>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+              seq(less(length(v4),length(v1))),lambda(v6,_3764)of _3761,
+              [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_))]==>less(length(v4),length(v1)),
+               lemma(less_length_lemma),su(_3899,[term_of(less_length_lemma)],[v6]),
+               [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:t:u(1)=>x:t list=>y:t list=>u:t=>v:t list=> (less(length(y),length(x))#less(length(x),length(u::v)))=>less(length(y),length(v))]==>less(length(v4),length(v1)),
+                do_elim_on(v6,[t,v0_,v4,v0,v1],[v6,v7,v8,v9,v10,v11])then (append([v7,v8,v9,v10],[v11],[v7,v8,v9,v10,v11]),thin([v7,v8,v9,v10])),su(su(su(su(su(_4195,[v10 of v1],[v11]),[v9 of v0],[v10]),[v8 of v4],[v9]),[v7 of v0_],[v8]),[v6 of t],[v7]),
+                [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:t:u(1)=>x:t list=>y:t list=>u:t=>v:t list=> (less(length(y),length(x))#less(length(x),length(u::v)))=>less(length(y),length(v)),v11: (less(length(v4),length(v0_))#less(length(v0_),length(v0::v1)))=>less(length(v4),length(v1))]==>less(length(v4),length(v1)),
+                 elim(v11),su(_4475,[v11 of _4482],[v7]),
+                 [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:t:u(1)=>x:t list=>y:t list=>u:t=>v:t list=> (less(length(y),length(x))#less(length(x),length(u::v)))=>less(length(y),length(v)),v11: (less(length(v4),length(v0_))#less(length(v0_),length(v0::v1)))=>less(length(v4),length(v1))]==>less(length(v4),length(v0_))#less(length(v0_),length(v0::v1)),
+                  repeat (intro orelse hyp(_4743)),v5&v3,
+                  [
+                  ]) ext _4482,
+                  problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:t:u(1)=>x:t list=>y:t list=>u:t=>v:t list=> (less(length(y),length(x))#less(length(x),length(u::v)))=>less(length(y),length(v)),v11: (less(length(v4),length(v0_))#less(length(v0_),length(v0::v1)))=>less(length(v4),length(v1)),v7:less(length(v4),length(v1))]==>less(length(v4),length(v1)),
+                  hyp(v7),v7,
+                  [
+                  ]) ext _4475
+                 ]) ext _4195
+                ]) ext _3899
+               ]) ext _3761,
+               problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:less(length(v4),length(v1))]==>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+               do_elim_on(v2,[v4],[v2,v7])then (append([],[v7],[v7]),thin([])),su(_5184,[v2 of v4],[v7]),
+               [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:less(length(v4),length(v1)),v7:less(length(v4),length(v1))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+                elim(v7),su(v8,[v7 of _5397],[v8]),
+                [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:less(length(v4),length(v1)),v7:less(length(v4),length(v1))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>less(length(v4),length(v1)),
+                 hyp(v6),v6,
+                 [
+                 ]) ext _5397
+                ]) ext _5184
+               ]) ext _3764
+              ]) ext _3604
+             ]) ext _3458
+            ]) ext _3162
+           ]) ext _2969
+          ]) ext _2957,
+          problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:lambda(u,lambda(v,less(length(u),length(v))))of v4 of v0_,v6:v4:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v4 of v0_=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+          beta_normalize(hyp(v5))then beta_normalize(hyp(v6)),_5589,
+          [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:v4:t list=>less(length(v4),length(v0_))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+           do_elim_on(v6,[v4],[v6,v7])then (append([],[v7],[v7]),thin([])),su(_6021,[v6 of v4],[v7]),
+           [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:v4:t list=>less(length(v4),length(v0_))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v7:less(length(v4),length(v0_))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+            elim(v7),su(v8,[v7 of _6266],[v8]),
+            [problem([t:u(1),l:t list,v0:t,v1:t list,v2:v0:t list=>less(length(v0),length(v1))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v0_:t list,v3:less(length(v0_),length(v0::v1)),v4:t list,v5:less(length(v4),length(v0_)),v6:v4:t list=>less(length(v4),length(v0_))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v7:less(length(v4),length(v0_))=>v4 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>less(length(v4),length(v0_)),
+             hyp(v5),v5,
+             [
+             ]) ext _6266
+            ]) ext _6021
+           ]) ext _5589
+          ]) ext _2960
+         ]) ext _2749
+        ]) ext _2616
+       ]) ext _2489
+      ]) ext _2214
+     ]) ext _1690
+    ]) ext _1493
+   ]) ext _1481,
+   problem([t:u(1),l:t list,v0:t list,v1:lambda(u,lambda(v,less(length(u),length(v))))of v0 of l,v2:v0:t list=>lambda(u,lambda(v,less(length(u),length(v))))of v0 of l=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+   beta_normalize(hyp(v1))then beta_normalize(hyp(v2)),_6490,
+   [problem([t:u(1),l:t list,v0:t list,v1:less(length(v0),length(l)),v2:v0:t list=>less(length(v0),length(l))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+    elim(v2,on(v0)),su(_6745,[v2 of v0],[v3]),
+    [problem([t:u(1),l:t list,v0:t list,v1:less(length(v0),length(l)),v2:v0:t list=>less(length(v0),length(l))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:less(length(v0),length(l))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+     elim(v3),su(v4,[v3 of _6912],[v4]),
+     [problem([t:u(1),l:t list,v0:t list,v1:less(length(v0),length(l)),v2:v0:t list=>less(length(v0),length(l))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:less(length(v0),length(l))=>v0 in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>less(length(v0),length(l)),
+      hyp(v1),v1,
+      [
+      ]) ext _6912
+     ]) ext _6745
+    ]) ext _6490
+   ]) ext _1484
+  ]) ext _1351
+ ]) ext _1296
+]).

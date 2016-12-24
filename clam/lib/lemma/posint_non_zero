@@ -1,0 +1,59 @@
+problem([]==>x:{posint}=>y:pnat#x=s(y)in pnat,
+simplify,_1399,
+[problem([]==>x:{p:pnat\greater(p,0)}=>y:pnat#x=s(y)in pnat,
+ intro,lambda(x,_1472),
+ [problem([x:{p:pnat\greater(p,0)}]==>y:pnat#x=s(y)in pnat,
+  elim(x),su(_1519,[x,assert(greater(x,0))],[v0,v1]),
+  [problem([x:{p:pnat\greater(p,0)},v0:pnat]==>greater(v0,0)in u(1),
+   repeat wfftac,axiom,
+   [
+   ]),
+   problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat]==>y:pnat#v0=s(y)in pnat,
+   decide(x=0 in pnat),pnat_eq(x,0,su(_1657,[axiom],[v3]),su(_1665,[lambda(~,axiom)],[v3])),
+   [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,v3:x=0 in pnat]==>y:pnat#v0=s(y)in pnat,
+    subst(hyp(v1),over(v4,greater(v4,0)),x=0 in pnat)then[univ_elim(v3),idtac,wfftacs],_1683,
+    [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(0,0),v2:v0=x in pnat,v3:x=0 in pnat]==>y:pnat#v0=s(y)in pnat,
+     compute(hyp(v1),[[simplify]]),_1790,
+     [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:void,v2:v0=x in pnat,v3:x=0 in pnat]==>y:pnat#v0=s(y)in pnat,
+      elim(v1),any(v1),
+      [
+      ]) ext _1790
+     ]) ext _1683
+    ]) ext _1657,
+    problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,v3:x=0 in pnat=>void]==>y:pnat#v0=s(y)in pnat,
+    lemma(succlemma,new[v4])then (elim(v4,on(x),new[v5])then thin([v4]))then[thin([v5])then try wfftacs,(elim(v5,new[v4])then thin([v5]))then[hyp(v3),(elim(v4,new[x_,v5,v6])then thin([v4]))then rewrite(v5)then try wfftacs]],su(su(su(spread(v4,[x_,v5,_2142]),[v5 of v3],[v4]),[v4 of x],[v5]),[term_of(succlemma)],[v4]),
+    [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,v3:x=0 in pnat=>void,x_:pnat,v5:x=s(x_)in pnat]==>y:pnat#v0=s(y)in pnat,
+     subst(at(2),over(v4,y:pnat#v4=s(y)in pnat),v0=x in pnat)then[univ_elim(v2),idtac,wfftacs],_2172,
+     [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,v3:x=0 in pnat=>void,x_:pnat,v5:x=s(x_)in pnat]==>y:pnat#x=s(y)in pnat,
+      intro(x_),x_&_2406,
+      [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,v3:x=0 in pnat=>void,x_:pnat,v5:x=s(x_)in pnat]==>x_ in pnat,
+       intro,axiom,
+       [
+       ]),
+       problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,v3:x=0 in pnat=>void,x_:pnat,v5:x=s(x_)in pnat]==>x=s(x_)in pnat,
+       hyp(v5),v5,
+       [
+       ]) ext _2406,
+       problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,v3:x=0 in pnat=>void,x_:pnat,v5:x=s(x_)in pnat,y:pnat]==>x=s(y)in pnat in u(1),
+       repeat wfftac,axiom,
+       [
+       ])
+      ]) ext _2172
+     ]) ext _2142
+    ]) ext _1665,
+    problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat]==>x in pnat,
+    repeat wfftac,axiom,
+    [
+    ]),
+    problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat]==>0 in pnat,
+    intro,axiom,
+    [
+    ])
+   ]) ext _1519
+  ]) ext _1472,
+  problem([]==>{p:pnat\greater(p,0)}in u(1),
+  repeat wfftac,axiom,
+  [
+  ])
+ ]) ext _1399
+]).

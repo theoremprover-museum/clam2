@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: fac2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: fac2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:pnat=>fac(s(n))=times(s(n),fac(n))in pnat,
+repeat intro then simplify then repeat intro then repeat wfftacs,lambda(n,axiom),
+[
+]).

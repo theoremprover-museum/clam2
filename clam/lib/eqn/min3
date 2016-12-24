@@ -1,0 +1,170 @@
+/*
+ * @(#)$Id: min3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: min3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>y:pnat=>min(s(x),s(y))=s(min(x,y))in pnat,
+repeat dequantify_once,lambda(x,lambda(y,_7739)),
+[problem([x:pnat,y:pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+ decide(x<*y),pless(x,y,su(_7792,[axiom],[v0]),su(_7800,[lambda(~,axiom)],[v0])),
+ [problem([x:pnat,y:pnat,v0:x<*y]==>min(s(x),s(y))=s(min(x,y))in pnat,
+  lemma(mintrue),su(_7862,[term_of(mintrue)],[v1]),
+  [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+   elim(v1,on(x)),su(_7958,[v1 of x],[v2]),
+   [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat]==>x in pnat,
+    intro,axiom,
+    [
+    ]),
+    problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+    elim(v2,on(y)),su(_8144,[v2 of y],[v3]),
+    [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat]==>y in pnat,
+     intro,axiom,
+     [
+     ]),
+     problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+     elim(v3),su(_8373,[v3 of _8380],[v4]),
+     [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat]==>x<*y,
+      intro,v0,
+      [
+      ]) ext _8380,
+      problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+      subst(over(v5,min(s(x),s(y))=s(v5)in pnat),min(x,y)=x in pnat)then[univ_elim(v4),idtac,wfftacs],_8503,
+      [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat]==>min(s(x),s(y))=s(x)in pnat,
+       lemma(lessax),su(_8818,[term_of(lessax)],[v5]),
+       [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat,v5:x:pnat=>y:pnat=>x<*y=>s(x)<*s(y)]==>min(s(x),s(y))=s(x)in pnat,
+        elim(v5,on(x)),su(_9001,[v5 of x],[v6]),
+        [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat,v5:x:pnat=>y:pnat=>x<*y=>s(x)<*s(y)]==>x in pnat,
+         repeat intro,axiom,
+         [
+         ]),
+         problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat,v5:x:pnat=>y:pnat=>x<*y=>s(x)<*s(y),v6:y:pnat=>x<*y=>s(x)<*s(y)]==>min(s(x),s(y))=s(x)in pnat,
+         elim(v6,on(y)),su(_9364,[v6 of y],[v7]),
+         [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat,v5:x:pnat=>y:pnat=>x<*y=>s(x)<*s(y),v6:y:pnat=>x<*y=>s(x)<*s(y)]==>y in pnat,
+          repeat intro,axiom,
+          [
+          ]),
+          problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat,v5:x:pnat=>y:pnat=>x<*y=>s(x)<*s(y),v6:y:pnat=>x<*y=>s(x)<*s(y),v7:x<*y=>s(x)<*s(y)]==>min(s(x),s(y))=s(x)in pnat,
+          elim(v7),su(_9766,[v7 of _9773],[v8]),
+          [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat,v5:x:pnat=>y:pnat=>x<*y=>s(x)<*s(y),v6:y:pnat=>x<*y=>s(x)<*s(y),v7:x<*y=>s(x)<*s(y)]==>x<*y,
+           repeat intro,v0,
+           [
+           ]) ext _9773,
+           problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v2:y:pnat=>x<*y=>min(x,y)=x in pnat,v3:x<*y=>min(x,y)=x in pnat,v4:min(x,y)=x in pnat,v5:x:pnat=>y:pnat=>x<*y=>s(x)<*s(y),v6:y:pnat=>x<*y=>s(x)<*s(y),v7:x<*y=>s(x)<*s(y),v8:s(x)<*s(y)]==>min(s(x),s(y))=s(x)in pnat,
+           thin([v2,v3,v4,v5,v6,v7]),_9984,
+           [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v8:s(x)<*s(y)]==>min(s(x),s(y))=s(x)in pnat,
+            elim(v1,on(s(x))),su(_10310,[v1 of s(x)],[v2]),
+            [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v8:s(x)<*s(y)]==>s(x)in pnat,
+             repeat intro,axiom,
+             [
+             ]),
+             problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v8:s(x)<*s(y),v2:y:pnat=>s(x)<*y=>min(s(x),y)=s(x)in pnat]==>min(s(x),s(y))=s(x)in pnat,
+             elim(v2,on(s(y))),su(_10531,[v2 of s(y)],[v3]),
+             [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v8:s(x)<*s(y),v2:y:pnat=>s(x)<*y=>min(s(x),y)=s(x)in pnat]==>s(y)in pnat,
+              repeat intro,axiom,
+              [
+              ]),
+              problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v8:s(x)<*s(y),v2:y:pnat=>s(x)<*y=>min(s(x),y)=s(x)in pnat,v3:s(x)<*s(y)=>min(s(x),s(y))=s(x)in pnat]==>min(s(x),s(y))=s(x)in pnat,
+              elim(v3),su(_10809,[v3 of _10816],[v4]),
+              [problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v8:s(x)<*s(y),v2:y:pnat=>s(x)<*y=>min(s(x),y)=s(x)in pnat,v3:s(x)<*s(y)=>min(s(x),s(y))=s(x)in pnat]==>s(x)<*s(y),
+               repeat intro,v8,
+               [
+               ]) ext _10816,
+               problem([x:pnat,y:pnat,v0:x<*y,v1:x:pnat=>y:pnat=>x<*y=>min(x,y)=x in pnat,v8:s(x)<*s(y),v2:y:pnat=>s(x)<*y=>min(s(x),y)=s(x)in pnat,v3:s(x)<*s(y)=>min(s(x),s(y))=s(x)in pnat,v4:min(s(x),s(y))=s(x)in pnat]==>min(s(x),s(y))=s(x)in pnat,
+               intro,v4,
+               [
+               ]) ext _10809
+              ]) ext _10531
+             ]) ext _10310
+            ]) ext _9984
+           ]) ext _9766
+          ]) ext _9364
+         ]) ext _9001
+        ]) ext _8818
+       ]) ext _8503
+      ]) ext _8373
+     ]) ext _8144
+    ]) ext _7958
+   ]) ext _7862
+  ]) ext _7792,
+  problem([x:pnat,y:pnat,v0:x<*y=>void]==>min(s(x),s(y))=s(min(x,y))in pnat,
+  lemma(minfalse),su(_11192,[term_of(minfalse)],[v1]),
+  [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+   lemma(succless2),su(_11291,[term_of(succless2)],[v2]),
+   [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void]==>min(s(x),s(y))=s(min(x,y))in pnat,
+    elim(v2,on(x)),su(_11429,[v2 of x],[v3]),
+    [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void]==>x in pnat,
+     repeat intro,axiom,
+     [
+     ]),
+     problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void]==>min(s(x),s(y))=s(min(x,y))in pnat,
+     elim(v3,on(y)),su(_11705,[v3 of y],[v4]),
+     [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void]==>y in pnat,
+      repeat intro,axiom,
+      [
+      ]),
+      problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void]==>min(s(x),s(y))=s(min(x,y))in pnat,
+      elim(v4),su(_12032,[v4 of _12039],[v5]),
+      [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void]==>x<*y=>void,
+       repeat intro,v0,
+       [
+       ]) ext _12039,
+       problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void]==>min(s(x),s(y))=s(min(x,y))in pnat,
+       elim(v1,on(s(x))),su(_12409,[v1 of s(x)],[v6]),
+       [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void]==>s(x)in pnat,
+        repeat intro,axiom,
+        [
+        ]),
+        problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+        elim(v6,on(s(y))),su(_12832,[v6 of s(y)],[v7]),
+        [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat]==>s(y)in pnat,
+         repeat intro,axiom,
+         [
+         ]),
+         problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+         elim(v7),su(_13316,[v7 of _13323],[v8]),
+         [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat]==>s(x)<*s(y)=>void,
+          repeat intro,v5,
+          [
+          ]) ext _13323,
+          problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat]==>min(s(x),s(y))=s(min(x,y))in pnat,
+          subst(over(v9,v9=s(min(x,y))in pnat),min(s(x),s(y))=s(y)in pnat)then[univ_elim(v8),idtac,wfftacs],_13586,
+          [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat]==>s(y)=s(min(x,y))in pnat,
+           elim(v1,on(x)),su(_14178,[v1 of x],[v9]),
+           [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat]==>x in pnat,
+            repeat intro,axiom,
+            [
+            ]),
+            problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat,v9:y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat]==>s(y)=s(min(x,y))in pnat,
+            elim(v9,on(y)),su(_14758,[v9 of y],[v10]),
+            [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat,v9:y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat]==>y in pnat,
+             repeat intro,axiom,
+             [
+             ]),
+             problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat,v9:y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v10: (x<*y=>void)=>min(x,y)=y in pnat]==>s(y)=s(min(x,y))in pnat,
+             elim(v10),su(_15387,[v10 of _15394],[v11]),
+             [problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat,v9:y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v10: (x<*y=>void)=>min(x,y)=y in pnat]==>x<*y=>void,
+              repeat intro,v0,
+              [
+              ]) ext _15394,
+              problem([x:pnat,y:pnat,v0:x<*y=>void,v1:x:pnat=>y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v2:x:pnat=>y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v3:y:pnat=> (x<*y=>void)=>s(x)<*s(y)=>void,v4: (x<*y=>void)=>s(x)<*s(y)=>void,v5:s(x)<*s(y)=>void,v6:y:pnat=> (s(x)<*y=>void)=>min(s(x),y)=y in pnat,v7: (s(x)<*s(y)=>void)=>min(s(x),s(y))=s(y)in pnat,v8:min(s(x),s(y))=s(y)in pnat,v9:y:pnat=> (x<*y=>void)=>min(x,y)=y in pnat,v10: (x<*y=>void)=>min(x,y)=y in pnat,v11:min(x,y)=y in pnat]==>s(y)=s(min(x,y))in pnat,
+              rewrite(v11)then repeat intro,axiom,
+              [
+              ]) ext _15387
+             ]) ext _14758
+            ]) ext _14178
+           ]) ext _13586
+          ]) ext _13316
+         ]) ext _12832
+        ]) ext _12409
+       ]) ext _12032
+      ]) ext _11705
+     ]) ext _11429
+    ]) ext _11291
+   ]) ext _11192
+  ]) ext _7800
+ ]) ext _7739
+]).

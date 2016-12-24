@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: intersect1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: intersect1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l2:int list=>intersect(nil,l2)=nil in int list,
+simplify,_7549,
+[problem([]==>l2:int list=>nil=nil in int list,
+ dequantify_once then identity,lambda(l2,axiom),
+ [
+ ]) ext _7549
+]).

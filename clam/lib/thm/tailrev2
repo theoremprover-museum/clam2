@@ -1,0 +1,4 @@
+problem([]==>a:int list=>n:int=>app(rev(a),n::nil)=rev(n::a)in int list,
+normalize_term([reduction([2,1],[rev2,equ(int list,left)])])then[elementary((intro(new[a])then wfftacs)then(intro(new[n])then wfftacs)then unfold_iff then identity)],lambda(v0,lambda(v1,su(su(su(lambda(v2,su(su(v4,[v3 of v1],[v4]),[v2 of v0],[v3]))of lambda(a,lambda(n,axiom)),[v2 of v0],[v3]),[rev2 of v1],[v2]),[term_of(rev2)],[rev2]))),
+[
+]).

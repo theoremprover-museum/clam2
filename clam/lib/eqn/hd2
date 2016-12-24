@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: hd2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: hd2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>a:int=>l:int list=>hd(a::l)=a in int,
+simplify then repeat intro,lambda(a,lambda(l,axiom)),
+[
+]).

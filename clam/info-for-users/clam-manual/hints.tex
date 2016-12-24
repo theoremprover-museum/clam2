@@ -1,0 +1,927 @@
+% @(#)$Id: hints.tex,v 1.2 1999/03/31 13:38:04 img Exp $
+% $Log: hints.tex,v $
+% Revision 1.2  1999/03/31 13:38:04  img
+% *** empty log message ***
+%
+% Revision 1.1  1994/09/16 09:23:51  dream
+% Initial revision
+%
+
+\def\version{2.2}
+\documentstyle[12pt,a4,citespacebreak]{article}
+% insert file name and comment here:
+%\typeout{Latex source file in ??}
+%\typeout{?? paper in DAI rp format}
+\def\thebibliography#1{\section*{References}\list
+{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus -.07em}
+ \sloppy
+ \sfcode`\.=1000\relax}
+\pagestyle{myheadings}
+\parskip= .35\baselineskip plus .0833333\baselineskip minus .0833333\baselineskip
+\parindent=0pt
+
+\renewcommand{\theenumii}{\alph{enumii}}
+\renewcommand{\theenumiii}{\roman{enumiii}}
+
+
+% insert short version of title in following two slots:
+\markboth{Hint Mechanism for Clam}
+{Hint Mechanism for Clam}
+\title{Hint Mechanism for Clam (Clam version \version)}
+
+\author{Santiago Negrete\\
+Department of Artificial Intelligence,\\
+University of Edinburgh,\\
+80 South Bridge,\\
+Edinburgh EH1~1HN\\
+Email:santiago@aisb.ed.ac.uk
+}
+
+% leave date blank
+\date{\ }
+\begin{document}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+
+
+%**end of header
+\maketitle
+
+
+\begin{abstract}
+
+        This report describes the Hint Mechanism for Clam (HMC). This 
+mechanism helps to reduce search using {\em Proof Plans} by giving 
+hints to the planner like those used in mathematics. The {\em Proof Plans}
+technique is used to guide automatic inference in order to avoid a
+combinatorial explosion. This technique has been implemented in Clam,
+a proof planner that constructs proof plans that can be applied in {
+\em Oyster}, a proof refinement system for sequent calculus based on
+Martin-L\"of's type theory. Some proofs have tricky steps which only
+experienced human theorem provers are able to devise at first sight.
+Some theorems have been identified, for which Clam could find a plan
+except for a few hard steps . The Hint Mechanism for Clam has been
+implemented as a utility to solve these hard steps in Clam. HMC
+includes a new set of planners that accept and use hints to guide
+their planning process. 
+
+\end{abstract}
+
+
+\section{Description}
+
+
+        This report is a technical description of the Hint Mechanism for
+Clam, a mechanism to reduce search in {\em Proof Plans} by the use of
+hints like those used in mathematics. The full description of the
+development of the system can be found in \cite{negrete-msc}.
+
+        The Maths Reasoning group at Edinburgh has been successful at
+applying the Proof Plans technique to a large number of theorems. Two
+systems are involved in the implementation of this technique: Oyster
+and Clam.
+
+        The Oyster system is a reformulation in Prolog of the NuPRL
+system built at Cornell University \cite{nuprl-book}. It is a proof
+refinement system for sequent calculus based on Martin-L\"of's type
+theory. We can prove theorems with Oyster by telling it to apply
+different procedures called {\em tactics} that correspond to various
+techniques to prove theorems (e.g. induction, generalise, ripple
+etc.).
+
+        Clam is a proof planner that constructs proof plans with
+specifications of Oyster's tactics called methods. Clam has a set of
+planners, each of which uses a different strategy to search the
+planning space (depth-first, iterative deepening, breadth-first,
+best-first) and generate a proof plan. This plan may then be applied
+to the conjecture to build the proof.
+
+        Clam has been able to prove a large number of theorems
+automatically as described in \cite{pub413}. In addition, some other
+theorems for which Clam could find a plan except for one or few hard
+steps have been identified. Some proofs have tricky steps which only
+experienced human theorem provers are able to devise at first sight.
+Now, if we give Clam or some theorem prover a theorem which might need
+some kind of hint to be proven and if the theorem prover performs some
+kind of search (as Clam does without this hint), it may take too long
+a time or even exhaust the computer's resources before finding a proof.
+
+       Ideally, Clam should only use constrained methods and a good
+heuristic function for the Best-first planner which, combined, would
+tell Clam the appropriate choices to make at each node of the search
+space.  In this way, search would be minimal and Clam would find a plan
+quickly for every provable sequent. Unfortunately we have neither a
+good uniform heuristic function, nor all the ``sophisticated methods''
+we require to eliminate search.
+
+        What we often have though, is an insight, coming rather from
+experience than from some kind of theory, that tells us what methods to
+apply at certain stages and which, of all the possible applications, is
+the most likely to achieve success.
+
+        The central idea behind the HMC is that this insight can be
+formalised in a language and incorporated to Clam in the form of hints.
+This would enable Clam to use the knowledge contained in the hints to
+prove harder theorems.  By doing so, it will also enable us to use a
+more versatile environment in which we might discover, by experimenting,
+the underlying theories to develop the methods and heuristics required
+to achieve a fully automatic theorem prover.
+
+        The aim of a hint mechanism is to guide Clam in its search for a
+proof plan. Two main approaches seem to suit this purpose. First, a {\em
+batch} approach in which Clam would be given a set of hints from the
+start. It would then proceed as it normally does but would try to use
+the given hints when applicable. The second option is to have an
+interactive mechanism by which the user could monitor what Clam is doing
+and intervene, when he judges appropriate, giving Clam the proper hints
+``on the spot''.
+
+        Considering pros and cons for both approaches, we have used a
+design which incorporates parts of both schemes, a hybrid approach.
+This approach includes a mechanism to differentiate between various
+stages in a partial plan and apply hints when appropriate, as described
+above for the batch scheme. It also provides the user with an ``ask me''
+option by which the user could interact with the planner, at the given
+stage of the plan, to provide the required hints.
+
+        Originally, hints were considered as a way of solving hard
+theorems just like in mathematics. After experimenting with hints in
+Clam, we now think we can see hints in the context of Proof Planning as
+way of proving hard theorems but also as a way of generating a set of
+particular cases where the application of a tactic helps proving the
+theorem and that this set of cases can be further generalised to obtain
+a general method that describes when and how the tactic must be applied.
+
+        The interactive mode of HMC turned out to be, apart from a
+mechanism to give hints, a very useful debugging tool. It provides a
+good environment to trace the planning process, as well as testing
+methods and hints. In is useful for the user, the programmer and the
+method designer.
+
+        Hints are then, a way of obtaining knowledge, by experimenting,
+about tactics and the theorems they prove, to be able to define methods
+that fully characterise these tactics. These methods would then reduce
+the search the planners do to find proof plans for those theorems.
+
+
+        The Hint Mechanism for Clam\footnote{version 1.5.} consists of
+several parts:
+
+\begin{enumerate}
+
+\item A simple language to express hints.
+
+\item An extension of the library mechanism already in Clam to handle a
+database of hints in the same way it handles methods and submethods.
+
+\item A set of planners that use a given set of hints in their
+planning task to control search.
+
+\item The planners include an interactive mechanism to enable the user
+to stop the planning process at a fixed stage and examine the partial
+plan before telling the planner what to do next.
+
+\end{enumerate}
+
+        
+\section{Hints}
+
+        A hint for Clam is a specification of a position in the plan
+tree and an action to perform at that point. There are four possible
+kinds of hint:
+
+\begin{itemize}
+
+\item \begin{verbatim} after( < position >, < action > ) \end{verbatim}
+\item \begin{verbatim} imm_after( < position >, < action > ) \end{verbatim}
+\item \begin{verbatim} alw_after( < position >, < action > )\end{verbatim}
+\item \begin{verbatim} alw_imm_after( < position >, < action > ) \end{verbatim}
+
+\end{itemize}
+
+        The first kind of hint specifies an {\em action} to be taken
+when the current node of the partial plan is a descendant of the {\em
+position} given in the first argument.
+
+        The second kind of hint specifies an action to be taken when the
+current node of the partial plan is a daughter node of the position
+given in the first argument.
+
+        {\em Imm\_after} and {\em after} hints may only be used once. 
+That is, once the position in the partial plan has been reached and the
+corresponding action taken, the hint will no longer be used.  If the
+user wants to have a hint in the planning process that can be applied
+several times, he must use the third and fourth kinds of hint mentioned
+above.  {\em Always} hints will behave just like after and imm\_after
+hints but, they will remain usable until the user erases them or until
+the proof has been finished. 
+
+        A position in a partial plan is given by a {\em path section}.
+This is a sequent of methods with their arguments separated by ``then''.
+For example:
+\begin{verbatim}
+   induction(_) then ..... induction(_) then tautology(_)
+\end{verbatim}
+
+        Methods in a path section may also specify what branch to follow
+after its application (branch extension). For example: 
+
+\begin{verbatim}
+        after( casesplit(_)-2, <action> )
+\end{verbatim}
+
+indicates that {\em action} should be performed on the second branch of
+induction (i.e. step case). We can even use an anonymous Prolog variable in
+place of any method where we do not care about what method is used. For
+example:
+
+\begin{verbatim}
+        after(_, <action>)
+\end{verbatim}
+
+indicates that the action is to be taken immediately.
+
+        This mechanism is in general enough to specify a position in
+the plan tree by giving a path section consisting of a single method
+(with possibly a branch extension), but the system allows the use of a
+more general path if it is needed.
+
+
+        Actions may be either a method, a hint-method, a term of the
+form: 
+\begin{verbatim}
+no( <Method | Hint-method> )
+\end{verbatim}
+ or the constant {\em askme}. If the action proposed is a method or a
+hint-method, the hint suggests that the planner should try applying the
+action when the position in the plan tree has been reached. If the
+action specified is a {\em no}-term, the planner will avoid applying
+its argument when the position is reached. Finally, if the action is
+the constant ``askme'', the planner, once the position has been
+reached, will invoke the interactive hint mechanism (see below).
+
+	When using a hint involving ``immediately after'', if the
+position indicated is reached and the action is not applicable, the
+system will start the interactive mode. This will enable the user to
+check why the action could not be performed interactively. If the hint
+does not involve ``immediately after'' then the system will not stop
+when the action is not applicable. This is because the position where
+the planner is supposed to apply the action is more approximate and
+the system would have to stop in too many places before reaching the
+appropriate position.
+
+\section{Hint-methods}
+
+        Hint-methods are very similar to methods. They live in a
+separate data base but they are handled in a similar way (see section
+``library'' below).  The main difference is that they are parameterised
+by a predicate called hint\_context\footnote{This is a dynamic
+predicate, so it can be defined in various files and consulted when
+necessary. Currently, there is a file called hint\_contexts in /home
+/morar1 /oyster /clam.v1.5/ meta\_level\_support where all the
+hint\_context clauses are defined.}.  This predicate appears as the
+first precondition of the hint-methods and has two uses. The first one
+is to define different cases (one in each clause) where the hint
+\_method is applicable, that is, specific theorems or families of
+theorems. The second use, is to provide the hint-method the
+instantiation of variables required by the rest of the preconditions,
+postconditions and output. For instance, if the hint-method
+generalises subexpressions, the hint\_context will indicate what
+theorems need a generalisation, and what the subexpressions to be
+generalised are in each case. 
+
+        When the user wants to prove a theorem using a hint, he must
+first decide what hint will be needed and then design a hint\_context
+clause for the theorem (family of theorems) before running the planer.
+When the planner is run, the hint\_context clause must already be present
+in memory for the planner to use it.
+
+        The hint\_context clause is defined as follows:
+
+\begin{verbatim}
+hint_context( <hint-method>, <label>, <Input>, <Parameters> ):- <body>.
+\end{verbatim}
+
+        {\em Hint-method} is the name of the hint-method to which the
+context is linked. {\em Label} is a constant to distinguish this context
+clause from the rest. {\em Input} is the input sequent and {\em
+parameters} is a list of parameters to be instantiated in the context.
+{\em Body} may be any Prolog code.
+
+        Hint-methods are defined in separate files in the ``hint''
+directory of the library using the following pattern:
+
+\begin{verbatim}
+hint( name( label, ...  ),
+      input,
+      [hint_context(name,label,input,[term1,term2,...,termn]),...],
+      postconditions,
+      output,
+      tactic  ).
+\end{verbatim}
+
+\section{Interactive Hints}
+
+
+        When the interactive hint mechanism is triggered, a brief menu
+as a prompt is displayed as follows.
+
+\begin{verbatim}
+[ t, pro, seq, pla, c, a, e, sel, r, h ] <?> 
+
+
+        The options of the menu are:
+
+          (t)est method/hint
+          (pro)log,
+          (seq)uent.
+          (pla)n.
+          (c)ontexts.
+          (a)pplicable methods,
+          (e)dit hint list.
+          (sel)ect method.
+          (r)esume
+          (h)elp.
+
+\end{verbatim}
+
+        The (t) option allows the user to test the applicability of a
+method or hint-method. It displays the last instantiation of all the
+succeeding preconditions. That is, the system will try to make all
+preconditions true and in this process it might backtrack finding different
+instantiations for the variables in each case. If it is the case that not
+all the preconditions are satisfied, then the system will display the last
+instantiation of the variables tried. If all preconditions succeeded
+then it displays all succeeding postconditions and the output.
+
+	This option is helpful for debugging purposes when the user thought
+a method (hint-method) was applicable at a certain stage, but it was not,
+and he would like to know what went wrong.
+
+        The (pro) option allows the user to send goals directly to
+Prolog. As it is implemented, the metainterpreter will show the
+instantiation of variables if the goal succeeded. All variables in the
+goal will be numbered by order of appearance and will be displayed with
+the corresponding instantiation. Type the goal ``true.'' to return to
+the main menu.
+
+        The (seq) option displays the current sequent in the planning
+process.
+
+        
+        The (pla) option displays the partial plan constructed so far
+by the planner and indicates with $<current>$ the section of the plan
+currently being computed.
+
+        The (c) option displays all hint\_context clauses currently in
+memory.
+
+
+        The (a) option displays all applicable methods and
+hint\_methods to the current sequent having the specified output.
+
+        
+        The (e) option. When a {\it non-always} hint in the list given
+to the planner is used, it is removed from the list so that it can only
+apply once. When using the interactive hint mechanism, the user may
+want to restore the hint into the list to try applying it again or may
+want to add or delete another hint. This can be done using (e) option.
+When called, this option shows the list of hints and another menu to
+edit it. 
+
+        
+        The (sel) option. The aim of the interactive hint mechanism and
+of hints in general is to help the planner in deciding what to do
+during difficult stages of the planning process. Once the user has
+examined the planning process with the other options of the menu, she
+may use (sel) option to tell the planner what method or hint-method it
+should apply.
+
+
+        The (r) option terminates interactive session, leaves the askme
+hint in the list, undoes all changes done in the session and continues
+with normal planning. This option is useful when the planner stopped in
+an undesired stage, or if the user just wants to trace what the planner
+is doing. In the latter case, a good hint to try would be:
+
+\begin{verbatim}
+       after( _, askme )
+\end{verbatim}
+
+        (h) option displays a longer menu to remind the user what the
+options are.
+
+
+        Before the prompt, the program sometimes gives a notice saying
+what effects it is looking for. In these cases, the planner is
+searching for methods or hint-methods that yield this effects (normally
+[]) in their output. When the prompt is not preceded by any notice, it
+means the system will display or apply any method or hint\_method
+without  restrictions on what the output should look like.
+
+
+\section{Using the planners}
+
+        The system currently has extensions of the Clam planners to
+handle hints. The extensions are: dhtplan for dplan, idhtplan for idplan
+and gdhtplan for gdplan. They all work with the same arguments as their
+non-hint cousins except that the first argument is now an extra argument
+where a list of hints is to be passed.
+
+        Examples:
+
+\begin{verbatim} 
+dhtplan( [ after( induction(_,_)-2, no( induction(_,_)) ] ). 
+\end{verbatim}will display the plan generated by dhtplan, on the
+current sequent and using the hint:  "Don't apply induction on the step
+case of the first induction".
+
+\begin{verbatim}
+dhtplan( [ imm_after( induction(_,_), generalise_hint( label1 ) ),
+           after( casesplit(_)-2, askme ) ], i, P, O ). \end{verbatim}
+will generate plan P and output O, for input i, using the hints:
+``Immediately after induction, (try to\footnote{Despite the user's
+telling the planner explicitly to use a method or hint-method at a
+certain stage, the system still checks for applicability of that method
+before applying it. If the method is not applicable, the system will
+indicate this and continue the planning process and will try to apply
+the same hint later on.}) apply  generalise\_hint with context label1
+and, on the second branch of casesplit, ask me ''
+
+\section{Library}
+
+        The normal library mechanism in Clam is extended by hints.pl to
+handle hints as well as methods and submethods. The extra commands are
+the logical ones:
+
+\begin{itemize}
+
+\item list\_hints. will display all hints loaded in the database.
+
+\item lib\_load( hint(H/A) ). will load hint H with arity A into the
+database. All other parameters to lib\_load are also allowed.
+
+\item lib\_delete( hint(H/A) ) will delete hint H with arity A from the
+database.
+
+\end{itemize}
+
+\section{Examples: Planning with Hints}
+
+        To test HMC, some ``quasi theorems'' were selected to try
+proving them with hints. These theorems have some specific points in
+their proofs that Clam is not currently able to solve and can be solved
+using hints. The theorems are: the associativity of $x+x+x$, Halfint
+theorem and the rot-length theorem and they are proven using the batch
+mode. For an example of the interactive mode refer to the long
+description of HMC in \cite{negrete-msc}.
+
+
+\subsection{Associativity of $x+x+x$}
+
+        This theorem, although a simple one, shows an example in which a
+generalisation is needed to be able to get Clam produce a proof plan
+for it. The statement is:
+\begin{equation}
+\label{trix-thm}
+\forall x.\, x + ( x + x) = (x + x ) + x 
+\end{equation}
+
+        Clam applies induction on $x$ and solves the base case easily.
+The step case though is blocked because it cannot ripple out the wave
+fronts on the second members of the sums. The step case is:
+\begin{equation} \label{trix-step} \forall x.\, s(x) + ( s(x) + s(x) )
+= ( s(x) + s(x) ) + s(x) \end{equation}
+
+        A way out this problem then, is to give Clam the hint
+gen\_hint/3 (see Figure~\ref{gen-hint} and Figure~\ref{contexts}) to
+generalise the theorem to one in which the first $x$ members of each
+side of the equations are changed into a new variable:
+\begin{equation} \label{trix-gen} \forall x.\, \forall y.\, y + ( x + x
+) = ( y + x ) + x \end{equation} Here, Clam does induction on $y$ and
+proves the theorem. Figure~\ref{trix-plan} shows a Proof Plan generated
+by Clam using dhtplan from HMC.
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small} 
+\begin{verbatim} 
+
+| ?- display.
+assoc_plus: [] incomplete autotactic(idtac)
+==> x:pnat=>plus(x,plus(x,x))=plus(plus(x,x),x)in pnat
+by _
+
+| ?- dhtplan( [ after(_, gen_hint(_,_,_)) ] ).
+
+
+ (Hint-)Method: gen_hint(_47,_56,_827:pnat) is not applicable for []
+        effects.
+Selected method at depth 0:
+gen_hint(plus_assoc,[[1,1,1],[1,1,2,1]],v0:pnat)
+|Selected method at depth 1: induction([s(v1)],v0:pnat)
+||Selected method at depth 2: sym_eval(...)
+|||Terminating method at depth 3: tautology(...)
+||Selected method at depth 2: ripple(...)
+|||Terminating method at depth 3: strong_fertilize(v2)
+gen_hint(plus_assoc,[[1,1,1],[1,1,2,1]],v0:pnat) then
+  induction([s(v1)],v0:pnat) then
+    [sym_eval(...) then
+       tautology(...),
+     ripple(...) then
+       strong_fertilize(v2)
+    ]
+
+\end{verbatim}
+\end{small}
+%}}
+\end{center}
+\caption{Proof Plan for associativity of $x+x+x$ using a hint}
+\label{trix-plan}
+\hrule
+\end{figure}
+
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small} 
+\begin{verbatim} 
+
+% GEN_HINT METHOD:
+%
+% Generalisation Hint Method. 
+%
+% Positions is a list of subexpression's positions to generalise.
+% Var: Variable to be used. 
+% Hint_name: Name of context in which the method should be used.
+	
+hint(gen_hint(HintName, Positions, Var:pnat ),
+       H==>G,
+       [hint_context( gen_hint, HintName, H==>G, [ Positions ] ),
+ 	matrix(Vs,M,G),
+
+        % the last 2 conjuncts will always succeed, and are not really
+        % needed for applicability test, so they could go in the
+        % postconds, but we have them here to get the second arg of the
+        % method instantiated even without running the postconds...
+
+        append(Vs,H,VsH),
+        free([Var],VsH)
+       ], 
+       [replace_list(Positions , Var, M, NewM),
+        matrix(Vs,NewM,NewG)
+       ],
+       [H==>Var:pnat=>NewG],
+       gen_hint(Positions,Var:pnat,_)
+      ).
+
+
+
+\end{verbatim}
+\end{small}
+%}}
+\end{center}
+\caption{Hint method gen\_hint. It is used to generalise variables
+apart}
+\label{gen-hint}
+\hrule
+\end{figure}
+
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small} 
+\begin{verbatim} 
+
+
+% This hint contexts is for the hint method gen_hint.
+
+% This clause is for the theorem x+(x+x)=(x+x)+x in pnat.
+% The parameters are the positions of the variables to be generalised. 
+
+
+hint_context(gen_hint,
+             plus_assoc,
+	     _==>G,
+             [
+              [[1,1,1],
+               [1,1,2,1]]
+             ]
+            ):- matrix(_,plus(X,plus(X,X))=plus(plus(X,X),X) in pnat,G).
+
+% This clause is for the theorem halfpnat.
+% The parameters are the positions of the variables to be generalised.
+
+hint_context(gen_hint,
+             halfpnat,
+             _==>plus(X,s(X))=S in pnat,
+             [
+              [[1,1,1],
+               [1,1,2,1]]
+             ]
+            ):-
+             wave_fronts(s(plus(X,X)),_,S).
+
+
+
+% -----------------------------------------------------------------sny.
+% Context to generalise theorem rotlen into rotapp.
+%
+
+hint_context( gen_thm, 
+              rotlen,  
+              []==> l:(int list)=>rotate(length(l),l)=l in int list,
+              [ rotapp ]).
+
+
+
+\end{verbatim}
+\end{small}
+%}}
+\end{center}
+\caption{Hint contexts for hint methods gen\_hint and gen\_thm used
+for theorems plus\_assoc, halfpnat and rot\_length} 
+\label{contexts}
+\hrule
+\end{figure}
+
+\subsection{The Halfpnat theorem}
+
+        Halfpnat\footnote{We thank Andrew Ireland for showing us this
+theorem.} is another theorem where rippling is blocked and the same
+generalisation hint used before (see Figure~\ref{gen-hint} and
+Figure~\ref{contexts}) solves the problem.
+
+        The statement is:
+
+\begin{equation}
+\label{halfpnat}
+\forall x.\, half( x +  x ) = x 
+\end{equation}
+
+        Clam applies induction on $x$, solves the base case and gets
+blocked for the step case, again because it can not ripple out the wave
+fronts from the second argument of the sum. The step case is:
+\begin{equation}
+\label{halfpnat-step}
+\forall x.\, half( s(x) + s(x) ) = s(x)
+\end{equation} after ripple out:
+
+\begin{equation}
+\label{halfpnat-rippleout}
+\forall x.\, half( s( x + s(x) ) ) = s(x)
+\end{equation} then weak fertilize:
+\begin{equation}
+\label{halfpnat-fert}
+\forall x.\, half( s( x + s(x) ) ) = s( half( x +  x ) )
+\end{equation} then ripple in the right hand side using the definition
+of half:
+
+\begin{equation}
+\label{halfpnat-ripple}
+\forall x.\, half( s( x + s(x) ) ) = half( s( s( x +  x ) ) )
+\end{equation} then unblock (cancellation):
+\begin{equation}
+\label{halfpnat-unblock}
+\forall x.\, x + s(x) = s( x +  x )
+\end{equation} Here, Clam applies the generalise hint to change the
+first two $x$ of both sides of the equation to a new variable:
+
+\begin{equation}
+\label{halfpnat-general}
+\forall x.\, \forall y.\,y + s(x) = s( y + x )
+\end{equation} This new sequent is easily proven by Clam doing
+induction on y. Figure~\ref{halfpnat-plan} shows a Proof Plan generated
+by Clam using dhtplan from HMC.
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small}
+\begin{verbatim}
+
+| ?- display.
+halfpnat: [] incomplete autotactic(idtac)
+==> x:pnat=>half(plus(x,x))=x in pnat
+by _
+
+| ?- dhtplan([after(induction(_,_)-2,gen_hint(_,_,_))]).
+
+induction([s(v0)],x:pnat) then
+  [sym_eval(...) then
+     tautology(...),
+   ripple(...) then
+     weak_fertilize(right,[.]) then
+       ripple(...) then
+         gen_hint(halfint,[[1,1,1],[1,1,2,1]],v1:pnat) then
+           induction([s(v2)],v1:pnat) then
+             [sym_eval(...) then
+                tautology(...),
+              ripple(...) then
+                tautology(...)
+             ]
+  ]
+
+\end{verbatim}
+\end{small}
+%}}
+\end{center}
+\caption{Proof Plan for halfpnat using a hint}
+\label{halfpnat-plan}
+\hrule
+\end{figure}
+
+
+\subsection{Rot-length}
+
+        In \cite{Kaufmann}, Kaufmann presents a theorem called
+Rot-length. To be proven by the Boyer/Moore theorem prover. This
+theorem needs a lemma called Rot-append, which is a more general
+version of the same theorem. The Rot-length theorem
+is:~\footnote{$rotate(n,l)$ is a function that rotates the elements of
+list $l$, $n$ times}
+
+\begin{equation}
+\label{rot-length}
+\forall l.\, rotate(length(l),l)=l
+\end{equation} 
+and the Rot-append theorem is:
+
+\begin{equation}
+\label{rot-append}
+\forall l.\, \forall p.\, rotate(length(l),app(l,p))=app(p,l)
+\end{equation}
+
+
+        In Clam, it is possible to generalise the Rot-length theorem to
+the Rot-append theorem by using a hint called {\em gen\_thm} (see
+Figure~\ref{gen-thm} and Figure~\ref{contexts}). This hint receives the
+name of a theorem from a hint context. It then looks in memory to see if
+the theorem is present, verifies that it is in fact a more general
+theorem and gives as output the new theorem to be proven. The hint
+verifies the new theorem is more general than that currently being
+attempted by replacing one universally quantified variable at the time
+for a metavariable in the new theorem and trying to obtain the current
+theorem by symbolic evaluation.
+
+        The hint will then take expression~\ref{rot-append}, will
+replace all $l$'s for a metavariable and will try to obtain
+expression~\ref{rot-length}. After failing, it will now try replacing
+all $p$'s in~\ref{rot-append} for a metavariable and will again try to
+obtain expression ~\ref{rot-length} by symbolic evaluation. This time
+the hint will succeed instantiating the meta variable with $nil$ and
+symbolic evaluation will produce expression~\ref{rot-length}. Gen\_thm
+is in the listing of all hints in appendix B, the context used in the
+proof is in appendix C and the plan obtained from Clam using this hint
+is shown in figure~\ref{rot-plan}.
+
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small}
+\begin{verbatim}
+
+| ?- display.
+rotlen: [] incomplete autotactic(idtac)
+==> l:int list=>rotate(length(l),l)=l in int list
+by _
+
+| ?- theorem(rotapp,T).
+
+T = l:int list=>p:int list=>rotate(length(l),app(l,p))=app(p,l)in int
+list
+
+yes
+| ?- dhtplan([after(_,gen_thm(_,_))]).
+
+gen_thm(rotlen,rotapp) then
+  induction([v0::v1],l:int list) then
+    [sym_eval(...) then
+       tautology(...),
+     ripple(...) then
+       weak_fertilize(left,[.]) then
+         ripple(...) then
+           tautology(...)
+    ]
+
+yes
+
+\end{verbatim}
+\end{small}
+%}}
+\end{center}
+\caption{Proof Plan for Rot-length using a hint}
+\label{rot-plan}
+\hrule
+\end{figure}
+
+\begin{figure}[htb] \begin{center} %\fbox{\parbox{5.9 in}{
+\hrule
+\begin{small} 
+\begin{verbatim} 
+
+
+% GEN_THM hint method. 
+%
+%	Generalises a theorem into another more general already
+%  loaded. Thm is the name of the theorem to be generalised. The
+%  hint method first verifies the theorem is in memory. Then it verifies
+%  it is in fact more general than the theorem being proved. It does so
+%  by replacing a universally quantified variable from Thm by a
+%  metavariable and then tries to apply sym_eval method to it and obtain
+%  the theorem being proved as a result. If it fails, it will backtrack 
+%  get the next universally quantified variable and try again until all
+%  such variables have been tried.
+
+
+
+	hint( gen_thm(Context,Thm),
+              H==>G,
+              [ hint_context(gen_thm, Context, H==>G, [Thm]),
+                theorem(Thm,Goal),
+                matrix(V,M,Goal),
+                select(Var:_,V,V1),
+	        replace_all(Var,_,M,M1),
+                matrix(V1,M1,Goal1),
+                applcble(method,[]==>Goal1,sym_eval(_),_,[H==>G])
+              ],
+              [],
+              [H==>Goal],
+              gen_thm(Context, Thm)
+            ).
+
+
+
+
+\end{verbatim}
+\end{small}
+%}}
+\end{center}
+\caption{Gen\_thm hint method.}
+\label{gen-thm}
+\hrule
+\end{figure}
+
+\clearpage
+\clearpage
+\clearpage
+\clearpage
+
+\section{Meta-Hints}
+
+
+\begin{itemize}
+
+\item As we wrote before, it is a good idea to trace the planning
+process using alw\_after(\_,askme). It gives an idea of what the sequent
+looks like at certain stage, what the hypothesis are, etc. This helps
+designing the contexts for a more automatic proof.
+
+\item Remember that almost all output produced by the system is
+``portrayed''. This means that what you see is normally nicer that the
+real representation. Copying literally or using the mouse will seldom
+work. It is therefore very important to bear in mind the arity of methods
+and what the arguments are when trying to make the system apply them.
+
+\item Remember that every time an {\em after} or {\em imm\_after} hint
+is used, it will be removed from the list of hints (unless you use the
+resume option in interactive mode). You may use the (e) option to
+insert more hints, before letting the planner continue if you would
+like to reuse some hint.
+
+\item If you modify the hint list and afterwards you use the (r)
+(resume) option to continue planning, all changes done in the present
+interactive session will disappear so the list of hints will be just as
+it was before the session. If you've modified the hint list and you
+just decided you want to resume planning but you don't want to loose
+your changes, there is a trick you can use. Select (sel) option and
+give it an anonymous Prolog variable. This will keep your changes and
+will select the next applicable method.
+
+\item When using the interactive (askme) hint mechanism, it is worth
+paying attention to the effects the planner is looking for at each
+stage because all processes related to applicability of
+methods/hint-methods will be constrained by this parameter. So, when
+asking for all applicable methods ( option (a) ) the system will show
+all applicable methods to the current sequent with the required
+effects. If you give the system a hint ((sel) option) and it replies it
+is not applicable, check the required effects. If the system stops and
+tells you it is looking for some effects you wouldn't like to deal
+with, use (r) option, the system will immediately look for unrestricted
+methods.
+
+\end{itemize}
+
+
+
+
+
+
+
+
+\bibliography{/usr/local/lib/tex.biblio/papers}
+\bibliographystyle{scribe}
+\end{document}

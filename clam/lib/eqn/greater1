@@ -1,0 +1,24 @@
+/*
+ * @(#)$Id: greater1,v 1.2 1996/06/11 17:04:44 img Exp $
+ *
+ * $Log: greater1,v $
+ * Revision 1.2  1996/06/11 17:04:44  img
+ * Correct equations for these predicates.
+ *
+ * Revision 1.1  1994/09/16  09:38:16  dream
+ * Initial revision
+ */
+problem([]==>x:pnat=>greater(0,x)=void in u(1),
+repeat dequantify_once,lambda(x,_13494),
+[problem([x:pnat]==>greater(0,x)=void in u(1),
+ elim(x),p_ind(x,_13528,[v0,v1,_13534]),
+ [problem([x:pnat]==>greater(0,0)=void in u(1),
+  simplify then identity,axiom,
+  [
+  ]) ext _13528,
+  problem([x:pnat,v0:pnat,v1:greater(0,v0)=void in u(1)]==>greater(0,s(v0))=void in u(1),
+  simplify then identity,axiom,
+  [
+  ]) ext _13534
+ ]) ext _13494
+]).

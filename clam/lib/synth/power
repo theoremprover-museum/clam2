@@ -1,0 +1,48 @@
+problem([]==>t:u(1)=>n:pnat=>r:(t=>t=>u(1))=>t=>t=>u(1),
+universe(2),_1352,
+[problem([]==>t:u(1)=>n:pnat=>r:(t=>t=>u(1))=>t=>t=>u(1),
+ repeat dequantify_once,lambda(t,lambda(n,lambda(r,_1250))),
+ [problem([t:u(1),n:pnat,r:t=>t=>u(1)]==>t=>t=>u(1),
+  elim(n),p_ind(n,_1198,[v0,v1,_1190]),
+  [problem([t:u(1),n:pnat,r:t=>t=>u(1)]==>t=>t=>u(1),
+   pure(intro),lambda(v0,_1141),
+   [problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:t]==>t=>u(1),
+    pure(intro),lambda(v1,_1088),
+    [problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:t,v1:t]==>u(1),
+     intro(explicit(r of v0 of v1))then wfftacs,r of v0 of v1,
+     [
+     ]) ext _1088,
+     problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:t]==>t in u(2),
+     repeat wfftac,axiom,
+     [
+     ])
+    ]) ext _1141,
+    problem([t:u(1),n:pnat,r:t=>t=>u(1)]==>t in u(2),
+    repeat wfftac,axiom,
+    [
+    ])
+   ]) ext _1198,
+   problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:pnat,v1:t=>t=>u(1)]==>t=>t=>u(1),
+   pure(intro),lambda(v2,_867),
+   [problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:pnat,v1:t=>t=>u(1),v2:t]==>t=>u(1),
+    pure(intro),lambda(v3,_796),
+    [problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:pnat,v1:t=>t=>u(1),v2:t,v3:t]==>u(1),
+     intro(explicit(w:t#r of v2 of w#v1 of w of v3)),w:t#r of v2 of w#v1 of w of v3,
+     [problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:pnat,v1:t=>t=>u(1),v2:t,v3:t]==>(w:t#r of v2 of w#v1 of w of v3)in u(1),
+      repeat wfftac,axiom,
+      [
+      ])
+     ]) ext _796,
+     problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:pnat,v1:t=>t=>u(1),v2:t]==>t in u(2),
+     intro,axiom,
+     [
+     ])
+    ]) ext _867,
+    problem([t:u(1),n:pnat,r:t=>t=>u(1),v0:pnat,v1:t=>t=>u(1)]==>t in u(2),
+    intro,axiom,
+    [
+    ])
+   ]) ext _1190
+  ]) ext _1250
+ ]) ext _1352
+]).

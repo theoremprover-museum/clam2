@@ -1,0 +1,2 @@
+length_equal(v0,v1) <==> pnat_eq(length(v0),length(v1),int,void).
+

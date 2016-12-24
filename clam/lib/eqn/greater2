@@ -1,0 +1,17 @@
+/*
+ * @(#)$Id: greater2,v 1.2 1996/06/11 17:04:46 img Exp $
+ *
+ * $Log: greater2,v $
+ * Revision 1.2  1996/06/11 17:04:46  img
+ * Correct equations for these predicates.
+ *
+ * Revision 1.1  1994/09/16  09:38:16  dream
+ * Initial revision
+ */
+problem([]==>x:pnat=>greater(s(x),0)={true}in u(1),
+repeat dequantify_once,lambda(x,_13600),
+[problem([x:pnat]==>greater(s(x),0)={true}in u(1),
+ simplify then identity,axiom,
+ [
+ ]) ext _13600
+]).

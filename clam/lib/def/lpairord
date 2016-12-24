@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: lpairord,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: lpairord,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+lpairord(t)<==>lambda(x,lambda(y,h1:t#h2:t#fst(y)&snd(y)= (h1::fst(x))&h2::snd(x)in (t list#t list))).

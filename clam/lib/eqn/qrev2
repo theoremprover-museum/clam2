@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: qrev2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: qrev2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>t:int list=>l:int list=>qrev(h::t,l)=qrev(t,h::l)in int list,
+simplify,_7713,
+[problem([]==>h:int=>t:int list=>l:int list=>list_ind(t,lambda(q,q),[hl,~,recl,lambda(q,recl of (hl::q))])of (h::l)=list_ind(t,lambda(q,q),[hl,~,recl,lambda(q,recl of (hl::q))])of (h::l)in int list,
+ dequantify_once then dequantify_once then dequantify_once then identity,lambda(h,lambda(t,lambda(l,axiom))),
+ [
+ ]) ext _7713
+]).

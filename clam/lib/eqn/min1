@@ -1,0 +1,26 @@
+/*
+ * @(#)$Id: min1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: min1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>y:pnat=>min(0,y)=0 in pnat,
+repeat intro then simplify,lambda(y,_8202),
+[problem([y:pnat]==>pless(0,y,0,y)=0 in pnat,
+ elim(y),p_ind(y,_8236,[v0,v1,_8242]),
+ [problem([y:pnat]==>pless(0,0,0,0)=0 in pnat,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _8236,
+  problem([y:pnat,v0:pnat,v1:pless(0,v0,0,v0)=0 in pnat]==>pless(0,s(v0),0,s(v0))=0 in pnat,
+  reduce({true})then repeat intro,axiom,
+  [problem([y:pnat,v0:pnat,v1:pless(0,v0,0,v0)=0 in pnat]==>0<*s(v0),
+   apply(arith(<*))then repeat intro,axiom,
+   [
+   ]) ext _8345
+  ]) ext _8242
+ ]) ext _8202
+]).

@@ -1,0 +1,56 @@
+/*
+ * @(#)$Id: rotate2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: rotate2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>l:int list=> (l=nil in int list=>void)=>rotate(s(x),l)=rotate(x,app(tl(l),hd(l)::nil))in int list,
+repeat dequantify_once,lambda(x,lambda(l,_7624)),
+[problem([x:pnat,l:int list]==> (l=nil in int list=>void)=>rotate(s(x),l)=rotate(x,app(tl(l),hd(l)::nil))in int list,
+ elim(l),list_ind(l,_7694,[v0,v1,v2,_7702]),
+ [problem([x:pnat,l:int list]==> (nil=nil in int list=>void)=>rotate(s(x),nil)=rotate(x,app(tl(nil),hd(nil)::nil))in int list,
+  repeat intro,lambda(v0,_7773),
+  [problem([x:pnat,l:int list,v0:nil=nil in int list=>void]==>rotate(s(x),nil)=rotate(x,app(tl(nil),hd(nil)::nil))in int list,
+   elim(v0),su(_7844,[v0 of _7851],[v1]),
+   [problem([x:pnat,l:int list,v0:nil=nil in int list=>void]==>nil=nil in int list,
+    repeat intro,axiom,
+    [
+    ]) ext _7851,
+    problem([x:pnat,l:int list,v0:nil=nil in int list=>void,v1:void]==>rotate(s(x),nil)=rotate(x,app(tl(nil),hd(nil)::nil))in int list,
+    elim(v1),any(v1),
+    [
+    ]) ext _7844
+   ]) ext _7773
+  ]) ext _7694,
+  problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list]==> (v0::v1=nil in int list=>void)=>rotate(s(x),v0::v1)=rotate(x,app(tl(v0::v1),hd(v0::v1)::nil))in int list,
+  repeat intro,lambda(v3,_8119),
+  [problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list,v3:v0::v1=nil in int list=>void]==>rotate(s(x),v0::v1)=rotate(x,app(tl(v0::v1),hd(v0::v1)::nil))in int list,
+   simplify,_8128,
+   [problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list,v3:v0::v1=nil in int list=>void]==>p_ind(x,lambda(u,u),[~,v1_,lambda(l,list_ind(l,nil,[head,tail,~,v1_ of app(tail,head::nil)]))])of list_ind(v1,v0::nil,[t,~,v,t::v])=p_ind(x,lambda(u,u),[~,v1,lambda(l,list_ind(l,nil,[head,tail,~,v1 of app(tail,head::nil)]))])of list_ind(v1,v0::nil,[t,~,v,t::v])in int list,
+    repeat intro,axiom,
+    [problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list,v3:v0::v1=nil in int list=>void]==>p_ind(x,lambda(u,u),[~,v1_,lambda(l,list_ind(l,nil,[head,tail,~,v1_ of app(tail,head::nil)]))])of list_ind(v1,v0::nil,[t,~,v,t::v])in int list,
+     intro(using(int list=>int list)),axiom,
+     [problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list,v3:v0::v1=nil in int list=>void]==>p_ind(x,lambda(u,u),[~,v1_,lambda(l,list_ind(l,nil,[head,tail,~,v1_ of app(tail,head::nil)]))])in (int list=>int list),
+      repeat intro,axiom,
+      [problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list,v3:v0::v1=nil in int list=>void,v4:pnat,v5:int list=>int list,v6:int list,v7:int,v8:int list,v9:int list]==>app(v8,v7::nil)in int list,
+       simplify then repeat intro,axiom,
+       [
+       ]) ext _8809
+      ]),
+      problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list,v3:v0::v1=nil in int list=>void]==>list_ind(v1,v0::nil,[t,~,v,t::v])in int list,
+      repeat intro,axiom,
+      [
+      ]),
+      problem([x:pnat,l:int list,v0:int,v1:int list,v2: (v1=nil in int list=>void)=>rotate(s(x),v1)=rotate(x,app(tl(v1),hd(v1)::nil))in int list,v3:v0::v1=nil in int list=>void,v4:int list]==>v4 in int list,
+      intro,axiom,
+      [
+      ])
+     ]) ext _8487
+    ]) ext _8128
+   ]) ext _8119
+  ]) ext _7702
+ ]) ext _7624
+]).

@@ -1,0 +1,1424 @@
+\def\rcsid{$Id: ProgrammerManual.tex,v 1.16 2003/01/22 19:34:21 smaill Exp $}
+\input header
+
+
+\part{Programmer Manual}
+
+\chapter {Representations}
+
+This second part of this note is intended for readers who want to
+understand the inner workings of \clam\ so that they can change the
+way it works. This can vary from adding new planners to the existing
+set, to changing the way \clam\ interfaces with Oyster, to changing the
+internal organisation of \clam, etc. Note that method-programming is
+not discussed here. It was discussed in the {\em User Manual\/} (section
+\reference{methods}), since \clam\ users should already be able to change
+methods. You don't have to be (or shouldn't have to be \ldots) a
+\clam\ programmer in order to experiment with different methods.
+
+This {\em Programmer Manual\/} discusses
+\begin{itemize}
+\item
+the representation of induction schemes,
+\item
+the mechanics of constructing iterators,
+\item
+{\clam}'s storage mechanism for definitions, theorem, lemmas,
+recursion equations etc, (which is not the same as Oyster's
+representation mechanism),
+\item
+the representation of wave-fronts,
+\item
+the representation of the methods- and submethods-databases,
+\item
+and a list of utilities to make a programmer's life easier. 
+\end{itemize}
+
+We have not discussed many parts of {\clam}'s code, and the interested
+reader should refer to {\clam}'s source files for these. The ratio of
+comment to code is quite high at the moment (more than 1:1, better than
+I've ever produced before), so most of the code should be fairly
+understandable. The organisation of {\clam}'s source code across the
+various Prolog files is explained in appendix \reference{source-files}.
+
+\section {Induction schemes}
+\label{schemes}
+
+An important part of {\clam}'s current ability to produce proof-plans
+relies on an effective representation of \inx{induction schemes}. This
+section discusses this representation in some detail.
+
+As discussed earlier, the \p{scheme/3} and \p{scheme/5} predicates
+implement the \clam{}-level representation and application of
+induction rules.  Some logics (such as Oyster) require justification
+of non-standard (i.e., non built-in) induction schemes: lemmas
+justifying these inductions are stored as logical objects of type {\tt
+scheme}.  For each such object loaded from the library, \clam{}
+automatically creates a corresponding meta-level induction scheme.
+This scheme record is stored in the scheme database to be access via
+\p{scheme/3}.
+
+Due to restrictions in the implementation, some scheme objects cannot
+be translated into \p{scheme/3} objects.  This will be improved in the
+future.
+
+
+Currently, the \clam\ library contains a number of different induction
+schemes.  Here we give each of them together with the corresponding
+higher-order theorem from the {\tt scheme} database which justifies it
+($phi(x)$ is a schematic formula, possibly containing $x$).
+
+\paragraph{\protect\inx{primitive induction}} over {\tt pnat}:
+\begin{verbatim}
+scheme([s(_)], _,
+[    []          ==> phi(0),
+[X:pnat, phi(X)] ==> phi(s(X))]
+                 ==> phi(N:pnat)).
+\end{verbatim}
+
+\[\infer{\vdash \all x:{pnat} \phi(x)}
+  {\vdash \phi(0) & \Ty x:{pnat},\phi(x)\vdash\phi(s(x))}\]
+(This induction is built into Oyster, so no justification is
+required.)  
+
+\paragraph {\protect\inx{two-step induction}} over {\tt pnat} (twos):
+\begin{verbatim}
+scheme([s(s(_))], twos,
+[                ==> phi(0),
+                 ==> phi(s(0)),
+[X:pnat, phi(X)] ==> phi(s(s(X)))]
+                 ==> phi(N:pnat)).
+\end{verbatim}
+\[\infer{\vdash \all x:{pnat} \phi(x)}
+  {\vdash \phi(0) & \vdash \phi(s(0)) & \Ty x:{pnat},\phi(x)\vdash\phi(s(s(x)))}\]
+
+\begin{verbatim}
+phi:(pnat=>u(2))=>
+ phi of 0=>
+  phi of s(0)=>
+   (x:pnat=>phi of x=>phi of s(s(x)))=>
+    z:pnat=>phi of z
+\end{verbatim}
+
+
+\paragraph {\protect\inx{plus induction}} over {\tt pnat} (plusind):
+\begin{verbatim}
+scheme([plus(_,_)], plusind,
+[                              ==> phi(0),
+                               ==> phi(s(0)),
+[X:pnat,Y:pnat,phi(X), phi(Y)] ==> phi(plus(X,Y))]
+                               ==> phi(Z:pnat)).
+\end{verbatim}
+\[\infer{\vdash \all x:{pnat} \phi(x)}
+  {\vdash \phi(0) & \vdash \phi(s(0)) &
+                \Ty x:{pnat},\Ty y:{pnat},\phi(x),\phi(y)\vdash\phi(x+y)}\]
+
+\begin{verbatim}
+phi:(pnat=>u(2))=>
+ phi of 0=>
+  phi of s(0)=>
+   (x:pnat=>y:pnat=>phi of x=>phi of y=>phi of plus(x,y))=>
+    z:pnat=>phi of z
+\end{verbatim}
+
+\paragraph {\protect\inx{simple prime induction}} over {\tt pnat} (primescheme):
+\begin{verbatim}
+scheme([times(_,_)], primescheme,
+[                                 ==> phi(0),
+                                  ==> phi(s(0)),
+  [P:{prime}, X:{posint}, phi(X)] ==> phi(times(P,X))]
+                                  ==> phi(Z:{posint})).
+\end{verbatim}
+\[\infer{\vdash \all x:{posint} \phi(x)}
+  {\vdash \phi(0) & \vdash \phi(s(0)) &
+        \Ty p:{prime},\Ty x:{posint},\phi(x)\vdash\phi(p \times x)}\]
+
+\begin{verbatim}
+phi:({posint}=>u(2))=>
+ phi of s(0)=>
+  (p:{prime}=>x:{posint}=>phi of x=>phi of times(p,x))=>
+   z:{posint}=>phi of z
+\end{verbatim}
+
+\paragraph {\protect\inx{simple simultaneous induction}} on two variables over {\tt
+pnat} (pairs):
+\begin{verbatim}
+scheme([s(_),s(_)], pairs,
+[    [Y:pnat]                  ==> phi(0,Y),
+     [X:pnat]                  ==> phi(X,0),
+     [X:pnat,Y:pnat, phi(X,Y)] ==> phi(s(X),s(Y))]
+                               ==> phi(X:pnat,Y:pnat)).
+\end{verbatim}
+
+\[\infer{\vdash \all x:{pnat} \all y:{pnat}\phi(x,y)}
+  {\Ty y:{pnat}\vdash \phi(0,y) & \Ty x:{pnat}\vdash \phi(x,0) &
+                \Ty x:{pnat},\Ty y:{pnat},\phi(x,y)\vdash\phi(s(x),s(y))}\]
+\begin{verbatim}
+phi:(pnat=>pnat=>u(2))=>
+ x:pnat=>
+  y:pnat=>
+   (y:pnat=>phi of 0 of y)=>
+    (x:pnat=>phi of x of 0)=>
+     (x:pnat=>y:pnat=>phi of x of y=>phi of s(x)of s(y))=>
+      phi of x of y
+\end{verbatim}
+
+\paragraph {\protect\inx{simultaneous induction}} on two variables over {\tt t list} and
+{\tt pnat} (nat-list-pairs):
+\begin{verbatim}
+scheme([s(_),_::_], nat_list_pair,
+[ [A:pnat]                           ==> phi(A,nil),
+  [B:T list]                         ==> phi(0,B),
+  [X:pnat, Y:T, Ys:T list, phi(X,Ys)] ==> phi(s(X),Y::Ys)]
+                                     ==> phi(P:pnat, Q:T list)).
+\end{verbatim}
+\[\infer{\vdash \all x:{list(t)} \all y:{pnat}\phi(x,y)}
+  {\Ty y:{pnat}\vdash \phi(nil,y) & \Ty x:{list(t)}\vdash \phi(x,0) &
+                \Ty h:t,\Ty x:{list(t)},\Ty y:{pnat},\phi(x,y)\vdash\phi(h::x,s(y))}\]
+
+
+\begin{verbatim}
+t:u(1)=>
+ phi:(t list=>t list=>u(2))=>
+  x:t list=>
+   y:t list=>
+    (y:t list=>phi of nil of y)=>
+     (x:t list=>phi of x of nil)=>
+      (x:t list=>xe:t=>y:t list=>ye:t=>
+          phi of x of y=>
+           phi of(xe::x)of(ye::y))=>
+       phi of x of y
+\end{verbatim}
+
+\paragraph {\protect\inx{primitive recursion}} on {\tt t list}:
+\begin{verbatim}
+scheme([_::_], _,
+[                               ==> phi(nil),
+  [H:Type, T:Type list, phi(T)] ==> phi(H::T)]
+                                ==> phi(L: Type list)).
+\end{verbatim}
+
+
+\[\infer{\vdash \all x:{list(t)} \phi(x)}
+  {\vdash \phi(nil) & \Ty h:t,\Ty x:{list(t)},\phi(x)\vdash\phi(h::x)}\]
+(This induction is built into Oyster, so no justification is
+required.)
+
+\paragraph {\protect\inx{structural induction}} over \inx{trees} (treeind):
+\begin{verbatim}
+scheme([node(_,_)], treeind,
+[[Leaf:T]                          ==> phi(leaf(Leaf)),
+ [L:T tree,R:T tree,phi(L),phi(R) ]==> phi(node(L,R))]
+                                   ==> phi(Tree:T tree)).      
+\end{verbatim}
+\[\infer{\vdash \all x:{tree(t)}\phi(x)}
+  {y:t\vdash \phi(leaf(y)) & l:tree(t), 
+        \Ty r:{tree(t)},\phi(l),\phi(r) \vdash \phi(node(l,r))}\]
+
+\begin{verbatim}
+t:u(1)=>
+ phi:(t tree=>u(2))=>
+  (n:t=>phi of leaf(n))=>
+   (l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r))=>
+    x:t tree=>phi of x
+\end{verbatim}
+
+For each of these induction schemes, \clam\ will automatically extract
+a separate clause of the \p{scheme/3} predicate. Furthermore, an extra
+clause for the \p{induction/1} tactic is needed to apply the scheme
+during plan execution: this is not extracted automatically.  However,
+such tactics are provided for the schemes shown above.
+
+This induction tactics, when applied to a sequent, should produce
+exactly the output sequents as specified in the \p{scheme/3}
+predicate.  Currently, an induction scheme is described by the term(s)
+that is(are) substituted for the induction variable(s) in the step
+sequent (known as the {\em \inx{step term}(s)\/}) or {\em
+\inx{induction term}(s)\/}.  This assumption is somewhat problematic,
+since different induction schemes sometimes correspond to the same
+step-term (for instance the simple prime and composite prime
+inductions above).  (See \p{scheme/5} for more detail on this
+representation.)
+
+The representation of induction schemes should therefore be expanded
+with a list of the recursion variables of the scheme. This extension
+should distinguish the simple prime induction (with only one recursive
+variable) from the composite prime induction (with two recursive
+variables).
+
+Thus, extending \clam\ to cope with more induction schemes should be
+fairly easy:
+\begin{enumerate}
+\item write a higher-order theorem expressing the validity of the
+induction, and save it into the library as scheme object.
+
+\item
+Load this scheme object to allow \clam{} to extract a new clause for
+the \p{scheme/3} predicate.  
+\item write a new clause for the \p{induction/1} tactic.
+\end{enumerate}
+change no. [3] should be made in the file \f{tactics.pl}
+and change no. [2] should result in a new file in the
+{\tt scheme} subdirectory of the library directory.  
+
+For schemes for which \clam\ cannot extract the \p{scheme/3} clause,
+the user may choose to edit \f{schemes.pl} directly and add new
+clauses in the style of those above for such an induction.
+
+\section {Iterating methods}
+\label{iterators}
+
+The general concept of \inx{iterator}s is discussed in section
+\reference{iterating-methods}. Such an iterated construct over (sub)methods
+has been called a {\em \inx{methodical}}, since it is to a method what
+a \inx{tactical} is to a tactic. Currently, the only available
+methodical is the iterator (corresponding to the tactical {\tt \inx
+{repeat}}). However, this could be extended in the future to deal with
+other methodicals such as \p{complete/1}, \p{progress/1}, etc.
+
+A rather arbitrary restriction on the construction of iterators
+is that the iterated (sub)methods must only produce at
+most one output sequent. In other words, their \inx{output-slot} must
+be either the empty list or a list of length 1. This restriction
+\notnice
+means that we don't have to deal with branching iterations, but is a
+rather arbitrary and not very nice hack. This should be changed in a 
+future version of \clam.
+
+Other restrictions on the behaviour of iterators are more reasonable,
+and can be varied easily by making small changes to the code of the
+\p{iterate-methods/4} predicate.  These concern the exhaustive-ness of
+the iterations performed by iterators, and possible permutations of
+iterations. For a discussion of these choices, we assume an iterator
+$I$ constructed out of iterating the list of methods
+$M_i$,$i=1,\ldots,n$. We write $M_{i_1};\ldots;M_{i_k}$ for a sequence
+of $k$ applications of these methods (i.e., an iteration of length
+$k$).
+\begin{description}
+\item[{\bf The length of an iteration}:]
+Currently, an iterator $I$ in \clam\ will always produce maximally long
+iterations. Thus, if after applying $M_{i_1},\ldots,M_{i_k}$, another
+method $M_{i_{k+1}}$ is still applicable, this method will be applied.
+As a result, it is guaranteed that after an application of an
+iterator $I$, none of the iterated method $M_i$ will be applicable.
+This behaviour can be changed by redefining the predicates
+\p{iterate-methods/4} in the file \f{methodical.pl}. By changing the use
+of \p{orelse/2} in the postconditions-slot of the generated 
+method into a \p{v/2}, the iterator will also generate subsequences
+of the maximally long chain, with the longest chain generated first. Thus,
+if the maximal chain is $M_{i_1};\ldots;M_{i_k}$, it will generate (on
+backtracking) all sequences $M_{i_1};\ldots;M_{i_j}$ for $j=k,\ldots,1$.
+Another small change, namely swapping the order of the disjuncts in
+the postconditions-slot, would change the order in which chains are
+generated, and would generate the shortest chain first, with longer
+chains only on backtracking.
+
+\item[{\bf Iterations of length 1}:]
+At the moment, iterations of length 1 are not suppressed. They are
+simply returned as a possible application of the iterator (if no
+further applications are possible, see above). This is not very useful
+if both $I$ and $M_i$ are available as
+applicable methods, since an application of $M_i$ and
+an application of $I$ of length 1 are equivalent, thus doubling the
+\inx{search space} for applicable methods. Thus, in general it is good
+programming technique to not have both $M_i$ and 
+$I$ available for application at the same time. This can be
+achieved by making $M_i$ a submethod, which will allow
+the construction of $I$, but will not make $M_i$ available for
+application. Alternatively, the \p{iterate-methods/4} predicate could
+be changed to disallow iterations of length 1.
+
+\item[{\bf Permutations of iterations}:]
+Currently, no permutations of sequences of applications are generated.
+Thus, if $I$ is an iterator over the methods $M_1,\ldots,M_n$, with
+the methods specified in this order when constructing $I$, then $I$
+will try to apply the $M_i$ in ascending order. Thus, a method $M_j$
+will only be applied by $I$ if none of the $M_i$,$i<j$ apply. This rule
+can be relaxed by changing the predicate \p{iterate-methods/4}: remove
+the use of the \p{thereis/1} predicate in the preconditions-slot of the
+generated method. This will result in all possible
+permutations of applicable methods being generated by $I$. This change
+is orthogonal to the removal of the \p{orelse/2} predicate in the
+postconditions (to not insist on maximally long chains of iterations).
+Thus, removing only the \p{thereis/1} from the preconditions-slot and
+leaving the \p{orelse/2} in the postconditions-slot will result in
+$I$ generating all permutations of maximal length, whereas making both
+changes will result in $I$ generating all permutations of all lengths.
+
+\item[{\bf Terminating iterations}:]
+If some of the methods can terminate, we have a choice in
+how to make $I$ behave: should it prefer
+terminating $M_i$ over non-terminating ones, or should it
+just iterate them in a fixed sequence, and stop when it
+happens to hit a terminating $M_i$, without actually
+gravitating towards one? The first (preferring terminating
+$M_i$s) is obviously preferable, but makes $I$
+potentially more expensive, since it will first try all
+$M_i$s to see if there is a terminating one, and if not, it
+will have to iterate over the $M_i$s in sequence as usual.
+These two behaviours can be obtained by changing the order
+of the two conjuncts in the preconditions of the generated method:
+having the \p{thereis/1} first will allow termination but not prefer it,
+while having the \p{thereis/1} second will prefer termination at
+the cost of trying all methods first for termination.
+Currently, the second option  (no preference for terminating $M_i$)
+is implemented. Of course, even with the second option, iterated
+methods can be ordered in the sequence so as to have the terminating
+ones first, but this is not possible in all cases.
+\end{description}
+
+\section {Caching mechanism}
+\label{caching}
+\inxx{caching}
+
+\clam\ has its own mechanisms for internally storing \inx{logical
+object}s such as definitions, lemmas, plans, recursion equations,
+etc. These representations are different from the representations
+Oyster uses, although for some they are ultimately based on these
+Oyster representations (there may be no corresponding Oyster
+representation, as in the case of plans, for instance).  The main
+reason for these separate \clam\ representations is efficiency. This
+section describes the {\clam} representational system.
+
+\subsection {Theorem records}
+When a \inx{logical object} of type {\tt lemma}, {\tt synth}, {\tt thm} or
+{\tt eqn} is loaded via the \p{lib-load/[1;2]} predicate, a
+\inxx{theorem record}
+{\tt theorem} record is stored in Prolog's \inx{record database} of the
+form: 
+\begin{verbatim}
+record(theorem, theorem(Name, Type, Goal, Thm), Ref)
+\end{verbatim}
+where {\tt Name} is the name of the logical object, {\tt Type} the type
+of the logical object (as specified in the {\tt Type(Name)} argument
+to the \p{lib-load/[1;2]} command), and {\tt Goal} the top-level goal of
+the logical object. In most cases, {\tt Thm} will be equal to {\tt
+Name}, except for recursion equations ({\tt Type=eqn}), when {\tt Name}
+will be of the form {\tt name}$n$, with $n=1,\ldots9$,
+and {\tt Thm} will be {\tt
+name} (i.e., {\tt Name} stripped of the last digit). {\tt Name} is the
+name of the Oyster theorem corresponding to the logical object.
+
+These
+\inxx{theorem record}
+{\tt theorem} records can be accessed using the predicate \p{theorem/3}.
+\begin{predicate}{theorem/3}{theorem(?Thm, ?Goal, ?T)}%
+{\tt Thm} is the name of a logical object of {\tt T}, with {\tt T} one
+of {\tt lemma}, {\tt synth}, {\tt thm} or {\tt eqn}, and {\tt Goal} is
+the top-level goal of the object. Will not succeed if {\tt Thm}
+unifies with the currently selected Oyster theorem. This predicate is
+an extension of \p{theorem/2}, where {\tt T} is restricted to {\tt thm} or
+{\tt lemma}.
+\end{predicate}
+
+The reason for having these {\tt theorem} records as an extra layer
+on top of the Oyster theorem representation is efficiency: It takes 
+Oyster 130 milliseconds to select a theorem and pick up the top-level
+goal, whereas doing the same task using theorem records takes only 6
+milliseconds. 
+
+\subsection {Reduction records}
+\label{reduction-records}
+Whenever a logical object of type {\tt eqn} or {\tt red} is loaded,
+\clam\ tries to add it to the terminating rewrite system.  It will try
+to prove that the rewrite rule is measure decreasing according to \inx
+{RPOS}.  It may extend\index{registry extension} either of the two
+registries, should this be necessary, and will give message to that
+effect.
+
+        If the rule is measure decreasing, it will be stored as a {\tt
+\inx{reduction record}} in Prolog's \inx{record database} of the form
+\begin{verbatim}
+record(reduction, reduction(LHS,RHS,Cond,Dir,Thm), Ref)
+\end{verbatim}
+where {\tt LHS} is the left-hand side of the reduction rule {\tt Thm}
+is the name of the theorem from which this rule was derived. All
+universally quantified variables in {\tt Exp} have been replaced by
+meta (Prolog) variables. These reduction records can be accessed with
+the predicate \p{reduction-rule/6}.
+
+The registry may be accessed via \p{registry/4}.
+
+
+\subsection {Rewrite records}
+\label{rewrite-records}
+Whenever a logical object of type {\tt wave} or {\tt eqn} is loaded it
+is stored as a {\tt rewrite} record.  This record database is used by
+the dynamic\index{dynamic rippling}\index{rippling!dynamic} wave-rule\index{wave-rule}\index{rippling!wave-rule} application code (see \p{wave/4} and \p{ripple/6}).  
+
+(The dynamic wave-rule parser caches wave-rules during a session.  This
+means that a rewrite rule will not be parsed into a particular
+wave-rule more than once in a session.)
+
+
+\subsection {Proof-plan records}
+inxx{proof-plan records} Whenever \clam{} finds a proof-plan for a
+particular theorem {\tt T}, the planning mechanism creates a
+proof-plan record of the form:
+\begin{verbatim}
+record(proof_plan, proof_plan(T,Plan),_).
+\end{verbatim}
+where {\tt Plan} is the proof-plan created.  Only one proof-plan
+record is kept per theorem, and it can only be created by the
+planning mechanism.  Proof-plans can be saved into the library in the
+normal way using \p{lib-save}.
+
+\subsection {Rewrite-rule records}
+\inxx{rewrite rule records} Whenever a logical object of type {\tt
+eqn} or {\tt thm} is loaded, \clam\ adds a record to Prolog's record
+database of the form
+\begin{verbatim}
+record(rewrite, rewrite(L,R,C,Dir,Name), Ref)
+\end{verbatim}
+where {\tt L} and {\tt R} are the left- and right-hand-sides of the
+rule, conditional upon {\tt C}; {\tt Dir} specifies in which direction
+and of what type the rewrite rule is; {\tt Name} is the name of the
+corresponding theorem.
+
+More than one such record may be added based upon each object loaded:
+as many rewrites as \clam{} can extract will be stored in separate
+records.  
+
+If the flag \p{prove-comm/0} is {\tt true}, and \clam has determined
+that a function is commutative, then equations and theorems are
+subjected to additional processing to form commuted versions, which are
+asserted as rewrite-rule records. No tactics are available for this yet,
+so if the commuted rules are used in a proof plan, the corresponding
+object-level proof will fail.
+
+% \subsection {Symbolic evaluation record}
+% \inxx{symbolic evaluation}
+% Whenever a step equation is loaded \clam\ adds a record to
+% Prolog's record database of the form
+% \begin{verbatim}
+% record(sym_eval_set, sym_eval_set(Term, Conds), Ref)
+% \end{verbatim}
+% where {\tt Term} is the skeleton term structure corresponding to the
+% left hand sides of the step equation while {\tt Conds}  is
+% the set of complementary conditions associated with {\tt Term}.
+% \notnice
+% This information is necessary for dealing with casesplits
+% within base case proof obligations. However, case splitting
+% in base cases is not currently supported.
+
+\section {Wave-fronts, holes and sinks}
+\index {annotation}
+\label {sec:representation}
+Here we describe the data structures we have chosen to represent
+\inx{wave-front}\index{annotation!wave-front} and
+\inx{sink}\index{annotation!sink}.
+
+
+As described in \S\reference{wave-fronts}, wave-fronts correspond to a
+subtree of the term, with a subtree inside it corresponding to the
+wave hole(s). We implement this annotation with special function
+symbols whose identity is secret.  \clam provides a kind of
+\index{data-type abstraction} to hide from the user and programmer the
+internal details of this annotation representation.
+
+The programmer/user can inspect, create and destruct annotated terms
+via the interface that \clam provides.  These predicates are
+\p{iswf/4}, \p{issink/2} and \p{iswh/2}.
+
+In fact, things are not secret: the actual functors that \clam are
+given by \p{wave-front-functor/1}, \p{wave-hole-functor/1} and
+\p{sink-functor/1}. 
+
+As described in \S\reference{sinks}\index{sinks} sinks delimit term
+structure in an induction hypothesis which corresponds to a
+universally quantified variable in an induction hypothesis. 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|c|c|c|}\hline
+{\sl Annotated term\/} & {\sl Prolog\/} & {\sl Portrayal\/}\\\hline
+$f({g({x})},y)$         &  \verb|f(g(x),y)|     & \verb|f(g(x),y)| \\
+$f({g(\sink{x})},y)$    & \verb|f(g('@sink@'(x)),y)| & \verb|f(g(\x/),y)|\\
+$\wfout{g(\wh{x})}$   & 
+\begin{tabular}{cc}\verb|'@wave_front@'(hard,out,|\\\verb|g('@wave_var@'(x)))|
+\end{tabular} &
+        \verb|``g({x})''<out>|\\[1ex]\hline
+\end{tabular}
+\end{center}
+\caption
+  {Representation and portrayal of annotations.  (The central column
+  is exposing `secret' information that cannot be trusted!)\index {annotation!portraying}}
+\label{tab:annrep}
+\end{table}
+
+\subsection {Well-annotated terms}
+\label {well-ann}
+\index {well-annotated} \index {annotation!well-annotated} A term
+containing annotations must be well-annotated otherwise \clam will
+produce an error message when it tries to take the term apart, or
+apply a wave-rule, for example.  It is an error to manipulate terms
+which are not well-annotated.
+
+The predicate \p{well-annoated/1} decides well-annotation, that is,
+membership of the set $\WAT$, as defined in \S\reference{wave-fronts}.
+
+In practice, it can become difficult to read well-annotated terms
+because of the large number of wave-fronts for certain annotations.
+For this reason, annotated terms may be depicted in a
+\inx{maximally-joined} form; see \p{maximally-joined/2}.
+
+\section {Induction hypotheses}
+\label{sec:indhyps}
+\inxx{induction hypotheses}
+Induction hypotheses are annotated in order that their role in a
+proof can be recorded and exploited by the preconditions of methods.
+These annotations also serve as a kind of `user documentation' that
+can help in debugging proofs.
+
+An induction hypothesis {\tt IHyp} is tagged by an induction 
+marker in the following way:
+\begin{verbatim}
+V:[ihmarker(Usage,Mark)|IHyps]
+\end{verbatim}
+where {\tt Usage} indicates how the induction hypotheses have been 
+used so far, if at all. {\tt Mark} is in place for future developments and 
+currently is not exploited. 
+
+An induction hypothesis can be in one three states, corresponding to
+three distinct phases of an induction proof-plan.  Notice that these
+phases are {\em particular\/} to the proof-plan implemented in the
+standard \clam{} setup.  These three states are:
+
+\begin{description}
+\item [\index*{raw={\tt raw}}\index{induction status!raw={\tt raw}}] the hypothesis has
+not been used in any way; this is the state immediately following an
+induction.  
+
+\item [{\tt notraw(Ds)}\index{notraw={\tt notraw}}\index{induction
+status!notraw={\tt notraw}}] the hypothesis is being used during a
+phase of iterated \index{weak-fertilization}.  {\tt Ds} is a list
+consisting of the following atoms:
+\begin{description}
+\item [{\tt left}] the hypothesis has been used in a left-to-right
+direction during weak-fertilization;
+\item [{\tt right}] the hypothesis has been used in a right-to-left
+direction during weak-fertilization;
+\end{description}
+The first element of {\tt Ds} describes the {\em nearest\/} (most
+recent) use of weak-fertilization, the last element describes the {\em
+furthest\/} (least-recent) use of weak-fertilization.  
+
+\item [{\tt used(Ds)}\index{used={\tt used}}\index{induction status!notraw={\tt notraw}}]
+the hypothesis has been used, and the weak-fertilization phase
+completed.  {\tt Ds} may be as above, and in addition, in the case of
+strong fertilization, {\tt Ds} can be the singleton {\tt [strong]},
+indicating that \index{strong-fertilization} has taken place on that
+hypothesis.  Alternatively, {\tt Ds} may reflect that \index{piecewise
+fertilization} has taken place: this is indicated with {\tt Ds=pw}.  
+\end{description}
+
+
+The above three states are \inx{pretty-printed} as {\tt 'RAW'}, {\tt
+'NOTRAW'} and {\tt 'USED'(Ds)} respectively.
+
+\section [methods]{The (sub)methods database}
+\label{methods-db}
+
+This section describes the way \clam\ stores the representations for
+\index*{methods} and \index*{submethods}. \clam\ distinguishes between external and
+internal representations of (sub)methods. When loading a (sub)method
+via {\tt lib-load(mthd(F/N),...)}, the system reads in the external
+format of the specified (sub)method, transforms it to the appropriate
+internal format, and stores this format in the internal database. All
+of the code that manages this process lives in the file \f{method-db.pl}.
+
+\inxx{method database}
+The external format of a (sub)method can take one of the following
+forms:
+\begin{enumerate}
+\item
+{\tt method(MethodName(...), Input, PreConds, PostConds, Output, Tactic)}:\\
+an explicitly specified method. 
+\item
+{\tt iterator(method, MethodName, methods, MethodList)}:\\
+a method constructed by iterating\index{iterator} other \index*{method}s.
+\item
+{\tt iterator(method, MethodName, submethods, SubMethodList)}:\\
+a method constructed by iterating other submethods.
+\item
+{\tt submethod(SubMethodName(...), Input, PreConds, PostConds, Output, Tactic)}:\\
+an explicitly specified \index*{submethod}.
+\item
+{\tt iterator(submethod, SubMethodName, methods, MethodList)}:\\
+a submethod constructed by iterating\index{iterator} other \index*{method}s.
+\item
+{\tt iterator(submethod, SubMethodName, submethods, SubMethodList)}:\\
+a submethod constructed by iterating\index{iterator} other \index*{submethod}s.
+\end{enumerate}
+
+The corresponding internal representations\index{method!internal representation} are:
+\begin{enumerate}
+\item
+{\tt method(MethodName(...),Input,Pre,Post,Output,Tactic)}
+\item
+{\tt method(MethodName([..MethodCalls..]),In,Pre,Post,Out,Tactic)}
+\item
+{\tt method(MethodName([..SubMethodCalls..]),In,Pre,Post,Out,Tactic)}
+\item
+{\tt submethod(SubMethodName(...),Input,Pre,Post,Output,Tactic)}
+\item
+{\tt submethod(SubMethodName([..MethodCalls..]),In,Pre,Post,Out,Tactic)}
+\item
+{\tt submethod(SubMethodName([..SubMethodCalls..]),In,Pre,Post,Out,Tactic)}
+\end{enumerate}
+
+Notice that [1]=[2]=[3] and [4]=[5]=[6], so that external
+\p{iterator/4} clauses get mapped into the same
+internal representation as normal methods and submethods (namely
+\p{method/6} clauses), thus giving only 2 different internal
+representations for 6 external representations.
+
+Notice also that the above representations force iterated (sub)methods
+to be of arity 1, with the single argument representing the sequence of
+calls to the iterated methods.
+
+The predicates \p{mthd-int/3}, \p{mthd-ext/3} and \p{ext2int/2} provide
+an interface to the internal and external representations of methods.
+If any of these two representations needs to be changed, only these
+predicates should suffer.
+
+After transformation from external to internal format, the
+(sub)methods get stored in an internal database. Currently, this
+database has the form of two lists, one for methods and one for
+submethods, stored in Prolog's \inx{record database}.
+
+The main predicates for accessing this database are:
+\begin{itemize}
+\item \p{load-method/[1;2;3]} and \p{load-submethod/[1;2;3]} for loading a
+(sub)method,
+
+\item \p{method/6} and \p{submethod/6} for accessing the database,
+\item \p{delete-method/1}, \p{delete-submethod/1},
+\p{delete-methods/0} and \p{delete-submethods/0} for removing (sub)methods from
+the database 
+\item \p{list-methods/[0;1]} and \p{list-submethods/[0;1]} for listing the database
+\end{itemize}
+
+The representation of the database as a recorded list is not a
+\notnice particularly good choice of representation, and was mainly
+motivated by ease of programming; Accessing a (sub)method in this
+format means ploughing through the list of all (sub)methods, whereas
+other means of storage could exploit Prolog's indexing mechanisms in
+various ways.  More efficient representations for a future version
+could be to store methods as separate items in the asserted
+database. If we would just store them as \p{method/6} clauses in the
+clause store, we could use the Prolog indexing to efficiently find
+methods given their name.  Actually, since we don't often look for a
+method with a given name, the name would not be the best property to
+be used for indexing (i.e.  to live in the first slot of a
+\p{method/6} clause). It would possibly be better to index on some
+other slot of the \p{method/6} clauses, such as the postconditions,
+which are often given as either {\tt []} or {\tt
+[\_|\_]}. Disadvantages of using clauses in the the assert database
+instead of a list in the record database is that the assert database
+is a pain to handle (after all, we must be able to assert a clause in
+any specified position among an existing set of clauses). All this
+depends on how often we actually modify the (sub)method database. If
+it is the case (which I think it is) that we modify the database much
+less frequently than we access it, it might well be worth moving to a
+representation using the asserted clause database, doing indexing on
+the postconditions slot.
+
+
+
+\chapter {Implementation}
+
+\section {Induction preconditions}
+This section to be written.
+
+
+\section {Rippling implementation}
+This section to be written.
+
+
+
+\section {RPOS implementation}
+
+\index {reduction rule}
+\index {implementation!reduction rule}
+\index {registry}
+\index {implementation!registry}
+
+
+
+\subsection {Overview}
+The code implementing the RPOS simplification ordering, and some
+utilities to orient equations into terminating rewrite systems, is
+described in this section.  See \S\reference{sec:reduction} for more
+general information.
+
+
+
+The primary predicate is {\tt prove/5} whose arguments are the RPOS
+registry, the term ordering problem to be determined, a proof object,
+and a set of atoms to be treated as variables in the ordering problem.
+(Recall that RPOS is lifted to variables as described
+in~\S\reference{lifting}/)
+
+\subsection {Registry}
+
+Most of the code implementing RPOS needs to know the current registry
+and so most of the predicates are parameterized by {\tt Prec}, which
+is the quasi-precedence relation, and {\tt Tau} which is the status
+function.
+
+\subsubsection {Quasi-precedence: {\tt Prec}}
+\label{quasi-imp}
+{\tt Prec} is a representation of the quasi-precedence relation
+$\quasi$; see \S\reference{quasi-def} for the definition.
+
+\clam makes explicit the negation present in the definition of the
+$\partial$, the strict part of $\quasi$.  {\tt Prec} is a pair {\tt
+P-I} of Prolog lists: {\tt P} is the transitive part of the ordering,
+consisting of function symbols related by {\tt >=}; {\tt I} is the
+inequality part of the ordering, {\tt =/=}.  {\tt =/=} is a symmetric,
+irreflexive binary relation. The partial order $\partial$ is the
+intersection of these two relations.  
+
+\begin{remark} Will will often ignore the fact that {\tt >=} and {\tt
+=/=} are kept separate, and simply refer to the precedence.
+\end{remark}
+
+
+Now there are some consistency checks to impose on the way in which
+{\tt Prec} can be extended.  For example, we cannot have {\tt Prec}
+containing {\tt a>=b}, {\tt b>=c}, {\tt a=/=b}, {\tt a>=c} and {\tt
+c>=a}; from this we can obtain $a\partial a$ which is illegal in a
+quasi-ordering (it must be reflexive).  The predicate \p{consistent/2}
+decides that a {\tt Prec} really is a quasi-ordering, and furthermore,
+that it obeys the restriction laid down in~\S\reference{quasi-consistent}.
+
+
+\subsubsection {Status function: {\tt Tau}}
+\label {imp:tau}
+The status function {\tt Tau} is represented as a list of
+symbol/status pairs.  The mapping must be total in that all function
+symbols in the ordering problem must be in the domain of the mapping.
+
+The range of the mapping (say of a symbol $f$) consists of the
+following elements:
+\begin{description}
+\item [{\tt\_}] Uncommitted status.  The status of that function
+symbol is free to be instantiated during the search for a proof.
+
+\item [{\tt undef}] Undefined status.  $\tau(f)=\Undef$. The status of that function
+symbol is uncommitted but cannot be committed during the proof.  That
+is a proof is in some sense independent from the status of that symbol.
+
+\item [{\tt ms}] Multiset.  $\tau(f)=\Multi$.
+\item [{\tt lex(D)}] Lexicographic.  If {\tt D} is ground it must be
+one of:
+\begin{description}
+\item [{\tt lr}] Left-to-right: $\tau(f)=\Left$.
+\item [{\tt rl}] Right-to-left: $\tau(f)=\Right$.
+\end{description}
+
+If  {\tt D}  is a variable, the status of $f$ is lexicographic, but
+the permutation is uncommitted and may be instantiated during a proof.
+\end{description}
+
+
+
+\subsection {Lifting}
+\index {lifting}
+
+RPOS is defined over ground first-order terms; lifting to terms
+containing variables is necessary to treat rewrite systems (see
+above).
+
+The implementation follows this style because it avoids the pain of
+worrying about variables becoming instantiated during a proof.
+Hence variables are simply atoms but their special status is recorded
+by passing them around as a parameter (called {\tt Vars}).  Any atom
+in {\tt Vars} is treated as if it were a variable.
+
+
+\subsection {Ordering problems}
+\label{ordprob}
+An ordering problem is a Prolog term of the form:
+\begin{description}
+\item [{\tt S >= T}] Iff  {\tt S = T}  or {\tt S > T}.
+\item [{\tt S = T}] Iff {\tt S} and {\tt T} are equivalent under EPOS.
+\item [{\tt S > T}] Iff {\tt S} is greater than {\tt T} under EPOS.
+\item [{\tt S < T}] Iff {\tt T > S}.
+\item [{\tt S =< T}] Iff {\tt T >= S}.
+\end{description}
+In these ordering problems {\tt S} and {\tt T} must be ground Prolog
+terms.   Atoms appearing in {\tt Vars} indicate which of the atoms in
+{\tt S} and {\tt T} are to be considered variables by RPOS.
+
+See the description of \p{prove/5}, \p{extend-registry-prove/4} in the
+{\em User Manual}.
+
+
+
+\chapter [Utilities]{Programmer utilities}
+\label{programmer-utils}
+
+This section describes some of the utilities developed for use by
+\clam\ programmers. Some of these utilities are general purpose
+programming utilities (such as the formatted output package), others
+are more specific to \clam\ (such as the statistics and debugging
+packages).
+
+\section [New versions]{Making new versions of \clam}
+
+A \f{Makefile}\inxx{Makefile} can be found in the \f{make} directory.
+This provides a mechanism for building new versions of \clam. The
+following targets are defined:
+\begin{description}
+\item[{\tt make DIA=qui oyster}:] Create a \inx{Quintus Prolog} runnable image for Oyster.
+\item[{\tt make DIA=sic oyster}:] Create a \inx {SICStus Prolog} runnable 
+image for Oyster.
+
+\iffalse
+\item[{\tt make DIA=swi oyster}:] Create a \inx {SWI Prolog} runnable
+image for Oyster. 
+\fi
+
+\item[{\tt make DIA=qui clam}:]
+Create a \inx{Quintus Prolog} runnable image for \clam\ with all the source code compiled.
+\item[{\tt make DIA=sic clam}:]
+Create a \inx {SICStus Prolog} runnable image for \clam\ with all the 
+source code compiled.
+\iffalse
+\item[{\tt make DIA=swi clam}:]
+Create a \index*{SWI Prolog} runnable image for \clam\ with all the 
+source code compiled.
+\fi
+\item[{\tt make DIA=qui clamlib}:]
+Create a runnable image with only the \inx{Quintus Prolog} loaded but
+none of the source code.
+\item[{\tt make DIA=sic clamlib}:]
+Create a runnable image with only the \inx {SICStus Prolog} loaded but
+none of the source code.
+
+\iffalse
+\item[{\tt make DIA=swi clamlib}:]
+Create a runnable image with only the \inx {SWI Prolog}  loaded but
+none of the source code.
+\fi
+
+\item[{\tt make clean}:]
+The dustman.
+\end{description}
+The {\tt Makefile} knows about the location of the Oyster executable
+image and about the collection of source files for \clam. If either of
+these changes, the {\tt Makefile} should be updated.
+
+If any \inx{Quintus Prolog} or \inx {SICStus Prolog} libraries are needed, the 
+required commands and declarations should be made in the file \f{libs.pl},
+using \p{ensure-loaded/1} instructions. The \f{libs.pl} file is located in
+the relevant subdirectory of \f{dialect-support}.
+
+Some properties of the \clam\ system will differ between machines.
+All these properties should be defined in the file \f{sysdep.pl} which
+is generated when \clam is compiled: currently this file contains
+predicates that determine paths and directories (\p{lib-dir/1},
+\p{lib-dir-system/1}, \p{source-dir/1}, \p{saving-dir/1} and
+\p{clam-version/1}). 
+
+
+Finally, the features which direct the \inx{conditional compilation},
+such as \p{dialect/1} and \p{os/1} are defined in this file.
+
+There are a couple of predicates reporting \clam\ version information:
+
+\begin{predicate}{clam-version/1}{clam-version(?N)}%
+{\tt N} will be unified with the current version of \clam. Current
+value of {\tt N} is \version. (See also \p{clam-patchlevel-info/0}.)
+\end{predicate}
+
+\begin{predicate}{clam-patchlevel-info/0}{clam-patchlevel-info}%
+Prints a short summary of changes since the last patchlevel.
+\end{predicate}
+
+\begin{predicate}{file-version/1}{file-version(?RCS)}%
+{\tt RCS} is an RCS header from one of \clam's source files.  
+\end{predicate}
+
+\begin{predicate}{lib-dir/1}{lib-dir/1(?Path)}%
+{\tt Path} is the current \clam{} library search path.  It can be
+changed using \p{lib-set/1}.  (See \p{lib-set/1} for an explanation of
+the library search path.)
+\end{predicate}
+
+\begin{predicate}{lib-sdir/1}{lib-sdir/1(?D)}%
+{\tt D} is the current \clam{} saving directory.  It can be
+changed using \p{lib-set/1}. 
+\end{predicate}
+
+\begin{predicate}{lib-dir-system/1}{lib-dir-system/1(?D)}%
+{\tt D} is the directory under which the default \clam{} library is to
+be found.  This is fixed at compile time and cannot be changed.  (See
+also \p{lib-set/1} for how to change \clam{} directory search path.)
+\end{predicate}
+
+\begin{predicate}{lib-fname-exists/5}{lib-fname-exists/5(+P,?Dir,?D,?T,?F)}%
+{\tt P} is a path (a path is a list of directories: see~\p{lib-set/1}
+for further details), {\tt Dir} is a directory in this path which
+contains the logical object {\tt Type(D)}.  The special directory name
+`{\tt *}' may appear in the path---the default \clam{} directory
+location is searched at that point.
+\end{predicate}
+
+\begin{predicate}{source-dir/1}{source-dir(?Dir)}%
+{\tt Dir} will be unified with the directory where the sources of
+\clam\ currently live in the system.
+\end{predicate}
+
+\subsection {Make package}
+\label{make-pred}
+
+Just as the Unix {\tt make} command provides a facility for
+incremental compilation, so the Prolog \p{make/[0;1]} predicate allows
+for incrementally reloading code.
+
+\begin{predicate}{make/1}{make +Flag}%
+This predicate will compare the modification date on all Prolog files
+loaded into the system with the time the files were loaded. If the
+modification time is more recent than the load time, the file will be
+reloaded. The meaning of ``reloaded'' depends on {\tt Flag}: {\tt make -i}
+will load the files interpreted (reconsult them), {\tt make -c} will
+load the files compiled (recompile them), and {\tt make -n} will only
+say which files will be reloaded, but not actually reload them.
+
+\iffalse
+This make command has been modelled on the built-in \p{make/0} command
+from \inx{SWI Prolog}.
+\fi
+
+Because \inx {SICStus Prolog} does not (easily) allow
+inspection of clock time and modification time, the \p{make/[0;1]}
+predicates do not function when \clam\ runs under this dialect.
+
+\iffalse
+In \inx{SWI Prolog}, the built-in definition of \p{make/0} applies
+instead.
+\fi
+
+\end{predicate}
+
+\begin{predicate}{make/0}{make}%
+This is as {\tt make -i}.
+\end{predicate}
+
+\section {Porting code to other Prolog dialects}
+\inxx{porting}
+
+\clam\ was developed using \inx{Quintus Prolog} and \inx {SICStus
+Prolog}. The \f{Makefile} allows \clam to be built under these
+dialects, using code from \f{dialect-support}.  Earlier versions of
+\clam were compiled under \inx {SWI Prolog}, but that dialect is now
+not supported---it may be in future releases.
+
+Three strategies have been used in trying to make \clam\ as portable
+as possible. Firstly, all code is written as much as possible in
+``vanilla flavour'' Prolog, relying as little as possible on system
+dependent features, and trying to stay inside the cross section of all
+{\sc \inx{DEC10}} based dialects. Secondly, the system and language
+dependent features have been localised in a small number of files. The
+files containing system dependent information are \f{sysdep.pl}
+(\inx{pathnames}, \inx{version number}), \f{boot.pl} (code for executing make
+scripts), and \f{libs.pl} (low-level code for libraries and saving prolog
+states).
+
+\iffalse
+, and \f{swi} (code for running \clam\ under \inx {SWI
+Prolog}).
+\fi
+
+A final mechanism in assisting with porting code is the use of
+conditional loading of code, described in~\S\ref{make-pred}.
+
+
+\section {Statistics package}
+
+The simplest way of collecting statistics on the behaviour of \clam\ is
+the predicate \p{runtime/[2;3]}:
+
+\begin{predicate}{runtime/2}{runtime(+Pred, ?Time)}%
+This will execute {\tt Pred} as a Prolog predicate, and if
+successful, will unify {\tt Time} with the CPU time spent 
+while executing {\tt Pred}, measured in milliseconds. This measurement
+is notoriously unreliable on Unix systems (especially when {\tt Time}
+is small). Therefore, it is often better to use the predicate \p{runtime/3}.
+\end{predicate}
+
+\begin{predicate}{runtime/3}{runtime(+Pred, +N, ?Time)}%
+This will execute {\tt Pred} {\tt N} times, and if successful, will
+unify {\tt Time} with the average CPU time spent while executing a
+call to {\tt Pred}. The larger {\tt N} and {\tt Time} are, the more
+reliable the value of {\tt Time} will be.
+\end{predicate}
+
+More sophisticated statistics concerning the size of the \inx{planning space}
+can be collected using the \inx{statistics package} from the file \f{stats.pl}.
+This file needs to be loaded manually: it is not part of the standard
+\clam\ system in order to keep things small. The current version of the
+statistics package can collect data about the branching factor of the
+planning space, and about the number of nodes visited while
+constructing a plan. The predicate for operating the statistics package
+is \p{stats/[2;3]}. Currently, the following versions of the
+\p{stats/[2;3]} predicate exist:
+
+\begin{predicate}{stats/3}{stats(branchfactor, \{on,off\}, +Planner/+Arity)}%
+If the first argument of \p{stats/3} is the atom {\tt \inx{branchfactor}},
+then collection of the average branching factor of the planning space for
+{\tt Planner/Arity} will be switched {\tt on} or {\tt off}, depending
+on the second argument. {\tt Planner/Arity} must be the specification
+of the recursive predicate of a planner, for instance {\tt dplan/3},
+or {\tt idplan/6}.
+Since the \p{stats/3} predicate works by 
+dynamically modifying the code of the specified planning predicate,
+the particular predicate needs to be declared {\tt dynamic} using the
+\p{dynamic/1} declaration in \inx{Quintus Prolog}.
+\notnice
+This typically means the
+appropriate source file for the {\tt Planner/Arity} predicate must be
+reloaded or recompiled.
+\end{predicate}
+
+\begin{predicate}{stats/3}{stats(branchfactor, collect, ?N)}%
+If the first argument of \p{stats/3} is the atom {\tt \inx{branchfactor}},
+and the second argument is {\tt collect}, then {\tt N} will be unified
+with the average branching factor as encountered by the planners for
+which the {\tt branchfactor} statistic has been switched on. It will
+also remove all data concerning the {\tt branchfactor} statistics, so
+as to clean up for a new batch of statistics-taking. As a result, this
+predicate will succeed only once.
+\end{predicate}
+
+\begin{predicate}{stats/2}{stats(nodesvisited, \{on,off\})}%
+If the first argument of \p{stats/2} is the atom {\tt \inx{nodesvisited}},
+then the collection of the number of nodes visited (by any planner)
+will be switched {\tt on} or {\tt off}, depending on the second
+argument. Notice that the {\tt nodesvisited} statistic is not
+dependent on any particular planner used, contrariwise to the
+{\tt branchfactor} statistics, which are collected per planner. Since
+the \p{stats/2} predicate works by dynamically modifying the code for
+the \p{applicable/4} predicate, this predicate needs to be declared {
+\tt dynamic} using the \p{dynamic/1} declaration in \inx{Quintus Prolog}.
+This typically means that the source file for the \p{applicable/4}
+predicate (the file \f{applicable.pl}) must be reloaded or recompiled. 
+\end{predicate}
+
+\begin{predicate}{stats/3}{stats(nodesvisited, collect, ?N)}%
+If the first argument of \p{stats/3} is the atom {\tt \inx{nodesvisited}},
+and the second argument is the atom {\tt collect}, then {\tt N} will
+be unified with the number of nodes visited by any planner since the
+last time the statistics were collected (or switched on). It will also
+remove all data concerning the {\tt nodesvisited} statistics, so as to
+clean up for a new batch of statistics-taking. As a result, this
+predicate will succeed only once.
+\end{predicate}
+
+\begin{predicate}{stats/3}{stats(rules, \{on,off\})}%
+If the first argument of \p{stats/2} is the atom {\tt \inx{rules}},
+then the counting the number of object-level Oyster
+rules of inference applied during execution of any tactics will be
+switched {\tt on} or {\tt off}. The problem with this is that in \notnice
+Quintus, the Oyster's \p{rule/3} needs to be dynamic. This can only be
+done by explicitly reloading or recompiling by hand a new version of
+Oyster which contains the appropriate {\tt :- dynamic rule/3}
+declaration. 
+\end{predicate}
+
+\begin{predicate}{stats/3}{stats(rules, collect [?Rules,?Wffs])}%
+If the first argument of \p{stats/2} is the atom {\tt \inx{rules}},
+and the second argument is the atom {\tt \inx{collect}}, then
+{\tt Rules} and {\tt Wffs} will be unified with the number of
+well-formedness rules ({\tt Wffs}) and non well-formedness rules
+({\tt Rules}) applied by Oyster since the most recent
+collection of the {\tt rules} statistics, or (if not collected
+before), since the collection of {\tt rules} statistics was started.
+Well-formedness rules are all those Oyster rules which apply to goals
+of the form {\tt G in T}, with {\tt G} not of the form {\tt \_ = \_}. 
+\end{predicate}
+
+\subsection {Debugging utilities}
+
+A simple \inx{tracing package} has been implemented to help \inx{debugging}
+and using \clam. This package is described in section
+\reference{tracing}. The predicate that should be used to introduce more
+trace points in newly constructed code is the predicate \p{plantraced/2}.
+
+\begin{predicate}{plantraced/2}{plantraced(+N, +Pred)}%
+{\tt N} is compared with the current tracing level, and if this
+level is at least {\tt N},  {\tt Pred} will be executed. In order to
+avoid interference with the embedding code, \p{plantraced/2} never
+fails or backtracks, neither when {\tt N} is larger then the current
+tracing level, nor when {\tt Pred} fails or leaves backtrack points.
+\end{predicate}
+
+\subsection {Benchmarking}
+% Previously \p{benchmark-plan/2}, \p{benchmark-plan-apply/2},
+
+After making changes to the code of planners, methods or tactics, we
+often want to test out the new version of the code on a set of
+theorems for which the old version was known to work. This process is
+made easier by the predicates \p{plan-all/[0;1]}, \p{plan-from/[1;2]},
+\p{plan-to/[1;2]}, \p{prove-all/[0;1]}, \p{prove-from/[1;2]} and 
+\p{prove-to/[1;2]}. These predicates access \f{examples.pl}
+file which contains clauses of the form:
+\begin{verbatim}
+example(Type,Thm,Status).
+\end{verbatim}
+where {\tt Type} is {\tt arith} or {\tt lists} and {\tt Thm} is
+the name of a theorem. If {\tt Thm} is marked as being provable if
+{\tt Status} is a variable. The \f{examples.pl} resides in the
+default library directory and is reconsulted every time one of
+the above {\tt prove-} or {\tt plan-} predicates is invoked. 
+
+\begin{predicate}{plan-all/0}{plan-all}%
+attempts to construct plans for all theorems recorded in \f{examples.pl}.
+\end{predicate}
+
+\begin{predicate}{plan-all/1}{plan-all(?Type)}%
+attempts to construct plans for all theorems recorded in \f{examples.pl} of type {\tt Type}.
+\end{predicate}
+
+\begin{predicate}{plan-from/1}{plan-from(?Thm)}%
+attempts to construct plans for all theorems recorded in \f{examples.pl} from {\tt Thm}.
+\end{predicate}
+
+\begin{predicate}{plan-from/2}{plan-from(?Type,?Thm)}%
+attempts to construct plans for all theorems recorded in \f{examples.pl} of type {\tt Type} starting with {\tt Thm}.
+\end{predicate}
+
+\begin{predicate}{plan-to/1}{plan-to(?Thm)}%
+attempts to construct plans for all theorems
+recorded in \f{examples.pl} up to and including {\tt Thm}.
+\end{predicate}
+
+\begin{predicate}{plan-to/2}{plan-to(?Type,?Thm)}%
+attempts to construct plans for all theorems
+recorded in \f{examples.pl} of type {\tt Type} up to
+and including {\tt Thm}.
+\end{predicate}
+
+\begin{predicate}{prove-all/0}{prove-all}%
+attempts to construct and execute plans for all theorems
+recorded in \f{examples.pl}.
+\end{predicate}
+
+\begin{predicate}{prove-all/1}{prove-all(?Type)}%
+ attempts to construct and execute plans for all theorems
+recorded in \f{examples.pl} of type {\tt Type}.
+\end{predicate}
+
+\begin{predicate}{prove-from/1}{prove-from(?Thm)}%
+attempts to construct and execute plans for all theorems
+recorded in \f{examples.pl} from {\tt Thm}.
+\end{predicate}
+
+\begin{predicate}{prove-from/2}{prove-from(?Type,?Thm)}%
+attempts to construct and execute plans for all theorems
+recorded in \f{examples.pl} of type {\tt Type} starting
+with {\tt Thm}.
+\end{predicate}
+
+\begin{predicate}{prove-to/1}{prove-to(?Thm)}%
+attempts to construct and execute plans for all theorems
+recorded in \f{examples.pl} up to and including {\tt Thm}.
+\end{predicate}
+
+\begin{predicate}{prove-to/2}{prove-to(?Type,?Thm)}%
+attempts to construct and execute plans for all theorems
+recorded in \f{examples.pl} of type {\tt Type} up to
+and including {\tt Thm}.
+\end{predicate}
+
+
+
+%\begin{predicate}{benchmark-plan/2}{benchmark-plan(+P, +Thms)}%
+%This predicate will apply the planner called {\tt P} to each of the
+%theorems in the list {\tt Thms}. The predicate will succeed iff a
+%complete plan can be constructed by {\tt P} for each element in
+%{\tt Thms}.
+%\end{predicate}
+
+%\begin{predicate}{benchmark-plan-apply/2}{benchmark-plan-apply(+P, +Thms)}%
+%This predicate is as \p{benchmark-plan/2}, but will also apply the
+%plan constructed for each member of {\tt Thms}, and check that the
+%application succeeds in proving the theorem. 
+%\end{predicate}
+
+\subsection {Pretty printing}
+
+Apart from the \inx{pretty-printer} for plans, described in section
+\reference{pretty-printer}, \clam\ also makes use of Prolog's \p{portray/1}
+pretty-printing hook to make output look somewhat more readable. The
+current uses of the \p{portray/1} hook are as follows:
+\begin{itemize}
+\item
+Terms of the form {\tt elementary(I)}, will be printed as
+{\tt elementary(...)} if {\tt I} is bound, to suppress the long chain of
+elementary inference rules usually bound to {\tt I}.
+\item
+If {\tt M/1} is an iterated method, than terms of the 
+Terms of the form {\tt M(L)}
+will be printed as
+{\tt M([...])} if {\tt L} is bound, to suppress the long
+chain of method applications usually bound to {\tt L}, with the number
+of dots in {\tt \ldots} indicating the number of iterations encoded
+in {\tt L}. 
+\end{itemize} 
+
+\subsection {Writef package}
+
+Rather then using the \inx{Quintus Prolog} \p{format/[2;3]} predicate for doing
+formatted output, I have been using an old workhorse from the
+DEC10 library, the \p{writef/[1;2;3]} predicate:
+
+\begin{predicate}{writef/2}{writef(+Format, +List)}\end{predicate}%
+\begin{predicate}{writef/1}{writef(+Format)}\end{predicate}%
+\begin{predicate}{writef/3}{writef(+File, +Format, +List)}\end{predicate}%
+\begin{predicate}{writef/2}{writef(+File, +Format)}\end{predicate}%
+All these predicates are documented in the file {\tt \inx{writef.doc}}.
+
+\section [Theory-free]{\protect\clam\ should be theory free}
+\label{theory free}
+
+This section explains a particular constraint that I (Frank van
+Harmelen) claim \clam\
+should always satisfy. It also shows how \clam\ almost satisfies this
+constraint, and how it can be easily fixed to completely satisfy it.
+I think it is useful for future programmers on \clam\ to be aware of
+these issues, which is why I include this section in the programmer's
+manual. 
+
+Ideally, we would like \clam\ (or any other theorem prover, for that
+matter), to be {\em \inx{theory free}\/}: it shouldn't have any
+particular knowledge about the function and predicate symbols that
+appear in the theory. For instance, if we are dealing with an
+arithmetic theory, then the theorem prover should not be ``told'' that
+$+$ is associative, since that would amount to cheating. \clam\
+satisfies this theory free requirement quite well: nowhere in the code
+of either the planner or the methods does it know about special
+properties of particular function or predicate symbols of the
+object-level logic.  (It does know about the logical constants of the
+object-level theory, but nobody said that theorem provers should be
+{\em logic free}. We only require them to be {\em theory free}).
+
+Above, I said: \clam\ satisfies the theory free \notnice
+requirement {\em quite\/} well, but unfortunately, not completely. There
+are two major places where \clam\ violates the theory free
+requirement, and uses specialised knowledge about object-level
+function and predicate symbols: 
+\begin{enumerate}
+\item In the formulation of \inx{induction schemes} (in \f{schemes.pl}).
+\item In the formulation of the \inx{weak fertilization} method.
+\end{enumerate}
+
+How does \clam\ violate the theory free requirement in these two places?
+\begin{enumerate}
+\item
+\label{schemes-problem}
+The induction schemes use specialised knowledge about object-level types
+and function and predicate symbols for their formulation: the
+\p{scheme/3} clauses in \f{schemes.pl} are contain them so some extent,
+and so does the code for \p{scheme/5}.
+\item
+\label{fertilization-problem}
+The weak fertilization method uses two types of specialised knowledge
+about a number of function and predicate symbols: first that some
+functions are \inx{transitive}, and second that functions are
+\inx{symmetric} or
+have a positive \inx{polarity} under some order (see code in the file
+{\tt lib/mthd/weak-fertilize}).
+\end{enumerate}
+
+How can these violations be removed from \clam? Below I sketch
+a solution for each of the two violations. They both rely on
+the introduction of extra families of theorems. Just as current
+theorems are divided into families such as recursion equations, wave
+rules, etc., we introduce some more families (for \ref{fertilization-problem})
+or use an existing family in a new way (for \ref{schemes-problem}), in
+order to remove all occurrences of specific object-level function and
+predicate symbols from the code of 
+\clam:
+\begin{enumerate}
+\item
+Currently, we have a family of (typically 2nd order) theorems called
+induction schemes. For each member of this family we also require a
+\p{scheme/3} clause which tells \clam\ how the induction specified in
+the theorem is to be done. The correspondence between the second-order
+scheme lemma and the corresponding \p{scheme/3} clause is close; It
+should not be too hard to write some code that would automatically
+produce the code for the \p{scheme/3} clauses on the basis of the
+induction scheme theorem (especially if we would formulate the 2nd
+order induction theorems in a more or less standard way). Then, when
+the user would load an induction scheme theorem, the system would
+automatically produce the \p{scheme/3} clause, and proceed as before.
+This situation is analogous to the treatment of wave-rules and of
+recursion equations, where some internal data-structure is produced
+when a theorem of a particular family is loaded.
+\item
+We should introduce two new families of theorems: Firstly, the
+family of theorems that show that a particular function is
+\inx{transitive}. Members of this family would be easy to recognise
+automatically (they would all be of the form
+$f(x,y) \rightarrow f(y,z) \rightarrow f(x,z)$),
+and they would be used in the first few conjuncts of the preconditions 
+of the weak fertilization method to recognise known transitive function
+symbols.
+
+Secondly, we should introduce the family of \inx{polarity theorems}.
+Members of this family would be theorems that show that a particular
+function symbol is \inx{positive} (or \inx{non-decreasing}, or \inx{monotonic})
+under some appropriate orderings. Again, they would be to recognise.
+They would all be of the form
+$x_1 \preceq_1 x_2 \rightarrow f(x_1) \preceq_2 f(x_2)$
+where $\preceq_1$ is a partial ordering on the domain of $f$ and
+$\preceq_2$ is a partial ordering on the codomain of $f$. These theorems
+would also be used in the preconditions of the weak fertilization
+method, to determine the polarity of function symbols. They would
+effectively replace the \p{plrty/5} table in \f{method-pre.pl}.
+In both cases I would imagine that a specialised data-structure is
+created when the theorem is loaded (for instance, a \p{plrty/5}
+entry for polarity theorems). 
+\end{enumerate}
+  
+Rather than actually implementing the above, I have only described
+how this could be done, convincing myself that, although \clam\ is not
+entirely theory free, it could be easily made to be, thus
+justifying the claim that it genuinely proves theorems for itself,
+without any prompting from the user. 
+
+The ideological position outlined above is also discussed in
+\cite{bb539}.
+
+A border line position in this debate about ``what \clam\ is allowed
+to know'' are the definitions of object-level types in Oyster. Do
+these types fall under the category ``logical constants''? Strictly
+speaking no (ask your local logician), and thus, \clam\ should not be told.
+However, they do seem integral part of the object-level system \clam\ 
+is reasoning about, so we would except \clam\ to have to know. As a
+result, there are a few places where \clam\ does get information about
+the existence and structure of object-level types of Oyster:
+\begin{enumerate}
+\item 
+The predicate \p{oyster-type/3} in \f{util.pl} enumerates Oyster
+types and corresponding constants and constructors.
+\item 
+The predicate \p{constant/2} in \f{method-pre.pl} gives more info
+about the recursive structure of Oyster types.
+\item
+Four {\tt clam-arith} clauses of \p{prule/2} in \f{elementary.pl} know
+about the structure of {\tt pnat}.
+\end{enumerate}
+
+Currently, I don't regard these three points as ``cheating'', or in
+conflict with the position outlined above (and in \cite{bb539}), until 
+somebody manages to convince me otherwise (or, plainly speaking:
+until somebody can show me how to get rid of these three bits of
+code\ldots). 
+
+
+\input footer

@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: flatten,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: flatten,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+flatten(x)<==>term_of(flatten)of x.

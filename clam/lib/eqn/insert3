@@ -1,0 +1,35 @@
+/*
+ * @(#)$Id: insert3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: insert3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:int=>h:int=>t:int list=> (n<h=>void)=>insert(n,h::t)=h::insert(n,t)in int list,
+repeat dequantify_once,lambda(n,lambda(h,lambda(t,_7678))),
+[problem([n:int,h:int,t:int list]==> (n<h=>void)=>insert(n,h::t)=h::insert(n,t)in int list,
+ repeat intro,lambda(v0,_7742),
+ [problem([n:int,h:int,t:int list,v0:n<h=>void]==>insert(n,h::t)=h::insert(n,t)in int list,
+  simplify then repeat intro,_7751,
+  [problem([n:int,h:int,t:int list,v0:n<h=>void]==>list_ind(h::t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list,
+   compute([[1]]=_7929 in _7926),_7817,
+   [problem([n:int,h:int,t:int list,v0:n<h=>void]==>less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list,
+    seq(less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list,new[v1]),lambda(v1,_8153)of _8150,
+    [problem([n:int,h:int,t:int list,v0:n<h=>void]==>less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list,
+     reduce(false)then repeat intro,axiom,
+     [
+     ]) ext _8150,
+     problem([n:int,h:int,t:int list,v0:n<h=>void,v1:less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list]==>less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list,
+     subst(over(v3,v3=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list),less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list)then[univ_elim(v1),idtac,wfftacs],_8293,
+     [problem([n:int,h:int,t:int list,v0:n<h=>void,v1:less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list]==>h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])=h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list,
+      repeat intro,axiom,
+      [
+      ]) ext _8293
+     ]) ext _8153
+    ]) ext _7817
+   ]) ext _7751
+  ]) ext _7742
+ ]) ext _7678
+]).

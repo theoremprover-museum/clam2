@@ -1,0 +1,63 @@
+/*
+ * @(#)$Id: less2,v 1.2 1996/06/11 17:04:56 img Exp $
+ *
+ * $Log: less2,v $
+ * Revision 1.2  1996/06/11 17:04:56  img
+ * Correct equations for these predicates.
+ *
+% Revision 1.1  1994/09/16  09:38:16  dream
+% Initial revision
+%
+ */
+
+problem([]==>x:pnat=> less(0,s(x)) = {true} in u(1),
+intro,lambda(x,_8578),
+[problem([x:pnat]==> (x=0 in pnat=>void)=>less(0,x),
+ intro,lambda(v0,_8614),
+ [problem([x:pnat,v0:x=0 in pnat=>void]==>less(0,x),
+  simplify,_8623,
+  [problem([x:pnat,v0:x=0 in pnat=>void]==>pnat_eq(x,0,void,{true}),
+   lemma(succlemma),su(_8692,[term_of(succlemma)],[v1]),
+   [problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat]==>pnat_eq(x,0,void,{true}),
+    elim(v1,on(x)),su(_8783,[v1 of x],[v2]),
+    [problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat]==>x in pnat,
+     intro,axiom,
+     [
+     ]),
+     problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v2: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat]==>pnat_eq(x,0,void,{true}),
+     elim(v2),su(_8972,[v2 of _8979],[v3]),
+     [problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v2: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat]==>x=0 in pnat=>void,
+      intro,v0,
+      [
+      ]) ext _8979,
+      problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v2: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v3:x_:pnat#x=s(x_)in pnat]==>pnat_eq(x,0,void,{true}),
+      elim(v3),spread(v3,[x_,v4,_9226]),
+      [problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v2: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v3:x_:pnat#x=s(x_)in pnat,x_:pnat,v4:x=s(x_)in pnat,v5:v3=x_&v4 in (x_:pnat#x=s(x_)in pnat)]==>pnat_eq(x,0,void,{true}),
+       subst(over(v6,pnat_eq(v6,0,void,{true})),x=s(x_)in pnat)then[univ_elim(v4),idtac,wfftacs],_9236,
+       [problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v2: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v3:x_:pnat#x=s(x_)in pnat,x_:pnat,v4:x=s(x_)in pnat,v5:v3=x_&v4 in (x_:pnat#x=s(x_)in pnat)]==>pnat_eq(s(x_),0,void,{true}),
+        simplify,_9440,
+        [problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v2: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v3:x_:pnat#x=s(x_)in pnat,x_:pnat,v4:x=s(x_)in pnat,v5:v3=x_&v4 in (x_:pnat#x=s(x_)in pnat)]==>int,
+         intro(0),0,
+         [
+         ]) ext _9440
+        ]) ext _9236,
+        problem([x:pnat,v0:x=0 in pnat=>void,v1:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v2: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v3:x_:pnat#x=s(x_)in pnat,x_:pnat,v4:x=s(x_)in pnat,v5:v3=x_&v4 in (x_:pnat#x=s(x_)in pnat),v6:pnat,v7:v6=0 in pnat=>void]==>{true}in u(1),
+        simplify then repeat intro,axiom,
+        [
+        ]) ext _9777
+       ]) ext _9226
+      ]) ext _8972
+     ]) ext _8783
+    ]) ext _8692
+   ]) ext _8623
+  ]) ext _8614,
+  problem([x:pnat]==> (x=0 in pnat=>void)in u(1),
+  repeat intro,axiom,
+  [
+  ])
+ ]) ext _8578,
+ problem([]==>pnat in u(1),
+ intro,axiom,
+ [
+ ])
+]).

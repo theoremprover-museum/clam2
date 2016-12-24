@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: gcd3,v 1.2 1997/10/09 17:14:49 img Exp $
+ *
+ * $Log: gcd3,v $
+ * Revision 1.2  1997/10/09 17:14:49  img
+ * updates
+ *
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>y:pnat=>less(y,x)=>gcd(x,y)=gcd(minus(x,y),y)in pnat,_,_,_).

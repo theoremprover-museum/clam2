@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: prodlapp,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: prodlapp,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>ul:pnat list=>vl:pnat list=>prodl(pnatapp(ul,vl))=times(prodl(ul),prodl(vl))in pnat,
+dequantify,lambda(ul,lambda(vl,_428)),
+[problem([ul:pnat list,vl:pnat list]==>prodl(pnatapp(ul,vl))=times(prodl(ul),prodl(vl))in pnat,
+ autotactic(idtac),_437,
+ [problem([ul:pnat list,vl:pnat list]==>prodl(pnatapp(ul,vl))=times(prodl(ul),prodl(vl))in pnat,_,_,_) ext _437
+ ]) ext _428
+]).

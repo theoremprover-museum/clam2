@@ -1,0 +1,984 @@
+\def\rcsid{$Id: appendix.tex,v 1.28 2006/07/11 13:44:35 smaill Exp $}
+\input header
+\chapter {Appendix}
+
+%\input summary.tex
+
+\section {The organisation of the source files}
+\label{source-files}
+\index {implementation!source files}
+
+{\small\begin{supertabular}{@{}lp{.5\textwidth}@{}}
+\f{NEWS}        & Information on the latest release.\\
+\f{README}      & A file containing information about the
+                        current version of \clam, (lists of things
+                        to do, known \inx{bugs}), etc.\\
+\f{dialect-support/}  & Directory containing the boot-strap file sub-directories
+                          for the various dialects of Prolog supported by the Makefile.
+      Currently only {\tt sic}, {\tt qui}  and {\tt swi} (\inx {SICStus Prolog}, \inx
+{Quintus Prolog} and \inx
+{SWI Prolog}) are available.\index{implementation!dialect support}
+      Each sub-directory contains a boot.pl, libs.pl and sysdep.pl.\\
+\f{info-for-users/}   & This directory contains various information of use to users
+                          including the \clam\ manual and a short introduction to 
+                          theorem proving using Oyster and \clam. It also contains some auxiliary \inx{style files} for use with the \inx{LaTeX=\LaTeX{}} tracing facility (see \p{dplanTeX[0;1]} and \p{idplanTeX[0;1]}). \\
+\f{lib/}                & Library directory with logical objects (constructor).\\
+\f{lib-buffer/}        & The lib-buffer provides a directory into which \clam\ -users
+                        can copy definitions, theorems, lemmas etc for validation by 
+                        the current keeper of \clam{} before being installed in the 
+                        official \f{lib} directory.  \\
+\f{lib-save/}          & The default library directory for saving objects. \\
+\f{low-level-code/}    & Low-level support routines. \\
+\f{make/Makefile}       & Commands and dependencies for installing new
+                        versions of \clam.\\  
+\f{make/clam.v\version.DIA}             
+                        & Executable image for the entire \clam\ system.\\
+\f{make/clamlib.v\version.DIA}          
+                        & Executable image with all necessary
+                        libraries pre-loaded.\\
+\f{make/oyster.DIA}   & Executable image for Oyster. \\
+\f{config/methods.pl}   
+                        & Code for loading a standard set of methods.\\
+\f{config/tactics.pl}   
+                        & Code for loading standard lemmas for arithmetic tactics.\\
+\f{config/hints.pl}     
+                        & Code for loading a standard set of hints. Note that these configuration files are not consulted --- they are goal clauses.\\
+\f{proof-planning/applicable.pl}        
+                        & Code for tests for method-applicability.\\
+\f{proof-planning/library.pl}   
+                        & Code for simple library mechanism.\\
+\f{proof-planning/method-db.pl} 
+                        & Code for maintaining the (sub)method databases.\\
+\f{proof-planning/plan-bf.pl}   
+                        & Code for breadth-first planner.\\
+\f{proof-planning/plan-df.pl}   
+                        & Code for depth-first planner.\\
+\f{proof-planning/plan-dht.pl}  
+                        & Code for depth-first (hint) planner.\\
+\f{proof-planning/plan-gdf.pl}  
+                        & Code for best-first planner.\\
+\f{proof-planning/plan-gdht.pl} 
+                        & Code for best-first (hint) planner.\\
+\f{proof-planning/plan-id.pl}   
+                        & Code for iterative-deepening planner.\\
+\f{proof-planning/plan-idht.pl} 
+                        & Code for iterative-deepening (hint) planner.\\
+\f{proof-planning/plan-toy.pl}  
+                        & Code for toy versions of all planners to use
+                        for experiments in artificially constructed
+                        search spaces.\\
+\f{proof-planning/plan-vi.pl}   
+                        & Code for visual iterative deepening planner.\\
+\f{proof-planning/util.pl}              
+                        & Code for utilities: tracers, printers, etc., plus
+                        generally useful Prolog stuff.\\
+\f{proof-planning/stats.pl}             
+                        & Code for taking statistics.\\
+\f{meta-level-support/cancellation.pl}  
+                        & Code needed to deal with cancellation rules. \\
+\f{meta-level-support/dp}       
+                        & This directory contains the code for the
+                          Presburger decision procedure. \\
+\f{meta-level-support/elementary.pl}    
+                        & This file contains a decision procedure for a subset of the
+                          propositional part of Oyster logic together with additional
+                          datatype properties, e.g. uniqueness. \\
+\f{meta-level-support/hint-context.pl}  
+                        & Contexts for the hint mechanism. \\
+\f{meta-level-support/hint-pre.pl}      
+                        & Code for the hint mechanism. \\
+\f{meta-level-support/method-con.pl}    
+                        & Definition of all the connectives of the method language.\\
+\f{meta-level-support/method-pre.pl}    
+                        & Definition of all the predicates of the method language.\\
+\f{meta-level-support/methodical.pl}    
+                        & Code for constructing methodicals, currently only the iterator.\\
+\f{meta-level-support/propositional.pl} 
+                        & This file contains a decision procedure for the 
+                          propositional part of Oyster logic.\\
+\f{meta-level-support/recursive.pl}     
+                        & Code for analysing recursive definitions.\\
+\f{meta-level-support/reduction.pl}     
+                        & Code for analysing reduction rules.\\
+\f{meta-level-support/schemes.pl}       
+                        & Representation of induction schemes.\\
+\f{meta-level-support/so.pl}    
+                        & RPOS and miscellaneous predicates for 
+                        reduction rule machinery..\\
+\f{meta-level-support/tactics.pl}       
+                        & Code for tactics corresponding to methods.\\
+\f{meta-level-support/tactics-wf.pl}    
+                        & Code for tactics for well-formedness goals.\\
+\f{meta-level-support/wave-rules.pl}    
+                        & Code for analysing wave-rules and handling wave-fronts.\\
+\f{object-level-support/oyster-theory.pl}       
+                        & Things particular to the Oyster logic and
+                           its  background theory.\\ 
+\f{writef.pl}           & Writef formatted output package.\\
+\end{supertabular}}
+
+
+\section {Release Notes}
+\label{release-notes}
+\index {implementation!release notes}
+\index {release notes}
+
+This section describes the changes in each subsequent release of
+\clam, starting from release 1.1 onwards. We only list changes to the
+functionality of the system and leave out fixed (and introduced\ldots)
+bugs. 
+
+\subsection {CVS and \clam}
+\label{app:cvs-clam}
+From version 2.2, \clam is under the CVS revision control system.  The
+CVS tags associated with each of the releases is show below in
+teletype font.
+
+Edinburgh researchers can retreive the latest \clam version for
+development, by issuing the CVS command
+\begin{verbatim}
+cvs checkout -rHEAD clam
+\end{verbatim}
+This will checkout the entire \clam system with all the revision
+control information ready for development work.
+
+To retrieve \clam version 2.8.4 for compilation, but not development,
+use the CVS command `export' rather than `checkout':
+\begin{verbatim}
+cvs export -rCLAM_2_8_4 oyster-clam
+\end{verbatim}
+This will checkout the entire \clam system without the revision
+control information.
+
+Please note that the these are for very rough guidance only; Please
+refer to local Edinburgh documentation for notificatio of current
+practice etc.
+
+\subsection {Version 1.1, May 1989}
+
+\begin{enumerate}
+\item
+The predicates \p{base-eq/2}, \p{base-eqs/1}, \p{step-eq/2} and
+\p{step-eqs/1} have all been renamed \p{base-rule/2}, \p{base-rules/1},
+\p{step-rule/2} and \p{step-rules/1} .
+\item
+The methods \m{fertilize-left/2} and \m{fertilize-right/2} are now
+submethods, disjunctively joint together in a new method
+\m{fertilize/2}.
+\item
+There is now a version of the induction method which explicitly
+encodes the minimality condition for subsumption in the preconditions,
+instead of relying on the procedural implementation of \p{subsumes/2}.
+\item
+The code for tactics has been distributed over two files:
+\f{tactics-wff} for all the well-formedness tactics, and \f{tactics}
+for all the other (``real'') tactics.
+\item
+The code defining the method language is distributed over two
+files: \f{method-con} for the connectives and \f{method-pre} for the
+predicates.  Some material is also in the \f{oyster-theory}
+\item
+A new predicate has been introduced to specify the default value for
+the pathname of the library directory: \p{lib-dir/1}.
+\item
+The predicate \p{lib-present/1} has been added to inspect the
+currently available set of logical objects.
+\item
+The predicate \p{lib-delete/1} has been added to delete logical
+objects.  ({\tt plan} logical objects may not be deleted.)
+\item
+The behaviour of \p{lib-load/[1;2]} has been changed. When loading in
+a logical object that is already present, the old predicate did
+nothing. The new predicate does (re)load the specified logical object,
+but does not reload any of the objects needed by the specified object
+(as recorded in the \p{needs/2} predicate). This is so that new
+versions of objects can be loaded without having to reload things that
+possibly did not change. 
+\item
+A mechanism for loading and deleting methods has been introduced:
+   \begin{itemize}
+        \item
+        The library mechanism (\p{lib-load/[1;2]}, \p{lib-present/1}
+        and \p{lib-delete/1}) has been extended to deal
+        with arguments of the form {\tt mthd} and {\tt smthd} for
+        methods and submethods. This enables individual loading of
+        methods from files.
+        \item\raggedright
+        \p{delete-methods/0}, \p{delete-submethods/0},
+        \p{list-methods/[0;1]} and \p{list-submethods/[0;1]} have been
+        introduced (although they could have been formulated in terms
+        of the library mechanism).
+   \end{itemize}
+As a result of this change, methods now live in individual files
+instead of one big file. 
+\item
+The representation of iterating methods has been changed. It also now
+possible to construct every possible combination of (sub)methods
+iterating (sub)methods. Thus, we can construct a method that iterates
+submethods, a method that iterates methods, a submethod that iterates
+submethods and a submethod that iterates methods.
+\item
+A new \m{try/1} methodical has been added to allow fail-save
+application of (sub)methods.
+\item
+A new \m{then/2} methodical has been added to allow sequential
+combination of submethods.
+\item
+The predicate \p{exists/1} has been renamed to \p{thereis/1} (to avoid
+a clash with a built-in \inx {NIP Prolog} predicate).
+\item
+Portability code for \inx {NIP Prolog} has been added in the file \f{nip}.
+\item
+The meta-linguistic connective \p{or/2} has been renamed \p{v/2} (to
+avoid a clash with the Oyster tactical \p{or/2}).
+\item
+The scripts to construct runnable images of \clam\ have been upgraded
+to run under both \inx {NIP Prolog} and \inx{Quintus Prolog}.
+\item
+A Makefile is now present to help with installing new versions.
+\item
+The tactic \m{lemma/1} has been renamed \m{apply-lemma/1} (to avoid a
+name clash with the Oyster rule of inference).
+\end{enumerate}
+
+\subsection {Version 1.2, June 1989}
+
+\begin{enumerate}
+\item
+The format of the \m{fertilize/2} method has been changed. It is now
+written in terms of  submethods \m{fertilize-left/2} and 
+\m{fertilize-right/2}.
+\item
+A new \p{or/2} methodical has been added to allow disjunctive
+combination of submethods.
+\item
+The predicate \p{matrix/3} has been added to the method-language predicates.
+\item
+Zero arity versions of {\tt lib-present}, {\tt lib-delete}, 
+\p{lib-present /0} and \p {lib-delete/0} have been added as utilities.
+\item
+The zero arity version of {\tt print-plan}, \p{print-plan/0} has been
+added as a utility.
+\item
+Portability code for \inx{SWI Prolog} has been added in the file
+\f{nip}. The main reason for porting to SWI is that
+it is the only Prolog with decent profiling facilities.
+\item
+The welcome-banner printing is different, to avoid a bug in
+\inx{Quintus Prolog}
+and to make it more portable.
+\end{enumerate}
+
+\subsection {Version 1.3, October 1989}
+
+\begin{enumerate}
+\item
+Appendix F (describing the contents of the \clam\ library of
+definitions and theorems) has been removed from the manual, because
+the current library is now far too big. At the
+moment, it contains 44 definitions (comprising 98 recursion equations)
+and 95 theorems. Most of the theorems and definitions are indexed with
+their numbers in the Boyer and Moore book \cite{boyerbook} in the
+subdirectory {\tt BM}. 
+\item
+The predicate \p{canonical/2} has been introduced into the method
+language. 
+\item
+The predicate \p{recursive/3} can now deal with simultaneous
+recursions.
+\item
+The predicate \p{recursive/4} has been introduced to deal with
+conditional recursion equations. 
+\item
+The predicate \p{universal-var/2} has been added to the method
+language. 
+\item
+The predicate \p{wave-fronts/3} provides a way of manipulating
+wave-fronts in formulae.
+\item
+The predicate \p{wave-rule/3} provides a new representation for
+wave-rules which allows the implementation of the rippling-out control
+strategy for conditional multiple-wave-rules.
+\item
+The fertilization method has also been substantially reorganised to
+deal with wave-fronts, and to distinguish between weak and strong
+fertilization. 
+\item
+Only one coherent version of the induction strategy (previously known
+as the ``basic plan'', remains as the method \m{ind-strat-I/1}). The
+methods \m{ind-strat-II/1} and \m{ind-strat-III/1} are now obsolete. 
+\item
+We now have a method for doing motivated casesplits in proofs (based
+on the notion of complementary sets of preconditions). 
+\item
+\p{listof/3} (an amalgam of the Prolog predicates
+\p{setof/3} and \p{findall/3}) has been added to the method language. 
+\item
+All methods have been reformulated so that they can now deal with
+explicitly quantified formula as well as with skolemised variables. 
+\item
+A section describing wave-front representation has been added to the
+manual. 
+\item
+Tracing output for planners in general, and for the depth-first
+planner in particular, has been improved. 
+\item
+The rewrite tactics have substantially changed. The functionality
+of the available rewrite operations should have increased, but I'm not
+sure how ``upwards compatible'' each of the individual predicates is.
+\item
+Some new pretty-print predicates are available:
+  \begin{itemize}
+  \item
+  \p{print-plan/0} which pretty-prints the plan below the current
+    sequent in the usual format.
+  \item
+  \p{snap/[0;1]} which form a compromise between the very short
+  \p{print-plan/0} and the still rather verbose \p{snapshot/[0;1]}
+  provided by Oyster.
+ \end{itemize}
+\item
+The default tracing level is now set to 20 rather than 0.
+\item
+For those not using an Emacs interface, it is now possible to edit
+(sub)methods from within clam, using the predicates \p{lib-edit/[1;2]}.
+\item
+Some global parameters of the system can now be set using the
+predicate \p{lib-set/1}.
+\item
+A new {\tt make/[0;1]} predicate is now available for incrementally
+reloading changed source files. 
+\item
+Iterated methods are now pretty printed differently, so that
+the printed form indicates the length of the iteration.
+\item
+The tautology checker has been jazzed up to make it deal with a bit
+more than just propositional tautologies (however, it remains a
+decidable predicate free of search).
+\end{enumerate}
+
+\subsection {Version 1.4, December 1989}
+
+\begin{enumerate}
+\item
+Induction schemes can now have more than one step case, although our
+way of indexing induction schemes (relying on a single induction term
+to identify a scheme) should also be upgraded in the future.
+\item
+A new predicate \p{object-level-term/1} has been added to the method
+language.
+\item
+\clam\ knows about the polarity of certain object-level function
+symbols. This is a temporary fix to allow the implementation of a more
+general version of weak fertilization, and should eventually be
+replaced by a theory free solution, described in 
+\reference{theory free}. A \p{polarity/5} predicate has been added to
+the method language to make this knowledge available inside methods. 
+\item
+Base- and step-rules are now stored with universally quantified
+variables replaced by meta-(Prolog) variables, allowing faster checks
+for applicability.
+\item
+A new class of theorems, so called reduction rules, have been
+implemented to improve the behaviour of and the story behind symbolic
+evaluation. 
+\item
+\clam\ now also runs under {\sc sics}tus Prolog
+\item
+Path expression (position specifiers, tree coordinates) for specifying
+positions in formulae are now transparent to wave-front annotations. 
+\item
+The predicate \p{canonical/2} has been renamed \p{constant/2} to avoid
+name clashes. 
+\item
+Side-ways wave-rules (transverse wave-rules) have been implemented.
+\item
+The \m{generalise/2} method has been generalised.
+\item
+A more general version of weak fertilization has been implemented.
+\item
+A predicate \p{source-dir/1} names the source directory for \clam\
+(useful for auto-loading of sources etc).
+\item
+A new statistics facility allows counting of number of inference rules
+applied at the Oyster object-level during plan execution.
+\item
+Geraint's visual version of the iterative deepening planner has been
+incorporated.
+\item
+wave-fronts can now be properly joined and split as and when needed.
+\item
+The {\tt wfftac} has been jazzed up (once more) to deal with wff
+goals of functions.
+\item
+Structural induction over trees has been added.
+\item
+The preconditions of the \m{ind-strat-I/1} method now explicitly call
+upon the preconditions of the \m{induction/2} method, rather than
+repeating them verbatim.
+\item
+The manual now has seperate indexes for keywords and for predicates. 
+\end{enumerate}
+
+\subsection {Version 2.1, November 1993}
+
+\begin{enumerate}
+\item The \p{induction/2} method has under gone significant
+modifications. The main change is the use of a heuristic 
+scoring mechanism to rank induction choices.
+
+\item \p{scheme/5} has been extended to allow for induction
+over more than one variable simultaneously. This is not, however,
+a general mechanism for supporting simultaneous induction.
+
+\item \m{base/2} and \m{step/2} methods have been replaced by
+\m{eval-def/2}. Consequently, methods \m{base-rule/2}, \m{base-rules/1},
+\m{step-rule/2} and \m{step-rules/1} have been removed.
+
+\item A mechanism for dealing with complementary sets of rewrites
+has been incorporated. As a consequence new database records have 
+been introduced to record complementary rewrites and condition sets.
+
+\item Induction hypotheses are now annotated to indicate there
+status within step-case proofs.
+
+\item Rippling is implemented as a single method \m{ripple/1}
+which iterates over the submethods \m{wave/4}, \m{casesplit/1}
+and \m{unblock/3}.
+
+\item The \m{eval-def/2} and \m{wave/4} methods now 
+include a polarity check.
+
+\item The submethod  \m{unblock/3}  has been introduced to 
+support a variety of meta- and object-level rewriting with 
+the aim of facilitating further wave-rule applications.
+
+\item The wave-rule parser has been generalised to allow
+for the full generality of rippling \cite{pub567}. This
+has led to a new wave-rule representation. The predicate
+\p{wave-rule/1} is provided for pretty printing wave-rules.
+
+\item The predicate \p{wave-rule/1} provides a means of
+pretty printing wave-rules.
+
+\item The meta-level annotations (wave-fronts and sinks)
+have been brought into line with the literature \cite{pub567}.
+
+\item strong fertilization and weak fertilization
+have been packaged up within a new method called
+\m{fertilize/2}. Weak fertilization now includes post-fertilization
+rippling as described in \cite{pub567}.
+
+\item Existential rippling \cite{pub567} has been implemented and
+consequently the \m{existential/2} method has been eliminated.
+A submethod has been introduced called \m{existential/2} which
+is invoked within \m{sym-eval/1} to deal with synthesis
+theorems. Eventually this will be replaced by an existential
+version of \m{eval-def/2}.
+
+\item An additional argument has been added to the \m{wave/3}
+method. This argument is for the substitutions generated by
+existential rippling.
+
+\item \m{base-case/1} and \m{step-case/1} methods have been
+introduced.
+
+\item The \m{normalize/1} method is not loaded by default but is
+required for certain theorems in the corpus.
+
+\item The methods language has been extended significantly.
+
+\item A new set of benchmarking predicates have been incorporated
+({\tt plan-} and {\tt prove-}). These are built on top of the existing
+benchmarking machinery. Instead of accessing the \f{needs.pl} file,
+these predicates access the \f{examples.pl} file which 
+provides clearer documentation of the current corpus.
+
+\item \m{ind-strat/1} replaces \m{ind-strat-I/1} and it can be applied
+as both a \inx{terminating} and a \inx{non-terminating} method.
+
+\item \m{ind-strat-II/1}, and \m{induction-min/2} have both been 
+removed.
+
+\item \p{tautology/[0;1;2]} has been renamed \p{elementary/[0;1;2]}. 
+
+\item \p{wfftacs} has been strengthend.
+
+\item Two new method iterators have been introduced: \m{repeat/7}
+and \m{iterate/5}.
+
+\item The library has been restructured to reflect the different
+kinds of logical objects which inhabit it.
+
+\item A hint mechanism has been introduced.
+
+\item The \f{needs.pl} file is reconsulted when \clam\ is
+invoked.
+
+\item A tutorial guide to \clam\ has been added to a subdirectory called \f{info-for-users}.
+
+\item Due to problems with the dynamic database \clam\ is incompatible
+with Quintus version 3.0.
+
+\item \m{apply-ext/1} provides an interface to the Oyster extraction
+      mechanism making it easier to execute Oyster programs.
+
+
+\end{enumerate}
+
+\subsection {Version 2.2, August 1994 ({\tt CLAM\_2\_2\_0})}
+\begin{enumerate}
+\item Correction to the removal of redundant wave-front annotations
+      after an application of the step-case method/submethod.
+
+\item Generalisation of the condition-set record structure. 
+
+\item Modification of the casesplit method/submethod to reflect
+      the generalisation of the condition-set record structure.
+
+\item New \verb|make/| directory organisation, and some changes to the 
+  organization of the source files:
+
+\begin{itemize}
+
+\item there is now a \verb|config/| directory, which contains
+        files \verb|hints.p|l, \verb|methods.pl|, \verb|tactics.pl|.
+These files     are used to initialize \clam{}.  These files contain
+Prolog goals (they are not consulted).
+
+\item \verb|make/| directory is quite different.  All of the various
+        driver files have been merged into a single file,
+        \verb|makeclam.pl|;  the C pre-processor is used to generate
+        a particular driver each time.  
+
+% \item all code is now under SCCS, with the 'q' flag set to the
+% \clam{} version number.  (see \verb|man sccs-admin| for information
+% on the 'q' flag.)  Briefy, this means that SCCS will expand   any
+% occurrence of \verb|%|\verb|Q%| to whatever the 'q' flag is set to,
+% when  a file is checked out.
+\end{itemize}
+
+ \item The behaviour of the Quintus, Sicstus and SWI versions is much
+closer.  \verb|clamlib| no longer loads the \verb|needs.pl| file, this
+is done {\em only\/} by \clam{} proper (and is done by all Prolog
+versions).
+
+      \item The symbol CPP in \verb|make/Makefile| should point to the 
+        C pre-processor.  Normally this is \verb|/usr/lib/cpp|.
+
+\item The \verb|CLAMSRC| symbol in \verb|make/Makefile| should
+be set as normal, but the default is to compute it based on the
+current working directory.  Thus the only thing that may require
+editing in that file is the location of Oyster: in the standard
+Oyster-\clam{} distribution this is not necessary.
+
+  \item The predicate \p{maplist} (in all arities) has been changed to
+\p{map-list}, to avoid a name clash with users wishing to use the
+Quintus map\_list library.
+
+\end{enumerate}
+
+\subsection {Version 2.3  patchlevel 5, 6 May 1995}
+First version with dynamic wave-rule parsing.
+
+\begin{enumerate}
+\item Totally new induction preconditions.
+\item New step-case, ripple and wave submethods to deal with dynamic
+rippling. 
+\item New rewrite database for dynamic wave-rule parsing.
+\item New conditional machinery.
+\item New complementary wave-rule submethod.
+\item Less dependancy on the old wave-rule parsing code;  I think
+          all that requires this now is reduction rule stuff.
+\item New object-level-support directory for things specific to Oyster and
+        background theory.  (This change is transparent to the user.)
+\end{enumerate}
+
+\subsection {Version 2.3 patchlevel 6, 18 July 1995 {\tt CLAM\_2\_3\_6}}
+
+\begin{enumerate}
+\item
+Bug in existential smthd fixed.
+
+\item
+{\tt red(plus1right)} and {\tt red(plus2right)} removed from \f{needs.pl} for {\tt thm(binom\_one)}; {\tt red(times1right)} removed
+from {\tt thm(evenm)}.
+
+\item
+Induction method preconditions now allow holes in induction term
+wave-fronts to be subterms other than variables.  For example,
+$\wfout{h_1::\wh{h_2::t}}$ was not possible previously, but now is.
+
+\item
+Removed limit of $20$ equations per definition.  All equations of the
+form $name_N$ are loaded from when {\tt def(name)} is loaded, starting
+with $N=1$, $N=2$ and so on.  $name_{N+1}$ is loaded only when
+$name_N$ is present, hence: IMPORTANT: All equations must be
+{\em consecutively numbered}.
+
+\item
+Added biconditional operator \verb|<=>|. Tactics \verb|intro_iff| and
+\verb|elim_iff|; \f{config/tactics.pl} does {\tt lib-load(def(iff))}
+(operator declaration was added to Oyster by Ian Green on 6~June 1995).
+
+\item
+\p{clam-patchlevel-info/0} command added for \clam{} patchlevel
+information.
+
+\item Only need for old wave-rule parsing code is to parse
+          reduction rules. 
+\item Speeded up loading of rewrite rules.
+\item
+{\tt lib-create/[1;2]} added for simple interactive creation of {\tt
+def}, {\tt eqn} and {\tt synth} objects.
+\item
+ Bugs in {\tt lib-save/[1;2]} fixed; ({\tt lib-save(def(O))} now saves
+equations associated with {\tt def(O)} as intended.
+\item Manual source split into more managable parts.
+\end{enumerate}
+
+
+\subsection {Version 2.4 patchlevel 0, 3 October 1995 {\tt CLAM\_2\_4\_0}}
+The version number was increased for the following reasons:
+\begin{itemize}
+\item The arity of the induction method and submethod has been changed
+from 2 to 1.  This is to accommodate the revised induction scheme
+representation.  See~\m{induction/1} and~\p{scheme/[3;5]}.
+
+\item The scheme database has been completely rewritten; it should now
+be easier to add new induction schemes.
+\end{itemize}
+
+Other less significant changes are:
+\begin{enumerate}
+\item Rewrite rules may have multiple conditions.  
+\item The library mechanism now operates with a list of directories (a
+          {\em path\/}) which is searched (in order) for library
+          items.  For example,  
+        \begin{center}
+          \verb|lib_set(dir(['~img/sys/clam/lib','*']))|
+        \end{center}
+ allows
+          searching of user \f{img}'s personal \clam{} library
+          before the default library (indicated by the special token
+          `{\tt *}') is searched.  The default system library may be
+          found using \verb|lib_dir_system(D)|, but this cannot be
+          changed.  \verb|lib_set(dir(['*']))| is the default path
+          setting.  Currently, local needs files are not supported, so
+          this means that the single needs file must reflect
+          dependancies across all libraries.  The saving directory,
+          \verb|lib_set(sdir(.))| has not been changed.  (The
+          predicate \p{lib-fname-exists/5} may be used to search
+          paths.)
+\item  \p{lib-sdir/1} added (same as {\tt saving-dir/1}, which is undocumented).
+\item Tricky problem in weak-fertilization tactic has been fixed.
+          The problem was a mis-alignment of variable names caused
+          when the weak-fertilization is a right-to-left rewrite where
+          the LHS has more variables than the RHS.  These unbound
+          variables were `arbitrarily' instantiated by the tactic,
+          whilst the method chooses the (unique) instantiation
+          suggested by the skeleton.
+\item \p{idplan-max/[1;2]} added to impose a maximum depth on the DFID
+          planner.  ({\tt idplan-max} is not really suggestive of iterative
+          deepening since it does not increase any search depth
+          iteratively; however, the code is from \f{plan-id.pl}, so it was
+          named that way for uniformity.)  
+\item Revised benchmarking code which parameterizes the benchmark
+          by the planner: e.g., \verb|plan_from(idplan_max(10),comm)| will use
+          the planner \verb|idplan_max| (with a search depth bound of $20$) for
+          entries in the corpus from (and including) {\tt comm}.
+          Benchmarking code automatically saves successful plan
+          construction using \verb|lib_save(plan(...))|.  The library into
+          which plans are saved defaults to the standard library.
+\item New logical object called `plan' has been added to
+          explicitly record the proof-plan associated with a
+          particular theorem.  This can be saved into the library via
+          \p{lib-save/1}: the name of the theorem, the raw proof-plan, the
+          \clam{} enviroment (type of planner used, \clam{} version number
+          methods, submethods, rewrites etc., in effect during plan
+          construction) is saved into the library.
+\item Totally new implementation of the scheme database.  This is
+          almost plug-in-compatible with the old database (which has
+          been removed), but it is much easier to add induction
+          schemes.  Difference matching is used to add annotation.
+\item Complementary sets are computed and stored at
+          load-time.  Access is via
+\p{complementary-set/1}. \p{complementary-set-dynamic/1} is available
+for run-time construction of complementary sets, should that be needed.
+\item  Library mechanism supports loading of multiple things in a
+          single call to \p{lib-load/1}: for example,
+          \verb|lib_load(scheme([pairs,plusind]))|.   If one of the objects
+          in the list fails to load the \clam{} continues trying to load
+          subsequent objects.  A warning message is printed in this
+          case. 
+\item The idea of `induction scheme' is less ambiguous: the induction
+          (sub)method now has a singe argument which  reflects  this
+        important change.
+
+          A `scheme' now makes explicit the connection between a
+          variable and the induction term which replaces it in an
+          induction conclusion.  E.g., \verb|[x:pnat-s(v0), y:pnat list-h::t]|
+          means \verb|nat_list_pair| induction.
+\item The induction tactic now avoids a problem encountered when
+renaming of variables in a goal was required to avoid
+          capture.  In some cases renaming of  these bound variables in the
+          goal is needed to avoid capture of variables present in the
+          induction scheme lemma.  Fix is to rename all variables
+          in the scheme lemma apart from all variables (free and
+          bound) in the hypotheses and goal.
+\end{enumerate}
+
+
+\subsection {Version 2.5 patchlevel 0, 21 June 1996 {\tt CLAM\_2\_5\_0}}
+
+This version is based on \clam~2.4, but differs in a few important
+ways which are discussed below.  As an end user, the only major
+difference is the interface to \m{eval-def/2} rules, which no longer
+exists: it is replaced by \inx{reduction rule}s.  Comparing the
+\m{eval-def/2} method with the old one will illustrate the change.
+See ``Other important changes'' below.
+
+\subsubsection* {Reduction rules \& symbolic evaluation}
+        Reduction rules were not available in \clam~2.4, but, due to
+popular demand, they are back.  The reduction rule machinery has been
+generalized and is used for any (unannotated) rewriting required to be
+terminating.  \S\reference {sec:reduction} describes reduction rules
+formally. 
+        Clam tries to add the following objects to the TRS when they
+are loaded via the library mechanism:
+\begin{itemize}
+        \item {\tt eqn}'s (loaded automatically as part of a definition)
+        \item {\tt red}'s ({\tt thm}'s that the user explicitly wants to use as a
+          reduction rule)
+\end{itemize}
+Notice that there is now no distinction between a rewrite which was
+loaded as an {\tt eqn} and one loaded as a {\tt red}: they are all added to the
+same database.  That database is accessed via \p{reduction-rule/6}, and
+the parameters are in \p{registry/4} (see \f{reduction.pl} for more
+information).
+        The methods for symbolic evaluation have been changed to use
+reduction rules.
+
+\subsubsection* {Labelled term rewriting}
+        This is an improvement to the speed with which terms are
+normalized by the repeated application of rewrite rules.  It is only
+implemented for unannotated terms at the moment, via the predicates
+\p{nf/2} and p{nf-plus/4}: see \f{reduction.pl} again.  
+
+        The \m{sym-eval/1} method uses \p{nf-plus/4} so that symbolic
+evaluation is faster.  This is done via a new method called
+m{normalize-term/1}, used in place of the standard \m{reduction/2}
+methods.  The \m{reduction/2} methods are still available.
+(\p{extending-registry/0} is a flag that determines if the registry is
+to be dynamically extended: it is set to false by default.)
+
+\subsubsection* {Other important changes}
+The first seven of these are incompatibilities with \clam~2.4
+\begin{enumerate}
+\item  Deleting a wave or a red will not remove the associated thm
+          (nor anything else).
+\item  {\tt lib-load(wave(t))} no longer does {\tt lib-load(red(t))}, and
+          vice-versa.  This allows more control over rewriting.  Use
+\p{needs/2} mechanism to enforce this if required.
+\item  Cancellation rules are no longer used, although they are still
+          generated.  This might have repercussions for
+          \m{ripple-and-cancel/1}. 
+\item  Equality rules no longer exist.  They are superseded by
+          reduction rules.  In particular, equivalences are now
+          handled by the reduction rule and wave-rule machinery (see
+          below). 
+\item  Since all {\tt eqn}'s are made into reduction rules, there is no
+          longer any need for {\tt func-defeqn/3}: it is superseded by
+          \p{reduction-rule/6} (an example of this is in the \m{eval-def/2}
+          method).
+\item  The definitions of {\tt leq}, {\tt geq}, {\tt greater} and {\tt
+less} have been 
+          revised (they were not all definitions before).  A result of
+          these new definitions is the need for {\tt  leqzero}, {\tt geqzero},
+          {\tt lesszero} and {\tt greaterzero} to be added to the
+library as theorems, and, for
+          certain theorems, for these to be loaded as reduction rules.
+\item  \m{step-case/1} preconditions now insist that the goal contains
+          annotation.
+
+\item  There is a new type of library object called {\tt trs}; currently
+          there is only one, called {\tt default}, referring to the
+combination of positive and negative polarites.  Currently there is no way of
+          saving these objects to the library, nor of having more than
+          one. {\tt lib-delete(trs(default))} will empty the reduction rule
+          database, and both ordering parameters.
+\item  Support is provided for casesplits during symbolic
+          evaluation, although this is not loaded by default.  The
+          s/methods \m{base-case-cs/1} and \m{sym-eval-cs/1} allow branching.
+\item  There was a restriction in \clam~2.4 that the left-hand-side of all
+          rewrites ({\tt wave}s and {\tt red}s) be non-atomic.  This has been
+          dropped (it was a bug).
+\item  When tracing at level 40, all the reduction rules and
+          rewrite rules are displayed as they are generated.
+\item  Full support for {\tt <=>} rewriting.
+\end{enumerate}
+
+
+\subsection {Version 2.6 patchlevel 3, 1 October 1997 {\tt CLAM\_2\_6\_3}}
+Clam 2.6, patchlevel 3
+
+\begin{enumerate}
+\item previous releases of Clam 2.6 did not have branching in
+          base-case and sym-eval, as documented in the release notes
+          of Clam 2.6.0.  This has now been fixed.
+\item Added decision procedure for Presburger arithmetic
+\item Dropped distinction bewteen methods and submethods inside the
+          library.  Both are now stored in the library as `methods'.
+          Such objects can be loaded either as {\tt mthd} or as {\tt
+          smthd}, as normal.  This simplifies the maintenance of
+          methods and submethods which are identical but for some
+          irrelevant syntax.  
+\item improved control over portrayal of terms.
+\end{enumerate}
+
+\subsection {Version 2.7 patchlevel 0 {\tt CLAM\_2\_7\_0}}
+\begin{enumerate}
+\item Automatic parsing of \p{scheme/[3;5]} logical objects.
+\item Simultaneous inductions correctly treated by \m{induction/1}
+heuristics.
+\item Faster simplification ordering for reduction rules.
+\item Library mechanism less verbose.  More flexible loading of
+          logical objects.
+\item Induction analysis and casesplit analysis uniformly treated.
+\item New propositional decider.
+\item Methods \m{elementary/1} and \m{propositional/1} treat annotations
+          uniformly.
+\item Type guessing improved.
+\item Compiles under SICStus Prolog version 3 patchlevel 5,\index{implementation!SICStus Prolog} and
+          under Quintus Prolog version 3\index{implementation!Quintus Prolog}.
+ \item Annotations abstracted into new file \f{annotations.pl}.
+\item Socket\index{socket support} support (under SICStus) for inter-process
+          communication\index{implementation!SICStus Prolog!sockets}.
+\item Manual up-to-date (chapter on background material is
+          incomplete).
+\item ``Klutz'' user guide for basic introduction to \clam in
+distribution.
+\end{enumerate}
+
+\subsection {Version 2.7 patchlevel 1 {\tt CLAM\_2\_7\_1}}
+This release has not been checked extensively; it performs miserably
+on transitivity proofs due to limitations in the  induction selection heuristics.
+
+\begin{enumerate}
+
+        \item  Support for SWI Prolog\index{implementation!SWI Prolog}.  This is known to run on at least
+          one Linux machine, but is not widely used at Edinburgh.
+        \item  Verbosity is decreased by default.  Most non-essential
+          messages are only shown if the tracing level is greater than~22.
+        \item  Library now supports equations having a filename of the form 
+          {\tt root.1}, {\tt root.2}, \dots, {\tt root.N} each of the $N$ equations defining
+          root.  The old style in which the separator is empty ({\tt root1},
+          {\tt root2}, \dots, {\tt rootN}) is still supported.
+        \item  \clam attempts to show that binary relations are
+          transitive.  The switch \p{trans-proving/0} (default {\tt true}; see
+          \f{config/tactics.pl}) controls this feature.
+
+          The predicate \p{is-transitive/2} does these proofs by calling the
+          decision procedure and, if that is inapplicable or runs
+          beyond a prespecified time limit, the proof-planner itself
+          is called.  (The time limit is currently set to 60s for the
+          decision procedure and 60s for the planner; see \f{library.pl}.)
+          
+          If a relation can be shown to be transitive, this is recored
+          as a \p{transitive-pred/1} fact.  Weak fertilization examines
+          this database.
+        \item  \p{trivially-falsifiable/2} has been added.  This instantiates a
+          universally quantified formula to a ground formula in which
+          variables have been instantiated to random constants of the
+          appropriate type.  This ground formula is then evaluated.
+          False instances reveal that the original formula is not a
+          theorem.   
+        \item  \m{weak-fertilize/4} uses \p{trivially-falsifiable/2} to
+          reject false subgoals.
+        \item  Method \m{elementary/1}: individual clauses merged to remove
+          unwanted backtracking.  Use of decision procedure controlled
+          by \p{using-presburger/0} switch (default {\tt true}; see
+        \f{config/methods.pl}).
+        \item  Method \m{step-case/1} subgoals are stripped of all annotation.
+
+        \item Manual not up-to-date.
+
+\end{enumerate}
+
+\subsection {Version 2.7, patchlevel 2 {\tt CLAM\_2\_7\_2}}
+\begin{enumerate}
+        \item  Small change to needs mechanism to support multiple
+          libraries.  \f{needs.pl} should no longer have the catch-all
+          clause  \verb|needs(_,[]).|
+
+          normally found at the end of the file.
+        \item  Some additions to the library.
+        \item  Speed improvements in induction preconditions.
+        \item  Method \m{ind-strat/1}: prefers unflawed induction over unflawed
+          casesplits over flawed induction.        
+\end{enumerate}
+
+\subsection {Version 2.8, patchlevel 0, February 1999 {\tt CLAM\_2\_8\_0}}
+\begin{enumerate}
+\item  Piecewise fertilization method \m{pwf/1} incorporated into step-case
+          of induction proof-plan.
+        \item All tactics for the basic induction proof-plan are present.
+          Tactics for Presburger arithmetic not present.
+\end{enumerate}
+
+\subsection {Version 2.8, patchlevel 1, 7th April 1999 {\tt CLAM\_2\_8\_1}}
+\begin{enumerate}
+\item Manual brought up-to-date.
+\item \p{lib-load-dep/3} added.
+\end{enumerate}
+
+\subsection {Version 2.8, patchlevel 2, 18th May 1999 {\tt
+    CLAM\_2\_8\_2}}
+\begin{enumerate}
+        \item  If the switch \p{comm-proving/0} is true (default {\tt false}; see
+          \f{config/tactics.pl}) \clam attempts to show that binary functions are
+          commutative.  
+
+          The predicate \p{is-commutative/2} does these proofs by calling the
+          decision procedure and, if that is inapplicable or runs
+          beyond a prespecified time limit, the proof-planner itself
+          is called.  (The time limit is currently set to 60s for the
+          decision procedure and 60s for the planner; see \f{library.pl}.)
+          
+          If a function can be shown to be commutative, then commuted
+          versions of all defining equations for the function are
+          loaded. The rewriting tactics have not been extended to take
+          this into account yet, which is why the switch is by default off.
+
+        \item The timeout code has been fixed, and should now allow an
+          arbitrary number of nested timeouts to be set, ensuring that
+          timeouts cause exceptions at the correct points in the code. 
+        \end{enumerate}
+
+\subsection {Version 2.8, patchlevel 3, 26th April 2005 {\tt
+    CLAM\_2\_8\_3}}
+\begin{enumerate}
+   \item
+     Fixes to \LaTeX and sicstus to make compatible with later releases.
+   \item
+     Strip out non-functional support for quintus and swi Prolog dialects.
+   \item
+     Presburger decision procedure is \emph{off} by default.
+   \item
+     Tactics revised to allow running of default test suite.
+   \item
+     Step case method changed to strip out annotations in hypotheses
+     after induction.
+   \item
+     Timing code uses sicstus time-out library.
+   \item
+     Propositional method slightly extended to recapture 
+     symmetry of equations in strong fertilisation. 
+\end{enumerate}
+
+\subsection {Version 2.8, patchlevel 4, July 2006 {\tt
+    CLAM\_2\_8\_4}}
+
+Wider release of version working under current sicstus.
+
+\input footer

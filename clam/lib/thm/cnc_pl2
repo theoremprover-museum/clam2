@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: cnc_pl2,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: cnc_pl2,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>u1:pnat=>u2:pnat=>v:pnat=>u1=u2 in pnat=>plus(u1,v)=plus(u2,v)in pnat,_,_,_).

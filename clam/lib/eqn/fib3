@@ -1,0 +1,344 @@
+problem([]==>x:pnat=>fib(s(s(x)))=plus(fib(s(x)),fib(x))in pnat,
+autotactic(idtac),_193461,
+[problem([]==>x:pnat=>fib(s(s(x)))=plus(fib(s(x)),fib(x))in pnat,
+ repeat dequantify_once,lambda(x,_193539),
+ [problem([x:pnat]==>fib(s(s(x)))=plus(fib(s(x)),fib(x))in pnat,
+  compute([[simplify]]=_193586 in _193583),_193548,
+  [problem([x:pnat]==>cv_ind(s(s(x)),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])=plus(fib(s(x)),fib(x))in pnat,
+   compute([[1]]=_193678 in _193675)then beta_reduce,_193599,
+   [problem([x:pnat]==>pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=plus(fib(s(x)),fib(x))in pnat,
+    seq(a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,new[v0]),lambda(v0,_193872)of _193869,
+    [problem([x:pnat]==>a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,
+     repeat intro,lambda(a,_193918),
+     [problem([x:pnat,a:pnat]==>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,
+      reduce(false),axiom,
+      [problem([x:pnat,a:pnat]==>s(0)in pnat,
+       repeat intro,axiom,
+       [
+       ]),
+       problem([x:pnat,a:pnat]==>a in pnat,
+       intro,axiom,
+       [
+       ]),
+       problem([x:pnat,a:pnat]==>s(s(x))=0 in pnat=>void,
+       seq(0<*s(s(x)),new[v0]),lambda(v0,_194063)of _194060,
+       [problem([x:pnat,a:pnat]==>0<*s(s(x)),
+        arith(<*)then repeat intro,axiom,
+        [
+        ]) ext _194060,
+        problem([x:pnat,a:pnat,v0:0<*s(s(x))]==>s(s(x))=0 in pnat=>void,
+        intro(new[v1])then[clam_arith(v1:s(s(x))=0 in pnat),wfftacs],lambda(v1,su(su(su(any(v4),[v3 of v1],[v4]),[v2 of s(x)],[v3]),[term_of(arith1)],[v2])),
+        [
+        ]) ext _194063
+       ])
+      ]) ext _193918
+     ]) ext _193869,
+     problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat]==>pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=plus(fib(s(x)),fib(x))in pnat,
+     elim(v0,on(pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))),su(_194514,[v0 of pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))],[v1]),
+     [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat]==>pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,
+      repeat intro,axiom,
+      [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void]==>plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))in pnat,
+       simplify,_194800,
+       [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void]==>p_ind(cv_ind(s(x),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(x,[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),[~,v,s(v)])in pnat,
+        repeat intro,axiom,
+        [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>plus(v3 of pred(s(x)),v3 of pred(pred(s(x))))in pnat,
+         simplify then repeat intro,axiom,
+         [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>x<*s(x),
+          elim(x),p_ind(x,_195407,[v5,v6,_195413]),
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>0<*s(0),
+           intro,axiom,
+           [
+           ]) ext _195407,
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:pnat,v6:v5<*s(v5)]==>s(v5)<*s(s(v5)),
+           arith(<*),axiom,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:pnat,v6:v5<*s(v5)]==>v5<*s(v5),
+            intro,v6,
+            [
+            ])
+           ]) ext _195413
+          ]) ext _195278,
+          problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>p_ind(x,0,[a,~,a])<*s(x),
+          lemma(predless),su(_195977,[term_of(predless)],[v5]),
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x]==>p_ind(x,0,[a,~,a])<*s(x),
+           elim(v3,on(x)),su(_311893,[v3 of x],[v6]),
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x]==>x in{v2:pnat\v2<*s(x)},
+            repeat intro,axiom,
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x]==>x<*s(x),
+             apply(lemma(plesssucc,new[v6]))then (elim(v6,on(x),new[v7])then thin([v6]))then[try wfftacs,hyp(v7)],su(su(v7,[v6 of x],[v7]),[term_of(plesssucc)],[v6]),
+             [
+             ]) ext _312074
+            ]),
+            problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x,v6:pnat,v7:v6=v3 of x in pnat]==>p_ind(x,0,[a,~,a])<*s(x),
+            elim(x),p_ind(x,_312478,[v8,v9,_312484]),
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x,v6:pnat,v7:v6=v3 of x in pnat]==>p_ind(0,0,[a,~,a])<*s(0),
+             simplify then repeat intro,axiom,
+             [
+             ]) ext _312478,
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x,v6:pnat,v7:v6=v3 of x in pnat,v8:pnat,v9:p_ind(v8,0,[a,~,a])<*s(v8)]==>p_ind(s(v8),0,[a,~,a])<*s(s(v8)),
+             simplify,_312685,
+             [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x,v6:pnat,v7:v6=v3 of x in pnat,v8:pnat,v9:p_ind(v8,0,[a,~,a])<*s(v8)]==>v8<*s(s(v8)),
+              lemma(plesssucc2),su(_313098,[term_of(plesssucc2)],[v10]),
+              [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x,v6:pnat,v7:v6=v3 of x in pnat,v8:pnat,v9:p_ind(v8,0,[a,~,a])<*s(v8),v10:x:pnat=>x<*s(s(x))]==>v8<*s(s(v8)),
+               elim(v10,on(v8))then repeat intro,su(v11,[v10 of v8],[v11]),
+               [
+               ]) ext _313098
+              ]) ext _312685
+             ]) ext _312484
+            ]) ext _311893
+           ]) ext _195977
+          ]) ext _195839
+         ]) ext _195127,
+         problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>plus(v3 of pred(x),v3 of pred(pred(x)))in pnat,
+         compute([[unfold]]in _313489),_313357,
+         [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>p_ind(v3 of pred(x),v3 of pred(pred(x)),[~,v,s(v)])in pnat,
+          intro,axiom,
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>v3 of pred(x)in pnat,
+           intro,axiom,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>v3 in (v4:{v2:pnat\v2<*x}=>pnat),
+            repeat wfftac,axiom,
+            [
+            ]),
+            problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>pred(x)in{v2:pnat\v2<*x},
+            intro,axiom,
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>pred(x)in pnat,
+             repeat wfftac,axiom,
+             [
+             ]),
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>pred(x)<*x,
+             lemma(succlemma,new[v5])then (elim(v5,on(x),new[v6])then thin([v5]))then[thin([v6])then try wfftacs,(elim(v6,new[v5])then thin([v6]))then[hyp(v2),(elim(v5,new[x_,v6,v7])then thin([v5]))then rewrite(v6)then try wfftacs]],su(su(su(spread(v5,[x_,v6,_314385]),[v6 of v2],[v5]),[v5 of x],[v6]),[term_of(succlemma)],[v5]),
+             [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>pred(s(x_))<*s(x_),
+              simplify,_314415,
+              [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>x_<*s(x_),
+               clam_arith(_314696:x_<*s(x_)),su(su(v7,[v5 of x_],[v7]),[term_of(plesssucc)],[v5]),
+               [
+               ]) ext _314415
+              ]) ext _314385
+             ]),
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,v5:pnat]==>v5<*x in u(1),
+             repeat wfftac,axiom,
+             [
+             ])
+            ]),
+            problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,v5:{v2:pnat\v2<*x},v6:pnat]==>v6 in pnat,
+            repeat wfftac,axiom,
+            [
+            ])
+           ]),
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>v3 of pred(pred(x))in pnat,
+           repeat wfftac,axiom,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>p_ind(pred(x),0,[a,~,a])<*x,
+            lemma(succlemma,new[v5])then (elim(v5,on(x),new[v6])then thin([v5]))then[thin([v6])then try wfftacs,(elim(v6,new[v5])then thin([v6]))then[hyp(v2),(elim(v5,new[x_,v6,v7])then thin([v5]))then rewrite(v6)then try wfftacs]],su(su(su(spread(v5,[x_,v6,_315368]),[v6 of v2],[v5]),[v5 of x],[v6]),[term_of(succlemma)],[v5]),
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>p_ind(pred(s(x_)),0,[a,~,a])<*s(x_),
+             simplify,_315398,
+             [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>p_ind(x_,0,[a,~,a])<*s(x_),
+              elim(x_),p_ind(x_,_315700,[v5,v7,_315706]),
+              [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>p_ind(0,0,[a,~,a])<*s(0),
+               simplify then arith(<*)then wfftacs,axiom,
+               [
+               ]) ext _315700,
+               problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat,v5:pnat,v7:p_ind(v5,0,[a,~,a])<*s(v5)]==>p_ind(s(v5),0,[a,~,a])<*s(s(v5)),
+               simplify,_315875,
+               [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat,v5:pnat,v7:p_ind(v5,0,[a,~,a])<*s(v5)]==>v5<*s(s(v5)),
+                lemma(plesssucc2),su(_316218,[term_of(plesssucc2)],[v8]),
+                [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat,v5:pnat,v7:p_ind(v5,0,[a,~,a])<*s(v5),v8:x:pnat=>x<*s(s(x))]==>v5<*s(s(v5)),
+                 elim(v8,on(v5))then repeat intro,su(v9,[v8 of v5],[v9]),
+                 [
+                 ]) ext _316218
+                ]) ext _315875
+               ]) ext _315706
+              ]) ext _315398
+             ]) ext _315368
+            ]) ext _315126
+           ]),
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:s(s(x))=s(0)in pnat=>void,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,v5:pnat,v6:pnat]==>s(v6)in pnat,
+           repeat wfftac,axiom,
+           [
+           ])
+          ]) ext _313357
+         ]) ext _313353
+        ]) ext _194800
+       ]) ext _194796
+      ]),
+      problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat]==>pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=plus(fib(s(x)),fib(x))in pnat,
+      simplify,_316574,
+      [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat]==>p_ind(cv_ind(s(x),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(x,[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),[~,v,s(v)])=p_ind(cv_ind(s(x),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(x,[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),[~,v,s(v)])in pnat,
+       equality,axiom,
+       [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat]==>p_ind(cv_ind(s(x),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(x,[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),[~,v,s(v)])in pnat,
+        repeat intro,axiom,
+        [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>plus(v3 of pred(s(x)),v3 of pred(pred(s(x))))in pnat,
+         simplify,_317864,
+         [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>p_ind(v3 of x,v3 of p_ind(x,0,[a,~,a]),[~,v,s(v)])in pnat,
+          intro,axiom,
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>v3 of x in pnat,
+           repeat intro,axiom,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>x<*s(x),
+            clam_arith(_319306:x<*s(x)),su(su(v6,[v5 of x],[v6]),[term_of(plesssucc)],[v5]),
+            [
+            ]) ext _318956
+           ]),
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>v3 of p_ind(x,0,[a,~,a])in pnat,
+           repeat intro,axiom,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>p_ind(x,0,[a,~,a])<*s(x),
+            elim(x),p_ind(x,_320060,[v5,v6,_320066]),
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>p_ind(0,0,[a,~,a])<*s(0),
+             simplify then repeat intro,axiom,
+             [
+             ]) ext _320060,
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:pnat,v6:p_ind(v5,0,[a,~,a])<*s(v5)]==>p_ind(s(v5),0,[a,~,a])<*s(s(v5)),
+             simplify,_320442,
+             [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:pnat,v6:p_ind(v5,0,[a,~,a])<*s(v5)]==>v5<*s(s(v5)),
+              clam_arith(_321205:v5<*s(s(v5))),su(su(v8,[v7 of v5],[v8]),[term_of(plesssucc2)],[v7]),
+              [
+              ]) ext _320442
+             ]) ext _320066
+            ]) ext _319699
+           ]),
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:pnat,v6:pnat]==>s(v6)in pnat,
+           repeat wfftac,axiom,
+           [
+           ])
+          ]) ext _317864
+         ]) ext _317860,
+         problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>plus(v3 of pred(x),v3 of pred(pred(x)))in pnat,
+         repeat wfftac,axiom,
+         [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>p_ind(x,0,[a,~,a])<*x,
+          lemma(succlemma,new[v5])then (elim(v5,on(x),new[v6])then thin([v5]))then[thin([v6])then try wfftacs,(elim(v6,new[v5])then thin([v6]))then[hyp(v2),(elim(v5,new[x_,v6,v7])then thin([v5]))then rewrite(v6)then try wfftacs]],su(su(su(spread(v5,[x_,v6,_322421]),[v6 of v2],[v5]),[v5 of x],[v6]),[term_of(succlemma)],[v5]),
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>p_ind(s(x_),0,[a,~,a])<*s(x_),
+           simplify then elementary,su(su(v7,[v5 of x_],[v7]),[term_of(plesssucc)],[v5]),
+           [
+           ]) ext _322421
+          ]) ext _321959,
+          problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>p_ind(pred(x),0,[a,~,a])<*x,
+          lemma(succlemma3,new[v5])then (elim(v5,on(x),new[v6])then thin([v5]))then[thin([v6])then try wfftacs,(elim(v6,new[v5])then thin([v6]))then[hyp(v2),(elim(v5,new[v6])then thin([v5]))then[hyp(v4),(elim(v6,new[x_,v5,v7])then thin([v6]))then rewrite(v5)then try wfftacs]]],su(su(su(su(spread(v6,[x_,v5,_323337]),[v5 of v4],[v6]),[v6 of v2],[v5]),[v5 of x],[v6]),[term_of(succlemma3)],[v5]),
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v5:x=s(s(x_))in pnat]==>p_ind(pred(s(s(x_))),0,[a,~,a])<*s(s(x_)),
+           simplify,_323374,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v5:x=s(s(x_))in pnat]==>x_<*s(s(x_)),
+            clam_arith(_324119:x_<*s(s(x_))),su(su(v7,[v6 of x_],[v7]),[term_of(plesssucc2)],[v6]),
+            [
+            ]) ext _323374
+           ]) ext _323337
+          ]) ext _322846
+         ]) ext _321599
+        ]),
+        problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat]==>p_ind(cv_ind(s(x),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(x,[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),[~,v,s(v)])in pnat,
+        repeat intro,axiom,
+        [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>plus(v3 of pred(s(x)),v3 of pred(pred(s(x))))in pnat,
+         simplify then repeat intro,axiom,
+         [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>x<*s(x),
+          clam_arith(_325260:x<*s(x)),su(su(v6,[v5 of x],[v6]),[term_of(plesssucc)],[v5]),
+          [
+          ]) ext _324910,
+          problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>p_ind(x,0,[a,~,a])<*s(x),
+          seq(x=0 in pnat=>void),lambda(v5,_325665)of _325662,
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>x=0 in pnat=>void,
+           intro,lambda(v5,_326023),
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x=0 in pnat]==>void,
+            subst(hyp(v4),over(k,s(k)=s(0)in pnat=>void),x=0 in pnat),_326032,
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x=0 in pnat]==>x=0 in pnat,
+             intro,v5,
+             [
+             ]),
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(0)=s(0)in pnat=>void,v5:x=0 in pnat]==>void,
+             elim(v4),su(_327129,[v4 of _327136],[v6]),
+             [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(0)=s(0)in pnat=>void,v5:x=0 in pnat]==>s(0)=s(0)in pnat,
+              repeat intro,axiom,
+              [
+              ]) ext _327136,
+              problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(0)=s(0)in pnat=>void,v5:x=0 in pnat,v6:void]==>void,
+              elim(v6),any(v6),
+              [
+              ]) ext _327129
+             ]) ext _326032,
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(0)=s(0)in pnat=>void,v5:x=0 in pnat,k:pnat]==> (s(k)=s(0)in pnat=>void)in u(1),
+             repeat intro,axiom,
+             [
+             ])
+            ]) ext _326023,
+            problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void]==>x=0 in pnat in u(1),
+            repeat intro,axiom,
+            [
+            ])
+           ]) ext _325662,
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*s(x)}=>pnat,v2:s(x)=0 in pnat=>void,v4:s(x)=s(0)in pnat=>void,v5:x=0 in pnat=>void]==>p_ind(x,0,[a,~,a])<*s(x),
+           expand_s(x)then simplify then elementary,su(su(su(spread(v6,[x_,v7,su(su(v8,[v6 of x_],[v8]),[term_of(plesssucc2)],[v6])]),[v7 of v5],[v6]),[v6 of x],[v7]),[term_of(succlemma)],[v6]),
+           [
+           ]) ext _325665
+          ]) ext _325292
+         ]) ext _324537,
+         problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>plus(v3 of pred(x),v3 of pred(pred(x)))in pnat,
+         compute([[unfold]]in _363224),_362870,
+         [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>p_ind(v3 of pred(x),v3 of pred(pred(x)),[~,v,s(v)])in pnat,
+          intro,axiom,
+          [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>v3 of pred(x)in pnat,
+           intro,axiom,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>v3 in (v4:{v2:pnat\v2<*x}=>pnat),
+            repeat wfftac,axiom,
+            [
+            ]),
+            problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>pred(x)in{v2:pnat\v2<*x},
+            intro,axiom,
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>pred(x)in pnat,
+             repeat wfftac,axiom,
+             [
+             ]),
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>pred(x)<*x,
+             lemma(succlemma,new[v5])then (elim(v5,on(x),new[v6])then thin([v5]))then[thin([v6])then try wfftacs,(elim(v6,new[v5])then thin([v6]))then[hyp(v2),(elim(v5,new[x_,v6,v7])then thin([v5]))then rewrite(v6)then try wfftacs]],su(su(su(spread(v5,[x_,v6,_365452]),[v6 of v2],[v5]),[v5 of x],[v6]),[term_of(succlemma)],[v5]),
+             [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>pred(s(x_))<*s(x_),
+              simplify,_365482,
+              [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>x_<*s(x_),
+               clam_arith(_366207:x_<*s(x_)),su(su(v7,[v5 of x_],[v7]),[term_of(plesssucc)],[v5]),
+               [
+               ]) ext _365482
+              ]) ext _365452
+             ]),
+             problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,v5:pnat]==>v5<*x in u(1),
+             repeat wfftac,axiom,
+             [
+             ])
+            ]),
+            problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,v5:{v2:pnat\v2<*x},v6:pnat]==>v6 in pnat,
+            repeat wfftac,axiom,
+            [
+            ])
+           ]),
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>v3 of pred(pred(x))in pnat,
+           repeat wfftac,axiom,
+           [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void]==>p_ind(pred(x),0,[a,~,a])<*x,
+            lemma(succlemma,new[v5])then (elim(v5,on(x),new[v6])then thin([v5]))then[thin([v6])then try wfftacs,(elim(v6,new[v5])then thin([v6]))then[hyp(v2),(elim(v5,new[x_,v6,v7])then thin([v5]))then rewrite(v6)then try wfftacs]],su(su(su(spread(v5,[x_,v6,_367767]),[v6 of v2],[v5]),[v5 of x],[v6]),[term_of(succlemma)],[v5]),
+            [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>p_ind(pred(s(x_)),0,[a,~,a])<*s(x_),
+             simplify,_367797,
+             [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>p_ind(x_,0,[a,~,a])<*s(x_),
+              elim(x_),p_ind(x_,_368543,[v5,v7,_368549]),
+              [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat]==>p_ind(0,0,[a,~,a])<*s(0),
+               simplify then arith(<*)then wfftacs,axiom,
+               [
+               ]) ext _368543,
+               problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat,v5:pnat,v7:p_ind(v5,0,[a,~,a])<*s(v5)]==>p_ind(s(v5),0,[a,~,a])<*s(s(v5)),
+               simplify,_368940,
+               [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat,v5:pnat,v7:p_ind(v5,0,[a,~,a])<*s(v5)]==>v5<*s(s(v5)),
+                lemma(plesssucc2),su(_369727,[term_of(plesssucc2)],[v8]),
+                [problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,x_:pnat,v6:x=s(x_)in pnat,v5:pnat,v7:p_ind(v5,0,[a,~,a])<*s(v5),v8:x:pnat=>x<*s(s(x))]==>v5<*s(s(v5)),
+                 elim(v8,on(v5))then repeat intro,su(v9,[v8 of v5],[v9]),
+                 [
+                 ]) ext _369727
+                ]) ext _368940
+               ]) ext _368549
+              ]) ext _367797
+             ]) ext _367767
+            ]) ext _367303
+           ]),
+           problem([x:pnat,v0:a:pnat=>pnat_eq(s(s(x)),0,s(0),a)=a in pnat,v1:pnat_eq(s(s(x)),0,s(0),pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]))))=pnat_eq(s(s(x)),s(0),s(0),plus(cv_ind(pred(s(s(x))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))]),cv_ind(pred(pred(s(s(x)))),[v2,v0,pnat_eq(v2,0,s(0),pnat_eq(v2,s(0),s(0),plus(v0 of pred(v2),v0 of pred(pred(v2)))))])))in pnat,v3:v4:{v2:pnat\v2<*x}=>pnat,v2:x=0 in pnat=>void,v4:x=s(0)in pnat=>void,v5:pnat,v6:pnat]==>s(v6)in pnat,
+           repeat wfftac,axiom,
+           [
+           ])
+          ]) ext _362870
+         ]) ext _362866
+        ])
+       ]) ext _316574
+      ]) ext _194514
+     ]) ext _193872
+    ]) ext _193599
+   ]) ext _193548
+  ]) ext _193539
+ ]) ext _193461
+]).

@@ -1,0 +1,310 @@
+\def\rcsid{$Id: Introduction.tex,v 1.8 1999/03/31 11:08:49 img Exp $}
+\input header
+
+\chapter {Introduction}
+\label{intro}
+
+\pagenumbering{arabic}
+
+
+\section {The purpose of this document and how to read it}
+This document describes the \clam\ proof-planning system. It is
+intended as a user manual for people who want to use \clam\ without
+knowing too much about the insides, and as a programmer manual for
+people who want to change and improve \clam. These aims are of course
+sufficiently conflicting to warrant two separate documents, but the
+state of flux of \clam\ and related systems means it will be difficult
+enough to maintain one document, let alone two. In order to satisfy
+both goals in one document, this document is separated into two
+parts. Part~I, which is a {\em User Manual}, contains the information
+that will be needed by new users who want an introduction to \clam\
+and by people using the system without wanting to know too much of the
+inside. Part~II, the {\em Programmer Manual}, contains more
+information about the insides of \clam\ and is useful for people who
+want to change and improve \clam.
+
+For quick reference, appendices summarise the most frequently used
+predicates in \clam.
+
+If you are only an interested reader and do not intend to actually use
+\clam\ on a machine, then you should read only chapter~\ref{ch:gen}
+and sections~\reference{intro} and~\reference{methods}.  This will
+give you a general idea of the capabilities of \clam.
+
+\iffalse
+If you are a novice user and want to start playing straight away
+without ploughing through too many pages of manual, read this section,
+\S\reference{library} (on the library mechanism) and
+\S\reference{top-level-preds} (which gives a summary of
+top-level predicates).
+\fi
+
+\section {What is \protect \clam?}
+
+\clam\ is an implementation of the notion of {\em \inx {proof-plan}s}.
+It is built on top of the Oyster proof development system. Oyster is
+an interactive environment for developing proofs in Martin-L\"{o}f's
+Intuitionistic Type Theory\footnote {For literature references, see
+section \reference{readings}.}, and is a redevelopment of the
+\inx{Nuprl} system that was implemented at Cornell University. \clam\
+is an extension of Oyster to support the idea of proof-plans. It
+provides a representation mechanism for {\em \inx{method}s}, and
+provides a language for formulating methods. It also provides a number
+of {\em \inx{planner}s\/} which allow the automatic construction of
+proof-plans out of combinations of methods. Corresponding to each of
+the methods \clam\ has a {\em \inx{tactic}\/} which allows the
+execution of the method, and consequently the execution of a plan
+consisting of individual methods.
+
+{\clam}'s development started in September 1988, and the first version
+version of \clam\ was documented and available for general use in
+February 1989. As is to be expected, \clam\ is in a state of flux and
+will no doubt change frequently and drastically in the near future.
+However, the current version to which this document applies
+(\inx{version} \version) will remain available unchanged until a new
+version will be released, together with a new version of this document.
+
+Since \clam\ is built on top of \inx{Oyster}, the mode of interaction
+is the same as in Oyster: Users type commands to the Prolog
+interpreter, and some of these commands will be special Oyster or
+\clam\ commands. Everything that holds for Oyster will also hold for
+\clam.
+
+This document expects both \clam\ and Oyster to be installed on your
+system as top-level commands, so that typing {\tt clam} or {\tt
+oyster} to your operating system will start up the corresponding
+system.
+
+The current implementations\index{implementation} of both \clam\ and
+Oyster run under 
+\begin{itemize}
+\item \inx {Quintus Prolog} (tested with versions~3.1, 3.2 and~3.3).\index{implementation!Quintus Prolog}
+\item \inx {SWI Prolog}\index{implementation!SWI Prolog} (version 2.7).
+\item \inx {SICStus Prolog}, versions~2.1 and 3.\index{implementation!SICStus Prolog}
+\end{itemize}
+
+\section {Required knowledge}
+
+This document is written under the assumption that readers will have a
+basic knowledge about certain topics. If you lack this knowledge, then
+section \reference{readings} will tell you where to go and look things
+up before you continue reading this document or using \clam. Both this
+note and the \clam\ program assume knowledge about the following
+topics:
+\begin{itemize}
+\item
+A  familiarity with Prolog as a programming language.
+\item
+(To a certain extent) Martin-L\"{o}f type theory, and in particular
+the version of it used in the Cornell Nuprl system and its Edinburgh
+derivative Oyster.
+\item
+(To an even lesser extent) ability to use Oyster. In particular, I expect you to be familiar with
+the syntax used in the Oyster logic, with inference rules of the
+Oyster logic, and with the following predicates:
+\begin{tabbing}
+\p{refinement/[0;1]}	\= \p{refinement/[0;1]}	\=
+\p{refinement/[0;1]}	\kill \p{create-thm/2}	\>
+\p{load-thm/2}	\> \p{save-thm/2}	\\ \p{create-def/2}	\>
+\p{create-def/1}	\> \p{add-def/1}	\\
+\p{save-def/2}		\> \p{select/[0;1]}	\>
+\p{pos/[0;1]}	\\ \p{top/0}		\> \p{up/0}		\>
+\p{down/[0;1]}	\\ \p{next/[0;1]}		\>
+\p{display/0}	\> \p{snapshot/[0;1]}	\\ \p{goal/[0;1]} 	\>
+\p{hypothesis/1}	\> \p{hyp-list/[0;1]}	\\
+\p{refinement/[0;1]}	\> \p{status/[0;1]}	\>
+\p{extract/[0;1]}	\\ \p{eval/2}		\>
+\p{autotactic/[0;1]}	\> \p{universe/[0;1]}	\\
+\p{apply/1}		\> \p{repeat/1}		\>
+\p{then/2}		\\ \p{try/1}		\>
+\p{complete/1}.	\> \p{idtac/0}		\\
+\end{tabbing}
+\item
+The general notion of proof-plans, methods and tactics.
+\end{itemize}
+
+\section {Related reading}
+\label{readings}
+Below are a number of \inx{references} that will supply more
+information about the topics mentioned above:
+\begin{itemize}
+\item \cite{primer} for a basic introduction to Prolog.     
+\item \cite{artofprolog} for a more advanced book on Prolog.
+\item \begin{itemize}
+        \item \cite{quintus,sicstus} for the reference manual of
+Quintus and SICStus Prolog.\inxx{Quintus Prolog}\inxx{SICStus Prolog}.
+
+\iffalse
+\item \cite{swi} for the reference manual of \inx{SWI Prolog}.
+\fi
+\end{itemize}
+
+\item \cite{martin-lof79} about Intuitionistic Type Theory in general
+\item \cite{nuprl-book} about the version of this logic used in the
+       Nuprl and Oyster systems.
+\item \cite{pub349} for a general introduction to the notion of proof
+       plans (Notice however that much of the technical details of
+that paper are now out of date, but the original ideas still stand
+firmly).
+\item \cite{bb423} for a gentle introduction to Oyster.
+\item \cite{wp214} for detailed information about Oyster.
+\item \cite{oyster-clam} for a short overview of the Oyster-\clam\
+       systems.
+\item \cite{pub413} for early experiments using \clam\ to construct
+       inductive proof-plans.
+\item \cite{pub419} for a detailed analysis of one of the important
+       methods in \clam.
+\item \cite{pub459,pub567} for a detailed description of the concept of wave-rules.
+\item \cite{boyerbook} for early work in the field of automated
+       inductive theorem proving.
+\end{itemize}
+
+\section {Structure of this note}
+
+The rest of this document has the following structure. Part I is the {\em
+User Manual\/} and describes:
+\begin{itemize}
+\item
+The mechanism for representing methods and the language that can be
+used for formulating them, plus the methods that are currently
+implemented in \clam\ (section \reference{methods}).
+\item
+The mechanism for storing \index*{method}s and \index*{submethod}s (section
+\reference{methods-db}).
+\item
+A number of planners that can be used to build proof-plans out of
+these methods (section \reference{planners}).
+\item
+The tactics that can be used to execute proof-plans (section
+\reference{tactics}).
+\item
+A number of utilities that make daily life with \clam\ bearable, such
+as a pretty-printer, a tracer and a simple library mechanism (section
+\reference{user-utils}).
+
+\iffalse
+\item
+The appendices \S\reference{top-level-preds},
+\S\reference{library-preds},
+\S\reference{method-ling-predicates-summary},
+\S\reference{method-ling-connectives-summary} and
+\S\reference{repertoire-summary} should also be regarded as part of
+the {\em User Manual}.
+
+Appendix \S\reference{top-level-preds} provides a
+summary of the predicates that you are most likely to use when running
+\clam. Appendix \S\reference{library-preds} does the same for the
+predicates that can be used to operate {\clam}'s library mechanism.
+Appendices \S\reference{method-ling-predicates-summary} and
+\S\reference{method-ling-connectives-summary} summarise the predicates
+and connectives that can be used when writing methods, and appendix
+\S\reference{repertoire-summary} summarises the currently available
+methods.
+\fi
+\end{itemize}
+
+Part II is the {\em Programmer Manual}, and contains more technical
+information about the insides of \clam:
+\begin{itemize}
+\item
+The representation of induction schemes.  In the Oyster logic it is
+necessary to justify induction schemes and this is done by proving a
+higher-order theorem of the appropriate form (section \reference{schemes}).
+\item
+The mechanism for constructing iterative methods (section
+\reference{iterators}).
+\item
+The mechanisms used for storing theorems, lemmas, definitions etc.
+(section \reference{caching}).
+\item
+A number of utilities that make life as a \clam\ programmer bearable
+(section \reference{programmer-utils}).
+\item
+Appendix \reference{source-files} describes the organisation of
+{\clam}'s source code.
+\item
+Appendix \reference{release-notes} describes the changes that were
+made in each release of \clam.
+\end{itemize}
+
+\section {Notation}
+
+\inxx{notation} I have tried as much as possible to be consistent in
+the use of different type-faces, etc. Normal text will be in normal
+Roman font, except where new terms get introduced, or where emphasis
+is needed, when I use {\em italic Roman font}.  Whenever I refer to
+pieces of Prolog code or type theory (either whole predicates, or
+terms or variables), I use {\tt typewriter font}.
+
+However: Because \inx{underscore}s {\tt \_} are a pain to print in
+\LaTeX, I have used \inx{hyphen}s {\tt -} instead of underscores in
+many places. Underscores occur in the Prolog code inside functor-names
+and as anonymous variables. It should always be clear from the context
+when a {\tt -} in the manual is actually a {\tt \_} in the code.
+
+Predicates are denoted by {\tt f/n}, which stands for the Prolog
+predicate {\tt f} of arity $n$. The notation {\tt f/[n;m]} stands for
+the Prolog predicates {\tt f} of arity $n$ and $m$.
+
+Predicate documentation is headed by the name of the predicate which
+is surrounded by horizontal lines. All references to predicates are
+included as entries in the predicate index on the last pages of this
+note.  Many other key words are listed in the normal index printed on
+the pages just before the predicate index. The defining entry for a
+predicate is distinguished in the predicate index by an underlined
+page number.
+
+Whenever a feature of \clam\ is discussed that is not to my liking,
+and which is a prime candidate for improvement, a \inx{frowny symbol}
+\notnice will be printed in the margin, like here.
+
+\section {Version control}
+\index{version control}
+\clam{} is large programming project.  There are many versions of
+\clam, some of which are fixed and some of which are evolving slowly,
+and some of which are highly experimental and liable to sudden
+change.  In some cases, radically different concepts and
+implementation paradigms have to be integrated into a particular
+\clam{} version and these changes are typically done with some degree
+of overlap with older, perhaps buggy code. 
+
+In an effort to control the multiplicity of versions, the Mathematical
+Reasoning Group has instituted a version control system for \clam.
+This allows us to retrieve, compare and develop \clam{} versions.  The 
+version control system is called `CVS'; some information on using CVS
+and Clam is given in Appendix~\reference{app:cvs-clam}.
+
+  It is useful to say a
+little about version numbering so that users have a picture about what
+is and what is not assigned a version number, and how that number can
+be used to describe a particular \clam{} system.
+
+First, there is a top-level \clam{} `version' number: it has the form
+$R.I.P$ where $R$ is a release number, $I$ is an instance of that
+release and $P$ is the patchlevel of that instance.  When \clam{}
+starts, it prints the RIP number.  This number uniquely identifies all
+parts of \clam: the predicate \p{clam-version/1} may be used to show
+the RIP version.
+
+Release numbers increase slowly over time and would correspond to
+significant alterations in \clam's architecture, operation, or
+user-interface, for example.
+
+Instance numbers are increased for significant changes that are not
+large enough to warrant a new release: for example, a new collection
+of methods, or an essentially different implementation of some
+existing technique may well receive a new instance number.
+
+Patchlevel increases are for all other changes: small extensions,
+bug-fixes, and so on.
+
+In addition, the many files of which \clam{} is composed each has a
+version number, but it is important to note that this version number
+is not particular to any single RIP (e.g., two \clam's with different
+RIPs may share a file with the same version number) and furthermore,
+the version numbering of files is not of the form $R.I.P$.  Please do
+not confuse the two.  File versions may be retrieved using the
+predicate \p{file-version/1} of all source files constituting \clam{}
+(at the moment this does not yet include \index*{method}s and \index*{submethod}s).
+
+\input footer

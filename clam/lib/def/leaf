@@ -1,0 +1,14 @@
+/*
+ *
+ * $Id: leaf,v 1.1 1995/06/10 15:40:53 armando Exp $
+ * 
+ * $Log: leaf,v $
+ * Revision 1.1  1995/06/10 15:40:53  armando
+ * Reinserted into the main trunk
+ *
+ * Revision 1.1.4.4  1995/05/29  17:11:25  armando
+ * Comment char changed
+ *
+ */
+
+leaf(t)<==>inl(t).

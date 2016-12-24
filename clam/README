@@ -1,0 +1,61 @@
+Making Oyster/Clam
+------------------
+
+To compile and run Clam you will need SICStus
+Prolog (you will also need the "make" program to help compile Clam),
+and you will need the Oyster distribuition.  (Both Oyster and Clam
+distributions come in the Oyster/Clam distribution.)
+
+1.  Configuration.
+      * Building the Prolog saved state may need the setting of
+	certain variables in clam/make/Makefile:
+
+	The variable SRC should default to the top-level dierctory of
+	distribution.   Continuing the example above, this would be
+	SRC=.../oyster-clam 
+
+	This version only runs under sicstus v4.
+
+	Set SOCKET_SUPPORT=yes if you want to compile socket support.
+
+      * (OPTIONAL) Edit the config files in the clam/config/ directory
+	to adjust the pre-loaded methods, hints and tactics.  
+
+2.  Make a Prolog saved state of Clam.
+	cd into the .../oyster-clam/clam/make/ directory and type
+	
+	make
+
+	"make clean" will empty the directory of everything not 
+	present in the distribution.
+	
+	The Prolog saved state containing Oyster/Clam will be
+	clam.sic; the script ' clam ' in that directory runs clam.
+
+3.  The Clam manual can be found in clam/info-for-users/clam-manual/manual.ps.
+    Type "make" there to LaTeX the manual to produce a DVI file (but
+    without the University crest on the first page).
+ 
+    The Oyster manual is in the oyster directory;  type "make" there
+    to build a DVI file.  It is not necessary to know about oyster
+    to use the Clam system.
+
+4. 
+To run the small benchmark.
+
+?- trace_plan(_,20).               % terse (optional)
+?- trace_plan(_,23).               % verbose (optional)
+?- trace_plan(_,40).               % very verbose (optional)
+?- do_all(dplan(Time),save,1).     % timeout Time in milliseconds for each 
+                                   % plan formation;
+                                   % dplan(60000) should be enough.
+
+-----------------------------------------------------------------------------
+					Maths Reasoning Group
+					CISA, School of Informatics
+					University of Edinburgh
+					Edinburgh EH8 9LE
+					Scotland
+
+					http://dream.dai.ed.ac.uk/
+

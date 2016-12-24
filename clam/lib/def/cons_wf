@@ -1,0 +1,1 @@
+{cons_wf} <==> lambda(u,lambda(v,h:pnat#v=h::u in pnat list)).

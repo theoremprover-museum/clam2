@@ -1,0 +1,20 @@
+/*
+ * @(#)$Id: mapcar1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: mapcar1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>f: (int=>int)=>mapcar(nil,f)=nil in int list,
+intro,lambda(f,_9462),
+[problem([f:int=>int]==>mapcar(nil,f)=nil in int list,
+ simplify then repeat intro,axiom,
+ [
+ ]) ext _9462,
+ problem([]==> (int=>int)in u(1),
+ repeat intro,axiom,
+ [
+ ])
+]).

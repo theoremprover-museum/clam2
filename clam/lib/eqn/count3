@@ -1,0 +1,36 @@
+/*
+ * @(#)$Id: count3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: count3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>a:int=>h:int=>t:int list=> (a=h in int=>void)=>count(a,h::t)=count(a,t)in pnat,
+repeat dequantify_once,lambda(a,lambda(h,lambda(t,_7688))),
+[problem([a:int,h:int,t:int list]==> (a=h in int=>void)=>count(a,h::t)=count(a,t)in pnat,
+ intro,lambda(v0,_7748),
+ [problem([a:int,h:int,t:int list,v0:a=h in int=>void]==>count(a,h::t)=count(a,t)in pnat,
+  compute([[simplify]]=_7815 in _7812),_7757,
+  [problem([a:int,h:int,t:int list,v0:a=h in int=>void]==>int_eq(a,h,s(list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])),list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)]))=count(a,t)in pnat,
+   seq(int_eq(a,h,s(list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])),list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)]))=list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])in pnat,new[v1]),lambda(v1,_8000)of _7997,
+   [problem([a:int,h:int,t:int list,v0:a=h in int=>void]==>int_eq(a,h,s(list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])),list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)]))=list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])in pnat,
+    reduce(false)then repeat intro,axiom,
+    [
+    ]) ext _7997,
+    problem([a:int,h:int,t:int list,v0:a=h in int=>void,v1:int_eq(a,h,s(list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])),list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)]))=list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])in pnat]==>int_eq(a,h,s(list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])),list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)]))=count(a,t)in pnat,
+    subst(over(v2,v2=count(a,t)in pnat),int_eq(a,h,s(list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])),list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)]))=list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])in pnat)then[univ_elim(v1),idtac,wfftacs],_8130,
+    [problem([a:int,h:int,t:int list,v0:a=h in int=>void,v1:int_eq(a,h,s(list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])),list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)]))=list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])in pnat]==>list_ind(t,0,[hl,~,nr_of_a_in_tl,int_eq(a,hl,s(nr_of_a_in_tl),nr_of_a_in_tl)])=count(a,t)in pnat,
+     simplify then equality then repeat intro,axiom,
+     [
+     ]) ext _8130
+    ]) ext _8000
+   ]) ext _7757
+  ]) ext _7748,
+  problem([a:int,h:int,t:int list]==> (a=h in int=>void)in u(1),
+  repeat intro,axiom,
+  [
+  ])
+ ]) ext _7688
+]).

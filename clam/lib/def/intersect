@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: intersect,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: intersect,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+intersect(l1,l2)<==>term_of(intersect)of l1 of l2.

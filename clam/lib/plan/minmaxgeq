@@ -1,0 +1,21 @@
+/*  This is a proof plan for theorem:
+    minmaxgeq: []==>a:pnat=>b:pnat=>c:pnat=>d:pnat=>(geq(a,c)#geq(b,d))=>geq(max(a,b),min(c,d))
+    planner = dplan, clam_version(2.7.0), oyster_version(1.20)
+
+    Time taken to find plan: 5610ms
+    Environment:
+    []
+ */
+
+/* This is the pretty-printed form
+ind_strat([(a:pnat)-s(v1),(b:pnat)-s(v0)]) then 
+  [normalize(...) then 
+     base_case(...),
+   normalize(...) then 
+     base_case(...),
+   ind_strat([(c:pnat)-s(v4),(d:pnat)-s(v3)])
+  ]
+
+*/
+
+proof_plan([]==>a:pnat=>b:pnat=>c:pnat=>d:pnat=>(geq(a,c)#geq(b,d))=>geq(max(a,b),min(c,d)),minmaxgeq,5610,ind_strat(induction(lemma(pairs)-[(a:pnat)-s(v1),(b:pnat)-s(v0)])then[base_case(sym_eval(normalize_term([reduction([1,1],[geqzero,equiv(left)]),reduction([1,2],[max1,equ(pnat,left)])]))),base_case(sym_eval(normalize_term([reduction([2,1],[geqzero,equiv(left)]),reduction([1,2],[max2,equ(pnat,left)])]))),step_case(ripple(direction_out,wave(direction_out,[1,2],[max3,equ(pnat,left)],[]))then[idtac])])then[normalize([normal(univ_intro),normal(univ_intro),normal(imply_intro),normal(conjunct_elim(v1,[v2,v3]))])then[base_case(sym_eval(equal(v2,right)then[normalize_term([reduction([2],[min1,equ(pnat,left)]),reduction([],[geq1,equ(u(1),left)])])])then[elementary(istrue)])],normalize([normal(univ_intro),normal(univ_intro),normal(imply_intro),normal(conjunct_elim(v1,[v2,v3]))])then[base_case(sym_eval(equal(v3,right)then[normalize_term([reduction([2],[min2,equ(pnat,left)]),reduction([],[geq1,equ(u(1),left)])])])then[elementary(istrue)])],ind_strat(induction(lemma(pairs)-[(c:pnat)-s(v4),(d:pnat)-s(v3)])then[base_case(sym_eval(normalize_term([reduction([1,1],[geq1,equ(u(1),left)]),reduction([2,2],[min1,equ(pnat,left)]),reduction([2],[geq1,equ(u(1),left)])]))then[elementary(intro(new[v4])then[istrue,wfftacs])]),base_case(sym_eval(normalize_term([reduction([2,1],[geq1,equ(u(1),left)]),reduction([2,2],[min2,equ(pnat,left)]),reduction([2],[geq1,equ(u(1),left)])]))then[elementary(intro(new[v4])then[istrue,wfftacs])]),step_case(ripple(direction_out,wave(direction_out,[2,2],[min3,equ(pnat,left)],[])then[wave(direction_out,[2],[geq3,equ(u(1),left)],[])then[wave(direction_out,[2,1],[geq3,equ(u(1),left)],[])then[wave(direction_out,[1,1],[geq3,equ(u(1),left)],[])]]])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,v2))])])],dplan).

@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: acc_ord,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: acc_ord,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+{acc_ord}<==>lambda(x,lambda(y,x=s(0)in{posint}\p:{prime}#y=times(p,x)in{posint})).

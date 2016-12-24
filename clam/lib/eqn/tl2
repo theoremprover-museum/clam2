@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: tl2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: tl2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>a:int=>l:int list=>tl(a::l)=l in int list,
+simplify,_7801,
+[problem([]==>a:int=>l:int list=>l=l in int list,
+ repeat intro,lambda(a,lambda(l,axiom)),
+ [
+ ]) ext _7801
+]).

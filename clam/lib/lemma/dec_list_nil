@@ -1,0 +1,25 @@
+problem([]==>t:u(1)=>h:t list=>h=nil in t list\h=nil in t list=>void,
+intro then intro,lambda(t,lambda(h,_2344)),
+[problem([t:u(1),h:t list]==>h=nil in t list\h=nil in t list=>void,
+ elim(h),list_ind(h,_2398,[v0,v1,v2,_2406]),
+ [problem([t:u(1),h:t list]==>nil=nil in t list\nil=nil in t list=>void,
+  intro(left)then elementary,inl(axiom),
+  [
+  ]) ext _2398,
+  problem([t:u(1),h:t list,v0:t,v1:t list,v2:v1=nil in t list\v1=nil in t list=>void]==>v0::v1=nil in t list\v0::v1=nil in t list=>void,
+  intro(right),inr(_2561),
+  [problem([t:u(1),h:t list,v0:t,v1:t list,v2:v1=nil in t list\v1=nil in t list=>void]==>v0::v1=nil in t list=>void,
+   intro(new[v3])then[clam_arith(v3:v0::v1=nil in t list),wfftacs],lambda(v3,su(su(su(su(su(any(v5),[v7 of v3],[v5]),[v6 of v1],[v7]),[v5 of v0],[v6]),[v4 of t],[v5]),[term_of(list1)],[v4])),
+   [
+   ]) ext _2561,
+   problem([t:u(1),h:t list,v0:t,v1:t list,v2:v1=nil in t list\v1=nil in t list=>void]==>v0::v1=nil in t list in u(1),
+   repeat wfftac,axiom,
+   [
+   ])
+  ]) ext _2406
+ ]) ext _2344,
+ problem([t:u(1)]==>t list in u(1),
+ repeat wfftac,axiom,
+ [
+ ])
+]).

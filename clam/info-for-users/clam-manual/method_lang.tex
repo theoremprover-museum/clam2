@@ -1,0 +1,2162 @@
+\def\rcsid{$Id: method_lang.tex,v 1.14 2003/01/22 19:35:23 smaill Exp $}
+\input header
+
+\section {The method language}
+\label{method-language}
+
+Although it is possible to use arbitrary Prolog code in the
+formulation of the pre- and post-conditions slots, users should only
+use a designated language for this purpose. Part of the goal of the
+whole proof-plan enterprise is to try and formulate a good language
+for controlling proof search, and this language should exactly be the
+one used inside the method-slots. This {\em \inx{method language}\/}
+consists of a set of predicates and a set of logical connectives.
+Below we first discuss the predicates of the method language, followed
+by a discussion of the logical connectives of the method-language.
+\iffalse A summary of the method-language can be found in
+appendices~\reference{method-ling-predicates-summary}
+and~\reference{method-ling-connectives-summary}.\fi Note that the
+definitions below extend and override the earlier definitions
+from~\cite{pub349}.
+
+In the specification of a predicate, variables are annotated with
+\inx{mode annotations}: {\tt \inx{$+$}}, {\tt \inx{$-$}} or {\tt \inx{?}}.
+This notation is borrowed from the \inx{Quintus Prolog} Reference Manual and
+the following is freely copied from \cite{quintus}:
+\begin{description}
+\item[{\tt +}]
+This argument is an input to the predicate. It must initially be
+instantiated or the predicate fails (or behaves unpredictably).
+\item[{\tt -}]
+This argument is an output. It is returned by the predicate. That is,
+the output value is unified with any value which was supplied for this
+argument. The predicate fails if this unification fails.
+\item[{\tt ?}]
+This argument does not fall into either of the above categories. It
+may be either input or output, and may be instantiated or not, as
+required by its application.
+\end{description}
+
+\subsection {The method language: predicates}
+\label{method-preds}
+
+
+The predicates are listed in alphabetical order.
+\begin{predicate}{active-inductive-hypothesis/2}{active-inductive-hypothesis(V:H,Hs)}%
+{\tt V:H} is an {\em active\/} hypothesis appearing in hypothesis list
+{\tt Hs}.  An active hypothesis is one which is a viable inductive
+target: it has status {\tt raw} or status {\tt notraw(\_)}.
+(cf. \p{induction-hypothesis/[3;5]}).  See
+\S\reference{sec:indhyps} for a more information on hypothesis status.
+\end{predicate}
+
+
+\begin{predicate}{adjust-existential-vars/4}{adjust-existential-vars(+EV,+Bs,-NewEV,-S)}%
+{\tt EV} is an association list with elements of the form {\tt
+Term-Var:Typ} where {\tt Term} denotes the instantiation for the
+existential variable {\tt Var} of type {\tt Type}. The instantiation
+may be partial so additional existential variables may be introduced.
+To prevent the introduction of name clashes the list of current
+bindings, {\tt Bs}, is required. {\tt NewEV} and {\tt S}
+denote the refined list of existential variables and the substitution
+list for the partially instantiated existential variables
+respectively.
+\end{predicate}
+
+
+\begin{predicate}{annotations/4}{annotations(?SinksSpec,?FrontsSpec,+T1, ?T2)}%
+{\tt T1} and {\tt T2} are identical except that all meta-level
+annotations are absent from {\tt T2}.  Wave-fronts and holes of {\tt
+T1} are those indicated in {\tt FrontsSpec}; sinks of {\tt T1} are
+indicated in {\tt Sinks} (using the representation described in
+\p{wave-fronts/3} and \p{sinks/3}) and in \S\reference{sec:representation}.
+\end{predicate}
+
+\begin{predicate}{ann-exp-at/5}{ann-exp-at(+TopLevel, ?Flag, +Exp, ?Pos, ?SubExp)}%
+Expression {\tt Exp} contains {\tt SubExp} at position {\tt Pos}. {\tt
+TopLevel} and {\tt Flag} are either {\tt in\_hole} or {\tt in\_front},
+indicating outermost annotations being exclusively wave-fronts {\em
+or\/} exclusively wave-holes, respectively.  {\tt TopLevel} refers to
+the status of {\tt Exp}; {\tt Flag} refers to the status of {\tt
+SubExp}.
+
+\examplepred{ann-exp-at/5}
+\begin{verbatim}
+?- ann-exp-at(in_hole,in_hole,``f(x,{y})'', [2], y)
+\end{verbatim}
+succeeds, but
+\begin{verbatim}
+?- ann-exp-at(in_hole,in_front,``f(x,{y})'', _, y).
+\end{verbatim}
+fails since {\tt y} is not in a wave-front, it is in a wave-hole.
+Similarly,
+\begin{verbatim}
+?- ann-exp-at(in_front,in_front,f(x,{y}), [], f(x,{y})).  
+?- ann-exp-at(in_front,in_front,f(x,{y}), [1], x).
+\end{verbatim}
+both succeed, but
+\begin{verbatim}
+?- ann-exp-at(in_front,in_front,f(x,{y}), _, y).
+\end{verbatim}
+fails.
+
+(See \p{exp-at/3} for more details of positions etc.)
+\end{predicate}
+
+\begin{predicate}{ann-exp-at/3}{ann-exp-at(+Exp, ?Pos, ?SubExp)}%
+Is a equivalent to {\tt ann-exp-at(in-hole,in-hole,Exp, Pos, SubExp)}.
+\end{predicate}
+
+\begin{predicate}{cancel-rule/2}{cancel-rule(?Exp,?RuleName:?Rule)}%
+{\tt RuleName} is the name of an equation which allows us to replace
+{\tt Exp} with some term that is an instance of one of its proper
+subterms. A cancellation rule corresponds to an instance of a
+substitution rule.
+\end{predicate}
+
+\begin{predicate}{canonical-form/3}{canonical-form(+Exp, +Rules, ?NewExp)}%
+{\tt NewExp} is the result of applying to {\tt Exp} the rewrite rules
+from {\tt Rules} as often as possible to as many subexpressions as
+possible.  In mode {\tt (+,+,-)} this generally  only makes sense if
+{\tt Rules} is terminating.
+The elements of the list {\tt Rules} are supposed to be of the form
+{\tt RuleName:Rule}, where each {\tt Rule} is a universally quantified
+equality.
+
+\begin{ex}\examplepred{canonical-form/3}
+{\small\begin{verbatim}
+| ?- canonical_form(plus(s(0),y),
+                    [plus1:x:pnat=>plus(0,x)=x in pnat,
+                     plus2:x:pnat=>y:pnat=>
+                       plus(s(x),y)=s(plus(x,y)) in pnat],P).
+
+P = s(y)
+\end{verbatim}
+}
+\end{ex}
+\end{predicate}
+
+\begin{predicate}{casesplit-suggestion/3}{casesplit-suggestion(H,G,Scheme)}%
+{\tt Scheme} describes an casesplit scheme, that would, according to
+the heuristics (see below), be a good choice.  This casesplit scheme
+is assumed to be valid---this must be checked separately.  
+
+{\tt Scheme} is actually a description of a substitution of terms for
+universally quantified variables appearing in the sequent {\tt H==>G}.
+Let {\tt G'} be the necessarily different goal resulting from the
+application of the the substitution {\tt Scheme} to {\tt G}.  (In
+contrast to \p{induction-suggestion/3}, which is otherwise very
+similar to {\tt casesplit-suggestion/3}, no wave-fronts are
+introduced by {\tt casesplit-suggestion/3}.)
+
+Each term introduced at each occurrence of each substituted variable
+is said either to be {\em\inx{unflawed}\/} or {\em\inx{flawed}},
+according to whether or not a reduction-rule can be used to rewrite
+this term or one of its superterms.  (Again, notice the difference
+between induction analysis and casesplit analysis: induction uses {\em
+wave-rules\/} whereas casesplit uses {\em reduction-rules}.)
+
+{\tt casesplit-suggestion/3} builds a so-called unflawed/flawed table
+according to almost all the various combinations of substitutions and
+variables; substitutions are computed by narrowing with the
+reduction-rules in the database.  Not all substitutions will make sense
+as casesplits---this must be checked separately (see \p{scheme/3} for
+one way of doing this).
+
+{\tt induction-suggestion/3} generates suggestions by considering all
+permutations of all universally quantified variables with all possible
+induction terms.  Induction terms are generated lazily, subject to
+the criterion that they can be rippled by some wave-rule present in
+the database.  Hence the term {\em\inx{ripple analysis}}.  In this way,
+each occurrence of all variables can  be tagged with a collection of
+candidate inductions which describes:
+\begin{itemize}
+\item
+ the terms to be substituted for the variables and the way in which
+ these  `induction terms' are to be annotated: we call this an
+ annotated substitution.
+\item any variables which must remain as sinks
+\item how well this annotated substitution fares.  That is, the
+ unflawed/flawed assignment for all variables in the domain of the
+substitution.  An occurrence for which a wave-rule is applicable is
+unflawed; otherwise it is flawed.
+\end{itemize}
+
+
+All of this information is then processed by a heuristic which
+implements the following:
+\begin{enumerate}
+\item prefer inductions on a variable which {\em minimizes\/} the
+number of flawed occurrences (in the case of
+\p{unflawed-induction-suggestion/3} this number must be zero);
+\item prefer inductions on a variable which {\em minimizes\/} the
+(sum of the) depth in the term tree of all flawed occurrences;
+\item inductions on a variable which {\em minimizes\/} the
+number of unflawed occurrences;
+\end{enumerate}
+These criteria are used (in lexicographic order) in order to rank
+various suggestions.
+
+\begin{ex}
+The conjecture for the associativity of multiplication
+\begin{verbatim}
+a:pnat=>
+  b:pnat=>
+    c:pnat=>
+      times(a,times(b,c)) = times(times(a,b),c) in pnat
+\end{verbatim}
+together with the definitions of multiplication and addition, has the
+following unflawed/flawed table:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}\hline
+\multicolumn{2}{|c|}{\sl Annotated substitution}  & Position & Status & Sinks\\
+{\sl Ind. var.} & {\sl Ind. term} & & & \\\hline
+{\tt a} & \wf{{\tt s(}\wh{\tt v0}{\tt )}} & {\tt [1,1,2,1]} & unflawed & $\{\}$ \\
+    &                 & {\tt [1,1,1]} & unflawed & $\{\}$\\\hline
+{\tt b} & \wf{{\tt s(}\wh{\tt v0}{\tt )}} & {\tt [2,1,2,1]} & flawed & \\
+        &                     & {\tt [1,2,1,1]} & unflawed & $\{\}$\\\hline
+\end{tabular}
+\end{center}
+The heuristic chooses induction on {\tt a} since that minimizes the
+number of flawed occurrences.
+\end{ex}
+See also: \p{unflawed-induction-suggestion/3},
+\p{casesplit-suggestion/3} and \p{unflawed-casesplit-suggestion/3}.
+\end{predicate}
+
+\begin{predicate}{complementary-sets/1}{complementary-sets(?CNames)}%
+{\tt CNames} is a list of the form
+\[\def\m{\!\!-\!\!}
+[C_1\m R_1\m {\it Dir}_1\m {\it Name}_1, \ldots, C_n\m R_n\m {\it Dir}_n\m {\it Name}_n]\m {\it LHS}
+\]
+such that ${\it LHS} \Rightarrow R_i$ is a rewrite with name ${\it
+Name}_i$ conditional upon $C_i$ (a single condition, not a list of
+conditions), and direction ${\it Dir}_i$, where $n>1$.  Pictorially:
+
+\begin{eqnarray*}
+   {\it Name}_1:\quad C_1 \rightarrow {\it LHS} &\Rightarrow& R_1\\
+                        & \vdots \\
+   {\it Name}_n:\quad C_n \rightarrow {\it LHS} &\Rightarrow& R_n
+\end{eqnarray*}
+
+{\tt complementary-sets/1} draws upon rewrites present in the rewrite
+database when it is called.  Notice that the ${\it Name}_i$'s need not
+belong to the same family of definitions (by family I mean e.g., {\tt
+member1}, {\tt member2}, {\tt member3}).
+
+For example, given usual definitions of member and insert we have:
+
+{\small\begin{verbatim}
+:- complementary_sets(CNames).
+CNames = 
+ [[(A2<B2=>void)-B2::insert(A2,C2)-equ(left)-insert3,
+   (A2<B2)-A2::B2::C2-equ(left)-insert2]-insert(A2,B2::C2),
+  [(A4=B4 in int=>void)-member(A4,C4)-equ(left)-member3,
+   (A4=B4 in int)-{true}-equ(left)-member2]-member(A4,B4::C4)]
+\end{verbatim}
+}
+\end{predicate}
+
+
+\begin{predicate}{complementary-sets/2}{complementary-sets(+Names,?CNames)}%
+As \p{complementary-sets/1}, but first parameter is a list of rewrite
+names to consider.  For example, {\tt complementary-sets([member1, member2,
+member3], CNames)} restricts attention to the  family of
+theorems defining {\tt member}. 
+
+See also~\p{print-complementary-sets/1}.
+\end{predicate}
+
+\begin{predicate}{complementary-set/1}{complementary-sets(?CName)}%
+As \p{complementary-sets/1}, but just return a single element, others
+on backtracking.
+\end{predicate}
+
+\begin{predicate}{consistent-registry/2}{consistent-registry(+Tau,+Prec)}%
+The registry described by {\tt Tau} and {\tt Prec} is consistent.
+(See \S\reference{quasi-consistent}.)
+\end{predicate}
+
+\begin{predicate}{contains-wave-fronts/1}{contains-wave-fronts(+T)}%
+Succeeds once only iff {\tt Term} contains a wave-front.
+\end{predicate}
+
+\begin{predicate}{cooper/2}{cooper(+F,?V)}%
+Runs Cooper's decision procedure for Presburger arithmetic
+(see~\S\reference{presburger}).  If {\tt cooper/2} fails, {\tt F} is
+not a sentence of Presburger arithmetic.
+
+If {\tt cooper/2} succeeds, {\tt V} indicates the validity of {\tt F}.
+{\tt V == yes} means {\tt F} is valid, otherwise {\tt V == no} and
+{\tt F} is invalid.
+
+\begin{ex}\examplepred{cooper/2}
+The statement of the associativity of addition is Presburger and is valid:
+{\small\begin{verbatim}
+| ?- cooper(x:pnat=>
+              y:pnat=>
+                z:pnat=>
+                  plus(x,plus(y,z))=plus(plus(x,y),z)in pnat,V).
+V = yes
+\end{verbatim}
+}
+The following fails since {\tt times} is not part of Presburger
+arithmetic.
+{\small\begin{verbatim}
+| ?- cooper(a:pnat=>
+         b:pnat=>
+           c:pnat=>times(a,times(b,c))=times(times(a,b),c)in pnat,V).
+
+no
+\end{verbatim}
+}
+{\small\begin{verbatim}
+| ?- cooper(10 = plus(9,1) in int,P).
+
+P = yes 
+\end{verbatim}
+}
+\end{ex}
+\end{predicate}
+
+
+\begin{predicate}{copy/2}{copy(+Term, -NewTerm)}%
+{\tt Term} and {\tt NewTerm} are identical except for the renaming of
+prolog variables.
+\end{predicate}
+
+\begin{predicate}{equal-rule/2}{equal-rule(?Exp,?RuleName:?Rule)}%
+{\tt RuleName} is the name of an equivalence which allows us to
+replace some sentence with an equality. {\tt Rule} is the equivalence
+expressed as directional rewrite rule, with all universally quantified
+variables replaced by prolog variables.
+\end{predicate}
+
+\begin{predicate}{ev/2}{ev(+Term,?Value)}%
+Ground {\tt Term} evaluates to value {\tt Value}.  More accurately,
+{\tt Value} is the result of computing using the computation rules
+until no more computation is possible.  `Computation rules' are in
+fact those definitional equality and biimplication rules in the
+rewrite database, used from left-to-right.  Rules for propositional
+evaluation are hard-wired.  Evaluation strategy is topmost-leftmost.
+
+Normally, applications call {\tt ev/2} with {\tt Term} being a
+quantifier-free variable-free term.  
+\end{predicate}
+
+
+\begin{predicate}{exp-at/3}{exp-at(+Exp, ?Pos, ?SubExp)}%
+Expression {\tt Exp} contains {\tt SubExp} at position {\tt Pos}.
+Positions are lists of integers representing \inx{tree coordinates} in
+the syntax-tree of the expression, but in reverse order. A coordinate
+0 represents the function symbol of an expression, thus, for example:
+\begin{verbatim}
+:- exp_at(f(g(2,x),3), [2,1], x).
+:- exp_at(f(g(2,x),3), [0,1], g).
+\end{verbatim}
+Due to the generous mode, this predicate can be used to either find
+the {\tt SubExp} at a given {\tt Pos}, or to find the {\tt Pos} of a
+given {\tt SubExp}.
+
+The definition from \cite{pub349} is extended by defining {\tt []} as
+the position of {\tt Exp} in {\tt Exp}. Fails if {\tt Pos} is an
+invalid position in {\tt Exp}.
+
+Furthermore, the \inx{position specifications} (or \inx{tree
+coordinates}, or \inx{path expressions}) are transparent for any
+possible \inx{wave-front} annotations in {\tt Exp}. (see \S\reference{wave-fronts} for an explanation on wave-fronts). Thus the
+position of {\tt x} in {\tt f(x)} and in {\tt ``f(\{x\})''} is {\tt
+[1]} in both cases. wave-fronts ({\tt ``\ldots''}) are regarded a part
+of the embedded expression, whereas wave variables ({\tt \{\ldots\}})
+are not. Thus, all possible values {\tt Pos} and {\tt Sub} in {\tt
+exp-at(f1(``f2(\{x\})''),Pos,Sub)} are:
+\begin{verbatim}
+Pos = [1]
+Sub = ``f2({x})'' ;
+Pos = [0]
+Sub = f1 ;
+Pos = [1,1]
+Sub = x;
+Pos = [0,1]
+Sub = f2 ;
+\end{verbatim}
+Notice that neither {\tt f2({x})} nor {\tt \{x\}} are subexpressions,
+and that the position specifiers are as if the wave-front in {\tt
+exp-at(f1(``f2(\{x\})''),Pos,Sub)} had not been there.
+
+See also \p{ann-exp-at/3} and \p{ann-exp-at/5}.
+\end{predicate}
+
+\begin{predicate}{exp-at/4}{exp-at(+Exp,?Pos,?SubExp,?SupExp)}%
+This is as \p{exp-at/3} (expression {\tt Exp} contains {\tt SubExp} at
+position {\tt Pos}). The additional fourth argument {\tt SupExp} is
+bound to the expression immediately surrounding {\tt SubExp}. Thus,
+for example:
+\begin{verbatim}
+:- exp_at(f(g(2,x),3), [2,1], x, g(2,x)).
+:- exp_at(f(g(2,x),3), [0,1], g, g(2,x)).
+\end{verbatim}
+Notice that {\tt exp-at(\_,[],\_,\_)} will always fail (since what
+would the value of {\tt SupSubExp} be?). Of course \p{exp-at/4} can be
+trivially expressed in terms of \p{exp-at/3} but the implementation of
+\p{exp-at/4} is more efficient since it avoids descending down the
+same subterms twice in a row.
+
+\sloppypar The same rules for wave-fronts hold as described above for
+\p{exp-at/3}. Pursuing the same example as above, we get as all
+possible values for {\tt Pos}, {\tt Sub} and {\tt Sup}:
+\begin{verbatim}
+:- exp_at(f1(``f2({x})''),Pos,Sub,Sup).
+
+Pos = [1]
+Sup = f1(``f2({x})'')
+Sub = ``f2({x})'' ;
+Pos = [0] Sup = f1(``f2({x})'')
+Sub = f1 ;
+Pos = [1,1]
+Sub = x
+Sup = ``f2({x})'' ;
+Pos = [0,1]
+Sub = f2
+Sup = ``f2({x})'' ;
+no.
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{extending-registry/0}{extending-registry}%
+This is a flag which the user can use to control the \m{reduction/2}
+method.  If defined so as to succeed, \m{reduction/2} will attempt to
+extend the registry during symbolic evaluation, otherwise this
+behaviour is prevented.  See the description of the \m{reduction/2}
+method for further detail.
+
+The default is that {\tt extending-registry} fails.
+\end{predicate}
+
+\begin{predicate}{extend-registry-prove/3}
+        {extend-registry-prove(+T-+P,?T'-?P',+Prob)}%
+\index {reduction rule}
+\index {registry}
+This predicate is a convenient interface to \p{rpos-prove/5}---it deals
+with lifting to variables, and ensures that all the function and
+constant symbols are mentioned in the resulting registry.
+
+{\tt extend-registry-prove/4} succeeds iff {\tt Prob} can be proved to
+hold in registry {\tt T'-P'}.  {\tt Prob} is an ordering problem as
+described under \p{rpos-prove/5}.  Registry {\tt T'-P'} is a
+consistent extension of registry {\tt T-P}.
+
+{\tt T} is a status function, and {\tt P} is a quasi-precedence, as
+described under \p{rpos-prove/5}.
+
+The registry defined by {\tt T} and {\tt P} is assumed to be
+consistent.  (This is decided by \p{consistent-registry/2}.)  {\tt S} and
+{\tt T} are possibly non-ground Prolog terms.  All the function and
+constant symbols in {\tt S} and {\tt T} are present in {\tt T'-P'}.
+
+
+\begin{ex}  Here is a simple example which computes a
+registry suitable to show that the step case definition of {\tt plus}
+is terminating when used from left to right:
+\begin{verbatim}
+| ?- extend_registry_prove([]-([]-[]), T-P,
+                           plus(s(X),Y) > s(plus(X,Y))).
+
+P = [plus>=s]-[plus=\=s],
+T = [s/_7243,plus/_7234]
+\end{verbatim}
+In the example above the term {\tt []-([]-[])} is the empty registry.
+Notice that no commitment has been made to the status function,
+although entries been added for {\tt plus} and {\tt s}; the precedence
+commits to ${\tt plus}\partial {\tt s}$.
+
+A more realistic illustration of the use of {\tt
+extend-registry-prove/4} can be found in the preconditions of the
+\m{reduction/2} method.
+\end{ex}
+
+\end{predicate}
+
+
+
+
+\begin{predicate}{groundp/1}{groundp(+Term)}%
+Succeeds iff {\tt Term} is ground. Since \clam\ uses Prolog as the
+meta-language (whereas Type Theory is the the object-language), Prolog
+variables play the role of \inx{meta-variable}s. Thus, {\tt
+groundp(Term)} can be used to check if {\tt Term} does or does not
+contain any meta-variables.  Arguably, this predicate should have
+another name.
+\end{predicate}
+
+\begin{predicate}{ground-sinks/4}{ground-sinks(+Instan, +Lhs, +Rhs, ?SubTerm)}%
+{\tt Instan} is a list of sink instantiations. For all members of {\tt
+Instan} which are prolog variables an instantiation is calculated
+using {\tt Lhs} and {\tt Rhs}, the left and right hand sides of the
+current goal. {\tt SubTerm} is a subexpression of {\tt Rhs} in which
+uninstantiated sinks may occur.
+\end{predicate}
+
+\begin{predicate}{hyp/2}{hyp(?Hyp, ?HypList)}%
+Hypothesis {\tt Hyp} is among the annotated hypothesis list {\tt
+HypList}.  {\tt hyp/2} behaves much like list membership but it also
+recognises annotations and filters these.  
+
+\begin{ex}
+\begin{verbatim}
+| ?- hyp(H,
+         [x:pnat,
+          ih:[ihmarker(_,_), v0:plus(s(x),x)=s(plus(x,x)) in pnat]]).
+
+H = (x:pnat) ? ;
+
+H = (v0:plus(s(x),x)=s(plus(x,x))in pnat)
+\end{verbatim}
+\end{ex}
+\end{predicate}
+
+\begin{predicate}{inductive-hypothesis/3}{inductive-hypothesis(?S,?Hyp,+Hyps)}%
+{\tt Hyps} is a list of hypothesis containing an inductive hypothesis
+{\tt Hyp} 
+having status {\tt S}. (cf. \S\reference{sec:indhyps} and
+\p{inductive-hypothesis/5} and \p{active-induction-hypothesis/2}.)
+\end{predicate}
+
+\begin{predicate}{inductive-hypothesis/5}{inductive-hypothesis(S,V:H,H1,NS,H2)}%
+{\tt V:H} is an inductive hypothesis in both {\tt H1} and {\tt H2}
+(each a hypothesis list), with status {\tt S} in {\tt H1} and status
+{\tt NS} in {\tt H2}.  {\tt H1} and {\tt H2} agree on all other
+elements.
+
+This predicate is useful when changing the status of some induction
+hypothesis: see \m{weak-fertilization/4} for an example.
+\end{predicate}
+
+
+\begin{predicate}{induction-suggestion/3}{induction-suggestion(H,G,Scheme)}%
+{\tt Scheme} describes an induction scheme, that would, according to
+the heuristics (see below), be a good choice.  This induction scheme
+is not known to be valid---this must be checked separately.
+
+{\tt Scheme} is actually a description of a substitution of terms for
+universally quantified variables appearing in the sequent {\tt H==>G}.
+Let {\tt G'} be the necessarily different goal resulting from the
+application of {\tt Scheme} to {\tt G}, and in which wave-fronts
+capture these differences.  Thus the skeleton of {\tt G'} is equal to
+{\tt G}.
+
+Each wave-front introduced at each occurrence of each substituted
+variable is said either to be {\em\inx{unflawed}\/} or {\em\inx{flawed}},
+according to whether or not a wave-rule can be applied to that
+wave-front or one of its superterms.  Since the ability to ripple a
+wave-front may depend on the presence of sinks, each unflawed/flawed
+assignment may demand that certain of the universal variables in {\tt
+G'} are not induced upon, so that they may be used as \inx{sinks}.
+Equally, certain ripples will require {\em other\/} variables to be
+induced upon, in the case of simultaneous induction.
+
+
+{\tt induction-suggestion/3} builds a so-called unflawed/flawed table
+according to almost all the various combinations of substitutions and
+sink assignments;  substitutions are computed by narrowing with the
+rewrite rules in the database.  Not all substitutions will make sense
+as inductions---this must be checked separately (see \p{scheme/3} for
+one way of doing this).
+
+{\tt induction-suggestion/3} generates suggestions by considering all
+permutations of all universally quantified variables with all possible
+induction terms.  Induction terms are generated lazily, subject to
+the criterion that they can be rippled by some wave-rule present in
+the database.  Hence the term {\em\inx{ripple analysis}}.  In this way,
+each occurrence of all variables can  be tagged with a collection of
+candidate inductions which describes:
+\begin{itemize}
+\item
+ the terms to be substituted for the variables and the way in which
+ these  `induction terms' are to be annotated: we call this an
+ annotated substitution.
+\item any variables which must remain as sinks
+\item how well this annotated substitution fares.  That is, the
+ unflawed/flawed assignment for all variables in the domain of the
+substitution.  An occurrence for which a wave-rule is applicable is
+unflawed; otherwise it is flawed.
+\end{itemize}
+
+
+All of this information is then processed by a heuristic which
+implements the following:
+\begin{enumerate}
+\item prefer inductions on a variable which {\em minimizes\/} the
+number of flawed occurrences (in the case of
+\p{unflawed-induction-suggestion/3} this number must be zero);
+\item prefer inductions on a variable which {\em minimizes\/} the
+(sum of the) depth in the term tree of all flawed occurrences;
+\item inductions on a variable which {\em minimizes\/} the
+number of unflawed occurrences;
+\end{enumerate}
+These criteria are used (in lexicographic order) in order to rank
+various suggestions.
+
+\begin{ex}
+The conjecture for the associativity of multiplication
+\begin{verbatim}
+a:pnat=>
+  b:pnat=>
+    c:pnat=>
+      times(a,times(b,c)) = times(times(a,b),c) in pnat
+\end{verbatim}
+together with the definitions of multiplication and addition, has the
+following unflawed/flawed table:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}\hline
+\multicolumn{2}{|c|}{\sl Annotated substitution}  & Position & Status & Sinks\\
+{\sl Ind. var.} & {\sl Ind. term} & & & \\\hline
+{\tt a} & \wf{{\tt s(}\wh{\tt v0}{\tt )}} & {\tt [1,1,2,1]} & unflawed & $\{\}$ \\
+    &                 & {\tt [1,1,1]} & unflawed & $\{\}$\\\hline
+{\tt b} & \wf{{\tt s(}\wh{\tt v0}{\tt )}} & {\tt [2,1,2,1]} & flawed & \\
+        &                     & {\tt [1,2,1,1]} & unflawed & $\{\}$\\\hline
+\end{tabular}
+\end{center}
+The heuristic chooses induction on {\tt a} since that minimizes the
+number of flawed occurrences.
+\end{ex}
+See also: \p{unflawed-induction-suggestion/3},
+\p{casesplit-suggestion/3} and \p{unflawed-casesplit-suggestion/3}.
+\end{predicate}
+
+\begin{predicate}{instantiate/3}{instantiate(+G1, ?G2, ?G2Vals)}%
+{\tt G2} is the result of instantiating all the universally quantified
+variables in {\tt G1} with the values in {\tt G2Vals}.  We require
+that {\em all\/} variables quantified in {\tt G1} are instantiated in
+{\tt G2}, thus:
+\begin{verbatim}
+:- instantiate(x:pnat=>y:pnat=>f(x,y), y:pnat=>f(1,y), [1])
+\end{verbatim}
+will {\em not\/} succeed because of {\tt y}, whereas
+\begin{verbatim}
+:- instantiate(x:pnat=>y:pnat=>f(x,y), f(1,2), [1,2])
+\end{verbatim}
+will.
+\end{predicate}
+
+\begin{predicate}{instantiate/4}{instantiate(?Frees,+G1, ?G2, ?G2Vals)}%
+Similar to \p{instantiate/3}.  (Exactly the same if {\tt Frees} is a
+variable.)   This predicate is more generous in that it allows
+universal variables of {\tt G1} that do not take part in the
+instantiation to be supplied with instantiating terms.  
+
+For example, the following call to \p{instantiate/3} fails to give a
+ground term for {\tt A}:
+\begin{verbatim}
+:- instantiate(x:pnat=>p(x)=0 in pnat, A = 0 in pnat,P).
+A = p(X),
+P = [X]
+\end{verbatim}
+since any instantiation of {\tt x} will do.  (Notice that
+\p{instantiate/3} does not fail in this case, only when instantiation
+to a bound variable is required.)
+
+There are cases where it is necessary to provide a binding for {\tt
+x}, e.g., using a rewrite rule left-to-right when the set of variables
+on the left is a proper subset of those on the right.  The rewrite is
+legitimate providing a term can be supplied of the correct type.  For
+example, using
+
+\begin{verbatim}
+z:pnat, x:pnat=>f(x)=s(0) in pnat ==>x:pnat=>f'(x)=s(0) in pnat
+\end{verbatim}
+during weak-fertilization from right-to-left ({\tt x} is unbound).
+
+At the meta-level, \clam{} ignores this problem and simply uses {\tt
+x} as the resulting instance of {\tt x}.  At the object level the
+tactic must work to mimic this and ensure that the variable naming
+remains aligned.  
+
+{\tt instantiate/4} allows these eigenvariables from the context to be
+supplied and used to instantiate what would otherwise be unbound
+variables: {\tt Frees} is a list of terms which are to be used to
+supply the instantiation of otherwise `floating' variables.
+\begin{verbatim}
+:- instantiate([y],x:pnat=>p(x)=0 in pnat, A = 0 in pnat,P).
+A = p(y),
+P = [y]
+\end{verbatim}
+
+Typically, the {\tt Frees} will correspond to the matrix of the goal
+being weak-fertilized, since that is the instantiation which preserves
+the structure of the hypothesis (see the implementation of the
+weak-fertilization tactic for further programmer-level information).
+\end{predicate}
+
+\begin{predicate}{issink/2}{issink(?T,?S)}%
+{\tt T} is a sink whose contents is the term {\tt S}.  Informally, we
+might write ${\tt T}=\sink{{\tt S}}$.
+\end{predicate}
+
+\begin{predicate}{iswh/2}{iswh(?T,?S)}%
+{\tt T} is a wave-hole whose contents is the term {\tt S}.
+Informally, we might write ${\tt T}=\wh{{\tt S}}$.
+\end{predicate}
+
+\begin{predicate}{iswf/4}{iswf(?T,?Type,?Dir,?S)}%
+{\tt T} is a wave-front around the term {\tt S}.  Notice that {\tt T}
+is not necessarily a well-annotated term: {\tt iswf} does not enforce
+any restrictions on the term {\tt S}.  
+
+{\tt Dir} indicates the direction of the wave-front: it is either {\tt
+in} or {\tt out};  the flag {\tt Type} is reserved for future
+expansion and must always be set to the atom {\tt hard}.
+\end{predicate}
+
+\begin{predicate}{join-wave-fronts/3}{join-wave-fronts(+Term,?PosL,?JTerm)}%
+Recall that \clam always manipulates well-annotated terms,
+which are, by definition (see \S\reference{well-ann}) in a
+maximally-split normal form. This predicate can be use to transform
+annotated terms into a form in which wave-fronts are {\em not in this
+normal form: some wave-fronts are joined together}.  {\em Note that
+this form is not well-annotated!}.
+
+The maximally joined form (see \p{maximally-joined/2}) is typically
+used to present annotations through some user-interface: it is easier
+to read than the well-annotated form.
+
+{\tt JTerm} will be as {\tt Term}, but with a number of small wave
+fronts joined into larger ones. {\tt PosL} will contain the positions
+of the wave-fronts in {\tt Term} which were joined. This predicate
+generates on backtracking all possible joins of wave-fronts.
+
+\end{predicate}
+
+\begin{predicate}{mark-potential-waves/2}{mark-potential-waves(+Goal, -NewGoal)}%
+{\tt Goal} and {\tt NewGoal} are identical except that all top-level
+existential variables in {\tt NewGoal} are annotated as potential
+wave-fronts.  For example:
+\begin{verbatim}
+mark_potential_waves(x:pnat=>y:pnat#p(g:pnat#h(g),p(y,g)),
+x:pnat=>"y":pnat#p(g:pnat#h(g),p("y",g))).
+\end{verbatim}
+Notice that the deepest existential ({\tt g}) is not annotated.
+\end{predicate}
+
+\begin{predicate}{mark-sinks/3}{mark-sinks(+Bindings, +Term, -NewTerm)}%
+{\tt Bindings} is a list of bindings. The {\tt Term} and {\tt NewTerm}
+are identical except that all variables in {\tt Bindings} which occur
+in {\tt Term} are annotated as sinks in {\tt NewTerm}.
+\end{predicate}
+
+\begin{predicate}{matrix/3}{matrix(?VarList,?Matrix,?Formula)}%
+{\tt Matrix} is the matrix of {\tt Formula}, that is: {\tt Matrix} is
+as {\tt Formula}, except all prefixing quantifiers. {\tt VarList} is
+the list of variables involved in these quantifiers (in the same order
+as the quantifiers occurred in {\tt Formula}).
+\end{predicate}
+
+\begin{predicate}{matrix/4}{matrix(?VarList,?EVarList,?Matrix,?Formula)}%
+{\tt matrix/4} is as {\tt matrix/3} except it is extended to deal with
+existential quantification. {\tt EVarList} is a list with elements of
+the form {\tt MetaVar-ObjVar:Typ} where {\tt MetaVar} is the prolog
+variable which replaces the object-level variable {\tt ObjVar} in {\tt
+Formula} to give {\tt Matrix}. Possible modes are {\tt matrix(+, +, +,
+-)} and {\tt matrix(-, -, -, +)}.
+\end{predicate}
+
+\begin{predicate}{maximally-joined/2}{maximally-joined(+S,?T)}%
+{\tt T} is the \inx{maximally-joined} form of {\tt S}.   Note that
+(excepting the trivial case when {\tt S} is identical to {\tt T}), the
+term {\tt T} will not be \inx{well-annotated}.
+
+
+Terms depicted in maximally-joined form are usually easier to read.
+For example, the following two terms are the `same', but the second
+one is depicted in the maximally-joined form.
+
+{\small\begin{verbatim}
+``s({``s({f(g(``s({``s({f(g(x))})''<out>})''<out>))})''<out>})''<out> 
+\end{verbatim}
+}
+and
+{\small\begin{verbatim}
+``s(s({f(g(``s(s({f(g(x))}))''<out>))}))''<out> 
+\end{verbatim}
+}
+\end{predicate}
+
+\begin{predicate}{meta-var/1}{metavar(?Var)}%
+Succeeds if {\tt Var} is a \inx{meta-variable}.
+\end{predicate}
+
+\iffalse
+\begin{predicate}{minimal/2}{minimal(?+Schemes,Scheme)}%
+{\tt Scheme}\inxx{subsumption} is an induction scheme which is a
+minimal member of {\tt Schemes}, that is: no other member of {\tt
+Schemes} is subsumed by {\tt Scheme}. For example:
+\begin{verbatim}
+:- minimal([s(x),times(x,y)],S).
+S = s(x) ;
+
+S = times(x,y) ;
+
+no
+:- minimal([s(x),s(s(x)),times(x,y)],S).
+S = s(x) ;
+S = times(x,y) ;
+no
+\end{verbatim}
+\end{predicate}
+\fi
+
+\iffalse
+\begin{predicate}{minimally-subsumes/2}{minimally-subsumes(?Scheme,+Schemes)}%
+\inxx{subsumption}{\tt Scheme} is the minimal {\tt Scheme} which
+subsumes all members of {\tt Schemes}. That is: there is no other
+scheme which also subsumes all members of {\tt Schemes} but is itself
+subsumed by {\tt Scheme}.
+\end{predicate}
+\fi
+
+\begin{predicate}{matches/2}{matches(?S,?T)}%
+{\tt T} matches {\tt S}.  That is, {\tt T} can be instantiated to {\tt
+S} without substituting for variables in {\tt S}.  No instantiation is
+carried out.  See also~\p{unify/2} and \p{unifiable/2}.
+\end{predicate}
+
+\begin{predicate}{nr-of-occ/3}{nr-of-occ(?SubExp, +SupExp, ?N)}%
+{\tt SubExp} occurs exactly {\tt N} times in {\tt SupExp}. Failure
+indicates that {\tt SupExp} does not occur in {\tt SupExp}, thus: {\tt
+N} is never bound to {\tt 0}. Generous mode allows use to find the
+number of occurrences {\tt N} of a given {\tt SubExp}, or to find all
+{\tt SubExp}s that occur {\tt N} times
+\end{predicate}
+
+\begin{predicate}{notraw-to-used/2}{notraw-to-used(H1,H2)}%
+{\tt H1} and {\tt H2} are identical hypothesis lists but for the fact
+that each hypothesis in {\tt H1} having status {\tt notraw(Ds)} has
+status {\tt used(Ds)} in {\tt H2}.   (cf. \p{raw-to-used/2}.)
+
+See \m{pwf-then-fertilize/2} for an example.
+\end{predicate}
+
+\begin{predicate}{object-level-term/1}{object-level-term(+T)}%
+Succeeds iff {\tt T} does not contain any meta-variables (i.e., is
+ground), and does not contain any wave-fronts (or parts thereof).
+\end{predicate}
+
+
+\begin{predicate}{occ/4}{occ(+Term, ?SubTerm, ?Pos, ?F)}%
+{\tt SubTerm} occurs in {\tt Term} at {\tt Pos}, immediately
+surrounded by term {\tt F}.  This is equivalent to (but more readable
+and faster) than:
+\begin{verbatim}
+occ(Term, SubTerm, [N|P], SupTerm) :-
+    exp-at (Term, [N|P], SubTerm),
+    exp-at(Term, P, F).
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{polarity/5}{polarity(?O1,?O2,?F,?N,?P)}%
+Function {\tt F} has polarity {\tt P} in argument number {\tt N} under
+orderings {\tt O1} and {\tt O2}. {\tt P} is one of {\tt +}, {\tt -} or
+{\tt 0}.  {\tt F} is positive in argument number {\tt N} under {\tt
+O1} and {\tt O2} if {\tt O1(X1,X2) $\rightarrow$ O2(F(X1),F(X2))}
+where: {\tt X1} and {\tt X2} obey: {\tt exp-at(F(Xi),N,Xi)}, and {\tt
+O1} is a partial ordering on the domain of {\tt F} (in its {\tt N}th
+argument), and {\tt O2} is a partial ordering on the codomain of {\tt
+F}. A positive polarity means that {\tt F} is \inx{monotonic} in its
+{\tt N}th argument, a negative polarity means that {\tt F} is
+\inx{anti-monotonic} in its {\tt N}th argument. A zero polarity means
+that {\tt F} is neither monotonic nor anti-monotonic in its {\tt N}th
+argument.
+
+Polarity of nested functions is calculated according to the obvious
+transitivity rules: $+ = +(+)$ or $+ = -(-)$, and $- = -(+)$ or $- =
++(-)$.
+
+This predicate is implemented via a lookup table, thereby making
+\notnice \clam\ not theory free (see \S\reference{theory free}), and
+should eventually be implemented in a proper, theory free, way, as
+suggested there.
+\end{predicate}
+
+\begin{predicate}{polarity-compatible/3}{polarity-compatible(+G, +P, ?Dir)}%
+This predicate holds if the subterm at position {\tt P} within the
+goal {\tt G} is compatible with respect to the rewrite orientation
+{\tt Dir}.
+
+See \p{rewrite-rule/6} for a description of the {\tt Dir} parameter. 
+\end{predicate}
+
+\begin{predicate}{precon-matrix/3}{precon-matrix(?TypedVarList,?PreCond=>?T1,?T2)}%
+Let a {\em prefix\/} $R$ be either $\Ty v:t$ or $p$; then $T_2$ is of the
+form $R\rightarrow\cdots\rightarrow R\rightarrow T_1$, where {\tt
+TypedVarList} is the collection of $\Ty v:t$'s for all $R$ of the first
+form, and {\tt PreConds} are the $p$'s for all $R$ of the second form.
+Note that there is much backtracking here, since $T_2$ may be of the form
+$R\rightarrow T_2'$.  
+
+{\sl Useful information:\/} This predicate is used heavily by the
+rewrite database mechanism (see \S\reference{rewrite-records}).  All theorems
+having a {\tt T1} which is an equality or an implication are
+considered as possible rewrite rules (i.e., dynamic wave-rules) by
+\p{ripple/6}, being conditional upon the appropriate {\tt PreCond}
+list.
+
+\end{predicate}
+
+\begin{predicate}{raw-to-used/3}{raw-to-used(Hs,Hyps,NHs)}%
+{\tt NHs} is as {\tt Hs} but all {\tt raw} hypotheses in {\tt Hyps}
+appearing in {\tt NHs} are marked as {\tt used([strong])} in {\tt NHs}.
+(cf. \p{notraw-to-used/2}.)
+
+See \S\reference{sec:indhyps} for a more information on hypothesis
+status.
+\end{predicate}
+
+\begin{predicate}{reduction-rtc/2}{reduction-rtc(+S,?T)}%
+Roughly, this is the reflexive transitive closure of the reduction
+relation described by the current TRS.
+
+More precisely: Let {\tt S} rewrite under $\Reduction$ to some term
+{\tt U} in a finite number $k$ of steps.  {\tt reduction-rtc/2}
+succeeds iff {\tt T} matches {\tt U} and there is no $k'>0$ such that
+{\tt U} rewrites to {\tt U'} different from {\tt U} in $k'$ steps and
+{\tt T} matches {\tt U'}.
+
+\begin{ex}
+\examplepred{reduction-rtc/2}  Assuming that {\tt plus} is in the
+reduction rules we have that:
+\begin{verbatim}
+| ?- reduction-rtc(plus(s(s(x)),y),T).
+T = s(s(plus(x,y)))
+\end{verbatim}
+which is the only solution.  However, note that
+\begin{verbatim}
+| ?- reduction-rtc(plus(s(s(x)),y),s(plus(s(X),Y))).
+X = x,
+Y = y
+\end{verbatim}
+succeeds only once since there is no normal form of {\tt s(plus(s(x),y))} which
+is an instance of {\tt s(plus(s(X),Y))}.  
+
+\begin{verbatim}
+| ?- reduction-rtc(plus(x,y),T).
+T = plus(x,y)
+\end{verbatim}
+shows that {\tt reduction-rtc/2} includes the reflexive case.
+\end{ex}
+
+For the non-reflexive case, use \p{reduction-tc/4}.
+
+See \p{reduction-rule/6}, \p{registry/4}, \p{canonical-form/3} and
+\S\reference{logical-objects} for related information.
+
+Use \p{reduction-rtc/4} to introduce hypotheses etc, as may be required for
+conditional rules.   
+\end{predicate}
+
+\begin{predicate}{reduction-rtc/4}{reduction-rtc(+S,?T,?Tactic,+Hyps)}%
+As \p{reduction-rtc/2}, but {\tt Tactic} and hypothesis (for
+conditional rewriting) are made explicit.  {\tt reduction-rtc(S,T)} is
+the same as {\tt reduction-rtc(S,T,\_,[])}.
+\end{predicate}
+
+\begin{predicate}{reduction-tc/4}{reduction-tc(+S,?T,?Tactic,+Hyps)}%
+{\tt T} is the normal form of {\tt S}, with respect to the transitive
+closure of the rewrite relation defined by the current TRS.
+\p{polarity-compatible/3} is used to determine which of the two
+registries, positive or negative,\index {registry!positive}\index
+{registry!negative}  should be used to ensure terminating rewriting. 
+
+{\tt Hyps} is a hypothesis list---this may be used to establish
+conditions of conditional rules.  {\tt Tactic} is a tactic which
+justifies the normalization.
+
+See \p{reduction-rule/6}, \p{registry/4} and \S\reference{logical-objects},
+and \m{normalize-term/1} for an example.
+\end{predicate}
+
+
+\begin{predicate}{rpos-prove/5}{rpos-prove(+Problem,+TP,?NTP,+Vars,?Proof}%
+
+{\tt Proof} is a proof of {\tt Problem} under the registry described
+by {\tt NTP}; furthermore, {\tt NTP} is a consistent extension of {\tt
+TP}.  ({\tt TP} is assumed to be consistent, as described by
+\p{consistent-registry/2}.)
+
+{\tt TP} and {\tt NTP} are of the form {\tt Tau-Prec}; {\tt Tau} is a
+status function, represented by a list having elements of the form
+{\tt F/Fs}, assigning status {\tt Fs} to function symbol {\tt F}.  See
+\S\reference{imp:tau} for more information on the status function.
+{\tt Prec} is the representation of a quasi-precedence, as described
+in \S\reference{quasi-imp}.
+
+The status function of {\tt TP}  must mention all the function symbols
+and constants appearing in {\tt Problem}.
+
+{\tt Proof} is simply for information---it has nothing to do with
+proof-planning or tactics! 
+
+{\tt Problem} is an ordering problem, having one of the following
+forms (cf.~\S\reference{ordprob} and \S\reference{quasi-def}):
+\begin{description}
+\item [{\tt S >= T}] Iff  {\tt S = T}  or {\tt S > T}, that is, ${\tt
+S}\RPOSeq_\rho {\tt T}$. 
+\item [{\tt S = T}] Iff {\tt S} and {\tt T} are equivalent under RPOS;
+that is, ${\tt S}\Equiv_\rho {\tt T}$.\index{$\Equiv_\rho$}
+\item [{\tt S > T}] Iff {\tt S} is greater than {\tt T} under RPOS;
+that is, ${\tt S}\RPOS_\rho {\tt T}$.\index{$\RPOS_\rho$}
+\item [{\tt S < T}] Iff {\tt T > S}.
+\item [{\tt S =< T}] Iff {\tt T >= S}.
+\end{description}
+In these ordering problems {\tt S} and {\tt T} must be ground Prolog
+terms.   Atoms appearing in {\tt Vars} indicate which of the atoms in
+{\tt S} and {\tt T} are to be considered variables by RPOS.
+
+\paragraph {Example.}
+\begin{verbatim}
+| ?- rpos-prove(plus(s(v0),v1) > s(plus(v0,v1)),
+           [plus/P,s/S]-([plus>=s]-[plus=\=s]),
+           NTP,[v0,v1],Prf).
+NTP = [plus/P,plus/ms,plus/lex(rl),plus/lex(lr),plus/_A,s/S]
+        -([plus>=s]-[plus=\=s]),
+Prf = decomp(plus>s) then
+        [extn(plus/P=plus/P) then
+          [[multiset(s(v0)>v0,_B)],[_C],[identity,_D]]]
+\end{verbatim}
+Compare this with the example given under \p{extend-registry-prove/4}.
+\end{predicate}
+
+\begin{predicate}
+  {reduction-rule/6}{reduction-rule(?LHS,?RHS,?Cond,?Dir,?RuleName,?Ref)}%
+{\tt RuleName} is the name of a rewrite {\tt Cond=>LHS:=>RHS} that has
+been proven to be \inx {measure decreasing}\index {reduction
+rule!measure decreasing} under some well-founded
+termination order.  {\tt Dir} describes the polarity restrictions in
+using the rule.  The rule may be based on implication, equality or
+equivalence. See \S\reference{ch:gen} for background information and
+\p{rewrite-rule/6} for documentation on {\tt Dir}.
+
+\clam supports two different reduction rule sets in order to permit
+implicative rewrites to be used in both directions.  This is
+terminating because the polarity\index {polarity}\index {reduction
+rule!polarity considerations} restriction on the use of the rules
+(which must be maintained by the caller) ensures that cycles are
+prevented.  Equality rules must be oriented either left-to-right or
+right-to-left since they may be applied in positions of either
+polarity.
+
+Thus, there are two registries\index {registry}\index {reduction
+rule!registries used by \clam}, labelled ``{\tt positive}'' and ``{\tt
+negative}'', establishing termination of all reduction rules whose
+{\tt Dir} is {\tt imp(left)} and {\tt imp(right)}, respectively.\index
+{positive registry}\index {negative registry}\index {reduction rule!registries!positive}\index {reduction rule!registries!negative}
+\index {registry!positive}\index {registry!negative}
+(Equality/equivalence rules are accounted for in both registries.)
+
+{\tt Ref} is the recorded database reference.
+\end{predicate}
+
+\begin{predicate}{registry/4}{registry(+TRS,?Tau,?Prec,?Ref)}%
+
+The registries\index{registry}\index {reduction rule!registries} under
+which reduction rules are shown to be terminating are stored in the
+Prolog database, and accessed via {\tt registry/4}.  The registry
+evolves over time as it is extended (for an illustration of how to
+extend the registry and add it to the database, see \m{reduction/2}).
+
+{\tt TRS} is the name of the registry---currently, \clam supports only
+two registries, {\tt positive} and {\tt negative}, for reduction rules
+at different polarities.  Equivalence rules are equality rules are
+present in both.  Together, these two registries define \clam's
+terminating rewrite system, {\tt trs(default)}.  (See
+\p{lib-load/[1;2]} and \S\reference{logical-objects}.)
+\end{predicate}
+
+\begin{predicate}{replace/4}{replace(+Pos, ?NewSub, +OldExp, ?NewExp)}%
+{\tt NewExp} is the result of replacing the subexpression in {\tt
+OldExp} at position {\tt Pos} with {\tt NewSub}. Either {\tt NewSub}
+or {\tt NewExp} must be instantiated.
+
+Similar rules for dealing with wave-front hold as for \p{exp-at/3}:
+\inx{position specifiers} are transparent to wave-fronts, and
+wave-fronts ({\tt ``\ldots''}) are deemed part of the embedding
+expression, while wave variables are part of the surrounding
+expression. For example:
+\begin{verbatim}
+:- replace([1],new,f1(``f2({x})''),T).
+T = f1(new)
+
+:- replace([1,1],new,f1(``f2({x})''),T).
+T = f1(``f2({new})'')
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{replace-all/4}{replace-all(+OldSub, +NewSub, +Exp, ?NewExp)}%
+{\tt NewExp} is the result of replacing all occurrences of {\tt
+OldSub} with {\tt NewSub} in {\tt Exp}.
+\end{predicate}
+
+\begin{predicate}{rewrite/4}{rewrite(?Pos, +Rule, ?Exp, ?NewExp)}%
+{\tt NewExp} is the result of rewriting the subexpression in {\tt Exp}
+at position {\tt Pos} using equation {\tt Rule}.  Only one of {\tt
+Pos}, {\tt Exp} and {\tt NewExp} has to be instantiated, so this can
+also be used to detect if and where a rewrite rule has been applied
+(but not to generate all possible applications of a rewrite rule).
+\end{predicate}
+
+\begin{predicate}{rewrite-rule/6}{rewrite-rule(?LHS,?RHS,?Cond,?Dir,?Rn,?Ref)}%
+Accesses the currently available rewrite rules.  
+
+\[
+        {\tt Cond} \mimplies {\tt LHS}\rew {\tt RHS}
+\]
+is a sound rewrite rule at polarity described by {\tt Dir}. {\tt Dir}
+is one of
+\begin{description}
+\item [{\tt equ(Type,Orient)}] {\tt Orient} is either {\tt left} or
+{\tt right}; {\tt Type} is an object-level equality.  The rule is
+based upon a typed equality, used from left-to-right ({\tt Orient==left}) or
+from right-to-left ({\tt Orient==right}).  It can be used at positions 
+of any polarity.  Notice that \clam{} stores commuted 
+variants of rules based on equality and equivalence.
+\item [{\tt equiv(Orient)}] {\tt Orient} is as above. The rule is based on a logical equivalence (and so 
+can be used at positions of any polarity).
+\item [{\tt imp(Orient)}] {\tt Orient} is as above.  The rule is based 
+on an object-level implication, used from left-to-right or from
+right-to-left (as identified by {\tt Orient}).  
+
+Soundness requires that:
+\begin{description}
+\item [{\tt imp(left)}] These rules may only be used at positions of
+positive polarity.
+\item [{\tt imp(right)}] These rules may only be used at positions of
+negative polarity.
+\end{description}
+See \reference{sec:rewriting} for further details.
+\end{description}
+
+\begin{example}
+Loading the definition of list membership with tracing set to level~40 
+(via \p{trace-plan/3}) shows how each of the formulae are processed in 
+to rewrite rules.  (Additional information, also shown at this tracing 
+level, is elided below.)
+\begin{verbatim}
+| ?- lib_load(def(member)).
+...
+member1/equ(u(1),left): [] => member(B,nil) :=> void
+member2/equ(u(1),left): B=C in int => member(B,C::D) :=> {true}
+member2/imp(right):
+      [] => member(B,C::D)={true}in u(1) :=> B=C in int
+member3/equ(u(1),left):
+      B=C in int=>void => member(B,C::D) :=> member(B,D)
+member3/imp(right):
+      [] => member(B,C::D)=member(B,D)in u(1) :=> B=C in int=>void
+...
+Loaded def(member)
+
+yes
+\end{verbatim}
+Each of the three equations making up {\tt member} are processed in
+turn and the rewrite rules extracted, in accordance with
+\S\reference{sec:rewriting}.   Here, {\tt member3} is the 
+object-level formula
+\[
+\forall x.\forall h.\forall t.x\not =h\oimplies {\tt
+member}(x,h::l)\oequiv {\tt member}(el,l)
+\]
+which yields two rewrite rules:
+\begin{verbatim}
+member3/equiv(left):
+      B=C in int=>void => member(B,C::D) :=> member(B,D)
+member3/imp(right):
+      [] => member(B,C::D)=member(B,D)in u(1) :=> B=C in int=>void
+\end{verbatim}
+the first of which is based on an equivalence `{\tt equiv(left)}' and so can be used at
+either positive or negative polarity (notice that this rewrite is based 
+on a left-to-right reading.  The right-to-left direction 
+is not a legal rewrite rule because of the variable condition on
+rules).    This rule is conditional: the condition is {\tt B=C in int=>void}.
+
+The second rewrite rule is unconditional (depicted by `{\tt []}' to
+the left of the meta-level implication `{\tt =>}'), and is based on the
+implication also present in the formula.  The resulting rewrite can
+only be used at positions of negative `{\tt imp(right)}' polarity.
+Again, there is no {\tt imp(left)} rule because of variable restrictions.
+\end{example}
+
+\end{predicate}
+
+\begin{predicate}{ripple/6}{ripple(?Kind,+WTT,?NWTT,?Cond,?Rn,?Dir)}%
+{\tt NWTT} is the result of applying rewrite-rule {\tt Rn} as a
+wave-rule to the well-annotated term {\tt WTT}, subject to condition
+{\tt Cond}.  {\tt WTT} and {\tt NWTT} are in normal form---errors may
+result if {\tt WTT} is not in normal form (see \p{join-wave-fronts/3}
+for description of normal form).
+
+{\tt Dir} indicates the orientation of the lemma {\tt Rn} on which the
+rewrite is based: {\tt Dir} is either {\tt equ(right)} (for
+right-to-left based upon an equality), {\tt equ(left)} (for
+left-to-right based upon an equality), {\tt imp(right)} (for
+right-to-left based upon an implication), or {\tt imp(left)} (for
+left-to-right based upon an implication).
+
+{\tt Kind} is one of \verb|direction_in| (only rippling-in is allowed)
+\verb|direction_out| (only rippling-out) \verb|direction_in_or_out|
+(either), depending upon the type of rippling permitted.  (If {\tt
+Kind} is uninstantiated the default is \verb|direction_in_or_out|.)
+
+{\sl Useful information:\/} {\tt ripple/6} is the core of the static
+wave-rule parsing mechanism.  Both eager\index{eager strict parsing}
+and lazy\index{lazy strict parsing} are implemented.  When a term is
+to be rippled, {\tt ripple/6} first examines a cache of previously
+parsed wave-rules and uses those if they are applicable.  This
+corresponds to eager parsing, since those cached rules are already
+available.  If none of the cached wave-rules are applicable (or others
+are required on backtracking), lazy parsing is used.\footnote
+{Strictly speaking, this caching of wave-rules is not eager static
+parsing, since not all possible parses of the rewrite rules are
+necessarily computed.}
+
+
+The skeleton preservation is modulo
+sinks.  Weakening {\em is not\/} carried out by {\tt ripple/6}:
+weakening must be done explicitly (see \m{wave/4} for how that can be
+done).  {\tt ripple/6} {\em does not\/} carry out meta-rippling (see
+\m{unblock/3} for a description of that).
+
+
+
+
+
+See \m{wave/4} for an illustration of how {\tt ripple/6} is used to do
+term rewriting.
+\end{predicate}
+
+
+
+\begin{predicate}{scheme/3}{scheme(?Thm,?Term,?Scheme)}%
+{\tt scheme/3} is a schematic database of all of the inductions loaded
+into the environment.  At present, {\tt scheme/3} is only suited to
+the representation of structural inductions which has single step
+cases.  
+
+There are two different representations of induction schemes, an
+object-level one and a meta-level one.  {\tt Thm} is the name of the
+object-level theorem which is a statement of the validity of the
+induction.  {\tt Scheme} is the meta-level version of this induction
+scheme.  The translation is done automatically by the \inx{library}
+mechanism when the object-level scheme is loaded with {\tt
+lib-load(scheme(Thm))}.  In fact for some schemes, \clam is either
+unable to do this translation automatically or no such translation
+exists.  (See the relevant section on \p{lib-load} for more details.)
+
+Induction schemes are indexed via a substitution of terms for
+induction variables: since the meta-level scheme makes these variables
+explicit, it is only necessary to index on the terms.  {\tt Term} is a
+list of unannotated terms in implicit correspondence with each of the
+variables to be induced upon.  
+
+{\tt Scheme} is a Prolog term, a list of the elements.  Each element
+has the form {\tt Sequents ==> Conclusion}, where {\tt Conclusion} is
+a schematic term of the form {\tt phi(...)} where {\tt ...} is a list
+of arguments.  Each argument has the form {\tt V:T}, where {\tt V} is
+a Prolog variable and {\tt T} is a possibly non-ground Prolog term.
+The set of variables in the {\tt Conclusion} is called $V$, the set of
+free variables in the {\tt T} are called $T$.
+  
+As indicated above, the third argument of {\tt scheme/3} reads as
+an induction scheme:
+\[
+        \infer[\mbox{\rm induction}]{\mbox{\tt ==> Goal}}
+                {\mbox{\tt Hyps1==>Goal1} & \mbox{\tt HypsN ==> GoalN}}
+\]
+Sequents is a list of sequents of the form {\tt Hyps==>Goal}.  When
+{\tt Hyps} is empty, the sequent may be written {\tt ==>Goal}.  {\tt
+Goal} is again a term of the form {\tt phi(...)} (of the same arity as
+appeared in {\tt Conclusion}), where each argument is an object-logic
+term, possibly containing Prolog variables. Let the set of Prolog
+variables be called $G$.
+  
+{\tt Hyps} is a list of the (binding) form {\tt B:BT} or the
+(induction hypothesis, or indhyp) form {\tt phi(...)}.  (Again {\tt
+phi} must have the same arity as in {\tt Conclusion}.)  Let the set of
+binding variables be $B$, and the set of variables in the indhyp form
+be $IH$.  We insist that $B = IH \cup G$, so that all variables in a
+sequent (both goal and hypotheses) are mentioned in the bindings.
+  
+The terms {\tt BT} may mention Prolog variables in $T$ (\p{scheme/5}
+allows these variables to be instantiated when a scheme is applied to
+a goal.  This freedom for type variables is useful: see the example
+below.
+  
+Internally, $B$, (and hence $IH$ and $G$) are kept in a different name
+space from $V$ (appearing in {\tt Conclusion}), but it might be
+confusing (on a casual perusal of the {\tt scheme/3} database) to rely
+on this, and so the user should discipline itself to keeping these
+sets disjoint, $B \cap V = \emptyset$.
+
+\paragraph {Example} Here are two example induction schemes both of
+which are present in the standard \clam library.
+
+\begin{verbatim}
+| ?- lib_load(scheme(list_primitive)).
+Loaded scheme(list_primitive)
+Added induction scheme for list_primitive
+
+yes
+| ?- scheme(A,B,C).
+
+A = list_primitive,
+B = [_A::_B],
+C = [[]==>phi(nil),[_C:_D,_E:_D list,phi(_E)]==>phi(_C::_E)]
+      ==>phi(_F:_D list)
+\end{verbatim}
+The library mechanism loads the object-level theorem  and then
+translates it into a meta-level scheme.  
+
+\begin{verbatim}
+| ?- lib_load(scheme(treeind)).
+Loaded def(node)
+Loaded def(leaf)
+Loaded def(tree)
+Loaded scheme(treeind)
+Added induction scheme for treeind
+
+| ?- scheme(A,B,C).
+
+A = treeind,
+B = [node(_A,_B)],
+C = [[_C:_D]==>phi(leaf(_C)),
+     [_E:_D tree,_F:_D tree,phi(_E),phi(_F)]
+       ==>phi(node(_E,_F))]
+    ==>phi(_G:_D tree)
+\end{verbatim}
+Notice that there are two induction hypothesis in the second of
+the two subgoals: {\tt phi(E)} and {\tt phi(F)}.  Induction using this
+rule will normally try to exploit both of these hypothesis and so the
+constructor {\tt node(.,.)} in the goal will be a multi-hole
+wave-front.  
+
+\p{scheme/5} will create the appropriate annotations automatically.
+\end{predicate}
+
+  
+\begin{predicate}{scheme/5}{scheme(?SchemeSource,?Sch,+H==>+AnnGoal,?BaseSequents,?StepSequents)}%
+Induction scheme {\tt Sch} is applicable to the sequent {\tt Sequent}
+giving a list of {\tt BaseSequents} and {\tt StepSequents}.  {\tt
+SchemeSource} is the source of the induction scheme, e.g.,
+{\tt lemma(Thm)} where {\tt Thm} is the name of the object-level induction
+theorem.  {\tt
+scheme/5} is the meta-level partner to the corresponding induction
+inference rule since it also adds necessary meta-level annotation.
+For some logics (e.g., \oyster) it is possible to justify the induction
+rule by proving some (typically) higher-order scheme lemma.  These
+scheme lemmas are used by the induction tactic. (See
+\S\reference{schemes} for information on this topic.)
+
+{\tt H} and {\tt AnnGoal} may be annotated, although any inductive
+conclusions in {\tt StepSequents} will not have sinks preserved from
+{\tt AnnGoal}: they are removed first.
+
+The {\tt Sch} term identifies the induction scheme albeit in a crude
+and non-unique way (see also \p{scheme/3}.  It is a list of the form
+{\tt (V:T)-IT} where {\tt V:T} is an essentially universal variable
+from {\tt H==>AnnGoal} (i.e., either a universally quantified variable
+in {\tt AnnGoal} or a parameter occurring in {\tt H}).  {\tt IT} is
+the term which will be substituted for all occurrences of that {\tt V}
+in {\tt AnnGoal} when the induction is performed.
+
+It is a list of the induction terms used in the induction. The order
+of these terms is that which appears in the \p{scheme/3} database,
+considering a left-to-right traversal of the list of sequents.  For
+example, for the {\tt nat-list-pair} scheme:
+\begin{verbatim}
+| ?- scheme(nat_list_pair,B,C).
+
+B = [s(_A),_B::_C],
+C = [[_D:pnat]==>phi(_D,nil),
+     [_E:int list]==>phi(0,_E),
+     [_F:pnat,_G:int,_H:int list,phi(_F,_H)]
+       ==>phi(s(_F),_G::_H)]
+    ==>phi(_I:pnat,_J:int list)
+\end{verbatim}
+{\tt Sch} would be (assuming induction on {\tt x} and {\tt y}) {\tt
+[(x:pnat)-s(X), (y:pnat list)-h::t]}.  In this induction, {\tt
+scheme/5} would insist upon induction parameters {\tt h} and {\tt t}
+for the {\tt list} part of the induction, whilst for the {\tt pnat}
+part the induction parameter is left unbound and will be automatically
+chosen. 
+
+{\tt scheme/5} is a uniform way of exploiting the \p{scheme/3}
+database, which is the raw form in which induction schemes are stored
+in \clam.
+
+Although recursion schemes can have any number of step-cases, the
+schemes are still characterised (indexed) by a single term (the {\tt
+IT} argument).  This is obviously not good enough.  Furthermore, even
+for induction schemes with only one step-case, simple classification
+(or characterisation or indexing) of induction schemes by a single
+induction term is not rich enough: different induction schemes can
+have the same induction scheme, but still be very different.
+
+\begin{ex}\examplepred{scheme/5}
+{\tt scheme/5} has a generous mode so that it
+can be used to test for and to generate applicable induction schemes.
+
+\begin{verbatim}
+| ?- scheme(_,Scheme,[]==>x:pnat=>y:int list=>p(x,y),B,S).
+
+Scheme = [(y:int list)-v0::v1],
+B = [[y:int list]==>x:pnat=>p(x,nil)],
+S = [[v0:int,v1:int list,ih:[RAW,v2:x:pnat=>p(x,v1)],y:int list]
+       ==>x:pnat=>p(\x/,``v0::{v1}''<out>)] ;
+
+Scheme = [(x:pnat)-s(v0)],
+B = [[x:pnat]==>y:int list=>p(0,y)],
+S = [[v0:pnat,ih:[RAW,v1:y:int list=>p(v0,y)],x:pnat]
+       ==>y:int list=>p(``s({v0})''<out>,\y/)] ;
+
+Scheme = [(x:pnat)-s(v0),(y:int list)-v1::v2],
+B = [[v0:pnat,x:pnat,y:int list]==>p(v0,nil),
+     [v0:int list,x:pnat,y:int list]==>p(0,v0)],
+S = [[v0:pnat,v1:int,v2:int list,
+      ih:[RAW,v3:p(v0,v2)],x:pnat,y:int list]
+       ==>p(``s({v0})''<out>,``v1::{v2}''<out>)] ;
+
+no
+| ?-
+\end{verbatim}
+(The last solution here is produced only when {\tt
+scheme(nat-list-pair)} has been loaded.)
+\end{ex}
+
+\begin{ex}\examplepred{scheme/5}Induction on a parameter
+\begin{verbatim}
+| ?- scheme(_,Scheme,[v0:pnat]==>x:pnat=>p(x,v0),B,S).
+
+Scheme = [(x:pnat)-s(v1)],
+B = [[x:pnat,v0:pnat]==>p(0,v0)],
+S = [[v1:pnat,ih:[RAW,v2:p(v1,v0)],x:pnat,v0:pnat]
+       ==>p(``s({v1})''<out>,v0)] ;
+
+Scheme = [(v0:pnat)-s(v1)],
+B = [[v0:pnat]==>x:pnat=>p(x,0)],
+S = [[v1:pnat,ih:[RAW,v2:x:pnat=>p(x,v1)],v0:pnat]
+       ==>x:pnat=>p(\x/,``s({v1})''<out>)] ;
+\end{verbatim}
+\end{ex}
+
+\begin{ex}\examplepred{scheme/5}Similar to the example above but in which the
+scheme prescribed is inapplicable due to variable conflicts
+\begin{verbatim}
+| ?- scheme(_,[VT-s(s(v0))],[v0:pnat]==>x:pnat=>p(x,v0),B,S).
+
+no.
+\end{verbatim}
+\end{ex}
+
+
+\begin{ex}\examplepred{scheme/5}The induction rule (schematic in $\phi$)
+\[
+  \infer{\all x:{pnat} \phi(x)}{\phi(0) & \phi(x)\rightarrow\phi(s(x))}
+\]
+Could be used in a proof of associativity of $plus$ via
+\begin{verbatim}
+:- scheme(_,[s(v0)],[a:pnat],
+          []==>a:pnat=>b:pnat=>plus(a,b)=plus(b,a)in pnat,B,S).
+B = [[a:pnat]==>b:pnat=>plus(0,b)=plus(b,0)in pnat]
+S = [[v0:pnat,
+      ih:[RAW,v1:b:pnat=>plus(v0,b)=plus(b,v0)in pnat],
+      a:pnat]
+     ==>
+      b:pnat=>plus(``s({v0})''<out>,\b/)=
+              plus(\b/,``s({v0})''<out>)in pnat]
+\end{verbatim}
+\end{ex}
+\end{predicate}
+
+\begin{predicate}{sinks/3}{sinks(?T1, ?SinksSpec, ?T2)}%
+{\tt T2} is as {\tt T1}, except that {\tt T2} has sinks in the
+positions specified by, {\tt SinksSpec}, a list of term positions.
+Due to the generous mode of this predicate, {\tt sinks/3}, can be used
+to insert (mode {\tt sinks(+,+,-)}) or to delete sinks (mode {\tt
+sinks(-,+,+)}), or locate sinks (mode {\tt sinks(-,-,+)}).  At least
+one of {\tt T1} of {\tt T2} must be instantiated.
+\end{predicate}
+
+\begin{predicate}{sink-proper/2}{sink-proper(?T1, ?T2)}%
+{\tt T1} is identical to {\tt T2} except that {\tt T1} is enclosed in
+a sink. {\tt sink-proper/2} can be used to retrieve the contents of a
+sink (mode {\tt sink-proper(+,-)}) or package up a term in a sink
+(mode {\tt sink-proper(-,+)}).  Either {\tt T1} or {\tt T2} must be
+instantiated.
+\end{predicate}
+
+\begin{predicate}{skeleton-position/3}{skeleton-position(+GPos, +G, -HPos )}%
+{\tt GPos} is a position inside the annotated term {\tt G}, and {\tt
+HPos} is the same position with respect to the skeleton of {\tt G}.
+
+For example, in an inductive proof, one can use this predicate to
+compute positions in the hypothesis which correspond to position in
+the goal, providing those positions are in the skeleton.
+\end{predicate}
+
+
+\begin{predicate}{split-wave-fronts/3}{split-wave-fronts(+Term,?PosL,?STerm)}%
+{\tt STerm} will be as {\tt Term}, but with a number of complex
+wave-fronts split into smaller ones. {\tt PosL} will contain the
+positions of the wave-fronts in {\tt Term} which were split. It
+generates on backtracking all possible splits of all wave-fronts; it
+returns the possible splits in a sensible order: it returns the splits
+in bigger chunks (i.e., few splits) before splits in smaller chunks.
+
+See the description of  \p{join-wave-fronts/3} for further details.
+
+
+
+\end{predicate}
+
+\begin{predicate}{strip-meta-annotations/2}{strip-meta-annotations(+T1, -T2)}%
+Identical to {\tt unannotated(T1,T2)}.  See \p{unannotated/2}.
+\end{predicate}
+
+\begin{predicate}{strip-redundant-sinks/2}{strip-redundant-sinks(+T1, -T2)}%
+{\tt T1} and {\tt T2} are lists of goal sequents. The corresponding
+goal sequents from each list are identical except that for each goal
+in {\tt T1} which contains sinks but no wave-fronts the associated
+goal in {\tt T2} contains no sinks.
+\end{predicate}
+
+\begin{predicate}{strip-redundant-waves/2}{strip-redundant-waves(+T1, -T2)}%
+{\tt T1} and {\tt T2} are lists of goal sequents. The corresponding
+goal sequents from each list are identical except that for each goal
+in {\tt T1} for which a nested induction would not be profitable then
+the wave-fronts in the associated goal in {\tt T2} are not present.
+\end{predicate}
+
+\iffalse
+\begin{predicate}{subsumes/2}{subsumes(+S1, +S2)}%
+Induction scheme {\tt S1} subsumes induction scheme {\tt S2}. The
+proper definition of subsumption is unclear at \notnice the moment, so
+we just resort to equating scheme subsumption with term instantiation:
+{\tt S1} subsumes {\tt S2} iff {\tt S1} is an instantiation of {\tt
+S2}. See~\cite{pub419} for a detailed explanation about induction
+schemes.
+\end{predicate}
+\fi
+
+\begin{predicate}{term-instance/3}{term-instance(+Context,T,S)}%
+{\tt T} is a quantifier-free formula (term) in some context {\tt
+Context} and {\tt S} is the result of instantiating variables
+appearing in {\tt T} with values of the appropriate type.  Values are
+ground constructor terms.  The choice of these values is unspecified:
+one can think of them as being selected from a known, finite  set
+randomly (cf. \p{random-term-instance/3}).   On backtracking,
+generates other term instances, no two of which are identical.
+
+
+\begin{example}{term-instance/3}
+\begin{verbatim}
+?- term_instance([x:pnat,y:int list],f(x,y),P)
+P = f(0,0::nil) ;
+P = f(0,-3::nil) ;
+P = f(0,3::nil) ;
+P = f(0,0::0::0::nil) ;
+P = f(0,0::0:: -3::nil) ;
+P = f(0,0::0::3::nil) 
+\end{verbatim}
+This predicate is used by \p{trivially-falsifiable/2}.
+\end{example}
+\end{predicate}
+
+\begin{predicate}{theorem/2}{theorem(?Theorem, ?Goal)}%
+{\tt Theorem} is an Oyster theorem or lemma with top level goal {\tt
+G}.  See \S\reference{library} for more information on the
+nature of theorems and lemmas.
+\end{predicate}
+
+\begin{predicate}{trivially-falsifiable/2}{trivially-falsifiable(+C,+F)}%
+{\tt F} is a formula in context {\tt C} which can readily be shown to
+be false.  `Readily shown to be false' means that one of (up to) five
+randomly chosen ground instances of {\tt F} evaluate to `false'.
+(Of course, `five' is a special number: no fewer, no more.)
+
+Evaluation is performed using \p{ev/2} and the defining
+equations\index{defining equations} present in the current
+environment.
+
+Example applications of this predicate can be found in
+\m{weak-fertilize/4} and \m{generalise/2}.
+\end{predicate}
+
+
+\begin{predicate}{unannotated/1}{unannotated/1(+T1)}%
+{\tt T1} contains no meta-level annotations.
+\end{predicate}
+
+\begin{predicate}{unannotated/2}{unannotated/2(+T1, ?T2)}%
+{\tt T1} and {\tt T2} are identical except that all meta-level
+annotations (wave-fronts, holes, and sinks) which appear in {\tt T1}
+are absent from {\tt T2}.
+\end{predicate}
+
+
+\begin{predicate}{unannotated-hyps/2}{unannotated-hyps(+T1, -T2)}%
+{\tt T1} and {\tt T2} are identical hypothesis lists except that {\tt
+T2} does not contain any annotation.
+\end{predicate}
+
+\begin{predicate}{unifiable/2}{unifiable(?S,?T)}%
+{\tt S} and {\tt T} are could be unified with each other.  No variable
+instantiation takes place.  See also~\p{unify/2} and~\p{matches/2}.
+\end{predicate}
+
+\begin{predicate}{unify/2}{unify(?S,?T)}%
+{\tt unify/2} computes the most general unifier of terms {\tt S} and
+{\tt T} and instantiates them with that unifier.  See
+also~\p{unifiable/2} and~\p{matches/2}.
+\end{predicate}
+
+\begin{predicate}{universal-var/2}{universal-var(+Seq,?Var)}%
+{\tt Var} is a variable occurring universally in the sequent {\tt
+Seq}.  This can be because {\tt Var} occurs among the hypotheses in
+{\tt Seq}, or because {\tt Var} appears as an explicitly universally
+quantified variable in the goal of {\tt Seq}.
+\end{predicate}
+
+\begin{predicate}{unflawed-casesplit-suggestion/3}{unflawed-casesplit-suggestion(+H,+G,?Scheme)}%
+{\tt Scheme} is an unflawed casesplit for goal {\tt G} in context {\tt
+H}.  See \p{casesplit-suggestion/3} for more information.
+\end{predicate}
+
+\begin{predicate}{unflawed-induction-suggestion/3}{unflawed-induction-suggestion(+H,+G,?Scheme)}%
+{\tt Scheme} is an unflawed induction scheme for goal {\tt G} in
+context {\tt H}.  
+
+This predicate carries out the same analysis as
+{\tt induction-suggestion/3} but it further restricts {\tt Scheme} to be
+such that there are no flawed variable occurrences.  See
+\p{induction-suggestion/3} for more information.
+\end{predicate}
+
+\begin{predicate}{wave-fronts/3}{wave-fronts(?T1,?FrontsSpec,?T2)}%
+{\tt T2} is as {\tt T1}, except that {\tt T2} has wave-fronts in the
+positions specified by {\tt FrontsSpec}.  
+
+See~\cite{rp4nn} for a precise description of wave-fronts; see
+\p{split-wave-fronts/3} for a discussion of this normal form.
+
+To make this document self-contained, \S \reference{wave-fronts}
+gives a brief description of wave-fronts and their representation.
+{\tt FrontsSpec} is a list of terms, each specifying the position of a
+wave-front as described in \S\reference{wave-fronts}.
+
+Due to the generous mode of this predicate, \p{wave-fronts/3} can be
+used to insert wave-fronts (mode {\tt wave-fronts(+,+,-)}), or to
+delete wave-fronts (mode {\tt wave-fronts(-,+,+)}), or to find wave
+fronts (mode {\tt wave-fronts(-,-,+)}). At least one of {\tt T1} and
+{\tt T2} must be instantiated.
+
+\inxx{pretty-printer} wave-fronts are pretty printed by \clam\ as
+follows: the wave-front $B_i$ is surround by double quotes ({\tt
+``\ldots''}), and all wave hole in $B$ are surrounded by
+ braces ({\tt \{\ldots\}}).  Thus, a formula like {\tt
+f(g(x),y)}, with wave-fronts specified by {\tt [[1]-[[1]]]} would be
+printed like {\tt f(``g(\{x\})'',y)}.
+
+(But see also \p{idplanTeX[0;1]} and \p{dplanTeX[0;1]} to get
+\inx{LaTeX=\LaTeX{}} source files of proof-plans.)
+\end{predicate}
+
+\begin{predicate}{wave-terms-at/3}{wave-terms-at(+Term, ?Pos, ?SubTerm)}%
+{\tt SubTerm} is a subterm of {\tt Term} at position {\tt Pos} such
+that {\tt SubTerm} is a wave-term or contains wave-term(s).
+\end{predicate}
+
+\begin{predicate}{well-annotated/1}{well-annotated(+Term)}%
+{\tt Term} is is a well-annotated term.  \clam will only manipulate
+well-annotated terms (as defined in \S\reference{well-ann}) (with the
+exception of \p{join-wave-fronts/3} and \p{maximally-joined/2}.
+\end{predicate}
+
+\input logic-oyster.tex
+
+\subsection {The method language: connectives}
+
+This section discusses the connectives that can be used in the
+method-language. Obviously, we can use any Prolog connective (such as
+{\tt ;}, \verb'\+' etc) but we rather develop our own principled (?)
+set of connectives (as with the predicates discussed above). The only
+``native'' Prolog connective that we recommend is \inx{conjunction}:
+``{\tt ,}''. Again, the connectives are discussed in alphabetical
+order.
+
+%\begin{predicate}{andpossibly/2}{+G1 andpossibly +G2}%
+%Flexible conjunction. The \p{andpossibly/2} connective is like
+%\inx{conjunction}: it tries to satisfy both {\tt G1} and {\tt G2}.
+%If this cannot be
+%done, it tries to satisfy {\tt G1} alone. Thus, a sequence
+%\begin{verbatim}
+%:- G1 andpossibly ... andpossibly Gn
+%\end{verbatim}
+%will try to satisfy {\tt G1,...,Gi} for decreasing $i$ from $n$ to $1$.
+%In a sequence {\tt G1,...,Gn}, satisfying {\tt G1,...,Gi} with $i<n$
+%means that {\tt Gi+1,...,Gn} must be false.
+%For example
+%\begin{verbatim}
+%:- member(X, [1,15,25,3]) andpossibly X>10 andpossibly X>20.
+%\end{verbatim}
+%succeeds with {\tt X=25, X=15, X=1, X=3} in this order.
+%\end{predicate}
+
+\begin{predicate}{thereis/1}{thereis \{?Var$\backslash$+List\}:+Pred}%
+Extensional bounded existential quantification: succeeds if {\tt Pred}
+succeeds for some element of {\tt List}.  {\tt Var} will become bound
+the first such element.  All other variables mentioned in {\tt Pred}
+will remain unbound.  {\tt Var} can occur in {\tt Pred}.  {\tt Var}
+can also be a general term containing variables. This term should then
+be the element of {\tt List} for which {\tt Pred} succeeds, and all
+variables occurring in this term will be bound.  The \p{thereis/1}
+predicate produces only the first element in {\tt List} for which {\tt
+Pred} succeeds, and fails on backtracking.
+\end{predicate}
+
+\begin{predicate}{thereis/1}{thereis \{?Var$\backslash$+Pred1\}:+Pred2}%
+Intensional bounded existential quantification: succeeds if {\tt
+Pred2} succeeds for some element in the set of values for {\tt Var}
+specified by the predicate {\tt Pred1}. {\tt Var} becomes bound to the
+first such element.  All other variables in {\tt Pred1} and {\tt
+Pred2} will remain unbound.  {\tt Var} can occur in both {\tt Pred2}
+in {\tt Pred1}.  {\tt Var} can also be a general term containing
+variables. {\tt Pred1} must then specify values for each of these
+variables such that {\tt Pred2} holds.  Only variables occurring in
+{\tt Var} can be referred to in {\tt Pred2}.  The \p{thereis/1}
+predicate does not backtrack to find further elements in {\tt Pred1}
+for which {\tt Pred2} succeeds.  This is a {\em bounded\/} quantifying
+construct: the set of values for {\tt Var} specified by {\tt Pred1}
+must be {\em finite\/} (this is needed to ensure finite failure of
+this predicate). The intensional bounded existential quantification
+can be expressed in terms of the extensional bounded quantification as
+follows:
+\begin{verbatim}
+thereis {Var\Pred1}:Pred2 :-
+    findall(Var, Pred1, List), thereis {Var\List}:Pred2.
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{thereis/1}{thereis \{?Var\}:+Pred}%
+Minor variation on the existential quantification constructs. Succeeds
+if there is a value of {\tt Var} for which {\tt Pred} succeeds.  {\tt
+Var} becomes bound to the first such value. {\tt Var} can occur in
+{\tt Pred}. All other variables in {\tt Pred} remain unbound. {\tt
+Var} can also be a general term containing variables. Does not
+backtrack over alternative values of {\tt Var} for which {\tt Pred}
+holds.
+\end{predicate}
+
+\begin{predicate}{forall/1}{forall \{?Var$\backslash$+List\}:+Pred}%
+Extensional bounded universal quantification:
+                \verb'forall {Var\List}:Pred'
+succeeds if {\tt Pred} succeeds for each element of {\tt List}.
+{\tt Var} can occur in {\tt Pred}.  This succeeds for any {\tt Pred}
+if {\tt List} is empty.  All variables mentioned in {\tt Pred}
+(including {\tt Var}) will remain unbound. {\tt Var} does not have to
+be a uninstantiated variable, but can be an arbitrary term containing
+variables, each of which can then be used in {\tt Pred}.  The
+following examples all succeed without any variables getting bound:
+\begin{verbatim}
+:- forall {X\[1,2,3]}:number(X).  :- forall
+{f(X,Y)\[f(1,a),f(2,b)]}:(number(X), atomic(Y)).
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{forall/1}{forall \{?Var$\backslash$+Pred1\}:+Pred2}%
+Intensional bounded universal quantification: succeeds if {\tt Pred2}
+succeeds for each element in the set of values for {\tt Var} specified
+by {\tt Pred1}. {\tt Var} can occur in {\tt Pred2} and {\tt Pred1}.
+This succeeds if {\tt Pred1} specifies the empty set (i.e., if {\tt
+Pred1} fails for any value of {\tt Var}). All variables occurring in
+{\tt Pred1} and {\tt Pred2} (including {\tt Var}) remain unbound.
+Again, {\tt Var} can also be an arbitrary term containing variables.
+Only the variables occurring in {\tt Var} can be referred to in {\tt
+Pred2}. This is a {\em bounded\/} quantifying construct: the set of
+values for {\tt Var} specified by {\tt Pred1} must be {\em finite}.
+The intensional bounded universal quantification can be expressed in
+terms of the extensional bounded quantification as follows:
+\begin{verbatim}
+forall {Var\Pred1}:Pred2 :- findall(Var, Pred1, List), forall
+{Var\List}:Pred2.
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{listof/3}{listof(?Term, +Pred, ?TermSet)}%
+This predicate is as the Prolog built-in \p{setof/3}, except that this
+predicate does not fail. If {\tt Pred} never succeeds, {\tt TermSet}
+will be the empty list {\tt []}, instead of the predicate failing (as
+\p{setof/3} does). In this respect, \p{listof/3} is like the Quintus
+library predicate \p{findall/3}, except that {\tt TermSet} is indeed a
+set, and not a list. Thus, \p{listof/3} can be thought of as:
+\begin{verbatim}
+listof(Term,Pred,TermSet) :- setof(Term,Pred,TermSet),!.
+listof(_,_,[]).
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{map-list/4}{map-list(?OL, +OE:=>NE, +Pred, ?NL)}%
+The predicate maps {\tt OL} into {\tt NL} by applying {\tt
+Pred} to each element. {\tt OE} and {\tt NE} must occur in
+{\tt Pred}, and are regarded as input- and output-argument
+respectively.  Values for {\tt OE} are taken from {\tt OL}
+and values for { \tt NE} are used to for {\tt NL}.  If {\tt
+Pred} is bidirectional, then \verb|map-list| works bidirectionally as
+well.  (N.B.\@Variables in {\tt Pred} which do not appear in {\tt OE} or {\tt
+NE} get uniformly renamed.)
+
+
+Essentially this predicate produces the extension of a function
+({\tt Pred}) to a set ({\tt OL}).  Example:
+\begin{verbatim}
+:- map_list([1,2,3], I:=>O, O is I+10, L).
+L = [11,12,13].
+:- map_list([a+1,b+2,c+3], C+N:=>C+NN, NN is N+10, L).
+L = [a+11,b+12,c+13]
+\end{verbatim}
+\end{predicate}
+
+
+\begin{predicate}{map-list-filter/4}{map-list-filter(?OL, ?OE:=>?NE, +Pred, ?NL)}%
+This is the same as \p{map-list/4} but elements for which \verb|Pred|
+fails are dropped from \verb|NL|.
+\end{predicate}
+
+\begin{predicate}{map-list-history/5}{map-list-history(?OL,?X-?OE:=>?NE,+Pred,?NL,?Hist)}%
+This is the same as \p{map-list/4} with the exception that the list of
+so-far-computed \verb|NL| is unified with \verb|X| before
+\verb|Pred| is called.  \verb|Hist| is the `initial' value of this
+so-far-computed list---normally the empty list.  This means that the
+mapping can be dependent upon the mapping of previous elements.
+
+
+Here is an example which enumerates the elements of a list:
+\begin{verbatim}
+?-  map_list_history([a,b,c,d],  (X-N):=>L-N, length(X,L), New, [] ).
+
+New = [0-a,1-b,2-c,3-d] 
+\end{verbatim}
+\end{predicate}
+
+
+\begin{predicate}{map-list-history-filter/5}{map-list-history-filter(?OL,?X-?OE:=>?NE,+Pred,?NL,?Hist)}%
+This is the merge of \p{map-list-filter/4} and \p{map-list-history/5}.
+It filters and gives access to the history too.  
+
+Here is an example which removes duplicates from a list:
+\begin{verbatim}
+?-  map_list_history_filter([a,b,c,c,b],
+                            (X-N):=>N,
+                            \+member(N,X),
+                            New, []).
+New = [a,b,c]
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{not/1}{not +Goal}%
+Meta-linguistic \inx {negation} by failure. Exactly as Prolog's
+\verb'\+'.  Variables in {\tt Goal} will not be bound.
+\end{predicate}
+
+\begin{predicate}{orelse/2}{+G1 orelse +G2}%
+Committed \inx{disjunction}. {\tt G1 orelse G2} will execute
+{\tt G1} but if this fails will execute {\tt G2}. The only difference
+between {\tt G1 orelse G2} and {\tt G1 or G2} is that the {\tt orelse}
+construct does not allow backtracking over {\tt G1}. For Prolog
+hackers: {\tt G1 orelse G2} is shorthand for {\tt (G1,!);G2} or
+equivalently {\tt G1->true;G2}. 
+\end{predicate}
+
+\subsection {Compound methods}
+
+A distinction can be made between {\em simple
+methods\/}\inxx{method!simple methods} and {\em compound
+methods\/}\inxx{method!compound methods}. Simple methods use only
+the predicates and connectives described in
+\S\ref{method-language} to formulate their preconditions and
+postconditions. A method is called compound when it calls other
+methods from its pre- or postconditions.  Thus, compound methods can
+be seen as built out of other methods (together with the predicates
+and connectives from the method language).  The {\tt \inx{ind-strat}}
+method (as described in \cite{pub349}) is an example of such a
+compound method. The method-language from
+\S\reference{method-language} offered no constructs for calling other
+methods from a method's pre- or postconditions, and the first
+subsection below describes how this can be done.
+
+Calling other methods from a method's pre- or postconditions can also be
+done in a fail-safe way if that is required, using the \p{try/1}
+connective. 
+Methods can also be combined in a sequential way using the \p{then/2}
+connective or disjunctively using the \p{or/2} connective. All
+these connectives are described below. (All these connectives are very
+close to the Oyster tacticals of the same names). 
+
+A final way of constructing compound method are the
+{\em \inx{iterating method}s}. Such an iterating method (also called
+an {\em \inx{iterator}\/}) is build by exhaustively iterating another
+method (or set of methods). The final subsection below describes how
+to build iterating methods.
+
+\subsubsection {Calling other (sub)methods}
+\label{calling-submethods}
+
+\begin{figure}[tb]
+\hrule\vspace{1ex}{\small\begin{verbatim}
+method(normal(imply_elim(HName,Lemma)),
+          H==>G,
+          [hyp(HName:A=>B,H),
+           (hyp(Lemma:A,H)
+            v applicable(H==>A,apply_lemma(Lemma))
+            v applicable(H==>A,backchain_lemma(Lemma)))],
+          [hfree([NewH],H),
+           del_element(HName:A=>B,H,HThin)],
+          [[NewH:B|HThin]==>G],
+          normal(imply_elim(Lemma))).
+\end{verbatim}
+}
+\caption{The {\tt normal/1} method.}
+\predinxx{normal/1}
+\label{lemma-fig}
+\vspace{1ex}
+\hrule
+\end{figure}
+
+\index{submethod}\index{method} The main predicates for calling a
+(sub)method from the pre- or post-conditions from another method are
+\p{applicable/[2;4]} and \p{applicable-submethod/[2;4]}, described in
+\S\reference{planning-mech}. Figure~\ref{lemma-fig} shows part of the
+\p{normal/1} submethod which checks as part of the preconditions
+whether there is a lemma that can be used to prove the antecedent of
+an implication occurring in the hypothesis-list. An alternative (and
+equivalent) way of formulating this method would of course have been
+to include the code for the \p{apply-lemma/1} and
+\p{backchain-lemma/1} methods in the preconditions of the \p{normal/1}
+submethod, but the formulation of figure \ref{lemma-fig} has all the
+obvious advantages of modularity, readability etc. In the
+preconditions of the \p{normal/1}\examplemethod{normal/1} submethod
+it is only necessary to know if the
+\p{apply-lemma/1}\examplemethod{apply-lemma/1} or
+\p{backchain-lemma/1}\examplemethod{backchain-lemma/1} methods apply,
+but it is not necessary to know what the output sequent and
+postconditions of these methods are if they apply. Therefore, the
+predicate \p{applicable/2} is used. Had it been necessary to know the
+output sequent and/or the postconditions of the \p{apply-lemma/1} or
+\p{backchain-lemma/1} methods, the predicate \p{applicable/4} should
+have been used instead.
+
+As shown in figure~\ref{lemma-fig}, methods can also be represented
+using a \p{submethod/6} term. This \p{submethod/6} representation
+should be used if the method is not to be used in its own right during
+the plan formation, but only as a \index* {submethod} to be called from
+other methods (which should then use the \p{applicable-submethod/[2;4]}
+predicate for this purpose). Thus, both methods represented by \p{method/6}
+and as \p{submethod/6} can be called from
+the pre- and postconditions of other methods, but only methods
+represented by \p{method/6} will be used as building blocks by
+the plan-formation programs. 
+
+\subsubsection {Iterating (sub)methods}
+\label{iterating-methods}
+\index {iterating methods}
+
+It is possible to create a new method out of a given set of
+(sub)methods by constructing an {\em \index* {iterator}}. This iterator will
+exhaustively apply the elements of the given set until none of them
+apply any longer. Thus, the application of an iterator is equivalent
+to a maximally long chain of applications of the given (sub)methods.
+The preconditions of the newly constructed iterator will state that at
+least one of the methods in the given set is applicable, and the
+postconditions will state that none of the methods in the given set is
+applicable. 
+
+The representation of an iterating method is as an \p{iterator/4} term:
+
+\begin{predicate}{iterator/4}{iterator(+IteratorType,+Name,+IteratedType,+MethodList)}%
+When this term is read when loading methods, a new (sub)method
+{\tt Name} will be constructed which iterates the (sub)methods
+specified in {\tt MethodList}. The tag {\tt IteratorType} must be one of the
+atoms {\tt method} or {\tt submethod}, and specifies whether the
+resulting iterator {\tt Name} is a method or a submethod.
+{\tt Name} must be an atom, and the elements of {\tt MethodList}
+must be specified as skeletal functors\footnote
+{
+A {\em \inx{skeletal functor}\/} is a functor with all arguments
+uninstantiated. For instance {\tt f(\_,\_)} is the skeletal functor
+corresponding to {\tt f/2}. 
+}.
+{\tt IteratedType} must be one of the atoms {\tt methods} or
+{\tt submethods}, and specifies whether the iteration is over methods or
+over submethods. The resulting method will be {\tt Name} of arity 1
+({\tt Name/1}), and will exhaustively apply the elements of
+{\tt MethodList} until none of them apply any longer. Thus, the
+application of a {\tt Name/1} is equivalent to a maximally long chain of
+applications of the elements of {\tt MethodList}. The preconditions of
+the newly constructed iterator method {\tt Name/1} will state that at least
+one element of {\tt MethodList} is applicable, and the postconditions
+will state that none of the elements of {\tt MethodList} is applicable.
+
+Using various combinations of the values for {\tt IteratorType} and 
+{\tt IteratedType} it is possible to construct a method that iterates
+submethods, a submethod that iterates methods, etc. 
+
+For example, the following \p{iterator/4} term constructs an iterating
+method \m{sym-eval/1} which iterates 3 submethods:
+{\small\begin{verbatim}
+iterator(submethod,sym_eval,submethods,
+        [ equal(_,_),
+          normalize_term(_),
+          existential(_,_) ]).
+\end{verbatim}
+}
+An example application of the newly constructed {\tt sym-eval/1}
+method would be:
+{\small\begin{verbatim}
+| ?- applicable(M,_,_).
+   M = sym_eval([normalize_term(
+                   [reduction([1,1],[plus1,equ(left)]),
+                    reduction([1,2,1],[plus1,equ(left)])])])
+\end{verbatim}
+}
+Thus, the single argument of the newly constructed iterator (sub)method
+will become bound to the list of applications of the iterated
+(sub)methods. {\clam}'s \inx{pretty-printer} (described in \S\reference{pretty-printer}) treats iterator (sub)methods specially.
+It suppresses the single argument of {\tt Name/1}, since this argument
+gets very long and complicated in general and does not carry much
+information that a user would want to see. It prints this list as
+{\tt [...]}, where the number of {\tt .}s represents the number
+of iterations applied. 
+
+The construction of an iterating method using the \p{iterator/4}
+predicate will also result in the construction of a tactic of the same
+name as the iterating method for execution purposes.
+\notnice
+Notice that this automatic construction of a tactic (i.e., a Prolog
+predicate) might result in overwriting an existing Prolog predicate
+that accidentally has the same name. 
+\end{predicate}
+
+The method constructed with \p{iterator/4} iterates the given set of
+methods exhaustively. Thus, only the longest possible chain of
+consecutive applications of methods in the given set will be generated
+by the iterator. No subsequences of this chain of applications will be
+generated. Also, no permutations of this chain will be generated (the
+elements in the given set are tried in the order in which the set was
+specified). Small modifications in the code of \p{iterate-methods/4}
+would make it possible to generate subsequences or permutations or
+both. See \S\reference{iterators} in the {\em Programmer
+Manual\/} for details.
+
+\begin{predicate}{repeat/6}{repeat(+IGs,+CG:=>SGs,+PS,+FS,+SPs,+OGs)}%
+\p{repeat/6} can be used to construct sub-planners, that is methods 
+which construct a possibly branching sub-plan depth first. For each
+sub-goal in {\tt IGs} {\tt repeat} unifies it with {\tt CG} and invokes 
+{\tt FS}. This, if it succeeds binds the plan step to be recorded to 
+{\tt PS} and the subgoals (if any) to {\tt SGs}. \p{repeat/6} then
+recursively invokes itself (depth-first) on the sub-goals introduced
+until there are no further subgoals to which {\tt FS} can be successfully 
+applied. When it completes the plans found for each goal in {\tt IGs}
+they appear in the corresponding position in {\tt SPs}. An empty
+plan is denoted by the token {\tt idtac}. Any open sub-goals left
+over are unified with {\tt OGs}.
+\end{predicate}
+
+\begin{predicate}{iterate/5}{iterate(+IArg,+CArg :=> NArg,+Proc,+CutCond,-OArg)}%
+\p{iterate/5} is used to iterate a given procedure, {\tt Proc}, over some
+argument, {\tt IArg}, with control over backtracking. When invoked {\tt iterate}
+unifies {\tt IArg} with {\tt CArg} and then invokes {\tt Proc}. If either 
+this unification or the procedure invocation fails it finishes and unifies 
+{\tt IArg} with {\tt OArg}. If {\tt Proc} succeeds {\tt iterate} then
+invokes {\tt CutCond}. If this fails {\tt NArg} is bound to {\tt OArg}
+and {\tt iterate} succeeds and {\tt Proc} may resatisfy on backtracking.
+If {\tt CutCond} also succeeds {\tt iterate} recursively invokes itself 
+with {\tt IArg} replace with {\tt NArg}, but any resatisfaction
+of {\tt Proc} is cut. This rather specialised behaviour turns out to be
+just what you need for rewriting methods that should apply some submethods 
+exhaustively except at points where looping might be introduced. 
+\end{predicate}
+
+\begin{predicate}{iterate-lazy/5}{iterate-lazy(+IArg,+CArg :=> NArg,+Proc,+CutCond,-OArg)}%
+\p{iterate-lazy/5} is as \p{iterate/5} but it prefers shorter rather
+than longer iterations.  It tries sequences of length 0, then 1 on
+backtracking, then 2 and so on.
+
+This form of iteration is useful for controlling unblocking  in the
+inductive proof plan: we only want a minimal amount of unblocking
+rather than a maximal amount.  See \m{unblock-lazy/1} for an example.
+\end{predicate}
+
+\subsubsection {Calling fail-safe (sub)methods}
+\inxx{fail-safe applicability} Sometimes it is desirable to apply a method if applicable, but to not
+fail if the method is not applicable. An example of the need for such a
+fail-safe mechanism of applying (sub)methods is the application of the
+\m{eval-def/2} method in the base-case of an induction. If the \m{eval-def/2}
+is applicable we want to apply it, otherwise we just want to leave the
+base-case sequent unchanged. The \p{try/1} connective implements this
+mechanism:
+
+\begin{predicate}{try/1}{try +Method}%
+The construct {\tt try Method} is always applicable, whether
+{\tt Method} is applicable or not. If {\tt Method} is
+applicable, the postconditions and output-sequent of {try Method} are
+as the postconditions and output-sequent of {\tt Method}. If
+{\tt Method} is not applicable, the postconditions of {\tt try Method}
+are empty and the output-sequent is a singleton list consisting of the
+input-sequent. Thus: if {\tt Method} is applicable, then
+{\tt try Method} is like {\tt Method}, if {\tt Method} is not
+applicable, then {\tt try Method} is the identity operation.
+
+An example of the use of \p{try/1} is in combination with an iterator.
+As explained in the previous section, an iterator succeeds only if at
+least one of the iterated methods can be applied. In combination with
+the \p{try/1} connective, an iterator can be seen as a chain of 0 or
+more applications, instead of a chain of 1 or more applications.
+\end{predicate}
+
+\subsubsection {Disjunctively combining (sub)methods}
+
+\inxx{disjunctive applicability}
+Methods and submethods can be combined disjunctively (that is: either
+one (sub) methods is applied or the other), using the \p{or/2}
+connective:
+
+\begin{predicate}{or/2}{M1 or M2}%
+The construct {\tt M1 or M2} is applicable whenever {\tt M1} is
+applicable to the given input sequent or {\tt M2} is applicable to the
+given input sequent. The system will first try the applicability of
+{\tt M1 }, and, on failure or backtracking, try the applicability of
+{\tt M2}. The output sequents of the \p{or/2} construct are
+the output sequents of the chosen applicable method.
+\end{predicate}
+
+\subsubsection {Sequentially combining (sub)methods}
+\inxx{sequential combination of methods}
+
+Methods and submethods can be combined sequentially (that is: one
+(sub)method is applied to the output sequent of another (sub)method)
+using the \p{then/2} connective:
+
+\begin{twopredicates}{then/2}{M1 then M2}%
+      {then/2}{M1 then [M2$_1$,...,M2$_n$]}%
+The construct {\tt M1 then M2} is applicable whenever {\tt M1} is
+applicable to the given input sequent and {\tt M2} is applicable to
+each output sequent of {\tt M1}.\footnote {Note that this is
+applicable with the {\em same\/} instantiation: i.e., {\tt M2} is instantiated.}   The construct
+{\tt M1 then [M2$_1$,...,M2$_n$]} is applicable whenever {\tt M1} is
+applicable to the given input sequent and each element of
+{\tt [M2$_1$,...,M2$_n$]} is applicable to the corresponding output
+sequent of {\tt M1} (thus, {\tt M1} is required to have $n$ output
+sequents). The output sequents of the \p{then/2} construct are the
+output sequents of the applications of {\tt M2} or
+{\tt [M2$_1$,...,M2$_n$]}.
+\end{twopredicates}
+
+\input footer

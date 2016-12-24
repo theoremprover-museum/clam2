@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: max1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: max1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>y:pnat=>max(0,y)=y in pnat,
+repeat dequantify_once,lambda(y,_7916),
+[problem([y:pnat]==>max(0,y)=y in pnat,
+ elim(y),p_ind(y,_7948,[v0,v1,_7954]),
+ [problem([y:pnat]==>max(0,0)=0 in pnat,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7948,
+  problem([y:pnat,v0:pnat,v1:max(0,v0)=v0 in pnat]==>max(0,s(v0))=s(v0)in pnat,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7954
+ ]) ext _7916
+]).

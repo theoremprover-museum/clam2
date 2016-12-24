@@ -1,0 +1,7 @@
+problem([]==>x:pnat=>y:pnat=>minus(x,s(y))=pred(minus(x,y))in pnat,
+dequantify then simplify then repeat intro,lambda(x,lambda(y,axiom)),
+[problem([x:pnat,y:pnat,v0:pnat,v1:pnat]==>pred(v1)in pnat,
+ repeat wfftac,axiom,
+ [
+ ]) ext _3906
+]).

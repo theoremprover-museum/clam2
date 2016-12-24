@@ -1,0 +1,87 @@
+% The Clam manual
+\def\rcsid{$Id: manual.tex,v 1.30 1999/04/30 14:42:32 img Exp $}
+\input header
+\expandafter\gdef\csname dofooter\endcsname{}
+
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\input   {Titlepage}
+\subsection* {Abstract}
+This note describes the \clam\ proof-planning system. It is intended
+as a user manual for people who want to use \clam\ without knowing too
+much about the insides, and as a programmer manual for people who want
+to change and improve \clam. For quick reference, the note provides
+appendices which summarise the most frequently used predicates in
+\clam.
+
+
+If you are only an interested reader and do not intend to actually use
+\clam\ on a machine, then you should read only sections
+\reference{intro} (Introduction) and \reference{methods} (The
+Methods). This will give you a general idea of the capabilities of
+\clam.
+
+If you are a novice user and want to start playing straight away
+without ploughing through 50 pages of manual, read section
+\reference{intro} (the introduction), and section \reference{library} on
+the library mechanism.
+
+
+\paragraph {Acknowledgements.}  \clam\ is the result of a
+collaborative effort between a number of members of the DReaM
+group. The main ideas originated from Alan Bundy and were first
+implemented by Frank van Harmelen;  Frank also wrote the first version
+of this manual.  Alan Smaill contributed through
+many suggestions and discussions, and wrote some of the methods and
+tactics, Jane Hesketh wrote some of the early tactics, and Geraint
+Wiggins was adventurous enough to be one of the first users.   Andrew
+Stevens, Andrew Ireland and Ian Green developed \clam over the years.
+Andrew and Ian made extensive contributions to this manual.
+
+In addition to the above developers, the following people have made
+contributions to the current \clam release: David Basin, Richard
+Boulton, Jason Gallagher, Predrag Jani\v{c}i\'c, Helen Lowe, and
+Santiago Negrete.  Other users and contributors include Francisco
+Cant\'u Ortiz, Ina Kraan, Ra\'ul Monroy and Julian Richardson.  This
+work is supported in part by {\sc epsrc} grants {\sc gr/h/23610}, {\sc
+gr/j/80702} and {\sc gr/m/45030}.
+
+\cleardoublepage
+
+\pagestyle{fancy}
+\pagenumbering{roman}
+\tableofcontents
+
+\include {Introduction}
+\include {UserManual}
+\include {ProgrammerManual}
+
+\appendix
+\include {general}
+\include {appendix}
+
+\lhead[\fancyplain{}{\sl BIBLIOGRAPHY}]{}
+\rhead[]{\fancyplain{}{\sl BIBLIOGRAPHY}}
+\bibliography{clam}
+\bibliographystyle{plain}
+
+\clearpage
+\lhead[\fancyplain{}{\sl INDEX}]{\fancyplain{}{\sl Index of methods
+and methodicals}}
+\rhead[\fancyplain{}{\sl Index of methods}]{\fancyplain{}{\sl INDEX}}
+\printindex[mthd]
+\lhead[\fancyplain{}{\sl INDEX}]{\fancyplain{}{\sl Index of predicates}}
+\rhead[\fancyplain{}{\sl Index of predicates}]{\fancyplain{}{\sl INDEX}}
+\printindex[pred]
+\clearpage
+\lhead[\fancyplain{}{\sl INDEX}]{\fancyplain{}{\sl Index of Prolog
+source files}}
+\rhead[\fancyplain{}{\sl Index of Prolog source files}]{\fancyplain{}{\sl INDEX}}
+\printindex[file]
+\clearpage
+\lhead[\fancyplain{}{\sl INDEX}]{}
+\rhead[]{\fancyplain{}{\sl INDEX}}
+\printindex[default]
+
+\end{document}

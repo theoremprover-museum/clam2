@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: odd1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: odd1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>odd(0)=void in u(1),
+simplify,_7879,
+[problem([]==>void=void in u(1),
+ identity,axiom,
+ [
+ ]) ext _7879
+]).

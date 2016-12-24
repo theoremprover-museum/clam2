@@ -1,0 +1,17 @@
+problem([]==>x:int=>y:int=> (x<y=>void)\x<y,
+autotactic(wfftacs),_1240,
+[problem([]==>x:int=>y:int=> (x<y=>void)\x<y,
+ repeat dequantify_once,lambda(x,lambda(y,_1315)),
+ [problem([x:int,y:int]==> (x<y=>void)\x<y,
+  decide(x<y),less(x,y,su(_1362,[axiom],[v0]),su(_1370,[lambda(~,axiom)],[v0])),
+  [problem([x:int,y:int,v0:x<y]==> (x<y=>void)\x<y,
+   intro(right)then intro,inr(v0),
+   [
+   ]) ext _1362,
+   problem([x:int,y:int,v0:x<y=>void]==> (x<y=>void)\x<y,
+   intro(left)then intro,inl(v0),
+   [
+   ]) ext _1370
+  ]) ext _1315
+ ]) ext _1240
+]).

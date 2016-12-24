@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: geq,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: geq,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+geq(x,y)<==>term_of(leq)of y of x.

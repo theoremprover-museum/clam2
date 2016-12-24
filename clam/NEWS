@@ -1,0 +1,493 @@
+Clam 2.8, patchlevel 1
+	+ manual up-to-date
+
+Clam 2.8, patchlevel 0
+	+ Piecewise fertilization method incorporated into step-case
+	  of induction proof-plan.
+	+ All tactics for the basic induction proof-plan are present.
+	  Tactics for Presburger arithmetic not present.
+
+Clam 2.7, patchlevel 2
+	+ small change to needs mechanism to support multiple
+	  libraries.  needs.pl should no longer have the catch-all
+	  clause  
+
+		needs(_,[]).
+
+	  normally found at the end of the file.
+	+ some additions to the library.
+	+ speed improvements in induction preconditions.
+	+ ind_strat: prefers unflawed induction over unflawed
+	  casesplits over flawed induction.        
+
+
+Clam 2.7, patchlevel 1
+This release has not been checked extensively; it performs miserably
+on transitivity proofs (limitation of induction selection heuristics).
+
+	+ Support for SWI Prolog.  This is known to run on at least
+	  one Linux machine, but is not widely used at Edinburgh.
+	+ Verbosity is decreased by default.  Most non-essential
+	  messages are only shown if the tracing level is greater than
+	  22.
+	+ Library now supports equations having a filename of the form 
+	  root.1, root.2, ..., root.N each of the N equations defining
+	  root.  The old style in which the separator is empty (root1,
+	  root2, ..., rootN) is still supported.
+	+ Clam attempts to show that binary relations are
+	  transitive.  The switch trans_proving/0 (default true; see
+	  config/tactics.pl) controls this feature.
+
+	  The predicate is_transitive/2 does this proof by calling the
+	  decision procedure and, if that is inapplicable or runs
+	  beyond a prespecified time limit, the proof-planner itself
+	  is called.  (The time limit is currently set to 60s for the
+	  decision procedure and 60s for the planner; see library.pl.)
+	  
+	  If a relation can be shown to be transitive, this is recored
+	  as a transitive_pred/1 fact.  Weak fertilization examines
+	  this database.
+	+ trivially_falsifiable/2 has been added.  This instantiates a
+	  universally quantified formula to a ground formula in which
+	  variables have been instantiated to random constants of the
+	  appropriate type.  This ground formula is then evaluated.
+	  False instances reveal that the original formula is not a
+	  theorem.   
+	+ mthd(weak_fertilize) uses trivially_falsifiable/2 to
+	  reject false subgoals.
+	+ mthd(elementary): individual clauses merged to remove
+	  unwanted backtracking.  Use of decision procedure controlled
+	  by using_presburger/0 switch (default true; see
+	  config/methods.pl).
+	+ mthd(step_case) sugboals are stripped of all annotation.
+
+	- Manual not up-to-date.
+
+Clam 2.7, patchlevel 0
+	+ Automatic parsing of "scheme" logical objects
+	+ Simultaneous inductions correctly treated by heuristic
+	+ Faster simplification ordering for reduction rules
+	+ Library mechanism less verbose.  More flexible loading of
+	  logical objects
+	+ Induction analysis and casesplit analysis uniformly treated
+	+ New propositional decider
+	+ mthd(elementary) and mthd(propositional) treat annotations
+	  uniformly 
+	+ Type guessing improved
+	+ Compiles under SICStus Prolog version 3 patchlevel 5, and
+	  under Quintus Prolog version 3.
+	+ Annotations abstracted into new file annotations.pl
+	+ Socket support (under SICStus) for inter-process
+	  communication 
+	+ Manual up-to-date (chapter on background material is
+	  incomplete) 
+	+ "Klutz" user guide for basic introduction to Clam
+Clam 2.6, patchlevel 2
+	+ previous releases of Clam 2.6 did not have branching in
+	  base_case and sym_eval, as documented in the release notes
+	  of Clam 2.6.0.  This has now been fixed.
+	+ Finds plans for 113 theorems in the corpus in 8 minutes.
+	+ cooper(+T,yes) succeeds iff T is Presburger and is valid;
+	  cooper(+T,no) succeeds iff T is Presburger and is invalid.
+	  cooper(+T,_) fails iff T is not Presburger.
+	  (cooper_extended/2 behaves in the same way, but includes the
+	  functions minus/2 and p/1.)
+	+ incompleteness bug fixed in ripple analysis.
+
+	- System does not appear to compile under SICStus Prolog nor
+	  under SWI Prolog.
+
+Clam 2.6, patchlevel 1
+	+ Initial integration of decision procedures in place---not
+	  yet available.
+	+ Complies under SICStus version 3
+
+	- Manual editing of dialect-support/sic/boot.pl required when
+	  compiling under SICStus Prolog.
+	- Decision procedure currently only run under Quintus Prolog,
+	  due to shortcoming of arithmetic in SICStus.
+
+Clam 2.6, patchlevel 0
+        + Methods and submethods are now stored in the library as
+          "methods".  Such objects can be loaded either as mthd or as
+          smthd, as normal.  This simplifies the maintenance of 
+          methods and submethods which are identical but for some
+          irrelevant syntax.
+        + Improved step-case proof-plan; base-case and sym-eval now
+          produce branching proofs.  
+
+        - Manual not up-to-date.
+
+----
+OLD Clam versions
+Patchlevel 2.   >> CLAM_2_3_2 <<
+An alpha release of Clam with dynamic wave-rule parsing.  Of interest:
+
+	- new step-case, ripple and wave (sub)methods; these are quite
+	  slow at the moment;  I'm not sure why, but it's not due to
+	  dynamic rippling, more likely related to duplicated effort.
+	- unblocking by skeleton-invariant rewriting in sinks
+	- weaking wave (sub)method
+	- rippling analysis exploits sinks and dynamic rippling; this
+	  is quite slow because: (i) weakening is done explicitly in
+	  the preconditions of induction, (ii) induction variable
+	  occurrences may have overlapping contexts, (iii) it is quite
+	  powerful.
+	- OLD wave-rule parsing still used for a variety of things,
+	  e.g., casesplits
+	- no ripple_then_cancel submethod
+	- print_plan behaves differently --- this is for development
+	  purposes.
+	- tactics not tested thoroughly
+	- does not yet do (all of) the Clam 2.2 corpus
+
+Patchlevel 3.   >> CLAM_2_3_3 <<
+
+	- improved step-case plan: effects remove annotation and this
+	  prevents nested induction in certain proofs (see below).
+	  Induction  preconditions improved with the addition of depth
+	  heuristic to prefer induction with least-nested flawed
+	  occurrences (see BB note 1018). 
+	- casesplit changed to avoid looping (annotation is added into
+	  the hypotheses).
+	- file revision information added to all files via
+	  file_version/1. 
+
+
+Patchlevel 4.   >> CLAM_2_3_4 <<
+	
+	- new conditional machinery
+	- new complementary wave-rule submethod
+	- less dependancy on the old wave-rule parsing code;  I think
+	  all that requires this now is reduction rule stuff.
+	- new directory "object-level-support", destined for
+	  theory/logic specific stuff
+
+Patchlevel 5.   >> CLAM_2_3_5 <<
+	
+	- change to the "make" process
+	- added conditional compilation to support sicstus
+
+Patchlevel 6.	>> CLAM_2_3_6 <<
+	
+	- Existential smthd fixed (Julian).
+	- red(plus1right) and red(plus2right) removed from needs.pl
+	  for binom_one; times1right removed from evenm
+	- Induction method preconditions now allow holes in induction
+	  term wave-fronts to be subterms other that variables.  For
+	  example, ``h1::{h2::t}'' was not possible previously, and
+	  now is (Geraint).
+	- induction_pre/3 does not allow induction on variables which
+	  appear inside wave-fronts.
+	- Removed limit of 20 equations per definition.  All equations
+	  of the form nameN are loaded from eqn/ when def(name) is
+	  loaded, starting with N=1, N=2 and so on.  name(N+1) is
+	  loaded only when nameN is present, hence: IMPORTANT: All
+	  equations must be _consecutively numbered_ (Francisco).
+	- Added biconditional operator <=>. Tactics intro_iff and
+	  elim_iff;  config/tactics.pl does lib_load(def(iff))
+	  (operator declaration was added to Oyster by img on 6-june-95).
+        - clam-patchlevel-info/0 command added for Clam patchlevel
+          information.
+	- Only need for old wave-rule parsing code is to parse
+	  reduction rules.  This means that add_wave_rule/1 no longer
+	  exists.
+	- Speeded up loading of rewrite rules.
+	- Manual source split into more managable parts.
+	- lib-create/[1;2] added for simple interactive creation of
+	  def, eqn and synth objects.
+	- Bugs in lib_save(def(O)) fixed.
+	- lib_error gives brief description of objects.
+
+
+
+			** Clam version 2.4 **
+
+Patchlevel 0.	>> CLAM_2_4_0 <<
+
+[ All the theorems in the corpus other than greaterplus3 are planned and
+proved successfully.  greaterplus3 fails because an inappropriate
+induction scheme is selected; this scheme leads to a divergence in the
+proof-planning (forcing the appropriate simultaneous induction gives a
+proof-plan). ]
+
+The following extensions and bug-fixes are with respect to Clam
+version 2.3, patchlevel 6:
+
+* General
+
+Rewrite rules may have multiple conditions.  For example,
+		
+	a=>b=>(c=d)
+
+is considered as an equaliy rewrite conditional on (a and b), as well
+as a implicative rewrite conditional on a.
+
+Tricky problem in weak-fertilization tactic has been fixed.  The
+problem was a mis-alignment of variable names caused when the
+weak-fertilization is a right-to-left rewrite where the lhs has more
+variables than the rhs.  These unbound variables were "arbitrarily"
+instantiated by the tactic, whilst the method chooses the (unique)
+instantiation suggested by the skeleton.
+
+idplan_max/[1;2] added to impose a maximum depth on the DFID planner.
+(idplan_max is not really suggestive of iterative deepening since it
+does not increase any search depth iteratively; however, the code is
+from plan_id.pl, so it was named that way for uniformity.)
+
+Revised benchmarking code which parameterizes the benchmark by the
+planner: eg plan_from(idplan_max(10),comm) will use the planner
+idplan_max (with a search depth bound of 20) for entries in the corpus
+from (and including) comm.  Benchmarking code automatically saves
+successful plan construction using lib_save(plan(...)).  The library
+into which plans are saved defaults to the standard library.
+
+Totally new implementation of the scheme database.  This is almost
+plug-in-compatible with the old database (which has been removed), but
+it is much easier to add induction schemes.  Difference matching is
+used to add annotation.
+
+Complementary sets are computed and stored at load-time.  Access is
+via complementary_set/1.
+
+The idea of "induction scheme" is less ambiguous: induction
+(sub)method now has a singe argument to reflect this.  A "scheme" now
+makes explicit the connection between a variable and the induction
+term which replaces it in an induction conclusion.  Eg [
+x:pnat-s(v0),y:pnat list-h::t] means nat_list_pair induction.
+
+Induction tactic now avoids a problem of renaming to avoid capture. In
+some cases renaming of bound variables in the goal is needed to avoid
+capture of variables present in the induction scheme lemma.  Fix is to
+rename all variables in the scheme lemma apart from all variables
+(bound and free) in hypotheses and goal.
+
+
+* Library
+
+Library mechanism now operates with a list of directories (a path)
+which are searched (in order) for items in the library.  For example,
+lib_set(dir(['~img/sys/clam/lib','*'])) allows searching of user img's
+personal Clam library before the default library (indicated by the
+special token '*') is searched.  The default system library may be
+found using lib_dir_system(D), but this cannot be changed.
+lib_set(dir(['*'])) is the default path setting.  Currently, local
+needs files are not supported, so this means that the single needs
+file must reflect dependancies across all libraries.  The saving
+directory, lib_set(sdir(.)) has not been changed.  (The predicate
+lib_fname_exists/5 may be used to search paths.)
+
+lib_sdir/1 added (same as saving_dir/1, but documented).
+
+New logical object called "plan" has been added to explicitly record
+the proof-plan associated with a particular theorem.  This can be
+saved into the library via lib_save: the name of the theorem, the raw
+proof-plan, the Clam enviroment (type of planner used, Clam version
+number methods, submethods, rewrites etc in effect during plan
+construction) is saved into the library.
+
+The library mechanism supports loading of multiple things in a single
+call to lib_load: for example, lib_load(scheme([pairs,plusind])).  If
+one of the objects in the list fails to load the Clam continues trying
+to load subsequent objects.  A warning message is printed in this
+case.
+
+* Methods
+
+unblock: position argument for tactic was incorrect.
+
+step_case: allow up to two appications of unblock before trying a
+strong fertilization (motivated by revqrev).
+
+ind_strat: induction/1 preconditions are inserted verbatim.
+
+induction: arity changed to induction/1.
+
+
+Patchlevel 1.	>> CLAM_2_4_1 <<
+
+	- added support for sicstus 2.1.9.  This entailed removing the
+	  clam_patchlevel_info/0 facility (bug in sicstus causes
+	  problems with large atoms).
+	- removed singleton variable and other style warnings,
+	  excepting those from scheme/3, which are best left.
+	- make structure slightly altered.
+	- ocuifiable/2 renamed to matches/2 and correctly documented.
+
+(The proofs and plans in lib are from Clam running Quintus Prolog.)	
+
+Patchlevel 2.	>> CLAM_2_4_2 <<
+
+	- old wave-rule code deleted
+
+Clam 2.5, patchlevel 0
+----------------------
+
+This version is based on Clam 2.4, but differs in a few important
+ways which are discussed below.  Alas, the manual for 2.5 is not
+written yet, but will not differ from that of 2.4 by a great deal.
+There are some BB notes which describe the termination stuff.
+	As an end user, the only major difference is the interface to
+eval-def rules, which no longer exists: it is replaced by reduction
+rules.  Comparing the eval_def method with the old one will illustrate
+the change.  See "OTHER IMPORTANT CHANGES" below.
+
+REDUCTION RULES & SYMBOLIC EVALUATION
+	Reduction rules were not available in Clam 2.4, but, due to
+popular demand, they are back.  The reduction rule machinery has been
+generalized and is used for any (unannotated) rewriting required to be
+terminating.
+	Reduction rules are implications, equivalences and equalities
+that are known to be part of a terminating term rewrite system (TRS).
+Clam uses a stronger version of the RPO simplification ordering to
+build a terminating TRS as certain logical objects are loaded.  All
+(unannotated) term rewriting should use reduction rules to ensure
+termination.  
+	Clam tries to add the following objects to the TRS when they
+are loaded via the library mechanism:
+
+	- eqn's (loaded automatically as part of a definition)
+	- red's (thm's that the user explicitly wants to use as a
+	  rewrite rule)
+
+Notice that there is now no distinction between a rewrite which was
+loaded as an eqn and one loaded as a red: they are all added to the
+same database.  That database is accessed via reduction_rule/6, and
+the parameters are in registry/4 (see reduction.pl for more
+information).
+	The methods for symbolic evaluation have been changed to use
+reduction rules.
+
+TERMINATING REWRITE SYSTEMS
+	As mentioned above, reduction rules are show terminating under
+a simplification ordering.  The particular ordering is quite strong,
+and is able to accommodate all the eqn's and red's in the Clam corpus.
+(Please see BB note 1084 for more information on the ordering.)
+	The ordering is parameterized: different values of this
+parameter all different rewrites to be shown terminating.  Clam
+automatically finds a suitable value, and changes it as required when
+new reduction rules are loaded (or gives a failure message).  The Clam
+implementation is unusual in that it exploits polarity to enlarge the
+class of reductions rules.  For example, the theorem
+	p(X) => q(X)
+can be used as a rewrite 
+	imp(left):  p(X) :=> q(X) 
+or	imp(right): q(X) :=> p(X)
+depending on polarity.  Clam recognizes that _both_ of these rewrites
+can be part of a terminating system because of the polarity
+restrictions.  There are two TRSs, one for positive polarity, one for
+negative, with a parameter for the ordering in each case.  Thus the
+conditions are that:
+	p(X) :=> q(X)  is terminating in the negative system
+	q(X) :=> p(X)  is terminating in the positive system	
+Equalities and equivalences are added to both systems, since they can
+be used at either polarity.
+
+LABELLED TERM REWRITING
+	This is an improvement to the way in which terms are
+rewritten, so that things are faster.  It is only implemented for
+unannotated terms at the moment, via the predicates nf/2 and
+nf_plus/4: see reduction.pl again.  See BB note 1098 for more
+information on labelled term rewriting.
+
+	The sym-eval/1 method uses nf_plus/4 so that symbolic
+evaluation is faster.  This is done via a new method called
+normalize_term/1, used in place of the standard reduction/2 methods.
+The reduction/2 methods are still available, and have been extended so
+that, if one is suitably adventurous, one can load them and run a
+proof-plan similar to (but crucially different from) that in BB note
+1073.  (extending_registry/0 is a flag that determines if the
+registry is to be dynamically extended: it is set to false by
+default.)
+
+OTHER IMPORTANT CHANGES
+The first seven of these are incompatibilities with Clam 2.4
+	* Deleting a wave or a red will not remove the associated thm
+	  (nor anything else).
+	* lib_load(wave(t)) no longer does lib_load(red(t)), and
+	  vice-versa.  This allows more control over rewriting.
+	* Cancellation rules are no longer used, although they are still
+	  generated.  This might have repercussions for
+	  ripple-then-cancel. 
+	* Equality rules no longer exist.  They are superseded by
+	  reduction rules.  In particular, equivalences are now
+	  handled by the reduction rule and wave-rule machinery (see
+	  below). 
+	* Since all eqn's are made into reduction rules, there is no
+	  longer any need for func_defeqn/3: it is superseded by
+	  reduction-rule/6 (an example of this is in the eval_def
+	  method).
+	* The definitions of leq, geq, greater and less have been
+	  revised (they were not all definitions before).  A result of
+	  these new definitions is the need for leqzero, geqzero,
+	  lesszero and greaterzero to be added to lib/thm, and, for
+	  certain theorems, for these to be loaded as reduction rules.
+	* step_case preconditions now insist that the goal contains
+	  annotation.
+
+	* There is a new type of library object called trs; currently
+	  there is only one, called "default", referring to both +ve
+	  and -ve mentioned above.  Currently there is no way of
+	  saving these objects to the library, nor of have more than
+	  one. lib_delete(trs(default)) will empty the reduction rule
+	  database, and both ordering parameters.
+	* Support is provided for casesplits during symbolic
+	  evaluation, although this is not loaded by default.  The
+	  s/methods base_case_cs and sym_eval_cs allow branching.
+	* There was a restriction in Clam 2.4 that the LHS of all
+	  rewrites (waves and reds) be non-atomic.  This has been
+	  dropped (it was a bug).
+	* When tracing at level 40, all the reduction rules and
+	  rewrite rules are displayed as they are generated.
+	* Full support for <=> rewriting.
+
+CORPUS
+	* A few new theorems have been added to needs.pl and
+	  examples.pl
+	* The third argument of example/3 (in examples.pl) is now a
+	  list, allowing multiple attributes to be assigned to an
+	  entry.
+	* Synthesis theorems are now skipped (see examples.pl)
+	
+
+Clam 2.5, patchlevel 1.
+	- guess_type/2 -> guess_type/3; performs better, works harder
+	  to establish types in the context.  For example:
+
+  	      guess_type(lambda(u,lambda(v,member(u,v))),[],T). 
+
+	  gives T = int=>int list=>u(1).
+	- well-formedness tactics improved.
+	- speed of RPOS increased
+	- rewrite rules may have a variable on the LHS providing the
+	  condition is non-trivial.
+	- incomplete lemmas proved.
+
+Clam 2.5, patchlevel 2.
+	+ Small but serious bug in library mechanism fixed (introduced
+	  non-terminating rewrite rule sets.)  For this reason, please
+	  upgrade from 2.5.1!
+	+ Hint mechanism updated to allow OR choice selection.
+	+ Speed-ups in induction preconditions, rewriting, wave-rule
+	  parsing.
+	+ Wave-rules cached.
+	+ All explicit references to term annotation are removed: all
+	  access is via an "abstract data type", defined in
+	  annotations.pl (new file).
+	+ Bug that restricted meta-rippling in ripple analysis
+	  removed.
+	+ Support for font-lock-mode in Emacs;  More control over the
+	  portrayal of terms and methods (etc).  Use portray_level/3,
+	  push_portray_type/1, pop_portray_type/0.
+	+ Timing information recorded during proof-planning.
+	+ Time-out can be set on proof-planning.  Eg abort planning if
+	  a time limit of 5 mins is exceeded.
+	+ lib_load(plan(T)) now works: plans can be loaded from the
+	  library and executed as tactics.
+
+	- Some theorems have incomplete proofs (e.g., induction
+	  schemes etc.). Mostly this is due to the excruciating task
+	  of proving statements of arithmetic in Oyster.
+	- The manual is out of date.
+	- NOTE: Some unrepeatable address violations have
+	  happened using 2.5.2, Quintus 3, on Solaris machines.

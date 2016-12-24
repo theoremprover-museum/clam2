@@ -1,0 +1,17 @@
+/*
+ *
+ * $Id: odd,v 1.1 1995/06/10 14:54:10 armando Exp $
+ * 
+ * $Log: odd,v $
+ * Revision 1.1  1995/06/10 14:54:10  armando
+ * Reinserted into the main trunk
+ *
+ * Revision 1.1  1995/06/09  16:01:12  armando
+ * Added to the IFFEXAMPLE branch
+ *
+ * Revision 1.1.4.3  1995/05/29  17:11:56  armando
+ * Comment char changed
+ *
+ */
+
+odd(x)<==>term_of(odd)of x.

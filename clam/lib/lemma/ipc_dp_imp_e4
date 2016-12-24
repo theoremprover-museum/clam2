@@ -1,0 +1,79 @@
+problem([]==>a:u(1)=>b:u(1)=>c:u(1)=>d:u(1)=> ((b=>a)# (d=>b)=>c=>d)=> ((c=>d)=>b)=>a,
+repeat dequantify_once,lambda(a,lambda(b,lambda(c,lambda(d,_9986)))),
+[problem([a:u(1),b:u(1),c:u(1),d:u(1)]==> ((b=>a)# (d=>b)=>c=>d)=> ((c=>d)=>b)=>a,
+ intro,lambda(v0,_10057),
+ [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d]==> ((c=>d)=>b)=>a,
+  intro,lambda(v1,_10130),
+  [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b]==>a,
+   elim(v0),spread(v0,[v2,v3,_10212]),
+   [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d)]==>a,
+    elim(v2),su(_10340,[v2 of _10347],[v5]),
+    [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d)]==>b,
+     elim(v1),su(_10476,[v1 of _10483],[v5]),
+     [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d)]==>c=>d,
+      intro,lambda(v5,_10614),
+      [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c]==>d,
+       elim(v0),spread(v0,[v6,v7,_10752]),
+       [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d)]==>d,
+        elim(v7),su(_10936,[v7 of _10943],[v9]),
+        [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d)]==>d=>b,
+         intro,lambda(v9,_11130),
+         [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d),v9:d]==>b,
+          elim(v1),su(_11318,[v1 of _11325],[v10]),
+          [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d),v9:d]==>c=>d,
+           intro,lambda(v10,_11517),
+           [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d),v9:d,v10:c]==>d,
+            hyp(v9),v9,
+            [
+            ]) ext _11517,
+            problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d),v9:d]==>c in u(1),
+            repeat wfftac,axiom,
+            [
+            ])
+           ]) ext _11325,
+           problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d),v9:d,v10:b]==>b,
+           hyp(v10),v10,
+           [
+           ]) ext _11318
+          ]) ext _11130,
+          problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d)]==>d in u(1),
+          repeat wfftac,axiom,
+          [
+          ])
+         ]) ext _10943,
+         problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d),v9:c=>d]==>d,
+         elim(v9,on(v5))then wfftacs,su(_12467,[v9 of v5],[v10]),
+         [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:c,v6:b=>a,v7: (d=>b)=>c=>d,v8:v0=v6&v7 in ((b=>a)# (d=>b)=>c=>d),v9:c=>d,v10:d,v11:v10=v9 of v5 in d]==>d,
+          hyp(v10),v10,
+          [
+          ]) ext _12467
+         ]) ext _10936
+        ]) ext _10752
+       ]) ext _10614,
+       problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d)]==>c in u(1),
+       repeat wfftac,axiom,
+       [
+       ])
+      ]) ext _10483,
+      problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:b]==>b,
+      hyp(v5),v5,
+      [
+      ]) ext _10476
+     ]) ext _10347,
+     problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d,v1: (c=>d)=>b,v2:b=>a,v3: (d=>b)=>c=>d,v4:v0=v2&v3 in ((b=>a)# (d=>b)=>c=>d),v5:a]==>a,
+     hyp(v5),v5,
+     [
+     ]) ext _10340
+    ]) ext _10212
+   ]) ext _10130,
+   problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (b=>a)# (d=>b)=>c=>d]==> ((c=>d)=>b)in u(1),
+   repeat wfftac,axiom,
+   [
+   ])
+  ]) ext _10057,
+  problem([a:u(1),b:u(1),c:u(1),d:u(1)]==> ((b=>a)# (d=>b)=>c=>d)in u(1),
+  repeat wfftac,axiom,
+  [
+  ])
+ ]) ext _9986
+]).

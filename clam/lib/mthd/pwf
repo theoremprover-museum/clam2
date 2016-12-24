@@ -1,0 +1,113 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: pwf,v 1.6 2008/05/21 14:14:13 smaill Exp $
+ *
+ * $Log: pwf,v $
+ * Revision 1.6  2008/05/21 14:14:13  smaill
+ * update for sicstus4
+ *
+ * Revision 1.5  2005/05/06 19:35:27  smaill
+ * fix object vars to coincide with Oyster implementation
+ *
+ * Revision 1.4  1999/02/02 09:51:01  img
+ * revisions for tactic support
+ *
+ * Revision 1.3  1999/01/11 11:03:18  img
+ * *** empty log message ***
+ *
+ * Revision 1.2  1999/01/11 11:02:47  img
+ * Added headers.  Spurious clause deleted.  Additional parameters added
+ * in concert with tactic support.
+ */
+
+/* these rules should be improved: casesplits may have removed
+quantification from goal, and so the skeleton of and ind. hyp may
+differ from goal BUT only in the prefix.  ie. need to take an instance
+of the hyp.  See BB note 1286 for more information */
+
+method(pwf(i_fert(imp,VV,V,W)),
+       H==>Ap=>Bp,
+       [contains_wave_fronts(Ap=>Bp),
+	inductive_hypothesis(raw,VV:A=>B,H,used(pw),NewH),
+	share_skeleton(Ap=>Bp,A=>B)],
+       [hfree([V,W],NewH),erase(Ap,Ape),
+	 inductive_hypotheses(raw,[V:Ap],[IHa]),
+	 inductive_hypotheses(raw,[W:B],[IHb]),
+	 append(NewH,[IHa],H1), append(NewH,[IHb,V:Ape], H2)],
+	[H1==>A, H2==>Bp],
+	pwf(i_fert(imp,VV,V,W))).
+	
+method(pwf(i_fert(Op,VV,V1,V2)), /* And/Or */
+       OH==>ApBp,
+       [contains_wave_fronts(ApBp),
+	ApBp =..[Op,Ap,Bp], (Op = '#'; Op = '\\'), AB =.. [Op,A,B],
+        inductive_hypothesis(raw,VV:AB,OH,used(pw),H),
+        share_skeleton(ApBp,AB)],
+	[hfree([V1,V2],H),
+	 inductive_hypotheses(raw,[V1:A],[IHa]),
+	 inductive_hypotheses(raw,[V2:B],[IHb]),
+	 append(H,[IHa],H1), append(H,[IHb],H2)],
+	[H1==>Ap, H2==>Bp],
+	pwf(i_fert(Op,VV,V1,V2))).
+
+method(pwf(and_i_cfert),
+	OOH==>G,
+	[is_annotated(G,#,[TagA:Ap,TagB:Bp]),		% two holes
+	 /* this clause would otherwise overlap with strong
+	    fertilization; we exclude that possibility here */
+	 (TagA = hole ->
+	     (contains_wave_fronts(Ap),
+	      inductive_hypothesis(raw,Va:A,OOH,used(pw),BH),
+              share_skeleton(Ap,A));
+	     BH = OOH),
+	 (TagB = hole ->
+	     (contains_wave_fronts(Bp),
+	      inductive_hypothesis(raw,Vb:B,OOH,used(pw),AH),
+	      share_skeleton(Bp,B));
+	     AH = OOH)],
+	[],
+	[AH==>Ap, BH==>Bp],
+	pwf(and_i_cfert)).
+
+method(pwf(or_i_fert(Side)),
+	OH==>G,
+	[is_annotated(G,\,[S1:AAp,S2:BBp]),
+	 (S1 = hole -> (Ap = AAp, Side = left);
+	     (Ap = BBp, Side = right)),
+	 inductive_hypothesis(raw,Va:A,OH,used(pw),H),
+	 share_skeleton(Ap,A)],
+	[],
+	[H==>Ap],
+	pwf(or_i_fert(Side))).
+	
+method(pwf(and_e_fert(Side,Va,V)),
+	OH==>Ap,
+	[inductive_hypothesis(raw,Va:AB,OH,used(pw),H),
+	 is_annotated(AB,#,[S1:AA,S2:BB]),
+	 (S1 = hole -> (A = AA, Side = left);
+	     (A = BB, Side = right)),
+	 share_skeleton(Ap,A)],
+	[hfree([V],H),
+	 inductive_hypotheses(raw,[V:A],[IHa]),
+	 append(H,[IHa],H1)],
+	[H1==>Ap],
+	pwf(and_e_fert(Side,Va,V))).
+
+method(pwf(imp_ir_fert),
+	OH==>G,
+	[is_annotated(G,=>,[front:B,hole:Ap]),
+	 inductive_hypothesis(raw,V:A,OH,used(pw),H),
+	 share_skeleton(Ap,A)],
+	[],
+	[H==>Ap],
+	pwf(imp_ir_fert)).
+	
+method(pwf(imp_e_fert(VV,V)),
+	OH==>Ap,
+	[inductive_hypothesis(raw,VV:AB,OH,used(pw),H),
+	 is_annotated(AB,=>,[front:B,hole:A]),
+	 share_skeleton(Ap,A)],
+	[hfree([V],H),
+	 inductive_hypotheses(raw,[V:A],[IHa]),
+	 append(H,[IHa],H1)],
+	[H==>B,H1==>Ap],
+	pwf(imp_e_fert(VV,V))).

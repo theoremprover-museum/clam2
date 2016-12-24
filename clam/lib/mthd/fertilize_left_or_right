@@ -1,0 +1,22 @@
+/* -*- Prolog -*-
+ * @(#)$Id: fertilize_left_or_right,v 1.3 1998/11/10 16:10:03 img Exp $
+ *
+ * $Log: fertilize_left_or_right,v $
+ * Revision 1.3  1998/11/10 16:10:03  img
+ * Reorganised methods and integrated piecewise fertilization.
+ *
+ * Revision 1.2  1998/09/15 16:00:36  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.1  1996/12/11 15:09:25  img
+ * Merge of mthd and smthd libraries.
+ *
+ * Revision 1.2  1996/12/04 13:16:15  img
+ * Use notraw_to_used to tidy up after fertilization.
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ */
+
+iterator(method,fertilize_left_or_right,submethods,
+	 [weak_fertilize(_,_,_,_)]).

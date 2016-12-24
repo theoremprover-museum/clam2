@@ -1,0 +1,263 @@
+# X resources for XCLaM 
+# @(#)$Id: XClam,v 1.1 1994/09/16 09:45:20 dream Exp $
+# $Log: XClam,v $
+# Revision 1.1  1994/09/16 09:45:20  dream
+# Initial revision
+#
+
+*.font:  -*-courier-bold-r-*-*-20-*-100-*-*-*-*-*
+#*.font:  -adobe-courier-bold-r-normal--14-140-75-75-m-90-iso8859-1
+*reverseVideo: on
+
+
+XClam.title: xclam v2.1
+#XClam.iconPixmap: escherknot
+*otherWindow.iconName: xclam.dialog
+*otherWindow2.iconName: xclam.plan
+*otherWindow3.iconName: xclam.proof
+
+#*dialogPopup.geometry: +200+200
+*dialogPopup.label: Which method/submethod ?
+*dialogPopup.width: 300
+*dialogPopup.value: 
+*dialogPopup.value.width: 275
+*dialogPopup.value.Translations: #override\n\
+	<Key>Return:  dialogNewline()
+#*dialogPopup.foreground: black
+#*dialogPopup.background: white
+
+*libDialogPopup.value.Translations: #override\n\
+        <Key>Return:  libDialogNewline()
+*libDialogPopup.width: 300
+*libDialogPopup.value:  
+*libDialogPopup.value.width: 275
+*libDialogPopup.label.width: 290
+*libDialogPopup.label: 
+
+
+*planDialogPopup.value.Translations: #override\n\
+        <Key>Return:  planDialogNewline()
+*planDialogPopup.label: Which thm ?
+*planDialogPopup.width: 300
+*planDialogPopup.value:
+*planDialogPopup.value.width: 275
+
+
+
+
+*otherWindow.geometry: +0+68
+*otherWindow2.geometry: +0+146
+#*otherWindow3.geometry: +0+544
+*otherWindow3.geometry: +0-0
+#*overrideRedirect: TRUE
+
+*otherWindow.title: dialogWindow
+*otherWindow2.title: planWindow
+*otherWindow3.title: proofWindow
+
+*otherWindow.icon_name: dialogWindow
+
+*proofWindow.height: 324
+*proofWindow.width:  1000
+*proofWindow.fromVert: rippleLabel
+*proofWindow.scrollVertical: always
+
+*planWindow.height:  324
+*planWindow.width:   1000
+*planWindow.scrollVertical: always
+*planWindow.scrollHorizontal: always
+#*planWindow.fromVert: dialogWindow
+*planWindow.translations: #override\
+        <Btn3Down>:  select-start() pickout() \n\
+        <Btn3Motion>: no-op()   \n\
+        <Btn3Up>:  no-op()     
+
+
+*rippleWindow.height: 200
+*rippleWindow.width:  1000
+*rippleWindow.scrollVertical: always
+*rippleLabel.fromVert: rippleWindow
+*rippleLabel.label:  ""
+*rippleLabel.height:  1
+*rippleLabel.width: 1000
+*rippleLabel.background: XtDefaultForeground
+*rippleWindow.translations: #override\
+        <Key>:  rippleNewline() \n\
+	<BtnUp>: no-op() \n\
+	<BtnMotion>: no-op() \n\
+	<BtnDown>:  rippleNewline()
+	
+
+*dialogWindow.height: 50
+*dialogWindow.width: 1000
+#*dialogWindow.fromVert: commandBox
+*dialogWindow.translations: #override\n\
+	<Btn2Down>: end-of-file() insert-selection(PRIMARY,CUT_BUFFER0)
+
+#<Btn2Up>:    insert-selection(PRIMARY,CUT_BUFFER0)\n\
+#<Btn2Motion>: 
+
+
+# new stuff about menus
+
+*menu.Box.hSpace: 0
+*menu.Box.vSpace: 0
+*menu*borderWidth: 0
+*menu.borderWidth: 1
+*menu.overrideRedirect: TRUE
+
+*menu2.Box.hSpace: 0
+*menu2.Box.vSpace: 0
+*menu2*borderWidth: 0
+*menu2.borderWidth: 1
+*menu2.overrideRedirect: TRUE
+
+*menu3.Box.hSpace: 0
+*menu3.Box.vSpace: 0
+*menu3*borderWidth: 0
+*menu3.borderWidth: 1
+*menu3.overrideRedirect: TRUE
+
+*menu4.Box.hSpace: 0
+*menu4.Box.vSpace: 0
+*menu4*borderWidth: 0
+*menu4.borderWidth: 1
+*menu4.overrideRedirect: TRUE
+
+
+*menu5.Box.hSpace: 0
+*menu5.Box.vSpace: 0
+*menu5*borderWidth: 0
+*menu5.borderWidth: 1
+*menu5.overrideRedirect: TRUE
+
+*menu7.Box.hSpace: 0
+*menu7.Box.vSpace: 0
+*menu7*borderWidth: 0
+*menu7.borderWidth: 1
+*menu7.overrideRedirect: TRUE
+
+*subbox*width:  90
+*subbox.Command.justify: left
+*subbox.Command.ShapeStyle: rectangle
+*subbox.spy.label:   spy  ==>
+
+*subbox2*width:  90
+*subbox2.Command.justify: left
+*subbox2.Command.ShapeStyle: rectangle
+
+*msubbox*width:  115
+*msubbox.Command.justify: left
+*msubbox.Command.ShapeStyle: rectangle
+
+*m2subbox*width: 130 
+*m2subbox.Command.justify: left
+*m2subbox.Command.ShapeStyle: rectangle
+
+*m5subbox*width:  110
+*m5subbox.Command.justify: left
+*m5subbox.Command.ShapeStyle: rectangle
+
+*m7subbox*width: 120 
+*m7subbox.Command.justify: left
+*m7subbox.Command.ShapeStyle: rectangle
+
+
+*menu3.translations:\
+     <BtnUp>: XtMenuPopdown(menu4) XtMenuPopdown(menu3)
+#*cascade.translations: #replace\
+#   <BtnDown>:        XtMenuPopup(menu3) 
+
+*formats.menuName: menu6
+*ripple.menuName: menu8
+
+*menu.translations:\
+     <BtnUp>: XtMenuPopdown(menu5) XtMenuPopdown(menu)
+*lib.translations: #replace\
+   <BtnDown>:        XtMenuPopup(menu)	
+
+*plan.translations:  #replace\
+   <BtnDown>:        XtMenuPopup(menu7)
+
+
+*subbox.Command.translations:\
+   <EnterWindow>:     set()             \n\
+   <LeaveWindow>:     reset()                 \n\
+   <BtnUp>:           notify() unset()
+*subbox.spy.translations:#replace\
+   <EnterWindow>:     set()             \n\
+   <LeaveWindow>:       checkRightAndPopupSubmenu() reset()
+
+! Sub Menu translations
+*menu4.translations:\
+   <LeaveWindow>:   XtMenuPopdown(menu4)
+   <BtnUp>:         XtMenuPopdown(menu4) XtMenuPopdown(menu3)
+*subbox2.Command.translations:\
+   <EnterWindow>:     set()             \n\
+   <LeaveWindow>:     reset()                 \n\
+   <BtnUp>:           notify() unset()
+
+
+*msubbox.save.translations:\
+   <EnterWindow>:     set()             \n\
+   <LeaveWindow>:     reset()                 \n\
+   <BtnUp>:           notify() unset()
+*msubbox.set.translations:\
+   <EnterWindow>:     set()             \n\
+   <LeaveWindow>:     reset()                 \n\
+   <BtnUp>:           notify() unset()
+
+*msubbox.Command.translations:#replace\
+   <EnterWindow>:     set()             \n\
+   <BtnUp>:            XtMenuPopdown(menu) XtMenuPopdown(menu5) \n\
+   <LeaveWindow>:      reset() checkRightAndPopupSubmenu()
+
+*menu5.translations:\
+   <LeaveWindow>:   XtMenuPopdown(menu5)
+   <BtnUp>:         XtMenuPopdown(menu5) XtMenuPopdown(menu)
+*m5subbox.Command.translations:\
+   <EnterWindow>:     set()             \n\
+   <LeaveWindow>:     reset()                 \n\
+   <BtnUp>:           notify() unset()
+
+*menu7.translations:\
+   <BtnUp>:         XtMenuPopdown(menu7) XtMenuPopdown(menu2)
+*m7subbox.Command.translations:\
+   <EnterWindow>:     set()             \n\
+   <BtnUp>:            XtMenuPopdown(menu7) XtMenuPopdown(menu2) \n\
+   <LeaveWindow>:      reset() checkRightAndPopupSubmenu()
+
+*menu2.translations:\
+   <LeaveWindow>:   XtMenuPopdown(menu2)
+   <BtnUp>:         XtMenuPopdown(menu2) XtMenuPopdown(menu7)
+
+*m2subbox.Command.translations:\
+   <EnterWindow>:     set()             \n\
+   <BtnUp>:           notify() unset() \n\
+   <LeaveWindow>:      reset()
+
+*pop.label: mspy
+
+*menu6*RowHeight:   16
+*menu6*HorizontalMargins: 30
+*menu8*RowHeight:   16
+*menu8*HorizontalMargins: 30
+
+*load.label:    load   =>
+*delete.label:  delete =>
+*present.label: present=>
+*lib.label: library
+*current.label: current =>
+*new.label:     new     =>
+*set.label: set dir
+*ok.width:  80
+*cancel.width: 80
+*nomspy.with:  80
+*commandBox.Command.width: 100
+*commandBox.MenuButton.width: 100
+
+
+*colour.menuName: menu9
+*menu9*RowHeight:   16
+*menu9*HorizontalMargins: 30
+

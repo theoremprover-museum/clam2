@@ -1,0 +1,34 @@
+problem([]==>x:pnat=>s(x)=0 in pnat=>void,
+intro,lambda(x,_1000),
+[problem([x:pnat]==>s(x)=0 in pnat=>void,
+ intro,lambda(v0,_1032),
+ [problem([x:pnat,v0:s(x)=0 in pnat]==>void,
+  seq(p_ind(s(x),void,[~,~,pnat])),lambda(v1,_1083)of _1080,
+  [problem([x:pnat,v0:s(x)=0 in pnat]==>p_ind(s(x),void,[~,~,pnat]),
+   simplify,_1092,
+   [problem([x:pnat,v0:s(x)=0 in pnat]==>pnat,
+    intro(0),0,
+    [
+    ]) ext _1092
+   ]) ext _1080,
+   problem([x:pnat,v0:s(x)=0 in pnat,v1:p_ind(s(x),void,[~,~,pnat])]==>void,
+   subst(hyp(v1),over(v2,p_ind(v2,void,[~,~,pnat])),s(x)=0 in pnat)then[univ_elim(v0),idtac,wfftacs],_1168,
+   [problem([x:pnat,v0:s(x)=0 in pnat,v1:p_ind(0,void,[~,~,pnat])]==>void,
+    compute(hyp(v1),[[simplify]]),_1254,
+    [problem([x:pnat,v0:s(x)=0 in pnat,v1:void]==>void,
+     elim(v1),any(v1),
+     [
+     ]) ext _1254
+    ]) ext _1168
+   ]) ext _1083
+  ]) ext _1032,
+  problem([x:pnat]==>s(x)=0 in pnat in u(1),
+  repeat wfftac,axiom,
+  [
+  ])
+ ]) ext _1000,
+ problem([]==>pnat in u(1),
+ repeat wfftac,axiom,
+ [
+ ])
+]).

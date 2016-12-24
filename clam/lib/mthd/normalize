@@ -1,0 +1,36 @@
+/*
+ * @(#)$Id: normalize,v 1.1 1994/09/16 09:33:29 dream Exp $
+ *
+ * $Log: normalize,v $
+ * Revision 1.1  1994/09/16 09:33:29  dream
+ * Initial revision
+ *
+ */
+
+/*
+ *
+ * I know that normaliZe is a USA-ism, but the work normalise is already
+ * a reserved term in Oyster, so...
+ */
+
+method( normalize( NormTacs ),
+        OH==>OG,
+        [ \+ member( _:[ihmarker(_,_)|_],OH),
+          exp_at( OG, _, T=>_ ),
+          exp_at( T, _, _=_ in _ ),
+          iterate( (OH==>OG) - [], 
+                   (Goal-Tacs):=>((H==>G)-STacs),
+   	           ( applicable_submethod( Goal, normal(A), _, [ H==>G ] ),
+                     STacs = [normal(A)|Tacs]
+                   ),
+                   true,
+		   SubGoal-RNormTacs             % reversed by alans
+                 ),
+          RNormTacs \= [], !, reverse(RNormTacs,NormTacs)
+        ],
+        [],
+        [ SubGoal ],
+	normalize( NormTacs )
+      ).
+
+% iterator(method,normalize,submethods,[normal(_)]).

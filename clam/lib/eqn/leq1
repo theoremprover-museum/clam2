@@ -1,0 +1,26 @@
+/*
+ * @(#)$Id: leq1,v 1.2 1996/06/11 17:04:49 img Exp $
+ *
+ * $Log: leq1,v $
+ * Revision 1.2  1996/06/11 17:04:49  img
+ * Correct equations for these predicates.
+ *
+% Revision 1.1  1994/09/16  09:38:16  dream
+% Initial revision
+%
+ */
+
+problem([]==>y:pnat=>leq(0,y)={true}in u(1),
+intro,lambda(y,_7674),
+[problem([y:pnat]==>leq(0,y)={true}in u(1),
+ simplify,_7683,
+ [problem([y:pnat]==>int=int in u(1),
+  intro,axiom,
+  [
+  ]) ext _7683
+ ]) ext _7674,
+ problem([]==>pnat in u(1),
+ intro,axiom,
+ [
+ ])
+]).

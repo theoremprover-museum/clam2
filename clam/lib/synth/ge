@@ -1,0 +1,37 @@
+problem([]==>x:pnat=>y:pnat list=>pnat list,
+autotactic(wfftacs),_1078,
+[problem([]==>x:pnat=>y:pnat list=>pnat list,
+ repeat dequantify_once,lambda(x,lambda(y,_1137)),
+ [problem([x:pnat,y:pnat list]==>pnat list,
+  lemma(lesstrich),su(_1168,[term_of(lesstrich)],[v0]),
+  [problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x)]==>pnat list,
+   elim(y),list_ind(y,_1243,[v1,v2,v3,_1251]),
+   [problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x)]==>pnat list,
+    intro(nil),nil,
+    [
+    ]) ext _1243,
+    problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),v1:pnat,v2:pnat list,v3:pnat list]==>pnat list,
+    do_elim_on(v0,[x,v1],[v0,v4,v5])then (append([v4],[v5],[v4,v5]),thin([v4])),su(su(_1439,[v4 of v1],[v5]),[v0 of x],[v4]),
+    [problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),v1:pnat,v2:pnat list,v3:pnat list,v5:less(x,v1)\x=v1 in pnat\less(v1,x)]==>pnat list,
+     elim(v5),decide(v5,[v4,_1568],[v6,_1572]),
+     [problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),v1:pnat,v2:pnat list,v3:pnat list,v5:less(x,v1)\x=v1 in pnat\less(v1,x),v4:less(x,v1),v7:v5=inl(v4)in (less(x,v1)\x=v1 in pnat\less(v1,x))]==>pnat list,
+      intro(explicit(v1::v3)),v1::v3,
+      [
+      ]) ext _1568,
+      problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),v1:pnat,v2:pnat list,v3:pnat list,v5:less(x,v1)\x=v1 in pnat\less(v1,x),v6:x=v1 in pnat\less(v1,x),v8:v5=inr(v6)in (less(x,v1)\x=v1 in pnat\less(v1,x))]==>pnat list,
+      elim(v6),decide(v6,[v4,_1887],[v7,_1891]),
+      [problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),v1:pnat,v2:pnat list,v3:pnat list,v5:less(x,v1)\x=v1 in pnat\less(v1,x),v6:x=v1 in pnat\less(v1,x),v8:v5=inr(v6)in (less(x,v1)\x=v1 in pnat\less(v1,x)),v4:x=v1 in pnat,v9:v6=inl(v4)in (x=v1 in pnat\less(v1,x))]==>pnat list,
+       intro(explicit(v1::v3)),v1::v3,
+       [
+       ]) ext _1887,
+       problem([x:pnat,y:pnat list,v0:x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),v1:pnat,v2:pnat list,v3:pnat list,v5:less(x,v1)\x=v1 in pnat\less(v1,x),v6:x=v1 in pnat\less(v1,x),v8:v5=inr(v6)in (less(x,v1)\x=v1 in pnat\less(v1,x)),v7:less(v1,x),v10:v6=inr(v7)in (x=v1 in pnat\less(v1,x))]==>pnat list,
+       hyp(v3),v3,
+       [
+       ]) ext _1891
+      ]) ext _1572
+     ]) ext _1439
+    ]) ext _1251
+   ]) ext _1168
+  ]) ext _1137
+ ]) ext _1078
+]).

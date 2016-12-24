@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: gcd,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: gcd,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+gcd(x,y)<==>term_of(gcd)of x of y.

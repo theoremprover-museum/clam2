@@ -1,0 +1,13 @@
+problem([]==>u:pnat=>v:pnat list=>w:pnat=>prod(v)=w in pnat=>prod(u::v)=times(u,w)in pnat,
+normalize_term([reduction([1,1,2],[prod2,equ(pnat,left)])]),lambda(v0,lambda(v1,lambda(v2,su(su(su(lambda(v3,su(su(su(v6,[v5 of v2],[v6]),[v4 of v1],[v5]),[v3 of v0],[v4]))of _40985,[v3 of v1],[v4]),[prod2 of v0],[v3]),[term_of(prod2)],[prod2])))),
+[problem([]==>u:pnat=>v:pnat list=>w:pnat=>prod(v)=w in pnat=>times(u,prod(v))=times(u,w)in pnat,
+ generalise(prod(v),v0:pnat),lambda(v0,lambda(v1,lambda(v2,lambda(v3,su(su(su(su(v7,[v6 of v3],[v7]),[v5 of v2],[v6]),[v4 of v1],[v5]),[v0 of prod(v2)],[v4])))))of _40860,
+ [problem([]==>v0:pnat=>u:pnat=>v:pnat list=>w:pnat=>v0=w in pnat=>times(u,v0)=times(u,w)in pnat,
+  normalize([normal(univ_intro),normal(univ_intro),normal(univ_intro),normal(univ_intro),normal(imply_intro)]),lambda(v0,lambda(u,lambda(v,lambda(w,lambda(v1,_40705))))),
+  [problem([v0:pnat,u:pnat,v:pnat list,w:pnat,v1:v0=w in pnat]==>times(u,v0)=times(u,w)in pnat,
+   equal(v1,left)then[elementary(unfold_iff then identity)],axiom,
+   [
+   ]) ext _40705
+  ]) ext _40860
+ ]) ext _40985
+]).

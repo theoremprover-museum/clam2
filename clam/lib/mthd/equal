@@ -1,0 +1,50 @@
+/* -*- Mode: Prolog -*-
+ * @@(#)$Id: equal,v 1.5 1998/11/10 16:08:49 img Exp $
+ *
+ * $Log: equal,v $
+ * Revision 1.5  1998/11/10 16:08:49  img
+ * Use inductive_hypothesis/3
+ *
+ * Revision 1.4  1998/07/30 16:07:57  img
+ * drop junk
+ *
+ * Revision 1.3  1998/07/27 12:51:24  img
+ * Only use hyps in non-inductive branches otherwise may spoil fertilization
+ *
+ * Revision 1.2  1997/04/07 11:02:38  img
+ * Document conditions on annotation
+ *
+ * Revision 1.1  1996/12/11 15:09:18  img
+ * Merge of mthd and smthd libraries.
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ */
+
+        % Use equalities of the form v1=v2 or v1=t where v1 and v2 are
+        % vars and t is a constant term.
+        % We always substitute vars by constant terms, and we rewrite
+        % var-equalities depending on alphabetic order. (Boyer and More
+        % use the same hack).
+        %
+        % After having done the substitution, it's not clear if it's
+        % safe to throw away the equal from among the hypotheses
+        % (this is what B&M do).
+        % The goal is assumed to be unannotated
+method(equal(HName,Dir),
+       H==>G,
+       [((hyp(HName:Term=Var in T,H), Dir=left)
+	     v
+	     (hyp(HName:Var=Term in T,H), Dir=right)),
+	\+ inductive_hypothesis(_,HName:_,H),	
+	(not freevarinterm(Term,_)  
+	     orelse
+	     (atomic(Var), not atomic(Term),
+		 not exp_at(Term,_,Var))
+	     orelse
+	     (atomic(Var), atomic(Term), Term @< Var)),
+	freevarinterm(G,Var)],
+       [replace_all(Var,Term,G,GG),
+	del_hyp(HName:_,H,HThin) ],
+       [HThin==>GG],
+       equal(HName,Dir)).

@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: double2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: double2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:pnat=>double(s(n))=s(s(double(n)))in pnat,
+repeat dequantify_once,lambda(n,_7865),
+[problem([n:pnat]==>double(s(n))=s(s(double(n)))in pnat,
+ simplify then equality then repeat intro,axiom,
+ [
+ ]) ext _7865
+]).

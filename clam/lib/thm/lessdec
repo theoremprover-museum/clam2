@@ -1,0 +1,14 @@
+problem([]==>x:pnat=>y:pnat=>less(x,y)\less(x,y)=>void,
+ind_strat(induction(lemma(pairs)-[(x:pnat)-s(v1),(y:pnat)-s(v0)])then[idtac,base_case(sym_eval(normalize_term([reduction([1],['less.1',equ(u(1),left)]),reduction([1,2],['less.1',equ(u(1),left)])]))then[elementary(intro(right)then[intro(new[v1])then[hyp(v1),wfftacs],wfftacs])]),step_case(ripple(direction_out,wave(direction_out,[1],['less.3',equ(u(1),left)],[])then[wave(direction_out,[1,2],['less.3',equ(u(1),left)],[])])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,v2))])]),lambda(v0,lambda(v1,lambda(v2,su(su(v4,[v3 of v0],[v4]),[v2 of v1],[v3]))of lambda(v0,lambda(v1,lambda(v2,su(su(v4,[v3 of v0],[v4]),[v2 of v1],[v3]))of lambda(x,lambda(y,su(lambda(v3,su(su(su(su(su(su(v10,[v9 of lambda(v1,lambda(v0,lambda(v2,su(su(su(su(su(su(v2,[v3 of v0],[v4]),['less.3'of v1],[v3]),[term_of('less.3')],['less.3']),[v3 of v0],[v4]),['less.3'of v1],[v3]),[term_of('less.3')],['less.3']))))],[v10]),[v8 of lambda(v0,su(su(su(su(inr(lambda(v1,v1)),['less.1'of v0],[v1]),[term_of('less.1')],['less.1']),['less.1'of v0],[v1]),[term_of('less.1')],['less.1']))],[v9]),[v7 of lambda(v0,_1554)],[v8]),[v6 of y],[v7]),[v5 of x],[v6]),[v3 of lambda(x,lambda(y,less(x,y)\less(x,y)=>void))],[v5]))of v4,[term_of(pairs)],[v4]))))))),
+[problem([x:pnat,y:pnat,v0:pnat]==>less(0,v0)\less(0,v0)=>void,
+ casesplit(datatype([v0:pnat,s(v1)])),pnat_eq(v0,0,su(_1661,[axiom],[v3]),su(su(lambda(v2,su(su(spread(v6,[v1,v7,_1697]),[v5 of v3],[v6]),[v2 of v0],[v5]))of v4,[term_of(succlemma)],[v4]),[lambda(~,axiom)],[v3])),
+ [problem([x:pnat,y:pnat,v0:pnat]==>less(0,0)\less(0,0)=>void,
+  sym_eval(normalize_term([reduction([1],['less.1',equ(u(1),left)]),reduction([1,2],['less.1',equ(u(1),left)])]))then[elementary(intro(right)then[intro(new[v1])then[hyp(v1),wfftacs],wfftacs])],su(su(su(su(inr(lambda(v1,v1)),['less.1'of 0],[v1]),[term_of('less.1')],['less.1']),['less.1'of 0],[v1]),[term_of('less.1')],['less.1']),
+  [
+  ]) ext _1661,
+  problem([x:pnat,y:pnat,v0:pnat,v1:pnat]==>less(0,s(v1))\less(0,s(v1))=>void,
+  sym_eval(normalize_term([reduction([1],['less.2',equ(u(1),left)]),reduction([1,2],['less.2',equ(u(1),left)])]))then[elementary(intro(left)then[istrue,wfftacs])],su(su(su(su(inl(0),['less.2'of v1],[v2]),[term_of('less.2')],['less.2']),['less.2'of v1],[v2]),[term_of('less.2')],['less.2']),
+  [
+  ]) ext _1697
+ ]) ext _1554
+]).

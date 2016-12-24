@@ -1,0 +1,106 @@
+/*
+ * @(#)$Id: less3,v 1.2 1996/06/11 17:04:57 img Exp $
+ *
+ * $Log: less3,v $
+ * Revision 1.2  1996/06/11 17:04:57  img
+ * Correct equations for these predicates.
+ *
+% Revision 1.1  1994/09/16  09:38:16  dream
+% Initial revision
+%
+ */
+
+problem([]==>x:pnat=>y:pnat=>less(s(x),s(y))=less(x,y)in u(1),
+repeat dequantify_once,lambda(x,lambda(y,_7761)),
+[problem([x:pnat,y:pnat]==>less(s(x),s(y))=less(x,y)in u(1),
+ elim(x),p_ind(x,_7807,[v0,v1,_7813]),
+ [problem([x:pnat,y:pnat]==>less(s(0),s(y))=less(0,y)in u(1),
+  elim(y),p_ind(y,_7860,[v0,v1,_7866]),
+  [problem([x:pnat,y:pnat]==>less(s(0),s(0))=less(0,0)in u(1),
+   simplify then intro,axiom,
+   [
+   ]) ext _7860,
+   problem([x:pnat,y:pnat,v0:pnat,v1:less(s(0),s(v0))=less(0,v0)in u(1)]==>less(s(0),s(s(v0)))=less(0,s(v0))in u(1),
+   simplify,_7920,
+   [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(0),s(v0))=less(0,v0)in u(1)]==>int=int in u(1),
+    intro,axiom,
+    [
+    ]) ext _7920
+   ]) ext _7866
+  ]) ext _7807,
+  problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1)]==>less(s(s(v0)),s(y))=less(s(v0),y)in u(1),
+  elim(y),p_ind(y,_8121,[v2,v3,_8127]),
+  [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1)]==>less(s(s(v0)),s(0))=less(s(v0),0)in u(1),
+   simplify then intro,axiom,
+   [
+   ]) ext _8121,
+   problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1)]==>less(s(s(v0)),s(s(v2)))=less(s(v0),s(v2))in u(1),
+   simplify,_8213,
+   [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1)]==>p_ind(v0,lambda(y,pnat_eq(y,0,void,{true})),[~,v1,lambda(y,pnat_eq(y,0,void,spread(term_of(succlemma)of y of lambda(~,axiom),[v6,~,v1 of v6])))])of v2=p_ind(v0,lambda(y,pnat_eq(y,0,void,{true})),[~,v1,lambda(y,pnat_eq(y,0,void,spread(term_of(succlemma)of y of lambda(~,axiom),[v6,~,v1 of v6])))])of v2 in u(1),
+    intro(at(2)),axiom,
+    [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1)]==>u(1)in u(2),
+     intro,axiom,
+     [
+     ]),
+     problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1)]==>p_ind(v0,lambda(y,pnat_eq(y,0,void,{true})),[~,v1,lambda(y,pnat_eq(y,0,void,spread(term_of(succlemma)of y of lambda(~,axiom),[v6,~,v1 of v6])))])of v2 in u(1),
+     intro(using(pnat=>u(1))),axiom,
+     [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1)]==>p_ind(v0,lambda(y,pnat_eq(y,0,void,{true})),[~,v1,lambda(y,pnat_eq(y,0,void,spread(term_of(succlemma)of y of lambda(~,axiom),[v6,~,v1 of v6])))])in (pnat=>u(1)),
+      repeat wfftac,axiom,
+      [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void]==>spread(term_of(succlemma)of v6 of lambda(~,axiom),[v6_,~,v5 of v6_])in u(1),
+       intro(using(x:pnat#v6=s(x)in pnat)),axiom,
+       [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void]==>term_of(succlemma)of v6 of lambda(~,axiom)in (x:pnat#v6=s(x)in pnat),
+        intro(using((v6=0 in pnat=>void)=>x:pnat#v6=s(x)in pnat)),axiom,
+        [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void]==>term_of(succlemma)of v6 in ((v6=0 in pnat=>void)=>x:pnat#v6=s(x)in pnat),
+         intro(using(y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat),over(q,(q=0 in pnat=>void)=>x:pnat#q=s(x)in pnat)),axiom,
+         [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void]==>term_of(succlemma)in (y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat),
+          intro,axiom,
+          [
+          ]),
+          problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void]==>v6 in pnat,
+          intro,axiom,
+          [
+          ]),
+          problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void,v8:pnat,v9: (v8=0 in pnat=>void)=>x:pnat#v8=s(x)in pnat]==>v9 in ((v8=0 in pnat=>void)=>x:pnat#v8=s(x)in pnat),
+          intro,axiom,
+          [
+          ])
+         ]),
+         problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void]==>lambda(~,axiom)in (v6=0 in pnat=>void),
+         repeat intro,axiom,
+         [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void,~ :v6=0 in pnat]==>axiom in void,
+          elim(v7),su(_10154,[v7 of _10161],[v8]),
+          [problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void,~ :v6=0 in pnat]==>v6=0 in pnat,
+           intro,~,
+           [
+           ]) ext _10161,
+           problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void,~ :v6=0 in pnat,v8:void]==>axiom in void,
+           elim(v8),any(v8),
+           [
+           ]) ext _10154
+          ]) ext _10024
+         ]),
+         problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void,v8:x:pnat#v6=s(x)in pnat]==>v8 in (x:pnat#v6=s(x)in pnat),
+         intro,axiom,
+         [
+         ])
+        ]),
+        problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:pnat,v5:pnat=>u(1),v6:pnat,v7:v6=0 in pnat=>void,v8:pnat,v9:v6=s(v8)in pnat,v10:term_of(succlemma)of v6 of lambda(~,axiom)=v8&v9 in (x:pnat#v6=s(x)in pnat)]==>v5 of v8 in u(1),
+        repeat intro,axiom,
+        [
+        ])
+       ]) ext _8897
+      ]),
+      problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1)]==>v2 in pnat,
+      intro,axiom,
+      [
+      ]),
+      problem([x:pnat,y:pnat,v0:pnat,v1:less(s(v0),s(y))=less(v0,y)in u(1),v2:pnat,v3:less(s(s(v0)),s(v2))=less(s(v0),v2)in u(1),v4:u(1)]==>v4 in u(1),
+      intro,axiom,
+      [
+      ])
+     ])
+    ]) ext _8213
+   ]) ext _8127
+  ]) ext _7813
+ ]) ext _7761
+]).

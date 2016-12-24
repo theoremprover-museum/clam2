@@ -1,0 +1,113 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: casesplit,v 1.10 1998/09/15 16:00:32 img Exp $
+ *
+ * $Log: casesplit,v $
+ * Revision 1.10  1998/09/15 16:00:32  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.9  1998/08/26 12:54:21  img
+ * update prefix; duplicate clause removed
+ *
+ * Revision 1.8  1998/07/30 15:59:00  img
+ * Not necessary to adjust sink annotation
+ *
+ * Revision 1.7  1998/07/27 12:57:13  img
+ * Do not touch sink markers
+ *
+ * Revision 1.6  1998/06/10 08:30:37  img
+ * remove sink marking when universal variable is involved in split
+ *
+ * Revision 1.5  1997/10/10 09:17:26  img
+ * uncomment datatype split
+ *
+ * Revision 1.4  1997/10/09 17:16:44  img
+ * New clause added for splits on datatypes
+ *
+ * Revision 1.3  1996/12/11 14:07:11  img
+ * Merge mthd and smthd libraries.
+ *
+ * Revision 1.2  1996/07/10  09:01:35  img
+ * from submethod
+ *
+ * Revision 1.1  1995/05/11  16:21:25  img
+ * 	* from submethod
+ */
+
+/* We introduce a case-split in the proof when there are "applicable"
+ * conditional rules (either reduction or wave), none of whose
+ * conditions are known as true among the hypotheses.  This will then
+ * enable the application of the conditional rules in the next step of
+ * the proof.  We need to check that the free variables in each of the
+ * Cases are in the context.  If they are not, we have to introduce
+ * the corresponding quantifiers.  It may not be possible to do this
+ * because (i) the quantification may not be universal, and/or (ii)
+ * the quantifer may not be in the prefix.  To add to the confusion,
+ * we need to check to see which binding operator is indeed binding
+ * that occurrence of the variable in the Case(s).  I have code
+ * written for this already (in tactics.pl, for rewriting beneath
+ * binding operators) but I haven't used it here yet.  In the
+ * meantime, the following approximation (in the post-conditions) will
+ * suffice.  */
+
+method(casesplit(disjunction(Cs)),
+       H==>G,
+       [matrix(Vars, Matrix, G),append(H,Vars,Context),
+	%% Removing annotations allows this method to be used in
+	%% base-case as well as step-case situations.
+	strip_meta_annotations(Matrix,Matrixstripped),
+	complementary_set(Cases-LHS),
+	exp_at(Matrixstripped,Pos,LHS),
+	map_list(Cases, Cond-RHS-Dir-TI-Name :=> Cond,
+		 \+ immediate(H==>Cond), Cs)],
+       [%% Build the new goals according to each Case: i.e., stick
+	%% the case in the hypothesis.   V are the inhabitants: we
+	%% instantiate them at the end when we know how many there
+	%% are. 
+        %% Find maximal Vrest
+	freevarsinterm(Cs,CsFVs), append(Vpre,Vrest,Vars),
+	\+ (member(A,CsFVs), member(A:_,Vrest)),
+	delete_all(Vrest,Vars,Vlost),
+	append(Vpre, H, NewH), hfree([V],NewH),
+	%% need to strip the corresponding elements of the prefix of
+	%% any raw induction hypotheses
+	findall(VH,inductive_hypothesis(raw,VH,H),VHs),
+	matrix(Vrest, Matrix, NewG),
+	map_list(Cases,
+		 Cond-RHS-Dir-TI-Name :=> (FinalHV==>NewG),
+		 (instantiate_type_variables(TI,Context),
+		  append(NewH,[V:Cond],FinalHV)), NewGoals)],
+       NewGoals,
+       casesplit(disjunction(Cs))).
+
+method(casesplit(datatype(Kind,[V:Type,CSD])),
+       H==>G,
+       [/* Do some analysis to suggest case splits.  */
+	/* Only works on unannotated goals in non-inductive branches  */
+	/* Currently fixed for lists and pnat */
+	unannotated(G),
+	\+ inductive_hypothesis(raw,_,H),
+	\+ inductive_hypothesis(notraw(_),_,H),
+	 
+	(Kind == unflawed -> unflawed_casesplit_suggestion(H,G,S);
+	    flawed_casesplit_suggestion(H,G,S)),
+	member((V:Type)-CSD,S),
+	\+ member(nosplit(V),H) ],		%dont split repeatedly
+       [matrix(Vars,Matrix,G),
+	/* if V is in the prefix, adjust the prefix of the resulting
+           matrix. otherwise, leave it unchanged  */
+	once((select(V:Type,Vars,Vs); Vs = Vars)),
+
+	((CSD = s(VV),atomic(VV)) ->
+	 (VVdec = [VV:pnat],
+	  replace_all(V,0,Matrix,NM1),matrix(Vs,NM1,NG1),
+	  replace_all(V,s(VV),Matrix,NM2), matrix(Vs,NM2,NG2));
+	 ((CSD = Hd::Tl,atomic(Hd),atomic(Tl)) ->
+	  (Type = Ty list,
+	   VV = Tl,
+	   VVdec = [Hd:Ty, Tl:Type],
+	   replace_all(V,nil,Matrix,NM1),matrix(Vs,NM1,NG1),
+	   replace_all(V,Hd::Tl,Matrix,NM2), matrix(Vs,NM2,NG2)))),
+	append(H,[nosplit(V),nosplit(VV)|VVdec],VVdecH)],
+       [ H==> NG1, 
+	 VVdecH==>NG2],
+    casesplit(datatype(Kind,[V:Type,CSD]))).

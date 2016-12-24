@@ -1,0 +1,12 @@
+/*
+ * @(#)$Id: projr,v 1.2 1997/05/08 12:46:03 img Exp $
+ *
+ * $Log: projr,v $
+ * Revision 1.2  1997/05/08 12:46:03  img
+ * Binding incorrect
+ *
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ */
+
+projr(w) <==> spread(w,[l,r,r]).

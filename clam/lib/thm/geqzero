@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: geqzero,v 1.1 1996/06/12 10:10:49 img Exp $
+ *
+ * $Log: geqzero,v $
+ * Revision 1.1  1996/06/12 10:10:49  img
+ * This used to be two equations from eqn: it is more properly a thm.
+ *
+ */
+
+problem([]==>x:pnat=>geq(0,x)<=>x=0 in pnat,
+quantifier_to_front(x:pnat)then try dequantify_once then do_induction([s(_7420)],[x:pnat]),lambda(x,p_ind(x,_7431,[v0,v1,_7437])),
+[problem([x:pnat]==>geq(0,0)=>0=0 in pnat,
+ intro then elementary,lambda(v0,axiom),
+ [
+ ]) ext _7431,
+ problem([x:pnat,v0:pnat,v1:geq(0,v0)=>v0=0 in pnat]==>geq(0,s(v0))=>s(v0)=0 in pnat,
+ simplify,_7483,
+ [problem([x:pnat,v0:pnat,v1:geq(0,v0)=>v0=0 in pnat]==>void=>s(v0)=0 in pnat,
+  intro(new[v2])then[elim(v2),wfftacs],lambda(v2,any(v2)),
+  [
+  ]) ext _7483
+ ]) ext _7437
+]).

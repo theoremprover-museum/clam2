@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: fst,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: fst,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+fst(x)<==>spread(x,[a,~,a]).

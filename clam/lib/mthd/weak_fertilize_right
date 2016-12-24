@@ -1,0 +1,16 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: weak_fertilize_right,v 1.1 1996/12/11 15:09:32 img Exp $
+ *
+ * $Log: weak_fertilize_right,v $
+ * Revision 1.1  1996/12/11 15:09:32  img
+ * Merge of mthd and smthd libraries.
+ *
+ * Revision 1.1  1994/09/16 09:34:27  dream
+ * Initial revision
+ */
+
+	% iterate weak_fertilize/4 forcing it in only one direction.
+	% This is a rare example an argument be passed >*into*< a
+	% (sub)method, instead of only out.
+iterator(method,weak_fertilize_right,submethods,
+	 [weak_fertilize(right,_,_,_)]).

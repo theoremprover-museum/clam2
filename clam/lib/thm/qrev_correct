@@ -1,0 +1,16 @@
+problem([]==>l:int list=>qrev(l,nil)=rev(l)in int list,
+lemma(qrev_correct_gen),su(_1407,[term_of(qrev_correct_gen)],[v0]),
+[problem([v0:l:int list=>m:int list=>qrev(l,m)=app(rev(l),m)in int list]==>l:int list=>qrev(l,nil)=rev(l)in int list,
+ repeat intro,lambda(l,_1491),
+ [problem([v0:l:int list=>m:int list=>qrev(l,m)=app(rev(l),m)in int list,l:int list]==>qrev(l,nil)=rev(l)in int list,
+  do_elim_on(v0,[l,nil],[v0,v1,v2])then (append([v1],[v2],[v1,v2]),thin([v1])),su(su(_1603,[v1 of nil],[v2]),[v0 of l],[v1]),
+  [problem([v0:l:int list=>m:int list=>qrev(l,m)=app(rev(l),m)in int list,l:int list,v2:qrev(l,nil)=app(rev(l),nil)in int list]==>qrev(l,nil)=rev(l)in int list,
+   lemma(app1right,new[v1])then elim_on(v1,[rev(l)],v3)then rewrite_hyp(v3,left,v2)then thin([app1right,v1,v3]),su(su(_1752,[v1 of rev(l)],[v3]),[term_of(app1right)],[v1]),
+   [problem([v0:l:int list=>m:int list=>qrev(l,m)=app(rev(l),m)in int list,l:int list,v2:qrev(l,nil)=rev(l)in int list]==>qrev(l,nil)=rev(l)in int list,
+    hyp(v2),v2,
+    [
+    ]) ext _1752
+   ]) ext _1603
+  ]) ext _1491
+ ]) ext _1407
+]).

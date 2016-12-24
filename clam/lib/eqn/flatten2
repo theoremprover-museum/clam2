@@ -1,0 +1,75 @@
+/*
+ * @(#)$Id: flatten2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: flatten2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>t:int nestedlist=>flatten(inl(h)::t)=h::flatten(t)in int list,
+repeat dequantify_once,lambda(h,lambda(t,_7731)),
+[problem([h:int,t:int nestedlist]==>flatten(inl(h)::t)=h::flatten(t)in int list,
+ compute(hyp(t),[[unfold]]),_7740,
+ [problem([h:int,t:rec(z,(int\z)list)]==>flatten(inl(h)::t)=h::flatten(t)in int list,
+  simplify then repeat intro,axiom,
+  [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list)]==>app(lambda(v0_,rec_ind(v0_,[v2_,v3,list_ind(v3,nil,[v4_,~,v6,decide(v4_,[v7,v7::v6],[v8,app(v2_ of v8,v6)])])]))of v4,v2)in int list,
+   compute(app([[1]],v2)in int list),_7850,
+   [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list)]==>app(rec_ind(v4,[v2_,v3,list_ind(v3,nil,[v4_,~,v6,decide(v4_,[v7,v7::v6],[v8,app(v2_ of v8,v6)])])]),v2)in int list,
+    compute([[unfold]]in _8184),_8029,
+    [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list)]==>list_ind(rec_ind(v4,[v2_,v3,list_ind(v3,nil,[v4_,~,v6,decide(v4_,[v7,v7::v6],[v8,app(v2_ of v8,v6)])])]),v2,[t,~,v,t::v])in int list,
+     intro(using(int list)),axiom,
+     [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list)]==>rec_ind(v4,[v2_,v3,list_ind(v3,nil,[v4_,~,v6,decide(v4_,[v7,v7::v6],[v8,app(v2_ of v8,v6)])])])in int list,
+      intro,axiom,
+      [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list]==>list_ind(v8,nil,[v4_,~,v6,decide(v4_,[v7_,v7_::v6],[v8_,app(v7 of v8_,v6)])])in int list,
+       intro,axiom,
+       [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list]==>v8 in (int\v3)list,
+        repeat intro,axiom,
+        [
+        ]),
+        problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list]==>nil in int list,
+        repeat intro,axiom,
+        [
+        ]),
+        problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list,v9:int\v3,v10: (int\v3)list,v11:int list]==>decide(v9,[v7_,v7_::v11],[v8_,app(v7 of v8_,v11)])in int list,
+        intro,axiom,
+        [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list,v9:int\v3,v10: (int\v3)list,v11:int list]==>v9 in (int\v3),
+         repeat intro,axiom,
+         [
+         ]),
+         problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list,v9:int\v3,v10: (int\v3)list,v11:int list,v12:int,v14:v9=inl(v12)in int\v3]==>v12::v11 in int list,
+         repeat intro,axiom,
+         [
+         ]),
+         problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list,v9:int\v3,v10: (int\v3)list,v11:int list,v13:v3,v14:v9=inr(v13)in int\v3]==>app(v7 of v13,v11)in int list,
+         simplify,_9667,
+         [problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:u(1),v6:v8:v3=>v8 in rec(z,(int\z)list),v7:v8:v3=>int list,v8: (int\v3)list,v9:int\v3,v10: (int\v3)list,v11:int list,v13:v3,v14:v9=inr(v13)in int\v3]==>list_ind(v7 of v13,v11,[t,~,v,t::v])in int list,
+          intro(using(int list))then repeat intro,axiom,
+          [
+          ]) ext _9667
+         ])
+        ])
+       ]),
+       problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list)]==>v4 in rec(z,(int\z)list),
+       intro,axiom,
+       [
+       ])
+      ]),
+      problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list)]==>v2 in int list,
+      intro,axiom,
+      [
+      ]),
+      problem([h:int,t:rec(z,(int\z)list),v0:int\rec(z,(int\z)list),v1: (int\rec(z,(int\z)list))list,v2:int list,v4:rec(z,(int\z)list),v5:v0=inr(v4)in int\rec(z,(int\z)list),v3:int,v6:int list,v7:int list]==>v3::v7 in int list,
+      repeat intro,axiom,
+      [
+      ])
+     ]) ext _8029
+    ]) ext _7850
+   ]) ext _7846
+  ]) ext _7740
+ ]) ext _7731,
+ problem([h:int]==>rec(z,(int\z)list)in u(1),
+ repeat intro,axiom,
+ [
+ ]) ext _10485
+]).

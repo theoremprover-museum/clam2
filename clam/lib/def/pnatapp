@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: pnatapp,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: pnatapp,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+pnatapp(l,m)<==>list_ind(l,m,[t,~,v,t::v]).

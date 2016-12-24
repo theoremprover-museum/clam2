@@ -1,0 +1,286 @@
+\begin{theindex}
+
+  \item $*$, 5
+  \item $+$, 5
+  \item $-$, 5
+  \item $/$, 5
+  \item $///$, 5
+  \item $:$, 5
+  \item $::$, 5
+  \item $<$, 5
+  \item $<=$, 5
+  \item $<==>$, 5
+  \item $=$, 5
+  \item $==>$, 5
+  \item $=>$, 5
+  \item $\#$, 5
+  \item $\&$, 5
+  \item $\leadsto $, 5
+  \item $\tau _{var}$, 88
+  \item $\triangle _{=:}$, 8
+  \item $\vartheta _{\it autotactic}$, 8
+  \item $\vartheta _{\it pos}$, 12
+  \item $\vartheta _{\it status}$, 20
+  \item $\vartheta _{\it theorem}$, 12
+  \item $\vartheta _{\it universe}$, 8
+  \item $in$, 5
+  \item \texttt {:=}, 6
+  \item \texttt {=:}, 6
+  \item \texttt {\char '134\relax }, 5
+
+  \indexspace
+
+  \item acc type, 73
+  \item \texttt {add\_def}, 10
+  \item \texttt {add\_thm}, 9
+  \item \texttt {allequals}, 85
+  \item \texttt {apostroph}, 112
+  \item \texttt {appears}, 96
+  \item \texttt {appears\_in}, 98
+  \item \texttt {apply}, 19
+  \item \texttt {arith}, 27
+  \item atom type, 32
+  \item \texttt {autotactic}, 11, 17, 19
+
+  \indexspace
+
+  \item \texttt {capital\_letter}, 112
+  \item \texttt {cfringe}, 14
+  \item \texttt {cleandatabase}, 7
+  \item \texttt {complete}, 21, 22, 27
+  \item \texttt {compute}, 26, 106
+  \item \texttt {compute\_list}, 104, 105
+  \item \texttt {compute\_list\_save}, 105
+  \item \texttt {compute\_old}, 104
+  \item \texttt {compute\_using}, 104
+  \item constructor rules, 30
+  \item \texttt {convertible}, 97
+  \item \texttt {convertlist}, 97
+  \item \texttt {copy}, 84, 112
+  \item \texttt {correct\_tag}, 106
+  \item cproblem, 12
+  \item \texttt {create\_def}, 3, 10
+  \item \texttt {create\_thm}, 9
+  \item \texttt {cscreensize}, 14
+  \item \texttt {cshift}, 14
+  \item \texttt {current\_def}, 11
+
+  \indexspace
+
+  \item \texttt {decide}, 26
+  \item \texttt {decideequal}, 85
+  \item \texttt {decimal}, 111
+  \item \texttt {decl}, 112
+  \item dependent function type, 56
+  \item dependent product type, 62
+  \item \texttt {derived}, 32
+  \item derived rule, 31
+  \item \texttt {diff}, 110
+  \item \texttt {digit}, 112
+  \item disjoint union type, 50
+  \item \texttt {display}, 15
+  \item \texttt {down}, 13
+  \item \texttt {dynvalue}, 6
+
+  \indexspace
+
+  \item \texttt {elim}, 26
+  \item \texttt {equal\_combine}, 83
+  \item \texttt {equality}, 26
+  \item equality rules, 30, 31
+  \item equality type scheme, 75
+  \item \texttt {equals}, 85
+  \item \texttt {erase\_def}, 11
+  \item \texttt {erasethm}, 11
+  \item \texttt {eval}, 101
+  \item \texttt {evalcond}, 104
+  \item \texttt {evallist}, 104
+  \item \texttt {ext}, 5
+  \item \texttt {extend}, 111
+  \item \texttt {extend\_thin}, 109
+  \item \texttt {extract}, 17
+  \item \texttt {extractequal}, 85
+  \item \texttt {extractterm}, 9
+
+  \indexspace
+
+  \item \texttt {fairly\_nonalphanum}, 88
+  \item \texttt {fold}, 24
+  \item \texttt {free}, 111
+  \item \texttt {freevar}, 111
+  \item \texttt {freevarinterm}, 96
+  \item \texttt {freevarsinterm}, 95
+  \item \texttt {fringe}, 14, 92
+  \item function type, 53
+
+  \indexspace
+
+  \item \texttt {generate\_sons}, 14
+  \item \texttt {genint}, 111
+  \item \texttt {genvar}, 111
+  \item \texttt {goal}, 16
+
+  \indexspace
+
+  \item \texttt {hyp}, 27
+  \item \texttt {hyp\_list}, 16
+  \item \texttt {hypothesis}, 17
+
+  \indexspace
+
+  \item \texttt {idtac}, 21
+  \item \texttt {idtaclist}, 25
+  \item \texttt {idtail}, 89
+  \item \texttt {illegal\_rec\_type}, 98
+  \item \texttt {imm\_subterms}, 108
+  \item \texttt {increment}, 20
+  \item \texttt {info}, 1
+  \item int type, 41
+  \item \texttt {intro}, 26
+
+  \indexspace
+
+  \item less type scheme, 44
+  \item \texttt {level}, 111
+  \item \texttt {list}, 5
+  \item list type, 48
+  \item \texttt {load\_thm}, 10
+
+  \indexspace
+
+  \item \texttt {makesubgoals}, 25
+  \item \texttt {mark}, 84
+  \item \texttt {markf}, 84
+  \item membership rules, 30, 31
+  \item membership type scheme, 75
+  \item \texttt {mod}, 5
+  \item \texttt {modify}, 96
+
+  \indexspace
+
+  \item natural numbers, 35
+  \item \texttt {new}, 28
+  \item \texttt {next}, 13
+  \item \texttt {noequal}, 30
+  \item \texttt {notused}, 111
+
+  \indexspace
+
+  \item \texttt {of}, 5
+  \item operator declarations, 5, 6, 21, 28
+  \item \texttt {or}, 21, 27
+
+  \indexspace
+
+  \item \texttt {pairing\_of}, 93
+  \item \texttt {par}, 91
+  \item pless type scheme, 38
+  \item pnat type, 35
+  \item \texttt {pnat,pless,s\_subterm,s\_strip}, 97
+  \item \texttt {polish}, 17
+  \item \texttt {polishl}, 18
+  \item \texttt {pos}, 12
+  \item \texttt {prepare}, 92
+  \item product type, 60
+  \item prove, 21
+  \item \texttt {provelist}, 25
+  \item \texttt {proving}, 19
+  \item \texttt {pure}, 20, 27
+
+  \indexspace
+
+  \item \texttt {quote}, 92
+  \item quotient type, 65
+
+  \indexspace
+
+  \item \texttt {readfile}, 112
+  \item realisation rules, 30
+  \item recursive type, 70
+  \item \texttt {reduce}, 26
+  \item \texttt {refinement}, 17
+  \item refinement rules, 30, 31
+  \item \texttt {repeat}, 21, 22, 27
+  \item \texttt {replace\_hyps}, 109
+  \item \texttt {rewrite}, 100
+  \item \texttt {rulename}, 32
+
+  \indexspace
+
+  \item \texttt {s}, 92
+  \item \texttt {save\_def}, 11
+  \item \texttt {save\_thm}, 10
+  \item \texttt {screensize}, 14
+  \item \texttt {select}, 12
+  \item selector rules, 30
+  \item \texttt {seq}, 27
+  \item \texttt {shift}, 14
+  \item \texttt {shyp}, 95
+  \item \texttt {simplify}, 26
+  \item \texttt {slist}, 95
+  \item \texttt {small\_letter}, 112
+  \item \texttt {snapshot}, 15
+  \item \texttt {standardform}, 91
+  \item \texttt {status}, 16
+  \item \texttt {status0}, 17
+  \item \texttt {store}, 7
+  \item \texttt {stored}, 7
+  \item subset type, 67
+  \item \texttt {subst}, 26
+  \item \texttt {substituted}, 93
+  \item \texttt {substitutedlist}, 95
+  \item \texttt {syntax}, 86
+  \item \texttt {syntax0}, 86
+
+  \indexspace
+
+  \item \texttt {tab}, 112
+  \item \texttt {tactic}, 23, 24
+  \item \texttt {tag\_for}, 107
+  \item \texttt {then}, 21
+  \item \texttt {thin}, 27
+  \item \texttt {thin\_hyps}, 109
+  \item \texttt {toggle}, 112
+  \item \texttt {top}, 13
+  \item \texttt {treeassign}, 8
+  \item \texttt {try}, 21, 22, 27
+  \item \texttt {ttl1}, 88
+  \item \texttt {ttt}, 86
+  \item \texttt {tttl}, 88
+  \item \texttt {type}, 99
+  \item \texttt {type0}, 100
+
+  \indexspace
+
+  \item Unary type, 33
+  \item \texttt {underscore}, 112
+  \item \texttt {undo}, 20
+  \item \texttt {unfold}, 19
+  \item \texttt {universe}, 17, 19
+  \item universes, 77
+  \item \texttt {unroll}, 27
+  \item \texttt {unstore}, 7
+  \item \texttt {unstoreall}, 7
+  \item \texttt {up}, 13
+  \item user tactic, 23
+
+  \indexspace
+
+  \item \texttt {verify\_tagging}, 106
+  \item \texttt {verify\_unfold}, 106
+  \item void type, 34
+
+  \indexspace
+
+  \item \texttt {wdecl}, 89
+  \item \texttt {weight}, 91
+  \item \texttt {write\_hyp}, 15
+  \item \texttt {writeclause}, 85
+  \item \texttt {writel}, 11
+  \item \texttt {writep}, 11
+  \item \texttt {writeterm}, 89
+  \item \texttt {writeterm0}, 89
+  \item \texttt {wterm}, 90
+  \item \texttt {wterml}, 91
+
+\end{theindex}

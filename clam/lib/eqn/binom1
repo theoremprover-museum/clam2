@@ -1,0 +1,29 @@
+/*
+ * @(#)$Id: binom1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: binom1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>binom(x,0)=s(0)in pnat,
+intro then wfftacs,lambda(x,_7553),
+[problem([x:pnat]==>binom(x,0)=s(0)in pnat,
+ elim(x),p_ind(x,_7587,[v0,v1,_7593]),
+ [problem([x:pnat]==>binom(0,0)=s(0)in pnat,
+  simplify,_7603,
+  [problem([x:pnat]==>s(0)=s(0)in pnat,
+   identity,axiom,
+   [
+   ]) ext _7603
+  ]) ext _7587,
+  problem([x:pnat,v0:pnat,v1:binom(v0,0)=s(0)in pnat]==>binom(s(v0),0)=s(0)in pnat,
+  simplify,_7660,
+  [problem([x:pnat,v0:pnat,v1:binom(v0,0)=s(0)in pnat]==>s(0)=s(0)in pnat,
+   identity,axiom,
+   [
+   ]) ext _7660
+  ]) ext _7593
+ ]) ext _7553
+]).

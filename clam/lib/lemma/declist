@@ -1,0 +1,30 @@
+problem([]==>t:u(1)=>x:t list=>x=nil in t list\h:t#tl:t list#x=h::tl in t list,
+repeat intro,lambda(t,lambda(x,_7677)),
+[problem([t:u(1),x:t list]==>x=nil in t list\h:t#tl:t list#x=h::tl in t list,
+ elim(x),list_ind(x,_7745,[v0,v1,v2,_7753]),
+ [problem([t:u(1),x:t list]==>nil=nil in t list\h:t#tl:t list#nil=h::tl in t list,
+  intro(left)then wfftacs,inl(_7824),
+  [problem([t:u(1),x:t list]==>nil=nil in t list,
+   tautology(identity),axiom,
+   [
+   ]) ext _7824
+  ]) ext _7745,
+  problem([t:u(1),x:t list,v0:t,v1:t list,v2:v1=nil in t list\h:t#tl:t list#v1=h::tl in t list]==>v0::v1=nil in t list\h:t#tl:t list#v0::v1=h::tl in t list,
+  intro(right),inr(_7987),
+  [problem([t:u(1),x:t list,v0:t,v1:t list,v2:v1=nil in t list\h:t#tl:t list#v1=h::tl in t list]==>h:t#tl:t list#v0::v1=h::tl in t list,
+   intro(v0)then wfftacs,v0&_8103,
+   [problem([t:u(1),x:t list,v0:t,v1:t list,v2:v1=nil in t list\h:t#tl:t list#v1=h::tl in t list]==>tl:t list#v0::v1=v0::tl in t list,
+    intro(v1)then wfftacs,v1&_8213,
+    [problem([t:u(1),x:t list,v0:t,v1:t list,v2:v1=nil in t list\h:t#tl:t list#v1=h::tl in t list]==>v0::v1=v0::v1 in t list,
+     repeat intro,axiom,
+     [
+     ]) ext _8213
+    ]) ext _8103
+   ]) ext _7987,
+   problem([t:u(1),x:t list,v0:t,v1:t list,v2:v1=nil in t list\h:t#tl:t list#v1=h::tl in t list]==>v0::v1=nil in t list in u(1),
+   repeat wfftac,axiom,
+   [
+   ])
+  ]) ext _7753
+ ]) ext _7677
+]).

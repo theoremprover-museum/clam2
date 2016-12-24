@@ -1,0 +1,19 @@
+/*
+ * @(#)$Id: mapcar2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: mapcar2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>f: (int=>int)=>h:int=>t:int list=>mapcar(h::t,f)=f of h::mapcar(t,f)in int list,
+repeat dequantify_once,lambda(f,lambda(h,lambda(t,_9571))),
+[problem([f:int=>int,h:int,t:int list]==>mapcar(h::t,f)=f of h::mapcar(t,f)in int list,
+ simplify,_9580,
+ [problem([f:int=>int,h:int,t:int list]==>f of h::list_ind(t,nil,[h_,~,recval,f of h_::recval])=f of h::list_ind(t,nil,[h,~,recval,f of h::recval])in int list,
+  repeat intro,axiom,
+  [
+  ]) ext _9580
+ ]) ext _9571
+]).

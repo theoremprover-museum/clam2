@@ -1,0 +1,639 @@
+\indexentry {proof-plan}{1}
+\indexentry {Nuprl}{1}
+\indexentry {method}{1}
+\indexentry {planner}{1}
+\indexentry {tactic}{1}
+\indexentry {version}{2}
+\indexentry {Oyster}{2}
+\indexentry {implementation}{2}
+\indexentry {Quintus Prolog}{2}
+\indexentry {implementation!Quintus Prolog}{2}
+\indexentry {SWI Prolog}{2}
+\indexentry {implementation!SWI Prolog}{2}
+\indexentry {SICStus Prolog}{2}
+\indexentry {implementation!SICStus Prolog}{2}
+\indexentry {references}{2}
+\indexentry {Quintus Prolog}{3}
+\indexentry {SICStus Prolog}{3}
+\indexentry {method}{3}
+\indexentry {submethod}{3}
+\indexentry {notation}{4}
+\indexentry {underscore}{4}
+\indexentry {hyphen}{4}
+\indexentry {frowny symbol}{4}
+\indexentry {not nice}{4}
+\indexentry {version control}{4}
+\indexentry {method}{5}
+\indexentry {submethod}{5}
+\indexentry {method}{9}
+\indexentry {method|textbf}{9}
+\indexentry {name-slot}{9}
+\indexentry {input-slot}{9}
+\indexentry {preconditions-slot}{9}
+\indexentry {postconditions-slot}{9}
+\indexentry {output-slot}{9}
+\indexentry {tactic-slot}{9}
+\indexentry {name-slot}{9}
+\indexentry {method!general form}{9}
+\indexentry {input-slot}{10}
+\indexentry {sequent}{10}
+\indexentry {preconditions-slot}{10}
+\indexentry {applicable}{10}
+\indexentry {applicable method}{10}
+\indexentry {postconditions-slot}{10}
+\indexentry {output-slot}{10}
+\indexentry {tactic-slot}{10}
+\indexentry {applicable method}{10}
+\indexentry {applicable method}{10}
+\indexentry {input-slot}{10}
+\indexentry {preconditions-slot}{10}
+\indexentry {postconditions-slot}{10}
+\indexentry {output-slot}{10}
+\indexentry {terminating method}{11}
+\indexentry {output-slot}{11}
+\indexentry {method language}{11}
+\indexentry {mode annotations}{11}
+\indexentry {$+$}{11}
+\indexentry {$-$}{11}
+\indexentry {?}{11}
+\indexentry {Quintus Prolog}{11}
+\indexentry {unflawed}{13}
+\indexentry {flawed}{13}
+\indexentry {ripple analysis}{13}
+\indexentry {tree coordinates}{16}
+\indexentry {position specifications}{16}
+\indexentry {tree coordinates}{16}
+\indexentry {path expressions}{16}
+\indexentry {wave-front}{16}
+\indexentry {reduction rule}{17}
+\indexentry {registry}{17}
+\indexentry {meta-variable}{18}
+\indexentry {unflawed}{18}
+\indexentry {flawed}{18}
+\indexentry {sinks}{19}
+\indexentry {ripple analysis}{19}
+\indexentry {maximally-joined}{21}
+\indexentry {well-annotated}{22}
+\indexentry {meta-variable}{22}
+\indexentry {monotonic}{22}
+\indexentry {anti-monotonic}{22}
+\indexentry {not nice}{23}
+\indexentry {registry!positive}{24}
+\indexentry {registry!negative}{24}
+\indexentry {$\Equiv _\rho $}{24}
+\indexentry {$\RPOS _\rho $}{24}
+\indexentry {measure decreasing}{25}
+\indexentry {reduction rule!measure decreasing}{25}
+\indexentry {polarity}{25}
+\indexentry {reduction rule!polarity considerations}{25}
+\indexentry {registry}{25}
+\indexentry {reduction rule!registries used by \clam }{25}
+\indexentry {positive registry}{25}
+\indexentry {negative registry}{25}
+\indexentry {reduction rule!registries!positive}{25}
+\indexentry {reduction rule!registries!negative}{25}
+\indexentry {registry!positive}{25}
+\indexentry {registry!negative}{25}
+\indexentry {registry}{25}
+\indexentry {reduction rule!registries}{25}
+\indexentry {position specifiers}{25}
+\indexentry {L|emph}{26}
+\indexentry {eager strict parsing}{27}
+\indexentry {lazy strict parsing}{27}
+\indexentry {library}{28}
+\indexentry {term-instance/3|emph}{32}
+\indexentry {defining equations}{32}
+\indexentry {pretty-printer}{33}
+\indexentry {LaTeX=\LaTeX {}}{34}
+\indexentry {not nice}{34}
+\indexentry {arithmetic}{34}
+\indexentry {lemmas}{35}
+\indexentry {needs file}{35}
+\indexentry {conjunction}{35}
+\indexentry {negation}{37}
+\indexentry {disjunction}{37}
+\indexentry {method!simple methods}{37}
+\indexentry {method!compound methods}{37}
+\indexentry {ind-strat}{37}
+\indexentry {iterating method}{38}
+\indexentry {iterator}{38}
+\indexentry {submethod}{38}
+\indexentry {method}{38}
+\indexentry {method!example!normal/1={\tt normal/1}|emph}{38}
+\indexentry {method!example!apply-lemma/1={\tt apply-lemma/1}|emph}{38}
+\indexentry {method!example!backchain-lemma/1={\tt backchain-lemma/1}|emph}{38}
+\indexentry {submethod}{38}
+\indexentry {iterating methods}{38}
+\indexentry {iterator}{38}
+\indexentry {pretty-printer}{39}
+\indexentry {not nice}{39}
+\indexentry {skeletal functor}{39}
+\indexentry {fail-safe applicability}{40}
+\indexentry {disjunctive applicability}{40}
+\indexentry {sequential combination of methods}{41}
+\indexentry {method!database}{41}
+\indexentry {needs file}{42}
+\indexentry {library!needs file}{42}
+\indexentry {method!inspecting}{42}
+\indexentry {method specification}{42}
+\indexentry {method!current repertoire}{42}
+\indexentry {method!example!elementary/1={\tt elementary/1}|emph}{42}
+\indexentry {pretty-printer}{43}
+\indexentry {method!example!propositional/1={\tt propositional/1}|emph}{43}
+\indexentry {decision procedure}{43}
+\indexentry {pretty-printer}{43}
+\indexentry {method!example!equal/2={\tt equal/2}|emph}{43}
+\indexentry {method!example!reduction/2={\tt reduction/2}|emph}{44}
+\indexentry {method!example!eval-def/2={\tt eval-def/2}|emph}{45}
+\indexentry {method!example!existential/2={\tt existential/2}|emph}{46}
+\indexentry {not nice}{46}
+\indexentry {method!example!normalize-term/1={\tt normalize-term/1}|emph}{46}
+\indexentry {normalization}{46}
+\indexentry {reduction rule}{46}
+\indexentry {labelled rewriting}{46}
+\indexentry {method!example!sym-eval/1={\tt sym-eval/1}|emph}{47}
+\indexentry {method!example!base-case/1={\tt base-case/1}|emph}{48}
+\indexentry {method!example!wave/4={\tt wave/4}|emph}{48}
+\indexentry {rippling!lazy static}{48}
+\indexentry {rippling!out}{48}
+\indexentry {rippling!in}{48}
+\indexentry {method!skeleton preservation}{48}
+\indexentry {termination}{48}
+\indexentry {sink}{49}
+\indexentry {method!example!wave/4={\tt wave/4}|emph}{50}
+\indexentry {complementary rewrite rules}{50}
+\indexentry {rewrite rules!complementary}{50}
+\indexentry {method!example!casesplit/1={\tt casesplit/1}|emph}{50}
+\indexentry {complementary set}{51}
+\indexentry {wave-rule!conditional}{51}
+\indexentry {complementary}{51}
+\indexentry {method!example!unblock/3={\tt unblock/3}|emph}{51}
+\indexentry {unblocking}{51}
+\indexentry {rippling!unblocking}{51}
+\indexentry {weakening}{54}
+\indexentry {weakening|textbf}{54}
+\indexentry {meta-rippling|textbf}{54}
+\indexentry {rippling!meta-rippling|textbf}{54}
+\indexentry {meta-rippling|emph}{54}
+\indexentry {rippling!meta-rippling|emph}{54}
+\indexentry {rippling}{54}
+\indexentry {method!example!unblock-lazy/1={\tt unblock-lazy/1}|emph}{55}
+\indexentry {method!example!ripple/2={\tt ripple/2}|emph}{55}
+\indexentry {method!example!cancellation/2={\tt cancellation/2}|emph}{55}
+\indexentry {post-fertilization rippling}{56}
+\indexentry {method!example!fertilize/2={\tt fertilize/2}|emph}{56}
+\indexentry {fertilization}{56}
+\indexentry {method!example!fertilization-strong/1={\tt fertilization-strong/1}|emph}{56}
+\indexentry {fertilization}{56}
+\indexentry {fertilization!strong}{56}
+\indexentry {fertilization!instance}{57}
+\indexentry {method!example!fertilization-weak/1={\tt fertilization-weak/1}|emph}{57}
+\indexentry {fertilization}{57}
+\indexentry {fertilization!weak}{57}
+\indexentry {fertilization!instance}{57}
+\indexentry {method!example!fertilize-then-ripple/1={\tt fertilize-then-ripple/1}|emph}{58}
+\indexentry {fertilization!post-fertilization rippling}{58}
+\indexentry {method!example!ripple-and-cancel/1={\tt ripple-and-cancel/1}|emph}{58}
+\indexentry {method!example!fertilize-left-or-right/2={\tt fertilize-left-or-right/2}|emph}{58}
+\indexentry {fertilization}{58}
+\indexentry {method!example!weak-fertilize/4={\tt weak-fertilize/4}|emph}{59}
+\indexentry {fertilization}{59}
+\indexentry {transitive functions}{59}
+\indexentry {positive occurrence}{59}
+\indexentry {negative occurrence}{59}
+\indexentry {monotonic|textbf}{59}
+\indexentry {symmetrical functions}{59}
+\indexentry {polarity}{59}
+\indexentry {not nice}{62}
+\indexentry {monotonicity}{62}
+\indexentry {transitive functions}{62}
+\indexentry {polarity}{62}
+\indexentry {theory free}{62}
+\indexentry {method!example!step-case/1={\tt step-case/1}|emph}{62}
+\indexentry {method!example!generalise/2={\tt generalise/2}|emph}{64}
+\indexentry {not nice}{65}
+\indexentry {method!example!induction/1={\tt induction/1}|emph}{65}
+\indexentry {method!example!ind-strat/1={\tt ind-strat/1}|emph}{66}
+\indexentry {pretty-printer}{67}
+\indexentry {method!example!normalize/1={\tt normalize/1}|emph}{67}
+\indexentry {dependent function type}{67}
+\indexentry {function type}{67}
+\indexentry {conjunctive hypothesis}{67}
+\indexentry {dependent product type}{67}
+\indexentry {function type}{67}
+\indexentry {method!example!identity/0={\tt identity/0}|emph}{67}
+\indexentry {not nice}{68}
+\indexentry {method!example!apply-lemma/1={\tt apply-lemma/1}|emph}{68}
+\indexentry {not nice}{68}
+\indexentry {method!example!backchain-lemma/1={\tt backchain-lemma/1}|emph}{68}
+\indexentry {backward-chaining}{69}
+\indexentry {not nice}{69}
+\indexentry {method!example!pwf-then-fertilize/2={\tt pwf-then-fertilize/2}|emph}{69}
+\indexentry {piecewise fertilization}{69}
+\indexentry {method!example!pwf/1={\tt pwf/1}|emph}{69}
+\indexentry {piecewise fertilization}{70}
+\indexentry {default configuration}{70}
+\indexentry {planners}{71}
+\indexentry {forward chaining}{71}
+\indexentry {input-slot}{71}
+\indexentry {preconditions-slot}{71}
+\indexentry {applicable method}{71}
+\indexentry {postconditions-slot}{71}
+\indexentry {terminating method}{71}
+\indexentry {choice points}{71}
+\indexentry {search space}{71}
+\indexentry {planning space}{71}
+\indexentry {output-slot}{71}
+\indexentry {plan}{72}
+\indexentry {branching plan}{72}
+\indexentry {pretty-printer}{72}
+\indexentry {complete plan}{72}
+\indexentry {pretty-printer}{73}
+\indexentry {applicable method}{73}
+\indexentry {postconditions-slot}{73}
+\indexentry {preconditions-slot}{73}
+\indexentry {input-slot}{73}
+\indexentry {output-slot}{73}
+\indexentry {submethod}{74}
+\indexentry {depth-first planner}{74}
+\indexentry {optimisations}{74}
+\indexentry {complete plan}{74}
+\indexentry {applicable method}{74}
+\indexentry {branching plan}{74}
+\indexentry {complete plan}{74}
+\indexentry {linearity assumption}{74}
+\indexentry {LaTeX=\LaTeX {}}{75}
+\indexentry {style files}{75}
+\indexentry {breadth-first}{75}
+\indexentry {size of a plan}{75}
+\indexentry {depth of a plan}{75}
+\indexentry {weight of a plan}{75}
+\indexentry {admissibility}{75}
+\indexentry {iterative-deepening planner}{76}
+\indexentry {admissibility}{76}
+\indexentry {cut-off depth}{76}
+\indexentry {branching factor}{76}
+\indexentry {cut-off depth}{76}
+\indexentry {cut-off depth}{76}
+\indexentry {cut-off depth}{76}
+\indexentry {not nice}{77}
+\indexentry {VT100}{77}
+\indexentry {heuristic search strategy}{77}
+\indexentry {applicable method}{77}
+\indexentry {method!example!eval-def/2={\tt eval-def/2}|emph}{84}
+\indexentry {proof-plan!for associativity of $plus$|emph}{85}
+\indexentry {tactics}{87}
+\indexentry {plan execution}{87}
+\indexentry {plan execution}{87}
+\indexentry {tactic}{87}
+\indexentry {autotactic}{87}
+\indexentry {autotactic}{87}
+\indexentry {tactic!autotactic}{87}
+\indexentry {not nice}{87}
+\indexentry {arithmetic}{88}
+\indexentry {proof by intimidation}{88}
+\indexentry {pretty-printer}{88}
+\indexentry {portray}{89}
+\indexentry {portraying!Emacs}{89}
+\indexentry {portraying!TeX=\TeX {}}{89}
+\indexentry {portraying!normal}{89}
+\indexentry {portray level}{89}
+\indexentry {planning!tracing}{90}
+\indexentry {tracing}{90}
+\indexentry {tracing!tracing level}{90}
+\indexentry {tracing!preconditions}{90}
+\indexentry {tracing!postconditions}{90}
+\indexentry {tracing level}{90}
+\indexentry {tracing level}{90}
+\indexentry {tracing level}{90}
+\indexentry {cut-off depth}{90}
+\indexentry {rewrites}{91}
+\indexentry {rippling!loading rewrite rules}{91}
+\indexentry {reduction rule}{91}
+\indexentry {reduction rule!loading reduction rules}{91}
+\indexentry {library!reduction rules}{91}
+\indexentry {library!rewrite rules}{91}
+\indexentry {tracing!default level}{91}
+\indexentry {output-slot}{91}
+\indexentry {library}{92}
+\indexentry {library}{92}
+\indexentry {dependencies}{92}
+\indexentry {logical object}{92}
+\indexentry {library!logical object}{92}
+\indexentry {logical object}{92}
+\indexentry {logical object}{92}
+\indexentry {logical object!plan|texttt}{92}
+\indexentry {plan=\texttt {plan}}{92}
+\indexentry {thm=\texttt {thm}}{92}
+\indexentry {logical object!thm|texttt}{92}
+\indexentry {lemma=\texttt {lemma}}{92}
+\indexentry {logical object!lemma|texttt}{92}
+\indexentry {synth=\texttt {synth}}{92}
+\indexentry {logical object!synth|texttt}{92}
+\indexentry {scheme=\texttt {scheme}}{93}
+\indexentry {logical object!scheme|texttt}{93}
+\indexentry {wave=\texttt {wave}}{93}
+\indexentry {logical object!wave|texttt}{93}
+\indexentry {wave-rule}{93}
+\indexentry {complementary rewrite rules}{93}
+\indexentry {rewrite rules!complementary}{93}
+\indexentry {def=\texttt {def}}{93}
+\indexentry {logical object!def|texttt}{93}
+\indexentry {definitions!\oyster }{93}
+\indexentry {\texttt {<"="=>}}{93}
+\indexentry {recursion equations}{93}
+\indexentry {definitions!\clam }{93}
+\indexentry {complementary rewrite rules}{93}
+\indexentry {eqn=\texttt {eqn}}{93}
+\indexentry {logical object!eqn|texttt}{93}
+\indexentry {eqns=\texttt {eqns}}{94}
+\indexentry {logical object!defeqn|texttt}{94}
+\indexentry {defeqn=\texttt {defeqn}}{94}
+\indexentry {logical object!defeqn|texttt}{94}
+\indexentry {red=\texttt {red}}{94}
+\indexentry {reduction rule}{94}
+\indexentry {logical object!red}{94}
+\indexentry {symbolic evaluation}{94}
+\indexentry {unblocking}{94}
+\indexentry {redwave=\texttt {redwave}}{94}
+\indexentry {mthd=\texttt {mthd}}{94}
+\indexentry {logical object!mthd|texttt}{94}
+\indexentry {smthd=\texttt {smthd}}{94}
+\indexentry {logical object!smthd|texttt}{94}
+\indexentry {hint=\texttt {hint}}{95}
+\indexentry {logical object!hint|texttt}{95}
+\indexentry {trs=\texttt {trs}}{95}
+\indexentry {logical object!trs|texttt}{95}
+\indexentry {logical object!examples}{95}
+\indexentry {thm=\texttt {thm}}{95}
+\indexentry {def=\texttt {def}}{95}
+\indexentry {eqn=\texttt {eqn}}{95}
+\indexentry {synth=\texttt {synth}}{95}
+\indexentry {synthetic definition}{95}
+\indexentry {lemma=\texttt {lemma}}{95}
+\indexentry {wave=\texttt {wave}}{96}
+\indexentry {red=\texttt {red}}{96}
+\indexentry {mthd=\texttt {mthd}}{96}
+\indexentry {smthd=\texttt {smthd}}{96}
+\indexentry {hint=\texttt {hint}}{96}
+\indexentry {logical object}{96}
+\indexentry {needs file}{96}
+\indexentry {library!needs file}{96}
+\indexentry {dependencies}{96}
+\indexentry {needs file!example}{96}
+\indexentry {dependency rules}{97}
+\indexentry {file naming convention}{97}
+\indexentry {library!creating definitions}{98}
+\indexentry {creating definitions}{98}
+\indexentry {library!creating definitions}{99}
+\indexentry {library!deleting reduction rules}{100}
+\indexentry {deleting reduction rules}{100}
+\indexentry {reduction rule!deleting rules}{100}
+\indexentry {registry}{100}
+\indexentry {library!deleting reduction rules|emph}{100}
+\indexentry {reduction rule}{100}
+\indexentry {reduction rule!adding rules}{100}
+\indexentry {transitive predicates}{100}
+\indexentry {transitivity}{101}
+\indexentry {commutativity}{101}
+\indexentry {complementary set}{102}
+\indexentry {mthd}{102}
+\indexentry {smthd}{102}
+\indexentry {first}{102}
+\indexentry {last}{102}
+\indexentry {before}{102}
+\indexentry {after}{102}
+\indexentry {library!loading methods}{103}
+\indexentry {editor}{104}
+\indexentry {visual}{104}
+\indexentry {editor}{104}
+\indexentry {vi}{104}
+\indexentry {SICStus Prolog}{104}
+\indexentry {library!search path|textbf}{105}
+\indexentry {library!search path|emph}{105}
+\indexentry {library!default search path}{105}
+\indexentry {library!needs file}{105}
+\indexentry {library!saving directory}{105}
+\indexentry {library!saving directory|emph}{105}
+\indexentry {library!editor}{105}
+\indexentry {induction schemes}{109}
+\indexentry {primitive induction}{110}
+\indexentry {two-step induction}{110}
+\indexentry {plus induction}{110}
+\indexentry {simple prime induction}{111}
+\indexentry {simple simultaneous induction}{111}
+\indexentry {simultaneous induction}{111}
+\indexentry {primitive recursion}{112}
+\indexentry {structural induction}{112}
+\indexentry {trees}{112}
+\indexentry {step term}{112}
+\indexentry {induction term}{112}
+\indexentry {iterator}{113}
+\indexentry {methodical}{113}
+\indexentry {tactical}{113}
+\indexentry {repeat}{113}
+\indexentry {output-slot}{113}
+\indexentry {not nice}{113}
+\indexentry {search space}{113}
+\indexentry {caching}{114}
+\indexentry {logical object}{114}
+\indexentry {logical object}{114}
+\indexentry {theorem record}{114}
+\indexentry {record database}{114}
+\indexentry {theorem record}{114}
+\indexentry {RPOS}{115}
+\indexentry {registry extension}{115}
+\indexentry {reduction record}{115}
+\indexentry {record database}{115}
+\indexentry {dynamic rippling}{115}
+\indexentry {rippling!dynamic}{115}
+\indexentry {wave-rule}{115}
+\indexentry {rippling!wave-rule}{115}
+\indexentry {rewrite rule records}{115}
+\indexentry {annotation}{116}
+\indexentry {wave-front}{116}
+\indexentry {annotation!wave-front}{116}
+\indexentry {sink}{116}
+\indexentry {annotation!sink}{116}
+\indexentry {data-type abstraction}{116}
+\indexentry {sinks}{116}
+\indexentry {annotation!portraying}{116}
+\indexentry {well-annotated}{116}
+\indexentry {annotation!well-annotated}{116}
+\indexentry {maximally-joined}{116}
+\indexentry {induction hypotheses}{116}
+\indexentry {raw={\tt raw}}{117}
+\indexentry {induction status!raw={\tt raw}}{117}
+\indexentry {notraw={\tt notraw}}{117}
+\indexentry {induction status!notraw={\tt notraw}}{117}
+\indexentry {weak-fertilization}{117}
+\indexentry {used={\tt used}}{117}
+\indexentry {induction status!notraw={\tt notraw}}{117}
+\indexentry {strong-fertilization}{117}
+\indexentry {piecewise fertilization}{117}
+\indexentry {pretty-printed}{117}
+\indexentry {methods}{117}
+\indexentry {submethods}{117}
+\indexentry {method database}{117}
+\indexentry {iterator}{117}
+\indexentry {method}{117}
+\indexentry {submethod}{117}
+\indexentry {iterator}{117}
+\indexentry {method}{117}
+\indexentry {iterator}{118}
+\indexentry {submethod}{118}
+\indexentry {method!internal representation}{118}
+\indexentry {record database}{118}
+\indexentry {not nice}{118}
+\indexentry {reduction rule}{119}
+\indexentry {implementation!reduction rule}{119}
+\indexentry {registry}{119}
+\indexentry {implementation!registry}{119}
+\indexentry {lifting}{120}
+\indexentry {Makefile}{121}
+\indexentry {Quintus Prolog}{121}
+\indexentry {SICStus Prolog}{121}
+\indexentry {Quintus Prolog}{121}
+\indexentry {SICStus Prolog}{121}
+\indexentry {Quintus Prolog}{121}
+\indexentry {SICStus Prolog}{121}
+\indexentry {Quintus Prolog}{121}
+\indexentry {SICStus Prolog}{121}
+\indexentry {conditional compilation}{121}
+\indexentry {SICStus Prolog}{123}
+\indexentry {porting}{123}
+\indexentry {Quintus Prolog}{123}
+\indexentry {SICStus Prolog}{123}
+\indexentry {SWI Prolog}{123}
+\indexentry {DEC10}{123}
+\indexentry {pathnames}{123}
+\indexentry {version number}{123}
+\indexentry {planning space}{123}
+\indexentry {statistics package}{123}
+\indexentry {branchfactor}{123}
+\indexentry {Quintus Prolog}{124}
+\indexentry {not nice}{124}
+\indexentry {branchfactor}{124}
+\indexentry {nodesvisited}{124}
+\indexentry {Quintus Prolog}{124}
+\indexentry {nodesvisited}{124}
+\indexentry {rules}{124}
+\indexentry {not nice}{124}
+\indexentry {rules}{124}
+\indexentry {collect}{124}
+\indexentry {tracing package}{125}
+\indexentry {debugging}{125}
+\indexentry {pretty-printer}{126}
+\indexentry {Quintus Prolog}{126}
+\indexentry {writef.doc}{127}
+\indexentry {theory free}{127}
+\indexentry {not nice}{127}
+\indexentry {induction schemes}{127}
+\indexentry {weak fertilization}{127}
+\indexentry {transitive}{127}
+\indexentry {symmetric}{127}
+\indexentry {polarity}{127}
+\indexentry {transitive}{128}
+\indexentry {polarity theorems}{128}
+\indexentry {positive}{128}
+\indexentry {non-decreasing}{128}
+\indexentry {monotonic}{128}
+\indexentry {term rewriting}{129}
+\indexentry {termination}{129}
+\indexentry {polarity}{129}
+\indexentry {annotation}{131}
+\indexentry {annotation}{131}
+\indexentry {annotation!wave-front}{131}
+\indexentry {annotation!wave-hole}{131}
+\indexentry {annotation!sink}{131}
+\indexentry {annotation!annotation=$\wf {\cdots {\wh {\quad }}\cdots }$}{131}
+\indexentry {annotation|textbf}{131}
+\indexentry {measure}{133}
+\indexentry {termination of rippling}{133}
+\indexentry {rippling!termination}{133}
+\indexentry {wave-rule}{133}
+\indexentry {rippling}{133}
+\indexentry {rippling}{133}
+\indexentry {rippling!rewriting records}{133}
+\indexentry {wave-rule}{133}
+\indexentry {rewrite rule}{133}
+\indexentry {rewrite rules}{133}
+\indexentry {dynamic rippling}{133}
+\indexentry {rippling!dynamic}{133}
+\indexentry {static rippling}{134}
+\indexentry {eager static parsing}{134}
+\indexentry {lazy static parsing}{134}
+\indexentry {dynamic rippling}{134}
+\indexentry {annotation!sink}{134}
+\indexentry {annotation!sink=$\sink {\cdot }$}{134}
+\indexentry {sideways rippling}{134}
+\indexentry {rippling!sideways}{134}
+\indexentry {rippling!into sinks}{134}
+\indexentry {skeleton preservation}{134}
+\indexentry {rippling!skeleton preservation modulo sinks}{134}
+\indexentry {universally quantified variable}{134}
+\indexentry {rippling!precondition}{134}
+\indexentry {rippling!skeleton preservation modulo sinks|emph}{134}
+\indexentry {reduction}{135}
+\indexentry {reduction rule}{135}
+\indexentry {terminating term rewriting}{135}
+\indexentry {reduction rule}{135}
+\indexentry {simplification ordering|textbf}{135}
+\indexentry {recursive path ordering with status}{135}
+\indexentry {RPOS}{135}
+\indexentry {quasi precedence|textbf}{135}
+\indexentry {$\quasi $}{135}
+\indexentry {registry}{135}
+\indexentry {registry!extension}{135}
+\indexentry {registry|textbf}{135}
+\indexentry {registry!precedence|textbf}{135}
+\indexentry {registry!status function|textbf}{135}
+\indexentry {$\quasi $|textbf}{135}
+\indexentry {$\partial $|textbf}{135}
+\indexentry {status function}{135}
+\indexentry {$\Undef $}{136}
+\indexentry {$\tuple {\vec {t_n}}^\Left $|textbf}{136}
+\indexentry {$\tuple {\vec {t_n}}^\Right $|textbf}{136}
+\indexentry {$\tuple {\vec {t_n}}^\Multi $|textbf}{136}
+\indexentry {registry!consistency}{136}
+\indexentry {$\RPOS _\rho $|textbf}{136}
+\indexentry {$\RPOSeq _\rho $|textbf}{136}
+\indexentry {$\Equiv _\rho $|textbf}{136}
+\indexentry {registry extension}{136}
+\indexentry {$\RPOS _\rho ^*$|textbf}{136}
+\indexentry {RPOS lifting}{137}
+\indexentry {registry extension}{137}
+\indexentry {dynamic registry extension}{137}
+\indexentry {reduction rule!polarity}{137}
+\indexentry {polarity}{137}
+\indexentry {rewriting}{137}
+\indexentry {positive polarity}{137}
+\indexentry {negative polarity}{137}
+\indexentry {labelled term rewriting}{138}
+\indexentry {rewriting!labelled}{138}
+\indexentry {labelled terms}{138}
+\indexentry {not nice}{141}
+\indexentry {implementation!source files}{143}
+\indexentry {bugs}{143}
+\indexentry {SICStus Prolog}{143}
+\indexentry {Quintus Prolog}{143}
+\indexentry {SWI Prolog}{143}
+\indexentry {implementation!dialect support}{143}
+\indexentry {style files}{143}
+\indexentry {LaTeX=\LaTeX {}}{143}
+\indexentry {implementation!release notes}{144}
+\indexentry {release notes}{144}
+\indexentry {NIP Prolog}{146}
+\indexentry {NIP Prolog}{146}
+\indexentry {NIP Prolog}{146}
+\indexentry {Quintus Prolog}{146}
+\indexentry {SWI Prolog}{146}
+\indexentry {Quintus Prolog}{146}
+\indexentry {terminating}{150}
+\indexentry {non-terminating}{150}
+\indexentry {reduction rule}{153}
+\indexentry {implementation!SICStus Prolog}{155}
+\indexentry {implementation!Quintus Prolog}{155}
+\indexentry {socket support}{155}
+\indexentry {implementation!SICStus Prolog!sockets}{155}
+\indexentry {implementation!SWI Prolog}{155}

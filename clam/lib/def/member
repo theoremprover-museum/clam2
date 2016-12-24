@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: member,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: member,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+member(m,l)<==>term_of(member)of m of l.

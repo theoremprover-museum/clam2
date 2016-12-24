@@ -1,0 +1,1 @@
+tci(t,x,r) <==> term_of(tci) of t of x of r.

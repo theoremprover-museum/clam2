@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: length,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: length,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+length(r)<==>list_ind(r,0,[~,~,v,s(v)]).

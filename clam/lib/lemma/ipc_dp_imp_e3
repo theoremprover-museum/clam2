@@ -1,0 +1,77 @@
+problem([]==>a:u(1)=>b:u(1)=>c:u(1)=>d:u(1)=> (((a=>c)#b=>c)=>d)=> ((a\b)=>c)=>d,
+repeat dequantify_once,lambda(a,lambda(b,lambda(c,lambda(d,_10069)))),
+[problem([a:u(1),b:u(1),c:u(1),d:u(1)]==> (((a=>c)#b=>c)=>d)=> ((a\b)=>c)=>d,
+ intro,lambda(v0,_10137),
+ [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d]==> ((a\b)=>c)=>d,
+  intro,lambda(v1,_10207),
+  [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c]==>d,
+   elim(v0),su(_10280,[v0 of _10287],[v2]),
+   [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c]==> (a=>c)#b=>c,
+    intro,_10369&_10370,
+    [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c]==>a=>c,
+     intro,lambda(v2,_10445),
+     [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:a]==>c,
+      elim(v1),su(_10523,[v1 of _10530],[v3]),
+      [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:a]==>a\b,
+       intro(left),inl(_10613),
+       [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:a]==>a,
+        hyp(v2),v2,
+        [
+        ]) ext _10613,
+        problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:a]==>b in u(1),
+        repeat wfftac,axiom,
+        [
+        ])
+       ]) ext _10530,
+       problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:a,v3:c]==>c,
+       hyp(v3),v3,
+       [
+       ]) ext _10523
+      ]) ext _10445,
+      problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c]==>a in u(1),
+      repeat wfftac,axiom,
+      [
+      ])
+     ]) ext _10369,
+     problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c]==>b=>c,
+     intro,lambda(v2,_10996),
+     [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:b]==>c,
+      elim(v1),su(_11074,[v1 of _11081],[v3]),
+      [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:b]==>a\b,
+       intro(right),inr(_11164),
+       [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:b]==>b,
+        hyp(v2),v2,
+        [
+        ]) ext _11164,
+        problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:b]==>a in u(1),
+        repeat wfftac,axiom,
+        [
+        ])
+       ]) ext _11081,
+       problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:b,v3:c]==>c,
+       hyp(v3),v3,
+       [
+       ]) ext _11074
+      ]) ext _10996,
+      problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c]==>b in u(1),
+      repeat wfftac,axiom,
+      [
+      ])
+     ]) ext _10370
+    ]) ext _10287,
+    problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d,v1: (a\b)=>c,v2:d]==>d,
+    hyp(v2),v2,
+    [
+    ]) ext _10280
+   ]) ext _10207,
+   problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: ((a=>c)#b=>c)=>d]==> ((a\b)=>c)in u(1),
+   repeat wfftac,axiom,
+   [
+   ])
+  ]) ext _10137,
+  problem([a:u(1),b:u(1),c:u(1),d:u(1)]==> (((a=>c)#b=>c)=>d)in u(1),
+  repeat wfftac,axiom,
+  [
+  ])
+ ]) ext _10069
+]).

@@ -1,0 +1,53 @@
+/*
+ * @(#)$Id: predless,v 1.1 1994/09/16 09:39:18 dream Exp $
+ *
+ * $Log: predless,v $
+ * Revision 1.1  1994/09/16 09:39:18  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=> (x=0 in pnat=>void)=>pred(x)<*x,
+repeat dequantify_once,lambda(x,_7442),
+[problem([x:pnat]==> (x=0 in pnat=>void)=>pred(x)<*x,
+ elim(x),p_ind(x,_7482,[v0,v1,_7488]),
+ [problem([x:pnat]==> (0=0 in pnat=>void)=>pred(0)<*0,
+  intro,lambda(v0,_7527),
+  [problem([x:pnat,v0:0=0 in pnat=>void]==>pred(0)<*0,
+   elim(v0),su(_7568,[v0 of _7575],[v1]),
+   [problem([x:pnat,v0:0=0 in pnat=>void]==>0=0 in pnat,
+    repeat intro,axiom,
+    [
+    ]) ext _7575,
+    problem([x:pnat,v0:0=0 in pnat=>void,v1:void]==>pred(0)<*0,
+    elim(v1),any(v1),
+    [
+    ]) ext _7568
+   ]) ext _7527,
+   problem([x:pnat]==> (0=0 in pnat=>void)in u(1),
+   repeat intro,axiom,
+   [
+   ])
+  ]) ext _7482,
+  problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>pred(v0)<*v0]==> (s(v0)=0 in pnat=>void)=>pred(s(v0))<*s(v0),
+  repeat intro,lambda(v2,_7767),
+  [problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>pred(v0)<*v0,v2:s(v0)=0 in pnat=>void]==>pred(s(v0))<*s(v0),
+   lemma(pred2),su(_7841,[term_of(pred2)],[v3]),
+   [problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>pred(v0)<*v0,v2:s(v0)=0 in pnat=>void,v3:x:pnat=>pred(s(x))=x in pnat]==>pred(s(v0))<*s(v0),
+    elim(v3,on(v0)),su(_7947,[v3 of v0],[v4]),
+    [problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>pred(v0)<*v0,v2:s(v0)=0 in pnat=>void,v3:x:pnat=>pred(s(x))=x in pnat]==>v0 in pnat,
+     intro,axiom,
+     [
+     ]),
+     problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>pred(v0)<*v0,v2:s(v0)=0 in pnat=>void,v3:x:pnat=>pred(s(x))=x in pnat,v4:pred(s(v0))=v0 in pnat]==>pred(s(v0))<*s(v0),
+     subst(over(v5,v5<*s(v0)),pred(s(v0))=v0 in pnat)then[univ_elim(v4),idtac,wfftacs],_8047,
+     [problem([x:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>pred(v0)<*v0,v2:s(v0)=0 in pnat=>void,v3:x:pnat=>pred(s(x))=x in pnat,v4:pred(s(v0))=v0 in pnat]==>v0<*s(v0),
+      arith then repeat intro,axiom,
+      [
+      ]) ext _8047
+     ]) ext _7947
+    ]) ext _7841
+   ]) ext _7767
+  ]) ext _7488
+ ]) ext _7442
+]).

@@ -1,0 +1,46 @@
+/* -*- Mode: Prolog -*-
+ */
+
+ /* Type should be instantiated to either weak or strong */
+
+method(pwf_then_fertilize(strong,PWFertPlan),
+	H==>G,
+        [((PWFertilize = pw_fertilize(_),
+	   applicable_submethod(H==>G,PWFertilize,_,Seqs)) orelse
+	  Seqs = [H==>G]),
+	 map_list(Seqs, Seq :=> (Plan-NewSeq),
+	          (   ((Plan = fertilization_strong(_),
+		        applicable_submethod(Seq,Plan,_,NewSeq))
+		      orelse
+		      (	  NewSeq = Seq, Plan = idtac))),PlanNewSeqs),
+         zip(PlanNewSeqs,Plans,NewSeqsF),
+	 flatten(NewSeqsF,NewSeqs),
+	 (var(PWFertilize) ->
+	     (Plans = [PWFertPlan],\+ PWFertPlan=idtac);
+	     PWFertPlan = (PWFertilize then Plans))],
+        [],
+        NewSeqs,
+        pwf_then_fertilize(strong,PWFertPlan)).
+
+
+method(pwf_then_fertilize(weak,PWFertPlan),
+	H==>G,
+        [((PWFertilize = pw_fertilize(_),
+	   applicable_submethod(H==>G,PWFertilize,_,Seqs)) orelse
+	  Seqs = [H==>G]),
+	 map_list(Seqs, Seq :=> (Plan-NewSeq),
+	          (FLR = fertilize_left_or_right(_),
+		   ((applicable_submethod(Seq,FLR,_,[UH==>UG]),
+		     Plan = FLR,
+		     notraw_to_used(UH,HSeq),
+		     (NewSeq = (HSeq==>UG)))
+	            orelse
+		    (NewSeq = Seq, Plan = idtac))),PlanNewSeqs),
+         zip(PlanNewSeqs,Plans,NewSeqs),
+	 (var(PWFertilize) ->
+	     (Plans = [PWFertPlan],\+ PWFertPlan=idtac);
+	     PWFertPlan = (PWFertilize then Plans))],
+        [],
+        NewSeqs,
+        pwf_then_fertilize(weak,PWFertPlan)).
+

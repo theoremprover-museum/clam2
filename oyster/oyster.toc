@@ -1,0 +1,123 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}The Oyster System}{1}
+\contentsline {section}{\numberline {1.2}The User Interface}{2}
+\contentsline {section}{\numberline {1.3}Representing Theorems}{2}
+\contentsline {section}{\numberline {1.4}Representing Proof Trees}{6}
+\contentsline {section}{\numberline {1.5}Global Control Predicates}{9}
+\contentsline {section}{\numberline {1.6}Focusing}{12}
+\contentsline {section}{\numberline {1.7}Display Routines}{14}
+\contentsline {section}{\numberline {1.8}Selector Predicates}{15}
+\contentsline {section}{\numberline {1.9}The Inference Engine}{18}
+\contentsline {subsection}{\numberline {1.9.1}The $apply$-Predicate}{18}
+\contentsline {subsection}{\numberline {1.9.2}The $\models $-Predicate}{21}
+\contentsline {subsection}{\numberline {1.9.3}Shorthand Notations}{26}
+\contentsline {chapter}{\numberline {2}The Rule Base}{28}
+\contentsline {section}{\numberline {2.1}Overview}{28}
+\contentsline {section}{\numberline {2.2}Atom}{32}
+\contentsline {subsection}{\numberline {2.2.1}Type Formation}{32}
+\contentsline {subsection}{\numberline {2.2.2}Constructors}{32}
+\contentsline {subsection}{\numberline {2.2.3}Selectors}{33}
+\contentsline {subsection}{\numberline {2.2.4}Type Formation}{33}
+\contentsline {subsection}{\numberline {2.2.5}Constructors}{34}
+\contentsline {subsection}{\numberline {2.2.6}Selectors}{34}
+\contentsline {section}{\numberline {2.3}Void}{34}
+\contentsline {subsection}{\numberline {2.3.1}Type Formation}{34}
+\contentsline {subsection}{\numberline {2.3.2}Selectors}{34}
+\contentsline {section}{\numberline {2.4}Pnat}{35}
+\contentsline {subsection}{\numberline {2.4.1}Type Formation}{35}
+\contentsline {subsection}{\numberline {2.4.2}Constructors}{35}
+\contentsline {subsection}{\numberline {2.4.3}Selectors}{36}
+\contentsline {section}{\numberline {2.5}Pless}{38}
+\contentsline {subsection}{\numberline {2.5.1}Type Formation}{38}
+\contentsline {subsection}{\numberline {2.5.2}Constructors}{39}
+\contentsline {subsection}{\numberline {2.5.3}Selectors}{39}
+\contentsline {subsection}{\numberline {2.5.4}Arithmetic}{40}
+\contentsline {section}{\numberline {2.6}Int}{41}
+\contentsline {subsection}{\numberline {2.6.1}Type Formation}{41}
+\contentsline {subsection}{\numberline {2.6.2}Constructors}{41}
+\contentsline {subsection}{\numberline {2.6.3}Selectors}{42}
+\contentsline {section}{\numberline {2.7}Less}{44}
+\contentsline {subsection}{\numberline {2.7.1}Type Formation}{44}
+\contentsline {subsection}{\numberline {2.7.2}Constructors}{45}
+\contentsline {subsection}{\numberline {2.7.3}Selectors}{45}
+\contentsline {subsection}{\numberline {2.7.4}Arithmetic}{47}
+\contentsline {section}{\numberline {2.8}List Types}{48}
+\contentsline {subsection}{\numberline {2.8.1}Type Formation}{48}
+\contentsline {subsection}{\numberline {2.8.2}Constructors}{49}
+\contentsline {subsection}{\numberline {2.8.3}Selectors}{49}
+\contentsline {section}{\numberline {2.9}Disjoint Union Types}{50}
+\contentsline {subsection}{\numberline {2.9.1}Type Formation}{51}
+\contentsline {subsection}{\numberline {2.9.2}Constructors}{51}
+\contentsline {subsection}{\numberline {2.9.3}Selectors}{52}
+\contentsline {section}{\numberline {2.10}Function Types}{53}
+\contentsline {subsection}{\numberline {2.10.1}Type Formation}{54}
+\contentsline {subsection}{\numberline {2.10.2}Constructors}{54}
+\contentsline {subsection}{\numberline {2.10.3}Selectors}{55}
+\contentsline {section}{\numberline {2.11}Dependent Function Types}{56}
+\contentsline {subsection}{\numberline {2.11.1}Type Formation}{57}
+\contentsline {subsection}{\numberline {2.11.2}Constructors}{57}
+\contentsline {subsection}{\numberline {2.11.3}Selectors}{58}
+\contentsline {section}{\numberline {2.12}Product Types}{60}
+\contentsline {subsection}{\numberline {2.12.1}Type Formation}{60}
+\contentsline {subsection}{\numberline {2.12.2}Constructors}{61}
+\contentsline {subsection}{\numberline {2.12.3}Selectors}{61}
+\contentsline {section}{\numberline {2.13}Dependent Product Types}{62}
+\contentsline {subsection}{\numberline {2.13.1}Type Formation}{62}
+\contentsline {subsection}{\numberline {2.13.2}Constructors}{63}
+\contentsline {subsection}{\numberline {2.13.3}Selectors}{64}
+\contentsline {section}{\numberline {2.14}Quotient Types}{65}
+\contentsline {subsection}{\numberline {2.14.1}Type Formation}{65}
+\contentsline {subsection}{\numberline {2.14.2}Constructors}{66}
+\contentsline {subsection}{\numberline {2.14.3}Selectors}{66}
+\contentsline {section}{\numberline {2.15}Subset Types}{67}
+\contentsline {subsection}{\numberline {2.15.1}Type Formation}{68}
+\contentsline {subsection}{\numberline {2.15.2}Constructors}{69}
+\contentsline {subsection}{\numberline {2.15.3}Selectors}{70}
+\contentsline {section}{\numberline {2.16}Recursive Types}{70}
+\contentsline {subsection}{\numberline {2.16.1}Type Formation}{71}
+\contentsline {subsection}{\numberline {2.16.2}Constructors}{71}
+\contentsline {subsection}{\numberline {2.16.3}Selectors}{72}
+\contentsline {section}{\numberline {2.17}Acc Types}{73}
+\contentsline {subsection}{\numberline {2.17.1}Type Formation}{73}
+\contentsline {subsection}{\numberline {2.17.2}Constructors}{74}
+\contentsline {subsection}{\numberline {2.17.3}Selectors}{74}
+\contentsline {section}{\numberline {2.18}Membership and Equality}{75}
+\contentsline {subsection}{\numberline {2.18.1}Type Formation}{76}
+\contentsline {subsection}{\numberline {2.18.2}Constructors}{76}
+\contentsline {section}{\numberline {2.19}Universes}{77}
+\contentsline {subsection}{\numberline {2.19.1}Type Formation}{77}
+\contentsline {subsection}{\numberline {2.19.2}Constructors}{77}
+\contentsline {section}{\numberline {2.20}Miscellaneous}{77}
+\contentsline {subsection}{\numberline {2.20.1}hypothesis}{78}
+\contentsline {subsection}{\numberline {2.20.2}sequence}{78}
+\contentsline {subsection}{\numberline {2.20.3}thinning}{78}
+\contentsline {subsection}{\numberline {2.20.4}lemma}{78}
+\contentsline {subsection}{\numberline {2.20.5}def}{79}
+\contentsline {subsection}{\numberline {2.20.6}explicit intro}{79}
+\contentsline {subsection}{\numberline {2.20.7}substitution}{80}
+\contentsline {subsection}{\numberline {2.20.8}direct computation}{80}
+\contentsline {subsection}{\numberline {2.20.9}equality and arith}{82}
+\contentsline {section}{\numberline {2.21}Shorthands}{82}
+\contentsline {chapter}{\numberline {3}Tactics}{84}
+\contentsline {section}{\numberline {3.1}Mark and Copy}{84}
+\contentsline {section}{\numberline {3.2}Equality and Arithmetic}{85}
+\contentsline {subsection}{\numberline {3.2.1}Decision Procedure for Equalities}{85}
+\contentsline {subsection}{\numberline {3.2.2}Decision Procedure for Arithmetic Properties}{86}
+\contentsline {section}{\numberline {3.3}Syntax Checker for Type Theoretical Terms}{86}
+\contentsline {section}{\numberline {3.4}Pretty Printer for Type Theoretic Terms}{89}
+\contentsline {section}{\numberline {3.5}Substitutions}{92}
+\contentsline {section}{\numberline {3.6}Free variables}{95}
+\contentsline {section}{\numberline {3.7}Convertible Terms}{97}
+\contentsline {section}{\numberline {3.8}Support for Peano Natural Numbers}{97}
+\contentsline {section}{\numberline {3.9}Legality of Recursive Types}{98}
+\contentsline {section}{\numberline {3.10}Type Checking}{99}
+\contentsline {section}{\numberline {3.11}Rewrite Rules}{100}
+\contentsline {section}{\numberline {3.12}Evaluation}{101}
+\contentsline {section}{\numberline {3.13}Computation of tagged terms $[[t]]$}{104}
+\contentsline {section}{\numberline {3.14}Generate / Check tagging for compute with using() clause}{106}
+\contentsline {section}{\numberline {3.15}Manipulations of the hypothesis list}{109}
+\contentsline {section}{\numberline {3.16}Utilities}{110}
+\contentsline {chapter}{\numberline {A}Examples}{114}
+\contentsline {section}{\numberline {A.1}Factorial }{114}
+\contentsline {subsection}{\numberline {A.1.1}Verification}{114}
+\contentsline {subsection}{\numberline {A.1.2}Synthesis}{116}

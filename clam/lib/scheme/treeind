@@ -1,0 +1,79 @@
+problem([]==>t:u(1)=>phi: (t tree=>u(2))=> (n:t=>phi of leaf(n))=> (l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r))=>tr:t tree=>phi of tr,
+autotactic(wfftac),_1271,
+[problem([]==>t:u(1)=>phi: (t tree=>u(2))=> (n:t=>phi of leaf(n))=> (l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r))=>tr:t tree=>phi of tr,
+ universe(3),_1369,
+ [problem([]==>t:u(1)=>phi: (t tree=>u(2))=> (n:t=>phi of leaf(n))=> (l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r))=>tr:t tree=>phi of tr,
+  repeat intro,lambda(t,lambda(phi,lambda(v0,lambda(v1,lambda(tr,_1571))))),
+  [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:t tree]==>phi of tr,
+   compute(hyp(tr),[[simplify]]),_1580,
+   [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_)]==>phi of tr,
+    elim(tr),rec_ind(tr,[v4,v5,_1791]),
+    [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2]==>phi of v5,
+     elim(v5),decide(v5,[v6,_1960],[v7,_1964]),
+     [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v6:t,v8:v5=inl(v6)in (t\v2#v2)]==>phi of inl(v6),
+      compute(hyp(v0),[[simplify]])then elim(v0,on(v6)),su(_2169,[v0 of v6],[v7]),
+      [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of inl(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v6:t,v8:v5=inl(v6)in (t\v2#v2),v7:phi of inl(v6)]==>phi of inl(v6),
+       intro,v7,
+       [
+       ]) ext _2169
+      ]) ext _1960,
+      problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2)]==>phi of inr(v7),
+      elim(v7),spread(v7,[v6,v8,_2571]),
+      [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2)]==>phi of inr(v6&v8),
+       elim(v1,on(v6)),su(_2797,[v1 of v6],[v11]),
+       [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2)]==>v6 in t tree,
+        elim(v3,on(v6)),su(_3028,[v3 of v6],[v11]),
+        [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:v6 in rec(z__,t\z__#z__)]==>v6 in t tree,
+         pure(simplify)then hyp(v11),v11,
+         [
+         ]) ext _3028
+        ]) ext _2811,
+        problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r)]==>phi of inr(v6&v8),
+        elim(v11,on(v8)),su(_3532,[v11 of v8],[v12]),
+        [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r)]==>v8 in t tree,
+         elim(v3,on(v8)),su(_3794,[v3 of v8],[v12]),
+         [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:v8 in rec(z__,t\z__#z__)]==>v8 in t tree,
+          pure(simplify)then hyp(v12),v12,
+          [
+          ]) ext _3794
+         ]) ext _3546,
+         problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8)]==>phi of inr(v6&v8),
+         elim(v12),su(_4349,[v12 of _4356],[v13]),
+         [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8)]==>phi of v6,
+          elim(v4,on(v6)),su(_4632,[v4 of v6],[v13]),
+          [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8),v13:phi of v6]==>phi of v6,
+           intro,v13,
+           [
+           ]) ext _4632
+          ]) ext _4356,
+          problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8),v13:phi of v8=>phi of node(v6,v8)]==>phi of inr(v6&v8),
+          elim(v13),su(_5209,[v13 of _5216],[v14]),
+          [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8),v13:phi of v8=>phi of node(v6,v8)]==>phi of v8,
+           elim(v4,on(v8)),su(_5509,[v4 of v8],[v14]),
+           [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8),v13:phi of v8=>phi of node(v6,v8),v14:phi of v8]==>phi of v8,
+            intro,v14,
+            [
+            ]) ext _5509
+           ]) ext _5216,
+           problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8),v13:phi of v8=>phi of node(v6,v8),v14:phi of node(v6,v8)]==>phi of inr(v6&v8),
+           compute(hyp(v14),[[simplify]]),_5819,
+           [problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:l:t tree=>r:t tree=>phi of l=>phi of r=>phi of node(l,r),tr:rec(z_,t\z_#z_),v2:u(3),v3:tr:v2=>tr in rec(z_,t\z_#z_),v4:tr:v2=>phi of tr,v5:t\v2#v2,v7:v2#v2,v9:v5=inr(v7)in (t\v2#v2),v6:v2,v8:v2,v10:v7=v6&v8 in (v2#v2),v11:r:t tree=>phi of v6=>phi of r=>phi of node(v6,r),v12:phi of v6=>phi of v8=>phi of node(v6,v8),v13:phi of v8=>phi of node(v6,v8),v14:phi of inr(v6&v8)]==>phi of inr(v6&v8),
+            intro,v14,
+            [
+            ]) ext _5819
+           ]) ext _5209
+          ]) ext _4349
+         ]) ext _3532
+        ]) ext _2797
+       ]) ext _2571
+      ]) ext _1964
+     ]) ext _1791
+    ]) ext _1580
+   ]) ext _1571,
+   problem([t:u(1),phi:t tree=>u(2),v0:n:t=>phi of leaf(n),v1:t tree,v2:t tree,v3:phi of v1,v4:phi of v2]==>node(v1,v2)in t tree,
+   simplify then compute(hyp(v1),[[simplify]])then compute(hyp(v2),[[simplify]]),axiom,
+   [
+   ]) ext _6426
+  ]) ext _1369
+ ]) ext _1271
+]).

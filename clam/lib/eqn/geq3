@@ -1,0 +1,43 @@
+/*
+ * @(#)$Id: geq3,v 1.2 1996/06/11 17:04:40 img Exp $
+ *
+ * $Log: geq3,v $
+ * Revision 1.2  1996/06/11 17:04:40  img
+ * Correct equations for these predicates.
+ *
+% Revision 1.1  1994/09/16  09:38:16  dream
+% Initial revision
+%
+ */
+
+problem([]==>x:pnat=>y:pnat=>geq(s(x),s(y))=geq(x,y)in u(1),
+intro then intro then wfftacs,lambda(x,lambda(y,_1173)),
+[problem([x:pnat,y:pnat]==>geq(s(x),s(y))=geq(x,y)in u(1),
+ compute([[1]]=_1222 in _1219),_1182,
+ [problem([x:pnat,y:pnat]==>term_of(leq)of s(y)of s(x)=geq(x,y)in u(1),
+  compute([[1]]of _1286 of _1283=_1280 in _1277),_1235,
+  [problem([x:pnat,y:pnat]==>lambda(x,p_ind(x,lambda(~,{true}),[~,v1,lambda(y,p_ind(y,void,[v2,~,v1 of v2]))]))of s(y)of s(x)=geq(x,y)in u(1),
+   beta_reduce,_1299,
+   [problem([x:pnat,y:pnat]==>p_ind(s(y),lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of s(x)=geq(x,y)in u(1),
+    compute([[1]]of _1451=_1448 in _1445),_1377,
+    [problem([x:pnat,y:pnat]==>lambda(y_,p_ind(y_,void,[v2,~,p_ind(y,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of v2]))of s(x)=geq(x,y)in u(1),
+     beta_reduce,_1464,
+     [problem([x:pnat,y:pnat]==>p_ind(s(x),void,[v2,~,p_ind(y,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of v2])=geq(x,y)in u(1),
+      compute([[1]]=_1629 in _1626),_1550,
+      [problem([x:pnat,y:pnat]==>p_ind(y,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of x=geq(x,y)in u(1),
+       beta_reduce,_1642,
+       [problem([x:pnat,y:pnat]==>p_ind(y,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of x=geq(x,y)in u(1),
+        simplify,_1710,
+        [problem([x:pnat,y:pnat]==>p_ind(y,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of x=p_ind(y,lambda(~,{true}),[~,v1,lambda(y_,p_ind(y_,void,[v2,~,v1 of v2]))])of x in u(1),
+         intro(using(pnat=>u(1)))then wfftacs,axiom,
+         [
+         ]) ext _1710
+        ]) ext _1642
+       ]) ext _1550
+      ]) ext _1464
+     ]) ext _1377
+    ]) ext _1299
+   ]) ext _1235
+  ]) ext _1182
+ ]) ext _1173
+]).

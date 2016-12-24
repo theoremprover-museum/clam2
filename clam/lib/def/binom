@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: binom,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: binom,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+binom(x,y)<==>term_of(binom)of x of y.

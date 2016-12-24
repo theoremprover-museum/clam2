@@ -1,0 +1,21 @@
+/*
+ * @(#)$Id: existential_hint,v 1.1 1994/09/16 09:38:58 dream Exp $
+ *
+ * $Log: existential_hint,v $
+ * Revision 1.1  1994/09/16 09:38:58  dream
+ * Initial revision
+ *
+ */
+
+%	 EXISTENTIAL_HINT hint method.
+%
+%	This hint method provides existential witnesses. Value is the witness
+% for the existentially quantified variable Var of type Type. 
+
+hint(existential_hint( HintName, Var:Type, Value ),
+       H==>Var:Type#G,
+       [hint_context( existential_hint, HintName, H==>Var:Type#G, [ Value ] )],
+       [replace_all(Var,Value,G,NewG)],
+       [H==>NewG],
+       existential(Var:Type,Value)
+      ).

@@ -1,0 +1,85 @@
+/*
+ * @(#)$Id: member3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: member3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>el:int=>h:int=>l:int list=> (el=h in int=>void)=>member(el,h::l)=member(el,l)in u(1),
+repeat dequantify_once,lambda(el,lambda(h,lambda(l,_7972))),
+[problem([el:int,h:int,l:int list]==> (el=h in int=>void)=>member(el,h::l)=member(el,l)in u(1),
+ elim(l),list_ind(l,_8036,[v0,v1,v2,_8044]),
+ [problem([el:int,h:int,l:int list]==> (el=h in int=>void)=>member(el,h::nil)=member(el,nil)in u(1),
+  intro,lambda(v0,_8107),
+  [problem([el:int,h:int,l:int list,v0:el=h in int=>void]==>member(el,h::nil)=member(el,nil)in u(1),
+   simplify,_8116,
+   [problem([el:int,h:int,l:int list,v0:el=h in int=>void]==>int_eq(el,h,{true},list_ind(nil,void,[v0,~,v2,int_eq(el,v0,{true},v2)]))=void in u(1),
+    compute(int_eq(el,h,{true},[[simplify]])=void in u(1)),_8177,
+    [problem([el:int,h:int,l:int list,v0:el=h in int=>void]==>int_eq(el,h,{true},void)=void in u(1),
+     reduce(false),axiom,
+     [problem([el:int,h:int,l:int list,v0:el=h in int=>void]==>{true}in u(1),
+      simplify then repeat intro,axiom,
+      [
+      ]),
+      problem([el:int,h:int,l:int list,v0:el=h in int=>void]==>void in u(1),
+      intro,axiom,
+      [
+      ]),
+      problem([el:int,h:int,l:int list,v0:el=h in int=>void]==>el=h in int=>void,
+      intro,v0,
+      [
+      ])
+     ]) ext _8177
+    ]) ext _8116
+   ]) ext _8107,
+   problem([el:int,h:int,l:int list]==> (el=h in int=>void)in u(1),
+   repeat intro,axiom,
+   [
+   ])
+  ]) ext _8036,
+  problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1)]==> (el=h in int=>void)=>member(el,h::v0::v1)=member(el,v0::v1)in u(1),
+  repeat intro,lambda(v3,_8636),
+  [problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>member(el,h::v0::v1)=member(el,v0::v1)in u(1),
+   simplify,_8645,
+   [problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>int_eq(el,h,{true},list_ind(v0::v1,void,[v0_,~,v2,int_eq(el,v0_,{true},v2)]))=int_eq(el,v0,{true},list_ind(v1,void,[v0_,~,v2,int_eq(el,v0_,{true},v2)]))in u(1),
+    compute(int_eq(el,h,{true},[[simplify]])=int_eq(el,v0,{true},list_ind(v1,void,[v0_,~,v2,int_eq(el,v0_,{true},v2)]))in u(1)),_8758,
+    [problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>int_eq(el,h,{true},int_eq(el,v0,{true},list_ind(v1,void,[v0_,~,v2,int_eq(el,v0_,{true},v2)])))=int_eq(el,v0,{true},list_ind(v1,void,[v0_,~,v2,int_eq(el,v0_,{true},v2)]))in u(1),
+     reduce(false),axiom,
+     [problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>{true}in u(1),
+      simplify then intro,axiom,
+      [
+      ]),
+      problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>int_eq(el,v0,{true},list_ind(v1,void,[v0_,~,v2,int_eq(el,v0_,{true},v2)]))in u(1),
+      intro,axiom,
+      [problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>el in int,
+       intro,axiom,
+       [
+       ]),
+       problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>v0 in int,
+       intro,axiom,
+       [
+       ]),
+       problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void,v4:el=v0 in int]==>{true}in u(1),
+       simplify then repeat intro,axiom,
+       [
+       ]),
+       problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void,v4:el=v0 in int=>void]==>list_ind(v1,void,[v0_,~,v2,int_eq(el,v0_,{true},v2)])in u(1),
+       repeat intro,axiom,
+       [problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void,v4:el=v0 in int=>void,v5:int,v6:int list,v7:u(1),v8:el=v5 in int]==>{true}in u(1),
+        simplify then repeat intro,axiom,
+        [
+        ]) ext _9745
+       ])
+      ]),
+      problem([el:int,h:int,l:int list,v0:int,v1:int list,v2: (el=h in int=>void)=>member(el,h::v1)=member(el,v1)in u(1),v3:el=h in int=>void]==>el=h in int=>void,
+      intro,v3,
+      [
+      ])
+     ]) ext _8758
+    ]) ext _8645
+   ]) ext _8636
+  ]) ext _8044
+ ]) ext _7972
+]).

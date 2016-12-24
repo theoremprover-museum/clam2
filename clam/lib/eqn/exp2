@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: exp2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: exp2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:pnat=>i:pnat=>exp(n,s(i))=times(n,exp(n,i))in pnat,
+repeat intro then simplify then repeat intro then repeat wfftacs,lambda(n,lambda(i,axiom)),
+[
+]).

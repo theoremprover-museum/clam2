@@ -1,0 +1,27 @@
+/*
+ * @(#)$Id: apply_lemma,v 1.2 1998/06/10 08:31:09 img Exp $
+ *
+ * $Log: apply_lemma,v $
+ * Revision 1.2  1998/06/10 08:31:09  img
+ * extend context
+ *
+ * Revision 1.1  1994/09/16 09:33:29  dream
+ * Initial revision
+ */
+
+	% LEMMA METHOD: optionally loaded. Is useful in places, but
+	% expensive in general.
+	% Bit of a hack to deal with commutativity of =.
+method(apply_lemma(Lemma),
+       H==>G,
+       [strip_meta_annotations(G,GG),
+        precon_matrix(_,AllPre=>Concl,GG),
+	append( _, Pre, AllPre ),
+	precon_matrix( [], Pre=>Concl, Matrix ),
+        theorem(Lemma,LemmaGoal),
+        (instantiate(H,[],LemmaGoal,Matrix,_)
+         v
+         (Matrix=(L=R in T),instantiate(H,[],LemmaGoal,R=L in T,_)))],
+       [],
+       [],
+       apply_lemma(Lemma)).

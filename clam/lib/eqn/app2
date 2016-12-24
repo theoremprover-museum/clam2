@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: app2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: app2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>l1:int list=>l2:int list=>app(h::l1,l2)=h::app(l1,l2)in int list,
+repeat intro then simplify then wfftacs,lambda(h,lambda(l1,lambda(l2,axiom))),
+[
+]).

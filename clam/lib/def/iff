@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: iff,v 1.2 1995/06/06 18:40:23 img Exp $
+ *
+ * $Log: iff,v $
+ * Revision 1.2  1995/06/06 18:40:23  img
+ * 	* added header
+ *
+ */
+
+x<=>y <==>(x=>y)#(y=>x).

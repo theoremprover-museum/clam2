@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: nth,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: nth,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+nth(n,l)<==>term_of(nth)of n of l.

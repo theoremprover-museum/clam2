@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: gcd1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: gcd1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>gcd(x,x)=x in pnat,_,_,_).

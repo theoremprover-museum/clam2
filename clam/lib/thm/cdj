@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: cdj,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: cdj,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==> p:u(1)=>q:u(1)=>r:u(1)=>((p=>r)\(q=>void))=>((p#q)=>r),_,_,_).
+
+
+

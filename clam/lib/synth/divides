@@ -1,0 +1,74 @@
+problem([]==>{posint}=>{posint}=>u(1),
+intro(new[x])then wfftacs,lambda(x,_1126),
+[problem([x:{posint}]==>{posint}=>u(1),
+ intro(new[y])then wfftacs,lambda(y,_1165),
+ [problem([x:{posint},y:{posint}]==>u(1),
+  intro(explicit(z:{posint}#y=times(x,z)in{posint})),z:{posint}#y=times(x,z)in{posint},
+  [problem([x:{posint},y:{posint}]==> (z:{posint}#y=times(x,z)in{posint})in u(1),
+   intro,axiom,
+   [problem([x:{posint},y:{posint}]==>{posint}in u(1),
+    repeat wfftac,axiom,
+    [
+    ]),
+    problem([x:{posint},y:{posint},v0:{posint}]==>y=times(x,v0)in{posint}in u(1),
+    intro,axiom,
+    [problem([x:{posint},y:{posint},v0:{posint}]==>{posint}in u(1),
+     repeat wfftac,axiom,
+     [
+     ]),
+     problem([x:{posint},y:{posint},v0:{posint}]==>y in{posint},
+     repeat wfftac,axiom,
+     [
+     ]),
+     problem([x:{posint},y:{posint},v0:{posint}]==>times(x,v0)in{posint},
+     compute(hyp(x),[[unfold]])then elim(x),su(_1497,[x,assert(greater(x,0))],[v1,v2]),
+     [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat]==>greater(v1,0)in u(1),
+      repeat wfftac,axiom,
+      [
+      ]),
+      problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(x,0),v3:v1=x in pnat]==>times(v1,v0)in{posint},
+      autotactic(idtac),_1576,
+      [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(x,0),v3:v1=x in pnat]==>times(v1,v0)in{posint},
+       subst(hyp(v2),over(v4,greater(v4,0)),x=v1 in pnat)then[univ_elim(v3),idtac,wfftacs],_1653,
+       [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat]==>times(v1,v0)in{posint},
+        seq(v1 in{posint}),lambda(v4,_1836)of _1833,
+        [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat]==>v1 in{posint},
+         simplify,_1845,
+         [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat]==>v1 in{p:pnat\greater(p,0)},
+          repeat intro,axiom,
+          [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat,p:pnat]==>greater(p,0)in u(1),
+           repeat wfftac,axiom,
+           [
+           ]) ext _1996
+          ]) ext _1845
+         ]) ext _1833,
+         problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat,v4:v1 in{posint}]==>times(v1,v0)in{posint},
+         lemma(times_preserves_posint),su(_2162,[term_of(times_preserves_posint)],[v5]),
+         [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat,v4:v1 in{posint},v5:x:{posint}=>y:{posint}=>times(x,y)in{posint}]==>times(v1,v0)in{posint},
+          elim(v5,on(v1)),su(_2291,[v5 of v1],[v6]),
+          [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat,v4:v1 in{posint},v5:x:{posint}=>y:{posint}=>times(x,y)in{posint}]==>v1 in{posint},
+           intro,v4,
+           [
+           ]),
+           problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat,v4:v1 in{posint},v5:x:{posint}=>y:{posint}=>times(x,y)in{posint},v6:y:{posint}=>times(v1,y)in{posint}]==>times(v1,v0)in{posint},
+           elim(v6,on(v0)),su(_2550,[v6 of v0],[v7]),
+           [problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat,v4:v1 in{posint},v5:x:{posint}=>y:{posint}=>times(x,y)in{posint},v6:y:{posint}=>times(v1,y)in{posint}]==>v0 in{posint},
+            intro,axiom,
+            [
+            ]),
+            problem([x:{p:pnat\greater(p,0)},y:{posint},v0:{posint},v1:pnat,v2:greater(v1,0),v3:v1=x in pnat,v4:v1 in{posint},v5:x:{posint}=>y:{posint}=>times(x,y)in{posint},v6:y:{posint}=>times(v1,y)in{posint},v7:times(v1,v0)in{posint}]==>times(v1,v0)in{posint},
+            intro,v7,
+            [
+            ]) ext _2550
+           ]) ext _2291
+          ]) ext _2162
+         ]) ext _1836
+        ]) ext _1653
+       ]) ext _1576
+      ]) ext _1497
+     ])
+    ])
+   ])
+  ]) ext _1165
+ ]) ext _1126
+]).

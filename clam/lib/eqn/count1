@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: count1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: count1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>a:int=>count(a,nil)=0 in pnat,
+repeat dequantify_once,lambda(a,_7650),
+[problem([a:int]==>count(a,nil)=0 in pnat,
+ simplify then repeat intro,axiom,
+ [
+ ]) ext _7650
+]).

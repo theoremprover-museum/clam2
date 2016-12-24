@@ -1,0 +1,29 @@
+/*
+ * @(#)$Id: arith2,v 1.1 1994/09/16 09:39:18 dream Exp $
+ *
+ * $Log: arith2,v $
+ * Revision 1.1  1994/09/16 09:39:18  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>s(x)=x in pnat=>void,
+intro then wfftacs,lambda(x,_1703),
+[problem([x:pnat]==>s(x)=x in pnat=>void,
+ elim(x),p_ind(x,_1737,[v0,v1,_1743]),
+ [problem([x:pnat]==>s(0)=0 in pnat=>void,
+  apply_lemma(arith1),su(su(v1,[v0 of 0],[v1]),[term_of(arith1)],[v0]),
+  [
+  ]) ext _1737,
+  problem([x:pnat,v0:pnat,v1:s(v0)=v0 in pnat=>void]==>s(s(v0))=s(v0)in pnat=>void,
+  intro then wfftacs,lambda(v2,_1856),
+  [problem([x:pnat,v0:pnat,v1:s(v0)=v0 in pnat=>void,v2:s(s(v0))=s(v0)in pnat]==>void,
+   elim(v1)then try hyp(_1921),su(v3,[v1 of _1930],[v3]),
+   [problem([x:pnat,v0:pnat,v1:s(v0)=v0 in pnat=>void,v2:s(s(v0))=s(v0)in pnat]==>s(v0)=v0 in pnat,
+    intro(s)then hyp(v2),axiom,
+    [
+    ]) ext _1930
+   ]) ext _1856
+  ]) ext _1743
+ ]) ext _1703
+]).

@@ -1,0 +1,90 @@
+problem([]==>x:pnat=> (x=0 in pnat=>void)=> (x=s(0)in pnat=>void)=>pred(pred(x))<*x,
+autotactic(wfftacs),_1835,
+[problem([]==>x:pnat=> (x=0 in pnat=>void)=> (x=s(0)in pnat=>void)=>pred(pred(x))<*x,
+ intro,lambda(x,_1935),
+ [problem([x:pnat]==> (x=0 in pnat=>void)=> (x=s(0)in pnat=>void)=>pred(pred(x))<*x,
+  repeat intro,lambda(v0,lambda(v1,_1994)),
+  [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void]==>pred(pred(x))<*x,
+   lemma(succlemma),su(_2053,[term_of(succlemma)],[v2]),
+   [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat]==>pred(pred(x))<*x,
+    elim(v2,on(x)),su(_2160,[v2 of x],[v3]),
+    [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat]==>pred(pred(x))<*x,
+     elim(v3),su(_2296,[v3 of _2303],[v4]),
+     [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat]==>x=0 in pnat=>void,
+      intro,v0,
+      [
+      ]) ext _2303,
+      problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat]==>pred(pred(x))<*x,
+      elim(v4),spread(v4,[x_,v5,_2582]),
+      [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat)]==>pred(pred(x))<*x,
+       decide(x_=0 in pnat),pnat_eq(x_,0,su(_2786,[axiom],[v7]),su(_2794,[lambda(~,axiom)],[v7])),
+       [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat]==>pred(pred(x))<*x,
+        elim(v1),su(_3006,[v1 of _3013],[v8]),
+        [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat]==>x=s(0)in pnat,
+         subst(at(1),hyp(v5),over(k,x=s(k)in pnat),x_=0 in pnat),_3024,
+         [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat]==>x_=0 in pnat,
+          intro,v7,
+          [
+          ]) ext _3246,
+          problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(0)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat]==>x=s(0)in pnat,
+          intro,v5,
+          [
+          ]) ext _3024
+         ]) ext _3013,
+         problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat,v8:void]==>pred(pred(x))<*x,
+         elim(v8),any(v8),
+         [
+         ]) ext _3006
+        ]) ext _2786,
+        problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void]==>pred(pred(x))<*x,
+        elim(v2,on(x_)),su(_4056,[v2 of x_],[v8]),
+        [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat]==>pred(pred(x))<*x,
+         elim(v8),su(_4302,[v8 of _4309],[v9]),
+         [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat]==>x_=0 in pnat=>void,
+          intro,v7,
+          [
+          ]) ext _4309,
+          problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat]==>pred(pred(x))<*x,
+          elim(v9),spread(v9,[v10,v11,_4808]),
+          [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat)]==>pred(pred(x))<*x,
+           subst(over(v13,pred(pred(v13))<*v13),x=s(x_)in pnat)then[univ_elim(v5),idtac,wfftac],_4818,
+           [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat)]==>pred(pred(s(x_)))<*s(x_),
+            subst(over(v13,pred(pred(s(v13)))<*s(v13)),x_=s(v10)in pnat)then[univ_elim(v11),idtac,wfftac],_5148,
+            [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat)]==>pred(pred(s(s(v10))))<*s(s(v10)),
+             simplify,_5486,
+             [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat)]==>v10<*s(s(v10)),
+              elim(v10),p_ind(v10,_6086,[v13,v14,_6092]),
+              [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat)]==>0<*s(s(0)),
+               pure(intro),axiom,
+               [
+               ]) ext _6086,
+               problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat),v13:pnat,v14:v13<*s(s(v13))]==>s(v13)<*s(s(s(v13))),
+               pure(arith(s)),axiom,
+               [problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat),v13:pnat,v14:v13<*s(s(v13))]==>v13 in pnat,
+                intro,axiom,
+                [
+                ]),
+                problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat),v13:pnat,v14:v13<*s(s(v13))]==>s(s(v13))in pnat,
+                intro,axiom,
+                [
+                ]),
+                problem([x:pnat,v0:x=0 in pnat=>void,v1:x=s(0)in pnat=>void,v2:y:pnat=> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,v3: (x=0 in pnat=>void)=>x_:pnat#x=s(x_)in pnat,v4:x_:pnat#x=s(x_)in pnat,x_:pnat,v5:x=s(x_)in pnat,v6:v4=x_&v5 in (x_:pnat#x=s(x_)in pnat),v7:x_=0 in pnat=>void,v8: (x_=0 in pnat=>void)=>x:pnat#x_=s(x)in pnat,v9:x:pnat#x_=s(x)in pnat,v10:pnat,v11:x_=s(v10)in pnat,v12:v9=v10&v11 in (x:pnat#x_=s(x)in pnat),v13:pnat,v14:v13<*s(s(v13))]==>v13<*s(s(v13)),
+                intro,v14,
+                [
+                ])
+               ]) ext _6092
+              ]) ext _5486
+             ]) ext _5148
+            ]) ext _4818
+           ]) ext _4808
+          ]) ext _4302
+         ]) ext _4056
+        ]) ext _2794
+       ]) ext _2582
+      ]) ext _2296
+     ]) ext _2160
+    ]) ext _2053
+   ]) ext _1994
+  ]) ext _1935
+ ]) ext _1835
+]).

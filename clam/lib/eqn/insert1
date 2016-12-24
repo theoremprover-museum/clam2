@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: insert1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: insert1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:int=>insert(n,nil)=n::nil in int list,
+simplify,_7820,
+[problem([]==>n:int=>n::nil=n::nil in int list,
+ dequantify_once then identity,lambda(n,axiom),
+ [
+ ]) ext _7820
+]).

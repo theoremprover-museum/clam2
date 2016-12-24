@@ -1,0 +1,37 @@
+/*
+ * @(#)$Id: binom3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: binom3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>px:pnat=>py:pnat=>binom(s(px),s(py))=plus(binom(px,s(py)),binom(px,py))in pnat,
+intro then wfftacs,lambda(px,_7930),
+[problem([px:pnat]==>py:pnat=>binom(s(px),s(py))=plus(binom(px,s(py)),binom(px,py))in pnat,
+ intro then wfftacs,lambda(py,_7984),
+ [problem([px:pnat,py:pnat]==>binom(s(px),s(py))=plus(binom(px,s(py)),binom(px,py))in pnat,
+  compute([[1]]=_8039 in _8036),_7993,
+  [problem([px:pnat,py:pnat]==>term_of(binom)of s(px)of s(py)=plus(binom(px,s(py)),binom(px,py))in pnat,
+   compute([[1]]of _8109 of _8106=_8103 in _8100),_8052,
+   [problem([px:pnat,py:pnat]==>lambda(v0,p_ind(v0,lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))]))of s(px)of s(py)=plus(binom(px,s(py)),binom(px,py))in pnat,
+    beta_reduce,_8122,
+    [problem([px:pnat,py:pnat]==>p_ind(s(px),lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))])of s(py)=plus(binom(px,s(py)),binom(px,py))in pnat,
+     compute([[1]]of _8316=_8313 in _8310),_8221,
+     [problem([px:pnat,py:pnat]==>lambda(v3,p_ind(v3,s(0),[v4,~,plus(p_ind(px,lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))])of s(v4),p_ind(px,lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))])of v4)]))of s(py)=plus(binom(px,s(py)),binom(px,py))in pnat,
+      beta_reduce,_8329,
+      [problem([px:pnat,py:pnat]==>p_ind(s(py),s(0),[v4,~,plus(p_ind(px,lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))])of s(v4),p_ind(px,lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))])of v4)])=plus(binom(px,s(py)),binom(px,py))in pnat,
+       compute([[1]]=_8648 in _8645),_8492,
+       [problem([px:pnat,py:pnat]==>plus(p_ind(px,lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))])of s(py),p_ind(px,lambda(v1,pnat_eq(v1,0,s(0),0)),[~,v2,lambda(v3,p_ind(v3,s(0),[v4,~,plus(v2 of s(v4),v2 of v4)]))])of py)=plus(binom(px,s(py)),binom(px,py))in pnat,
+        simplify then identity,axiom,
+        [
+        ]) ext _8492
+       ]) ext _8329
+      ]) ext _8221
+     ]) ext _8122
+    ]) ext _8052
+   ]) ext _7993
+  ]) ext _7984
+ ]) ext _7930
+]).

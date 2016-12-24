@@ -1,0 +1,16 @@
+% img/mrg 15-feb-93
+% Wave front annotations: (POSTSCRIPT)
+\def\dreamPS{\input pstricks.tex
+\newgray{dark}{.95}		% 1=white 0=black
+				% this is the colour of a wave-front
+\renewcommand{\wf}[1]{\psframebox*[framesep=1pt,fillcolor=dark]{\hbox{$##1$}}}
+\renewcommand{\wfp}[1]{\psframebox*[framesep=1pt,fillcolor=dark]{\hbox{$##1$}}^{-}}
+\renewcommand{\wfn}[1]{\psframebox*[framesep=1pt,fillcolor=dark]{\hbox{$##1$}}^{+}}
+%
+% Out bound wave front
+%
+\renewcommand{\wfout}[1]{\psframebox*[framesep=1pt,fillcolor=dark]{\hbox{$##1$}}^{\uparrow}}
+\renewcommand{\wfin}[1]{\psframebox*[framesep=1pt,fillcolor=dark]{\hbox{$##1$}}^{\downarrow}}
+% Wave hole
+\renewcommand{\wh}[1]{\psframebox*[framesep=0pt,fillcolor=white]{\hbox{$##1$}}}}
+\endinput

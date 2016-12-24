@@ -1,0 +1,104 @@
+problem([]==>x:{posint}=>y:{posint}=>times(x,y)in{posint},
+autotactic(idtac),_1094,
+[problem([]==>x:{posint}=>y:{posint}=>times(x,y)in{posint},
+ compute(x:[[unfold]]=>y:{posint}=>times(x,y)in{posint})then try (compute(x:[[expand]]of _1208=>y:{posint}=>times(x,y)in{posint})then repeat beta_reduce_plus_pos([1,2])),_1133,
+ [problem([]==>x:{p:pnat\greater(p,0)}=>y:{posint}=>times(x,y)in{posint},
+  compute(x:{p:pnat\greater(p,0)}=>y:[[unfold]]=>times(x,y)in{posint})then try (compute(x:{p:pnat\greater(p,0)}=>y:[[expand]]of _1355=>times(x,y)in{posint})then repeat beta_reduce_plus_pos([1,2,2,2])),_1245,
+  [problem([]==>x:{p:pnat\greater(p,0)}=>y:{p:pnat\greater(p,0)}=>times(x,y)in{posint},
+   compute(x:{p:pnat\greater(p,0)}=>y:{p:pnat\greater(p,0)}=>times(x,y)in[[unfold]])then try (compute(x:{p:pnat\greater(p,0)}=>y:{p:pnat\greater(p,0)}=>times(x,y)in[[expand]]of _1533)then repeat beta_reduce_plus_pos([2,2,2,2,2])),_1388,
+   [problem([]==>x:{p:pnat\greater(p,0)}=>y:{p:pnat\greater(p,0)}=>times(x,y)in{p:pnat\greater(p,0)},
+    intro,lambda(x,_1618),
+    [problem([x:{p:pnat\greater(p,0)}]==>y:{p:pnat\greater(p,0)}=>times(x,y)in{p:pnat\greater(p,0)},
+     elim(x),su(_1685,[x,assert(greater(x,0))],[v0,v1]),
+     [problem([x:{p:pnat\greater(p,0)},v0:pnat]==>greater(v0,0)in u(1),
+      repeat wfftac,axiom,
+      [
+      ]),
+      problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat]==>y:{p:pnat\greater(p,0)}=>times(v0,y)in{p:pnat\greater(p,0)},
+      intro,lambda(y,_1831),
+      [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)}]==>times(v0,y)in{p:pnat\greater(p,0)},
+       elim(y),su(_1921,[y,assert(greater(y,0))],[v3,v4]),
+       [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat]==>greater(v3,0)in u(1),
+        repeat wfftac,axiom,
+        [
+        ]),
+        problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat]==>times(v0,v3)in{p:pnat\greater(p,0)},
+        lemma(greater_non_zero),su(_2131,[term_of(greater_non_zero)],[v6]),
+        [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat]==>times(v0,v3)in{p:pnat\greater(p,0)},
+         elim(v6,on(v0)),su(_2287,[v6 of v0],[v7]),
+         [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat]==>v0 in pnat,
+          intro,axiom,
+          [
+          ]),
+          problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat]==>times(v0,v3)in{p:pnat\greater(p,0)},
+          elim(v7),su(_2590,[v7 of _2597],[v8]),
+          [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat]==>greater(v0,0),
+           subst(at(2),over(v8,greater(v8,0)),v0=x in pnat)then[univ_elim(v2),idtac,wfftacs],_2608,
+           [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat]==>greater(x,0),
+            intro,v1,
+            [
+            ]) ext _2608
+           ]) ext _2597,
+           problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat]==>times(v0,v3)in{p:pnat\greater(p,0)},
+           elim(v8),spread(v8,[v9,v10,_3127]),
+           [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat)]==>times(v0,v3)in{p:pnat\greater(p,0)},
+            elim(v6,on(v3)),su(_3366,[v6 of v3],[v12]),
+            [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat)]==>v3 in pnat,
+             intro,axiom,
+             [
+             ]),
+             problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat]==>times(v0,v3)in{p:pnat\greater(p,0)},
+             elim(v12),su(_3849,[v12 of _3856],[v13]),
+             [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat]==>greater(v3,0),
+              pure(rewrite(v5)),_3867,
+              [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat]==>greater(y,0),
+               intro,v4,
+               [
+               ]) ext _3867
+              ]) ext _3856,
+              problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat,v13:y:pnat#v3=s(y)in pnat]==>times(v0,v3)in{p:pnat\greater(p,0)},
+              elim(v13),spread(v13,[v14,v15,_4631]),
+              [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat,v13:y:pnat#v3=s(y)in pnat,v14:pnat,v15:v3=s(v14)in pnat,v16:v13=v14&v15 in (y:pnat#v3=s(y)in pnat)]==>times(v0,v3)in{p:pnat\greater(p,0)},
+               intro,axiom,
+               [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat,v13:y:pnat#v3=s(y)in pnat,v14:pnat,v15:v3=s(v14)in pnat,v16:v13=v14&v15 in (y:pnat#v3=s(y)in pnat)]==>times(v0,v3)in pnat,
+                repeat wfftac,axiom,
+                [
+                ]),
+                problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat,v13:y:pnat#v3=s(y)in pnat,v14:pnat,v15:v3=s(v14)in pnat,v16:v13=v14&v15 in (y:pnat#v3=s(y)in pnat)]==>greater(times(v0,v3),0),
+                subst(at(2),over(v17,greater(times(v17,v3),0)),v0=s(v9)in pnat)then[univ_elim(v10),idtac,wfftacs],_5268,
+                [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat,v13:y:pnat#v3=s(y)in pnat,v14:pnat,v15:v3=s(v14)in pnat,v16:v13=v14&v15 in (y:pnat#v3=s(y)in pnat)]==>greater(times(s(v9),v3),0),
+                 subst(at(2),over(v17,greater(times(s(v9),v17),0)),v3=s(v14)in pnat)then[univ_elim(v15),idtac,wfftacs],_5612,
+                 [problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat,v13:y:pnat#v3=s(y)in pnat,v14:pnat,v15:v3=s(v14)in pnat,v16:v13=v14&v15 in (y:pnat#v3=s(y)in pnat)]==>greater(times(s(v9),s(v14)),0),
+                  sym_eval(normalize_term([reduction([1],[times2,equ(pnat,left)]),reduction([1],[plus2right,equ(pnat,left)]),reduction([],[greater2,equ(u(1),left)])]))then[elementary(istrue)],su(su(su(su(su(su(su(su(0,[greater2 of plus(times(v9,s(v14)),v14)],[v17]),[term_of(greater2)],[greater2]),[v17 of v14],[v18]),[plus2right of times(v9,s(v14))],[v17]),[term_of(plus2right)],[plus2right]),[v17 of s(v14)],[v18]),[times2 of v9],[v17]),[term_of(times2)],[times2]),
+                  [
+                  ]) ext _5612
+                 ]) ext _5268
+                ]),
+                problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat,y:{p:pnat\greater(p,0)},v3:pnat,v4:greater(y,0),v5:v3=y in pnat,v6:x:pnat=>greater(x,0)=>y:pnat#x=s(y)in pnat,v7:greater(v0,0)=>y:pnat#v0=s(y)in pnat,v8:y:pnat#v0=s(y)in pnat,v9:pnat,v10:v0=s(v9)in pnat,v11:v8=v9&v10 in (y:pnat#v0=s(y)in pnat),v12:greater(v3,0)=>y:pnat#v3=s(y)in pnat,v13:y:pnat#v3=s(y)in pnat,v14:pnat,v15:v3=s(v14)in pnat,v16:v13=v14&v15 in (y:pnat#v3=s(y)in pnat),p:pnat]==>greater(p,0)in u(1),
+                repeat wfftac,axiom,
+                [
+                ])
+               ]) ext _4631
+              ]) ext _3849
+             ]) ext _3366
+            ]) ext _3127
+           ]) ext _2590
+          ]) ext _2287
+         ]) ext _2131
+        ]) ext _1921
+       ]) ext _1831,
+       problem([x:{p:pnat\greater(p,0)},v0:pnat,v1:greater(x,0),v2:v0=x in pnat]==>{p:pnat\greater(p,0)}in u(1),
+       repeat wfftac,axiom,
+       [
+       ])
+      ]) ext _1685
+     ]) ext _1618,
+     problem([]==>{p:pnat\greater(p,0)}in u(1),
+     repeat wfftac,axiom,
+     [
+     ])
+    ]) ext _1388
+   ]) ext _1245
+  ]) ext _1133
+ ]) ext _1094
+]).

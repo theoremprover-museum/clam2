@@ -1,0 +1,32 @@
+/*
+ * @(#)$Id: arith1,v 1.1 1994/09/16 09:39:18 dream Exp $
+ *
+ * $Log: arith1,v $
+ * Revision 1.1  1994/09/16 09:39:18  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>s(x)=0 in pnat=>void,
+repeat intro then wfftacs,lambda(x,lambda(v0,_1411)),
+[problem([x:pnat,v0:s(x)=0 in pnat]==>void,
+ universe(2),_1420,
+ [problem([x:pnat,v0:s(x)=0 in pnat]==>void,
+  seq(p_ind(s(x),void=>void,[~,~,void])=p_ind(0,void=>void,[~,~,void])in u(1)),lambda(v1,_1519)of _1516,
+  [problem([x:pnat,v0:s(x)=0 in pnat]==>p_ind(s(x),void=>void,[~,~,void])=p_ind(0,void=>void,[~,~,void])in u(1),
+   identity,axiom,
+   [
+   ]) ext _1516,
+   problem([x:pnat,v0:s(x)=0 in pnat,v1:p_ind(s(x),void=>void,[~,~,void])=p_ind(0,void=>void,[~,~,void])in u(1)]==>void,
+   compute(hyp(v1),[[simplify]]),_1595,
+   [problem([x:pnat,v0:s(x)=0 in pnat,v1:void= (void=>void)in u(1)]==>void,
+    subst(over(v2,v2),void= (void=>void)in u(1))then[univ_elim(v1),idtac,wfftacs],_1676,
+    [problem([x:pnat,v0:s(x)=0 in pnat,v1:void= (void=>void)in u(1)]==>void=>void,
+     intro then wfftacs then hyp(v2),lambda(v2,v2),
+     [
+     ]) ext _1676
+    ]) ext _1595
+   ]) ext _1519
+  ]) ext _1420
+ ]) ext _1411
+]).

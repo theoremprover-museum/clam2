@@ -1,0 +1,4 @@
+problem([]==>t:u(1)=>v:u(1)=>x:t=>w:v=>fst(x&w)=x in t,
+dequantify then simplify then repeat intro,lambda(t,lambda(v,lambda(x,lambda(w,axiom)))),
+[
+]).

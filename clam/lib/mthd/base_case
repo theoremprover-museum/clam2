@@ -1,0 +1,36 @@
+/*
+ * @(#)$Id: base_case,v 1.3 1998/09/15 15:30:02 img Exp $
+ *
+ * $Log: base_case,v $
+ * Revision 1.3  1998/09/15 15:30:02  img
+ * unfold sym_eval into base cases in order to avoid reappling equal,
+ * normalize_terms (etc) when elementary is applicable.  Consider
+ * base-case of assp: normalize_term is applied, then all others in
+ * sym_eval fail (including testing normalize_term again), before
+ * dropping back to elementary.
+ *
+ * Revision 1.2  1997/04/07 10:34:48  img
+ * Allow branching proofs via repeat methodical
+ *
+ * Revision 1.1  1994/09/16 09:33:29  dream
+ * Initial revision
+ */
+
+method(base_case(SubPlan),
+       HG,
+       [repeat([HG],
+               Goal :=> SubGoals,
+               Method,
+               (member(Method, [elementary(_),
+				equal(_,_),
+                                normalize_term(_),
+                                casesplit(disjunction(_)),
+                                existential(_,_)]),
+                applicable_submethod(Goal, Method, _, SubGoals)),
+        [SubPlan],
+        SubGoals
+       ),!,
+       SubPlan \= idtac ],
+    [],
+    SubGoals,
+    SubPlan).

@@ -1,0 +1,20 @@
+/*
+ * @(#)$Id: factors,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: factors,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:{posint}=>xl:{prime}list#prod(xl)=x in pnat,
+induction([times(v0,v1)],[x:{posint}]),lambda(x,su(su(su(su(su(v7,[v6 of x],[v7]),[v5 of lambda(v0,lambda(v1,lambda(v2,_1082)))],[v6]),[v4 of _1089],[v5]),[v3 of lambda(x,xl:{prime}list#prod(xl)=x in pnat)],[v4]),[term_of(primescheme)],[v3])),
+[problem([x:{posint}]==>xl:{prime}list#prod(xl)=s(0)in pnat,
+ base_case([sym_eval([existential(xl:{prime}list,nil),eval_def([1,1],prod1)]),elementary(identity)]),nil&su(axiom,[term_of(prod1)],[prod1]),
+ [
+ ]) ext _1089,
+ problem([x:{posint},v0:{prime},v1:{posint},v2:xl:{prime}list#prod(xl)=v1 in pnat]==>xl:{prime}list#prod(xl)=times(v0,v1)in pnat,
+ step_case(ripple(wave([],[prod_times,imp(right)],[xl:{prime}list,v0::v3]))then[fertilize(strong,v2)]),lambda(exhyp,spread(exhyp,[v3,v4,(v0::v3)&su(su(su(su(su(v6,[v8 of v4],[v6]),[v7 of v1],[v8]),[v6 of v3],[v7]),[prod_times of v0],[v6]),[term_of(prod_times)],[prod_times])]))of v2,
+ [
+ ]) ext _1082
+]).

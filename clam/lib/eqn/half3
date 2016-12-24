@@ -1,0 +1,129 @@
+problem([]==>n:pnat=>half(s(s(n)))=s(half(n))in pnat,
+universe(2),_5920,
+[problem([]==>n:pnat=>half(s(s(n)))=s(half(n))in pnat,
+ repeat intro,lambda(n,_5988),
+ [problem([n:pnat]==>half(s(s(n)))=s(half(n))in pnat,
+  compute([[1]]=_6030 in _6027),_5997,
+  [problem([n:pnat]==>term_of(half)of s(s(n))=s(half(n))in pnat,
+   compute([[1]]of _6082=_6079 in _6076),_6043,
+   [problem([n:pnat]==>lambda(n,term_of(twos)of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of n)of s(s(n))=s(half(n))in pnat,
+    beta_reduce,_6095,
+    [problem([n:pnat]==>term_of(twos)of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of s(s(n))=s(half(n))in pnat,
+     compute([[1]]of _6235 of _6232 of _6229 of _6226 of _6223=_6220 in _6217),_6161,
+     [problem([n:pnat]==>lambda(~,lambda(v0,lambda(v1,lambda(v2,lambda(z,lambda(v3,spread(v3,[v4,~,v4]))of p_ind(z,v0&v1,[v3,v4,spread(v4,[v5,v6,v6&v2 of v3 of v5])]))))))of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of s(s(n))=s(half(n))in pnat,
+      repeat beta_reduce,_6248,
+      [problem([n:pnat]==>spread(p_ind(s(s(n)),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])=s(half(n))in pnat,
+       subst(over(q,spread(p_ind(s(s(n)),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])=q in pnat),s(half(n))=spread(s(half(n))&s(half(s(n))),[v4,~,v4])in pnat),_6369,
+       [problem([n:pnat]==>s(half(n))=spread(s(half(n))&s(half(s(n))),[v4,~,v4])in pnat,
+        compute(_6569=[[1]]in _6567)then repeat intro then wfftacs,axiom,
+        [
+        ]),
+        problem([n:pnat]==>spread(p_ind(s(s(n)),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])=spread(s(half(n))&s(half(s(n))),[v4,~,v4])in pnat,
+        intro(using(pnat#pnat)),axiom,
+        [problem([n:pnat]==>p_ind(s(s(n)),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=s(half(n))&s(half(s(n)))in (pnat#pnat),
+         compute([[1]]=_6748 in _6745),_6678,
+         [problem([n:pnat]==>spread(p_ind(s(n),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=s(half(n))&s(half(s(n)))in (pnat#pnat),
+          subst(over(q,spread(p_ind(s(n),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=q in (pnat#pnat)),s(half(n))&s(half(s(n)))=spread(half(s(n))&s(half(n)),[v5,v6,v6&s(v5)])in (pnat#pnat)),_6761,
+          [problem([n:pnat]==>s(half(n))&s(half(s(n)))=spread(half(s(n))&s(half(n)),[v5,v6,v6&s(v5)])in (pnat#pnat),
+           compute(_7012=[[1]]in _7010)then repeat intro then wfftacs,axiom,
+           [
+           ]),
+           problem([n:pnat]==>spread(p_ind(s(n),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=spread(half(s(n))&s(half(n)),[v5,v6,v6&s(v5)])in (pnat#pnat),
+           intro(using(pnat#pnat)),axiom,
+           [problem([n:pnat]==>p_ind(s(n),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=half(s(n))&s(half(n))in (pnat#pnat),
+            compute([[1]]=_7196 in _7193),_7130,
+            [problem([n:pnat]==>spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=half(s(n))&s(half(n))in (pnat#pnat),
+             subst(over(q,spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=q in (pnat#pnat)),half(s(n))&s(half(n))=spread(half(n)&half(s(n)),[v5,v6,v6&s(v5)])in (pnat#pnat)),_7209,
+             [problem([n:pnat]==>half(s(n))&s(half(n))=spread(half(n)&half(s(n)),[v5,v6,v6&s(v5)])in (pnat#pnat),
+              compute(_7446=[[1]]in _7444)then repeat intro then wfftacs,axiom,
+              [
+              ]),
+              problem([n:pnat]==>spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=spread(half(n)&half(s(n)),[v5,v6,v6&s(v5)])in (pnat#pnat),
+              intro(using(pnat#pnat)),axiom,
+              [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=half(n)&half(s(n))in (pnat#pnat),
+               compute(_7621=[[1]]&[[1]]in _7619),_7560,
+               [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=term_of(half)of n&term_of(half)of s(n)in (pnat#pnat),
+                compute(_7709=[[1]]of _7716&[[1]]of _7723 in _7707),_7642,
+                [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=lambda(n,term_of(twos)of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of n)of n&lambda(n,term_of(twos)of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of n)of s(n)in (pnat#pnat),
+                 compute(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=[[1]]&[[1]]in (pnat#pnat)),_7736,
+                 [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=term_of(twos)of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of n&term_of(twos)of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of s(n)in (pnat#pnat),
+                  compute(_8025=[[1]]of _8044 of _8041 of _8038 of _8035 of _8032&[[1]]of _8063 of _8060 of _8057 of _8054 of _8051 in _8023),_7912,
+                  [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=lambda(~,lambda(v0,lambda(v1,lambda(v2,lambda(z,lambda(v3,spread(v3,[v4,~,v4]))of p_ind(z,v0&v1,[v3,v4,spread(v4,[v5,v6,v6&v2 of v3 of v5])]))))))of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of n&lambda(~,lambda(v0,lambda(v1,lambda(v2,lambda(z,lambda(v3,spread(v3,[v4,~,v4]))of p_ind(z,v0&v1,[v3,v4,spread(v4,[v5,v6,v6&v2 of v3 of v5])]))))))of lambda(~,pnat)of 0 of 0 of lambda(~,lambda(v1,s(v1)))of s(n)in (pnat#pnat),
+                   repeat beta_reduce,_8076,
+                   [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])&spread(p_ind(s(n),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])in (pnat#pnat),
+                    simplify,_8311,
+                    [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])&spread(spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)]),[v4,~,v4])in (pnat#pnat),
+                     seq(w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),new[v0]),lambda(v0,_8634)of _8631,
+                     [problem([n:pnat]==>w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),
+                      intro(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]))then wfftacs,p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])&_8732,
+                      [problem([n:pnat]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])in (pnat#pnat),
+                       intro then wfftacs,axiom,
+                       [
+                       ]) ext _8732
+                      ]) ext _8631,
+                      problem([n:pnat,v0:w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat)]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])&spread(spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)]),[v4,~,v4])in (pnat#pnat),
+                      elim(v0),spread(v0,[w,v1,_9046]),
+                      [problem([n:pnat,v0:w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),w:pnat#pnat,v1:p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),v2:v0=w&v1 in (w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat))]==>p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])&spread(spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)]),[v4,~,v4])in (pnat#pnat),
+                       rewrite(v1),_9056,
+                       [problem([n:pnat,v0:w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),w:pnat#pnat,v1:p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),v2:v0=w&v1 in (w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat))]==>w=spread(w,[v4,~,v4])&spread(spread(w,[v5,v6,v6&s(v5)]),[v4,~,v4])in (pnat#pnat),
+                        elim(w),spread(w,[v3,v4,_9580]),
+                        [problem([n:pnat,v0:w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),w:pnat#pnat,v1:p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),v2:v0=w&v1 in (w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat)),v3:pnat,v4:pnat,v5:w=v3&v4 in (pnat#pnat)]==>v3&v4=spread(v3&v4,[v4_,~,v4_])&spread(spread(v3&v4,[v5,v6,v6&s(v5)]),[v4_,~,v4_])in (pnat#pnat),
+                         intro,axiom,
+                         [problem([n:pnat,v0:w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),w:pnat#pnat,v1:p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),v2:v0=w&v1 in (w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat)),v3:pnat,v4:pnat,v5:w=v3&v4 in (pnat#pnat)]==>v3=spread(v3&v4,[v4_,~,v4_])in pnat,
+                          simplify then intro then wfftacs,axiom,
+                          [
+                          ]),
+                          problem([n:pnat,v0:w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),w:pnat#pnat,v1:p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat),v2:v0=w&v1 in (w: (pnat#pnat)#p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])])=w in (pnat#pnat)),v3:pnat,v4:pnat,v5:w=v3&v4 in (pnat#pnat)]==>v4=spread(spread(v3&v4,[v5,v6,v6&s(v5)]),[v4_,~,v4_])in pnat,
+                          simplify then intro then wfftacs,axiom,
+                          [
+                          ])
+                         ]) ext _9580
+                        ]) ext _9056
+                       ]) ext _9046
+                      ]) ext _8634
+                     ]) ext _8311
+                    ]) ext _8076
+                   ]) ext _7912
+                  ]) ext _7736
+                 ]) ext _7642
+                ]) ext _7560
+               ]),
+               problem([n:pnat,v0:pnat,v1:pnat]==>v1&s(v0)=v1&s(v0)in (pnat#pnat),
+               repeat intro then wfftacs,axiom,
+               [
+               ])
+              ]) ext _7209,
+              problem([n:pnat,q:pnat#pnat]==>spread(p_ind(n,0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=q in (pnat#pnat)in u(2),
+              repeat wfftac,axiom,
+              [
+              ])
+             ]) ext _7130
+            ]),
+            problem([n:pnat,v0:pnat,v1:pnat]==>v1&s(v0)=v1&s(v0)in (pnat#pnat),
+            repeat intro then wfftacs,axiom,
+            [
+            ])
+           ]) ext _6761,
+           problem([n:pnat,q:pnat#pnat]==>spread(p_ind(s(n),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v5,v6,v6&s(v5)])=q in (pnat#pnat)in u(2),
+           repeat wfftac,axiom,
+           [
+           ])
+          ]) ext _6678
+         ]),
+         problem([n:pnat,v0:pnat,v1:pnat]==>v0=v0 in pnat,
+         repeat intro,axiom,
+         [
+         ])
+        ]) ext _6369,
+        problem([n:pnat,q:pnat]==>spread(p_ind(s(s(n)),0&0,[v3,v4,spread(v4,[v5,v6,v6&s(v5)])]),[v4,~,v4])=q in pnat in u(2),
+        repeat wfftac,axiom,
+        [
+        ])
+       ]) ext _6248
+      ]) ext _6161
+     ]) ext _6095
+    ]) ext _6043
+   ]) ext _5997
+  ]) ext _5988
+ ]) ext _5920
+]).

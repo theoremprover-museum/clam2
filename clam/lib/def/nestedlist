@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: nestedlist,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: nestedlist,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+t nestedlist <==> rec(z,(t\z)list).

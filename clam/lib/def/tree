@@ -1,0 +1,14 @@
+/*
+ *
+ * $Id: tree,v 1.1 1995/06/10 15:40:55 armando Exp $
+ * 
+ * $Log: tree,v $
+ * Revision 1.1  1995/06/10 15:40:55  armando
+ * Reinserted into the main trunk
+ *
+ * Revision 1.1.4.3  1995/05/29  17:12:40  armando
+ * Comment char changed
+ *
+ */
+
+t tree<==>rec(z,t\z#z).

@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: cnc_cons3,v 1.1 1998/07/30 16:18:10 img Exp $
+ *
+ * $Log: cnc_cons3,v $
+ * Revision 1.1  1998/07/30 16:18:10  img
+ * *** empty log message ***
+ *
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>t:u(1)=>x1:t=>x2:t=>y:t list=>z:t list=>(x1::y=x2::z in
+t list)<=>((x1=x2 in t)#(y=z in t list)),
+normalize([normal(imply_intro),normal(univ_intro),normal(univ_intro),normal(univ_intro)]),lambda(x,lambda(y,lambda(z,lambda(v0,_7546)))),
+[problem([x:pnat,y:pnat list,z:pnat list,v0:y=z in pnat list]==>x::y=x::z in pnat list,
+ sym_eval([equal(v0,left)]),_7555,
+ [problem([x:pnat,y:pnat list,z:pnat list,v0:y=z in pnat list]==>x::y=x::y in pnat list,
+  tautology(identity),axiom,
+  [
+  ]) ext _7555
+ ]) ext _7546
+]).

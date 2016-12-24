@@ -1,0 +1,46 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: fertilize,v 1.4 1999/01/07 16:30:24 img Exp $
+ *
+ * $Log: fertilize,v $
+ * Revision 1.4  1999/01/07 16:30:24  img
+ * Support for ripple-and-cancel reintroduced (currently disabled,
+ * however).  weak_fertilize uses larger_size/2 to try to replace larger
+ * with smaller terms during weak fertilization
+ *
+ * Revision 1.3  1998/11/10 16:10:03  img
+ * Reorganised methods and integrated piecewise fertilization.
+ *
+ * Revision 1.2  1998/09/15 16:00:36  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.1  1994/09/16 09:33:29  dream
+ * Initial revision
+ */
+
+/* Strong and weak are pretty much the same but strong does not have a
+   ripple then cancel phase. */
+method(fertilize(strong,Fertilize),
+       H==>G,
+       [Fertilize = pwf_then_fertilize(strong,_),
+	applicable_submethod(H==>G,Fertilize,_,Seqs)],
+       [map_list(Seqs,(Hy==>NS):=> (Hy==>NSNA),
+		 strip_meta_annotations(NS,NSNA),NewSeqsNA)],
+       NewSeqsNA,
+       fertilize(strong,Fertilize)).
+
+method(fertilize(weak,FertPlan),
+       H==>G,
+        [Fertilize = pwf_then_fertilize(weak,_),
+         applicable_submethod(H==>G,Fertilize,_,Seqs),
+	 map_list(Seqs, Seq :=> (Plan-NewSeq),
+	          (PostFertRipple = ripple_and_cancel(_),
+		   ((fail,applicable_submethod(Seq,PostFertRipple,_,[NewSeq]),
+		     Plan = PostFertRipple)
+	            orelse
+		    (NewSeq = Seq, Plan = idtac))),PlanNewSeqs),
+         zip(PlanNewSeqs,Plans,NewSeqs),
+         FertPlan = (Fertilize then Plans)],
+        [map_list(NewSeqs,(Hy==>NS):=> (Hy==>NSNA),
+	          strip_meta_annotations(NS,NSNA),NewSeqsNA)],
+    NewSeqsNA,
+       fertilize(weak,Ms)).

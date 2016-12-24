@@ -1,0 +1,63 @@
+/*
+ * @(#)$Id: non_nil_is_cons,v 1.1 1997/10/16 11:19:39 img Exp $
+ *
+ * $Log: non_nil_is_cons,v $
+ * Revision 1.1  1997/10/16 11:19:39  img
+ * *** empty log message ***
+ *
+ * Revision 1.1  1994/09/16 09:39:18  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>t:u(1)=>y:t list=> (y=nil in t list=>void)=>h:t#ys:t
+list#y=h::ys in t list,
+intro,lambda(y,_7711),
+[problem([y:pnat]==> (y=0 in pnat=>void)=>x:pnat#y=s(x)in pnat,
+ elim(y),p_ind(y,_7760,[v0,v1,_7766]),
+ [problem([y:pnat]==> (0=0 in pnat=>void)=>x:pnat#0=s(x)in pnat,
+  intro,lambda(v0,_7814),
+  [problem([y:pnat,v0:0=0 in pnat=>void]==>x:pnat#0=s(x)in pnat,
+   elim(v0),su(_7864,[v0 of _7871],[v1]),
+   [problem([y:pnat,v0:0=0 in pnat=>void]==>0=0 in pnat,
+    repeat intro,axiom,
+    [
+    ]) ext _7871,
+    problem([y:pnat,v0:0=0 in pnat=>void,v1:void]==>x:pnat#0=s(x)in pnat,
+    elim(v1),any(v1),
+    [
+    ]) ext _7864
+   ]) ext _7814,
+   problem([y:pnat]==> (0=0 in pnat=>void)in u(1),
+   repeat intro,axiom,
+   [
+   ])
+  ]) ext _7760,
+  problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>x:pnat#v0=s(x)in pnat]==> (s(v0)=0 in pnat=>void)=>x:pnat#s(v0)=s(x)in pnat,
+  intro,lambda(v2,_8086),
+  [problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>x:pnat#v0=s(x)in pnat,v2:s(v0)=0 in pnat=>void]==>x:pnat#s(v0)=s(x)in pnat,
+   intro(v0),v0&_8177,
+   [problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>x:pnat#v0=s(x)in pnat,v2:s(v0)=0 in pnat=>void]==>v0 in pnat,
+    intro,axiom,
+    [
+    ]),
+    problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>x:pnat#v0=s(x)in pnat,v2:s(v0)=0 in pnat=>void]==>s(v0)=s(v0)in pnat,
+    repeat intro,axiom,
+    [
+    ]) ext _8177,
+    problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>x:pnat#v0=s(x)in pnat,v2:s(v0)=0 in pnat=>void,x:pnat]==>s(v0)=s(x)in pnat in u(1),
+    repeat intro,axiom,
+    [
+    ])
+   ]) ext _8086,
+   problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=>x:pnat#v0=s(x)in pnat]==> (s(v0)=0 in pnat=>void)in u(1),
+   repeat intro,axiom,
+   [
+   ])
+  ]) ext _7766
+ ]) ext _7711,
+ problem([]==>pnat in u(1),
+ intro,axiom,
+ [
+ ])
+]).

@@ -1,0 +1,37 @@
+problem([]==>t:u(1)=>phi: (t list=>u(1))=>phi of nil=> (a:t=>phi of (a::nil))=> (a:t=>b:t=>l:t list=>phi of (b::l)=>phi of (a::b::l))=>l:t list=>phi of l,
+universe(2),_8812,
+[problem([]==>t:u(1)=>phi: (t list=>u(1))=>phi of nil=> (a:t=>phi of (a::nil))=> (a:t=>b:t=>l:t list=>phi of (a::l)=>phi of (a::b::l))=>l:t list=>phi of l,
+ repeat intro,lambda(t,lambda(phi,lambda(v0,lambda(v1,lambda(v2,lambda(l,_9039)))))),
+ [problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),v2:a:t=>b:t=>l:t list=>phi of (a::l)=>phi of (a::b::l),l:t list]==>phi of l,
+  elim(l),list_ind(l,_9154,[v3,v4,v5,_9162]),
+  [problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),v2:a:t=>b:t=>l:t list=>phi of (a::l)=>phi of (a::b::l),l:t list]==>phi of nil,
+   intro,v0,
+   [
+   ]) ext _9154,
+   problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),v2:a:t=>b:t=>l:t list=>phi of (a::l)=>phi of (a::b::l),l:t list,v3:t,v4:t list,v5:phi of v4]==>phi of (v3::v4),
+   elim(v4),list_ind(v4,_9411,[v6,v7,v8,_9419]),
+   [problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),v2:a:t=>b:t=>l:t list=>phi of (a::l)=>phi of (a::b::l),l:t list,v3:t,v4:t list,v5:phi of v4]==>phi of (v3::nil),
+    elim(v1,on(v3)),su(_9560,[v1 of v3],[v6]),
+    [problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),v2:a:t=>b:t=>l:t list=>phi of (a::l)=>phi of (a::b::l),l:t list,v3:t,v4:t list,v5:phi of v4,v6:phi of (v3::nil)]==>phi of (v3::nil),
+     intro,v6,
+     [
+     ]) ext _9560
+    ]) ext _9411,
+    problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),v2:a:t=>b:t=>l:t list=>phi of (a::l)=>phi of (a::b::l),l:t list,v3:t,v4:t list,v5:phi of v4,v6:t,v7:t list,v8:phi of (v3::v7)]==>phi of (v3::v6::v7),
+    elim(v2,on(v3),new[v9])then[wfftacs,thin([v2])then elist_(v9,[v6,v7],v9)],su(su(su(_9914,[v2 of v7],[v9]),[v9 of v6],[v2]),[v2 of v3],[v9]),
+    [problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),l:t list,v3:t,v4:t list,v5:phi of v4,v6:t,v7:t list,v8:phi of (v3::v7),v9:phi of (v3::v7)=>phi of (v3::v6::v7)]==>phi of (v3::v6::v7),
+     elim(v9),su(_10080,[v9 of _10087],[v2]),
+     [problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),l:t list,v3:t,v4:t list,v5:phi of v4,v6:t,v7:t list,v8:phi of (v3::v7),v9:phi of (v3::v7)=>phi of (v3::v6::v7)]==>phi of (v3::v7),
+      intro,v8,
+      [
+      ]) ext _10087,
+      problem([t:u(1),phi:t list=>u(1),v0:phi of nil,v1:a:t=>phi of (a::nil),l:t list,v3:t,v4:t list,v5:phi of v4,v6:t,v7:t list,v8:phi of (v3::v7),v9:phi of (v3::v7)=>phi of (v3::v6::v7),v2:phi of (v3::v6::v7)]==>phi of (v3::v6::v7),
+      intro,v2,
+      [
+      ]) ext _10080
+     ]) ext _9914
+    ]) ext _9419
+   ]) ext _9162
+  ]) ext _9039
+ ]) ext _8812
+]).

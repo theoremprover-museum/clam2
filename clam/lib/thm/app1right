@@ -1,0 +1,7 @@
+problem([]==>x:int list=>app(x,nil)=x in int list,
+ind_strat(induction(lemma(list_primitive)-[(x:int list)-v1::v0])then[base_case(normalize_term([reduction([1,1],[app1,equ(int list,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[1,1],[app2,equ(int list,left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,in,[2],v2)]))then[idtac]))])]),lambda(x,list_ind(x,su(su(axiom,[app1 of nil],[v0]),[term_of(app1)],[app1]),[v1,v0,v2,su(su(su(su(_107935,[v4 of nil],[v5]),[v3 of v0],[v4]),[app2 of v1],[v3]),[term_of(app2)],[app2])])),
+[problem([x:int list,v1:int,v0:int list,v2:app(v0,nil)=v0 in int list]==>v1::v0=v1::v0 in int list,
+ elementary(unfold_iff then identity),axiom,
+ [
+ ]) ext _107935
+]).

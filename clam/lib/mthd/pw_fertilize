@@ -1,0 +1,14 @@
+/* apply pwf repeatedly */
+method(pw_fertilize(SubPlan),
+       HG,
+       [repeat([HG],
+               Goal :=> SubGoals,
+               Method,
+               (member(Method, [pwf(_)]),
+                applicable_submethod(Goal, Method, _, SubGoals)),
+        [SubPlan],
+        SubGoals),
+	\+ SubPlan = idtac,! ],
+    [],
+    SubGoals,
+    SubPlan).

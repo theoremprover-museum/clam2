@@ -1,0 +1,16 @@
+problem([]==>t:u(1)=>a:t=>a=a in t<=>{true},
+repeat intro,lambda(t,lambda(a,_214109)),
+[problem([t:u(1),a:t]==>a=a in t<=>{true},
+ compute([[unfold]]),_214100,
+ [problem([t:u(1),a:t]==>(a=a in t=>{true})#{true}=>a=a in t,
+  repeat intro then wfftacs,lambda(v0,_214014)&lambda(v0,axiom),
+  [problem([t:u(1),a:t,v0:a=a in t]==>{true},
+   compute([[unfold]])then wfftacs,_214002,
+   [problem([t:u(1),a:t,v0:a=a in t]==>int,
+    intro(0),0,
+    [
+    ]) ext _214002
+   ]) ext _214014
+  ]) ext _214100
+ ]) ext _214109
+]).

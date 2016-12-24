@@ -1,0 +1,12 @@
+#!/bin/bash
+# Convert .pl file into .tex file, then LaTeX the .tex file to produce the
+# .dvi file.
+./protex <$1.pl >$1.tmp
+# sed weirdo below is to make the printnames occur in the index, as well as
+# the Prologname.
+# next 2 lines old version - buggy
+# sed 's/\(\\ulinv{\([^ ]*\)}\)/\1 \\ulinv{\2 }/g' $1.tmp |\
+# sed -f Pro2TeX.s >$1.tex
+# new version (11/91)
+sed -f Pro2TeX.s $1.tmp >$1.tex
+/bin/rm $1.tmp

@@ -1,0 +1,35 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: backchain_lemma,v 1.3 1998/09/15 16:00:31 img Exp $
+ *
+ * $Log: backchain_lemma,v $
+ * Revision 1.3  1998/09/15 16:00:31  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.2  1998/06/10 08:33:00  img
+ * extend context
+ *
+ * Revision 1.1  1994/09/16 09:33:29  dream
+ * Initial revision
+ *
+ */
+
+	% BACKCHAIN_LEMMA METHOD: as lemma, but this time looks
+	% for lemma that instantiates to C=>G, with G goal and C a
+	% condition which is trivially true.
+	%
+	% Same hack with commutativity of = as above with lemma.
+	% I realise that lemma above is only a special case of
+	% backchain_lemma (namely with 0 conjuncts), but it's too tricky
+	% to formulate it all in one method, so we use two.
+method(backchain_lemma(Lemma),
+       H==>G,
+       [strip_meta_annotations(G,GG),
+        matrix(_,Matrix,GG),
+        theorem(Lemma,LemmaGoal),
+        (   instantiate(H,[],LemmaGoal,Cond=>Matrix,_)
+	v
+	(   Matrix=(L=R in T), instantiate(H,[],LemmaGoal,Cond=>R=L in T,_))),
+	immediate(H==>Cond)],
+       [],
+       [],
+       backchain_lemma(Lemma)).       

@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: half,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: half,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+half(n)<==>term_of(half)of n.

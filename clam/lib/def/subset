@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: subset,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: subset,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+subset(l1,l2)<==>list_ind(l1,{true},[h,t,r,member(h,l1)#r]).

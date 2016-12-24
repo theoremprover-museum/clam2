@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: flattenmc,v 1.1 1994/09/16 09:34:53 dream Exp $
+ *
+ * $Log: flattenmc,v $
+ * Revision 1.1  1994/09/16 09:34:53  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:int nestedlist=>l:int list=>int list,_,_,_).

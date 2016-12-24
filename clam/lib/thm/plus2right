@@ -1,0 +1,7 @@
+problem([]==>x:pnat=>y:pnat=>plus(x,s(y))=s(plus(x,y))in pnat,
+ind_strat(induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)])then[base_case(normalize_term([reduction([1,1],[plus1,equ(pnat,left)]),reduction([1,2,1],[plus1,equ(pnat,left)])])then[elementary((intro(new[y])then wfftacs)then unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[1,1],[plus2,equ(pnat,left)],[])then[wave(direction_out,[1,2,1],[plus2,equ(pnat,left)],[])])then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,in,[1],v1)]))then[idtac]))])]),lambda(x,p_ind(x,lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(y,axiom),[plus1 of v0],[v1]),[term_of(plus1)],[plus1])),[plus1 of s(v0)],[v1]),[term_of(plus1)],[plus1])),[v0,v1,lambda(v2,su(su(su(lambda(v3,su(v4,[v3 of v2],[v4]))of lambda(v2,su(su(su(lambda(v3,su(v4,[v3 of v2],[v4]))of lambda(v2,su(lambda(v3,su(v4,[v3 of v2],[v4]))of _37548,[v1 of v2],[v3])),[v3 of v2],[v4]),[plus2 of v0],[v3]),[term_of(plus2)],[plus2])),[v3 of s(v2)],[v4]),[plus2 of v0],[v3]),[term_of(plus2)],[plus2]))])),
+[problem([x:pnat,v0:pnat,v1:y:pnat=>plus(v0,s(y))=s(plus(v0,y))in pnat]==>y:pnat=>s(s(plus(v0,y)))=s(s(plus(v0,y)))in pnat,
+ elementary((intro(new[y])then wfftacs)then unfold_iff then identity),lambda(y,axiom),
+ [
+ ]) ext _37548
+]).

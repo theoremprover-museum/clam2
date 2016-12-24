@@ -1,0 +1,11 @@
+/*
+ * @(#)$Id: minht,v 1.2 1996/06/19 09:31:39 img Exp $
+ *
+ * $Log: minht,v $
+ * Revision 1.2  1996/06/19 09:31:39  img
+ * *** empty log message ***
+ *
+ * Revision 1.1  1994/09/16  09:37:56  dream
+ * Initial revision
+ */
+minht(t)<==>term_of(minht) of t.

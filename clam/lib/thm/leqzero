@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: leqzero,v 1.1 1996/06/12 10:10:52 img Exp $
+ *
+ * $Log: leqzero,v $
+ * Revision 1.1  1996/06/12 10:10:52  img
+ * This used to be two equations from eqn: it is more properly a thm.
+ *
+ */
+problem([]==>y:pnat=>leq(y,0)<=>y=0 in pnat,
+dequantify then elim(y)then simplify then repeat intro,lambda(y,p_ind(y,lambda(v0,axiom)&lambda(v0,_14085),[v0,v1,lambda(v2,_14097)&lambda(v2,_14100)])),
+[problem([y:pnat,v0:0=0 in pnat]==>int,
+ intro(0),0,
+ [
+ ]) ext _14085,
+ problem([y:pnat,v0:pnat,v1:leq(v0,0)<=>v0=0 in pnat,v2:void]==>s(v0)=0 in pnat,
+ elim(v2),any(v2),
+ [
+ ]) ext _14097,
+ problem([y:pnat,v0:pnat,v1:leq(v0,0)<=>v0=0 in pnat,v2:s(v0)=0 in pnat]==>void,
+ clam_arith(v2:s(v0)=0 in pnat),su(su(su(any(v5),[v4 of v2],[v5]),[v3 of v0],[v4]),[term_of(arith1)],[v3]),
+ [
+ ]) ext _14100
+]).

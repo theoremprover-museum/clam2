@@ -1,0 +1,343 @@
+
+\newdimen\inferLineSkip		\inferLineSkip=2pt
+\newdimen\inferLabelSkip	\inferLabelSkip=5pt
+\def\inferTabSkip{\quad}
+
+%	Variables
+
+\newdimen\@LeftOffset	% global
+\newdimen\@RightOffset	% global
+\newdimen\@SavedLeftOffset	% safe from users
+
+\newdimen\UpperWidth
+\newdimen\LowerWidth
+\newdimen\LowerHeight
+\newdimen\UpperLeftOffset
+\newdimen\UpperRightOffset
+\newdimen\UpperCenter
+\newdimen\LowerCenter
+\newdimen\UpperAdjust
+\newdimen\RuleAdjust
+\newdimen\LowerAdjust
+\newdimen\RuleWidth
+\newdimen\HLabelAdjust
+\newdimen\VLabelAdjust
+\newdimen\WidthAdjust
+
+\newbox\@UpperPart
+\newbox\@LowerPart
+\newbox\@LabelPart
+\newbox\ResultBox
+
+%	Flags
+
+\newif\if@inferRule	% whether \@infer draws a rule.
+\newif\if@ReturnLeftOffset	% whether \@infer returns \@LeftOffset.
+\newif\if@MathSaved	% whether inner math mode where \infer or
+			% \deduce appears.
+
+%	Special Fonts
+
+\def\DeduceSym{\vtop{\baselineskip4\p@ \lineskiplimit\z@
+    \vbox{\hbox{.}\hbox{.}\hbox{.}}\hbox{.}}}
+
+% I want to use this definition but there may be no appropriate font size.
+% \font\LineFont=line10 at \PointSize
+% \def\DeduceSym{\hbox{\LineFont \char'100 \vrule \char'0}}
+
+% I have decided to use \vdots instead of the symbol consisting 3 lines.
+%
+% \def\DeduceSym{{\setlength{\unitlength}{\PointSize}\begin{picture}
+% 	\put(0,1){\line(1,-1){1}}
+% 	\put(1,1){\line(0,-1){1}}
+% 	\put(2,1){\line(-1,-1){1}}
+% \end{picture}}}
+
+%	Math Save Macros
+%
+%	\@SaveMath is called in the very begining of toplevel macros
+%	which are \infer and \deduce.
+%	\@RestoreMath is called in the very last before toplevel macros end.
+%	Remark \infer and \deduce ends calling \@infer.
+
+%\def\@SaveMath{\@MathSavedfalse \ifmmode \ifinner
+%	\relax $\relax \@MathSavedtrue \fi\fi }
+\def\@SaveMath{\@MathSavedfalse}
+%\def\@RestoreMath{\if@MathSaved \relax $\relax\fi }
+\def\@RestoreMath{}
+
+%	Macros
+
+\def\@ifEmpty#1#2#3{\def\@tempa{\@empty}\def\@tempb{#1}\relax
+	\ifx \@tempa \@tempb #2\else #3\fi }
+
+\def\infer{\@SaveMath \@ifnextchar *{\@inferSteps}{\@inferOneStep}}
+
+\def\@inferOneStep{\@inferRuletrue
+	\@ifnextchar [{\@infer}{\@infer[\@empty]}}
+
+\def\@inferSteps*{\@ifnextchar [{\@@inferSteps}{\@@inferSteps[\@empty]}}
+
+\def\@@inferSteps[#1]{\@deduce{#1}[\DeduceSym]}
+
+\def\deduce{\@SaveMath \@ifnextchar [{\@deduce{\@empty}}
+	{\@inferRulefalse \@infer[\@empty]}}
+
+%	\@deduce<Proof Label>[<Proof>]<Lower><Uppers>
+
+\def\@deduce#1[#2]#3#4{\@inferRulefalse
+	\@infer[\@empty]{#3}{\@SaveMath \@infer[{#1}]{#2}{#4}}}
+
+%	\@infer[<Label>]<Lower><Uppers>
+%		If \@inferRuletrue, draws a rule and <Label> is right to
+%		a rule.
+%		Otherwise, draws no rule and <Label> is right to <Lower>.
+
+\def\@infer[#1]#2#3{\relax
+% Get parameters
+	\if@ReturnLeftOffset \else \@SavedLeftOffset=\@LeftOffset \fi
+	\setbox\@LabelPart=\hbox{$#1$}\relax
+	\setbox\@LowerPart=\hbox{$#2$}\relax
+%
+	\global\@LeftOffset=0pt
+	\setbox\@UpperPart=\vbox{\tabskip=0pt \halign{\relax
+		\global\@RightOffset=0pt \@ReturnLeftOffsettrue $##$&&
+		\inferTabSkip
+		\global\@RightOffset=0pt \@ReturnLeftOffsetfalse $##$\cr
+		#3\cr}}\relax
+%			Here is a little trick.
+%			\@ReturnLeftOffsettrue(false) influences on \infer or
+%			\deduce placed in ## locally
+%			because of \@SaveMath and \@RestoreMath.
+	\UpperLeftOffset=\@LeftOffset
+	\UpperRightOffset=\@RightOffset
+% Calculate Adjustments
+	\LowerWidth=\wd\@LowerPart
+	\LowerHeight=\ht\@LowerPart
+	\LowerCenter=0.5\LowerWidth
+%
+	\UpperWidth=\wd\@UpperPart \advance\UpperWidth by -\UpperLeftOffset
+	\advance\UpperWidth by -\UpperRightOffset
+	\UpperCenter=\UpperLeftOffset
+	\advance\UpperCenter by 0.5\UpperWidth
+%
+	\ifdim \UpperWidth > \LowerWidth
+		% \UpperCenter > \LowerCenter
+	\UpperAdjust=0pt
+	\RuleAdjust=\UpperLeftOffset
+	\LowerAdjust=\UpperCenter \advance\LowerAdjust by -\LowerCenter
+	\RuleWidth=\UpperWidth
+	\global\@LeftOffset=\LowerAdjust
+%
+	\else	% \UpperWidth <= \LowerWidth
+	\ifdim \UpperCenter > \LowerCenter
+%
+	\UpperAdjust=0pt
+	\RuleAdjust=\UpperCenter \advance\RuleAdjust by -\LowerCenter
+	\LowerAdjust=\RuleAdjust
+	\RuleWidth=\LowerWidth
+	\global\@LeftOffset=\LowerAdjust
+%
+	\else	% \UpperWidth <= \LowerWidth
+		% \UpperCenter <= \LowerCenter
+%
+	\UpperAdjust=\LowerCenter \advance\UpperAdjust by -\UpperCenter
+	\RuleAdjust=0pt
+	\LowerAdjust=0pt
+	\RuleWidth=\LowerWidth
+	\global\@LeftOffset=0pt
+%
+	\fi\fi
+% Make a box
+	\if@inferRule
+%
+	\setbox\ResultBox=\vbox{
+		\moveright \UpperAdjust \box\@UpperPart
+		\nointerlineskip \kern\inferLineSkip
+		\moveright \RuleAdjust \vbox{\hrule width\RuleWidth}\relax
+		\nointerlineskip \kern\inferLineSkip
+		\moveright \LowerAdjust \box\@LowerPart }\relax
+%
+	\@ifEmpty{#1}{}{\relax
+%
+	\HLabelAdjust=\wd\ResultBox	\advance\HLabelAdjust by -\RuleAdjust
+	\advance\HLabelAdjust by -\RuleWidth
+	\WidthAdjust=\HLabelAdjust
+	\advance\WidthAdjust by -\inferLabelSkip
+	\advance\WidthAdjust by -\wd\@LabelPart
+	\ifdim \WidthAdjust < 0pt \WidthAdjust=0pt \fi
+%
+	\VLabelAdjust=\dp\@LabelPart
+	\advance\VLabelAdjust by -\ht\@LabelPart
+	\VLabelAdjust=0.5\VLabelAdjust	\advance\VLabelAdjust by \LowerHeight
+	\advance\VLabelAdjust by \inferLineSkip
+%
+	\setbox\ResultBox=\hbox{\box\ResultBox
+		\kern -\HLabelAdjust \kern\inferLabelSkip
+		\raise\VLabelAdjust \box\@LabelPart \kern\WidthAdjust}\relax
+%
+	}\relax % end @ifEmpty
+%
+	\else % \@inferRulefalse
+%
+	\setbox\ResultBox=\vbox{
+		\moveright \UpperAdjust \box\@UpperPart
+		\nointerlineskip \kern\inferLineSkip
+		\moveright \LowerAdjust \hbox{\unhbox\@LowerPart
+			\@ifEmpty{#1}{}{\relax
+			\kern\inferLabelSkip \unhbox\@LabelPart}}}\relax
+	\fi
+%
+	\global\@RightOffset=\wd\ResultBox
+	\global\advance\@RightOffset by -\@LeftOffset
+	\global\advance\@RightOffset by -\LowerWidth
+	\if@ReturnLeftOffset \else \global\@LeftOffset=\@SavedLeftOffset \fi
+%
+	\box\ResultBox
+%	\hbox{\lower\LowerHeight\box\ResultBox}\relax
+	\@RestoreMath
+}
+
+%	Flags
+
+\newif\if@infermidRule	% whether \@infermid draws a rule.
+\newif\if@ReturnLeftOffset	% whether \@infermid returns \@LeftOffset.
+\newif\if@MathSaved	% whether inner math mode where \infermid or
+			% \deduce appears.
+
+%	Special Fonts
+% I want to use this definition but there may be no appropriate font size.
+% \font\LineFont=line10 at \PointSize
+% \def\DeduceSym{\hbox{\LineFont \char'100 \vrule \char'0}}
+
+% I have decided to use \vdots instead of the symbol consisting 3 lines.
+%
+% \def\DeduceSym{{\setlength{\unitlength}{\PointSize}\begin{picture}
+% 	\put(0,1){\line(1,-1){1}}
+% 	\put(1,1){\line(0,-1){1}}
+% 	\put(2,1){\line(-1,-1){1}}
+% \end{picture}}}
+
+%	Math Save Macros
+%
+%	\@SaveMath is called in the very begining of toplevel macros
+%	which are \infermid and \deduce.
+%	\@RestoreMath is called in the very last before toplevel macros end.
+%	Remark \infermid and \deduce ends calling \@infermid.
+
+\def\infermid{\@SaveMath \@ifnextchar *{\@infermidSteps}{\@infermidOneStep}}
+
+\def\@infermidOneStep{\@infermidRuletrue
+	\@ifnextchar [{\@infermid}{\@infermid[\@empty]}}
+
+\def\@infermidSteps*{\@ifnextchar [{\@@infermidSteps}{\@@infermidSteps[\@empty]}}
+
+\def\@@infermidSteps[#1]{\@deduce{#1}[\DeduceSym]}
+
+\def\@infermid[#1]#2#3{\relax
+% Get parameters
+	\if@ReturnLeftOffset \else \@SavedLeftOffset=\@LeftOffset \fi
+	\setbox\@LabelPart=\hbox{$#1$}\relax
+	\setbox\@LowerPart=\hbox{$#2$}\relax
+%
+	\global\@LeftOffset=0pt
+	\setbox\@UpperPart=\vbox{\tabskip=0pt \halign{\relax
+		\global\@RightOffset=0pt \@ReturnLeftOffsettrue $##$&&
+		\inferTabSkip
+		\global\@RightOffset=0pt \@ReturnLeftOffsetfalse $##$\cr
+		#3\cr}}\relax
+%			Here is a little trick.
+%			\@ReturnLeftOffsettrue(false) influences on \infermid or
+%			\deduce placed in ## locally
+%			because of \@SaveMath and \@RestoreMath.
+	\UpperLeftOffset=\@LeftOffset
+	\UpperRightOffset=\@RightOffset
+% Calculate Adjustments
+	\LowerWidth=\wd\@LowerPart
+	\LowerHeight=\ht\@LowerPart
+	\LowerCenter=0.5\LowerWidth
+%
+	\UpperWidth=\wd\@UpperPart \advance\UpperWidth by -\UpperLeftOffset
+	\advance\UpperWidth by -\UpperRightOffset
+	\UpperCenter=\UpperLeftOffset
+	\advance\UpperCenter by 0.5\UpperWidth
+%
+	\ifdim \UpperWidth > \LowerWidth
+		% \UpperCenter > \LowerCenter
+	\UpperAdjust=0pt
+	\RuleAdjust=\UpperLeftOffset
+	\LowerAdjust=\UpperCenter \advance\LowerAdjust by -\LowerCenter
+	\RuleWidth=\UpperWidth
+	\global\@LeftOffset=\LowerAdjust
+%
+	\else	% \UpperWidth <= \LowerWidth
+	\ifdim \UpperCenter > \LowerCenter
+%
+	\UpperAdjust=0pt
+	\RuleAdjust=\UpperCenter \advance\RuleAdjust by -\LowerCenter
+	\LowerAdjust=\RuleAdjust
+	\RuleWidth=\LowerWidth
+	\global\@LeftOffset=\LowerAdjust
+%
+	\else	% \UpperWidth <= \LowerWidth
+		% \UpperCenter <= \LowerCenter
+%
+	\UpperAdjust=\LowerCenter \advance\UpperAdjust by -\UpperCenter
+	\RuleAdjust=0pt
+	\LowerAdjust=0pt
+	\RuleWidth=\LowerWidth
+	\global\@LeftOffset=0pt
+%
+	\fi\fi
+% Make a box
+	\if@infermidRule
+%
+	\setbox\ResultBox=\vbox{
+		\moveright \UpperAdjust \box\@UpperPart
+		\nointerlineskip \kern\inferLineSkip
+		\moveright \RuleAdjust \vbox{\hrule width\RuleWidth}\relax
+		\nointerlineskip \kern\inferLineSkip
+		\moveright \LowerAdjust \box\@LowerPart }\relax
+%
+	\@ifEmpty{#1}{}{\relax
+%
+	\HLabelAdjust=\wd\ResultBox	\advance\HLabelAdjust by -\RuleAdjust
+	\advance\HLabelAdjust by -\RuleWidth
+	\WidthAdjust=\HLabelAdjust
+	\advance\WidthAdjust by -\inferLabelSkip
+	\advance\WidthAdjust by -\wd\@LabelPart
+	\ifdim \WidthAdjust < 0pt \WidthAdjust=0pt \fi
+%
+	\VLabelAdjust=\dp\@LabelPart
+	\advance\VLabelAdjust by -\ht\@LabelPart
+	\VLabelAdjust=0.5\VLabelAdjust	\advance\VLabelAdjust by \LowerHeight
+	\advance\VLabelAdjust by \inferLineSkip
+%
+	\setbox\ResultBox=\hbox{\box\ResultBox
+		\kern -\HLabelAdjust \kern\inferLabelSkip
+		\raise\VLabelAdjust \box\@LabelPart \kern\WidthAdjust}\relax
+%
+	}\relax % end @ifEmpty
+%
+	\else % \@infermidRulefalse
+%
+	\setbox\ResultBox=\vbox{
+		\moveright \UpperAdjust \box\@UpperPart
+		\nointerlineskip \kern\inferLineSkip
+		\moveright \LowerAdjust \hbox{\unhbox\@LowerPart
+			\@ifEmpty{#1}{}{\relax
+			\kern\inferLabelSkip \unhbox\@LabelPart}}}\relax
+	\fi
+%
+	\global\@RightOffset=\wd\ResultBox
+	\global\advance\@RightOffset by -\@LeftOffset
+	\global\advance\@RightOffset by -\LowerWidth
+	\if@ReturnLeftOffset \else \global\@LeftOffset=\@SavedLeftOffset \fi
+%
+	\hbox{\lower\LowerHeight\box\ResultBox}\relax
+	\@RestoreMath
+}
+\def\ttt#1{\catcode `\# = 12\def\cdots{...}{\tt #1}}
+\def\all#1:#2{\forall #1\!:\!#2. }
+\def\some#1:#2{\forall #1\!:\!#2. }
+\def\Ty#1:#2{#1\!:\!#2 }

@@ -1,0 +1,80 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: ind_strat,v 1.8 1998/09/15 15:16:19 img Exp $
+ *
+ * $Log: ind_strat,v $
+ * Revision 1.8  1998/09/15 15:16:19  img
+ * prefer casesplits to wholly flawed inductions
+ *
+ * Revision 1.7  1998/08/26 12:55:52  img
+ * Single call to scheme_suggestion is used to decide between flawed and
+ * unflawed induction.  casesplit is tried if it is unflawed and there
+ * are no unflawed inductions.
+ *
+ * Revision 1.6  1998/07/30 16:03:21  img
+ * Allow base- and step-case methods to fail on any of the subgoals
+ * resulting from induction (this patch just brings the step-case into
+ * line with the base case).  This patch is a reponse to the situation in
+ * which some progress is made on some base-cases, and yet one of the
+ * step-cases fails.  There is an argument that if this situation does
+ * arise then the correct thing to do is fail anyway.
+ *
+ * Revision 1.5  1998/06/10 08:34:06  img
+ * allow possibility that mthd(base_case) may not be applicable to base-case
+ *
+ * Revision 1.4  1997/10/17 17:18:42  rjb
+ * Fixed comment.
+ *
+ * Revision 1.3  1997/10/17 14:25:58  rjb
+ * Added source of induction lemma to method arguments.
+ *
+ * Revision 1.2  1995/10/03 12:54:10  img
+ * Induciton preconditions present verbatim to avoid duplication of call
+ * to scheme.  Use induction/1 rather than induction/2.
+ *
+ * Revision 1.1  1994/09/16  09:33:29  dream
+ * Initial revision
+ *
+ */
+method(ind_strat(Method),
+       H==>G,
+       [scheme_suggestion(H,G,induction,ripple,AllInductionInfo),
+	/* try an unflawed induction */
+	((selection_heuristic(AllInductionInfo, Scheme,0-_-_),
+	  scheme(Lemma,Scheme,H==>G,BSeqs,SSeqs));
+	 applicable_submethod(H==>G, casesplit(datatype(unflawed,P)),Plan,AllSeqs);
+	 (/* using same analysis, attempt flawed induction if there was no unflawed one */
+	  \+ (selection_heuristic(AllInductionInfo, Scheme,0-_-_),
+	      scheme(Lemma,Scheme,H==>G,BSeqs,SSeqs)),
+	  selection_heuristic(AllInductionInfo, Scheme,_-_-M),
+	  M > 0,	%pointless to try wholly flawed induction (?)
+	  scheme(Lemma,Scheme,H==>G,BSeqs,SSeqs));
+	  applicable_submethod(H==>G, casesplit(datatype(_,P)),Plan,AllSeqs))],
+
+       [(var(Scheme) -> /* Doing a casesplit */
+	    (Method = cases(datatype(P)));
+	    /* INDUCTION */
+	    (Method = (induction(Lemma-Scheme) then CasesTactics),
+	     map_list(BSeqs,BSeq:=>NBSeq,
+		      ((applicable_submethod(BSeq,base_case(Ms),_,BSeq1),
+			NBSeq=BSeq1-base_case(Ms)) 
+			   orelse NBSeq=BSeq-idtac),		      
+		      BSeq1sBTs),
+	     zip(BSeq1sBTs,BSeq1s,BaseTactics1),
+	     flatten(BaseTactics1,BaseTactics),
+	     flatten(BSeq1s,FBSeq1s),
+	     map_list(SSeqs,SSeq:=>NSSeq,
+		      ((applicable_submethod(SSeq,step_case(Ms),_,SSeq1),
+			NSSeq=SSeq1-step_case(Ms))
+			   orelse (erase_sequent(SSeq,SSeqErase),
+				   NSSeq=SSeqErase-idtac)),
+		      SSeq1sSTs),
+	     /* ensure at least one stepcase has made progress */
+  	     !,
+	     member(_-step_case(_),SSeq1sSTs),
+	     zip(SSeq1sSTs,SSeq1s,StepTactics),
+	     flatten(SSeq1s,FSSeq1s),
+	     append(BaseTactics, StepTactics, CasesTactics),
+	     append(FBSeq1s,FSSeq1s,AllSeqs)))],
+       AllSeqs,
+       ind_strat(Method)).
+

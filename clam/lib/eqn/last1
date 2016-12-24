@@ -1,0 +1,4 @@
+problem([]==>t:u(1)=>last(nil)=nil in t list,
+simplify then repeat intro,lambda(t,axiom),
+[
+]).

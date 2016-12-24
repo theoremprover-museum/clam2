@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: not0m,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: not0m,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>y:pnat=>((x=0 in pnat=>void)#y=0 in pnat=>void)=>times(x,y)=0 in pnat=>void,_,_,_).

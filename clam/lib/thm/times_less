@@ -1,0 +1,27 @@
+problem([]==>x:pnat=>y:pnat=>(less(0,x)#less(0,y))=>less(0,times(x,y)),
+ind_strat(cases(datatype([x:pnat,s(v0)]))),lambda(x,pnat_eq(x,0,su(lambda(v0,lambda(v1,su(v3,[v1 of v0],[v3]))of _15463),[axiom],[v2]),su(su(lambda(v1,su(su(spread(v5,[v0,v6,lambda(v1,lambda(v3,su(v4,[v3 of v1],[v4]))of _15408)]),[v4 of v2],[v5]),[v1 of x],[v4]))of v3,[term_of(succlemma)],[v3]),[lambda(~,axiom)],[v2]))),
+[problem([x:pnat]==>y:pnat=>(less(0,0)#less(0,y))=>less(0,times(0,y)),
+ normalize_term([reduction([1,1],[less1,equ(u(1),left)]),reduction([1],[and3,equiv(left)]),reduction([],[imp2,equiv(left)])])then[elementary((intro(new[y])then wfftacs)then unfold_iff then intro(explicit(0))then simplify then wfftacs)],lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(v0,su(su(spread(v1,[v2,v3,lambda(v5,lambda(v6,su(v7,[v5 of su(v7,[v2 of v6],[v7])],[v7])))of(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(v0,su(su(spread(v1,[v2,v3,su(v5,[v3 of(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(y,0))],[v5])]),[imp2 of less(0,times(0,v0))],[v1]),[term_of(imp2)],[imp2])))]),[and3 of less(0,v0)],[v1]),[term_of(and3)],[and3])),[less1 of 0],[v1]),[term_of(less1)],[less1])),
+ [
+ ]) ext _15463,
+ problem([x:pnat,v0:pnat]==>y:pnat=>(less(0,s(v0))#less(0,y))=>less(0,times(s(v0),y)),
+ normalize_term([reduction([1,1],[less2,equ(u(1),left)]),reduction([1],[and2,equiv(left)]),reduction([2,2],[times2,equ(pnat,left)])]),lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(v1,su(su(spread(v2,[v3,v4,lambda(v6,lambda(v7,su(v8,[v6 of su(v8,[v3 of v7],[v8])],[v8])))of(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(v1,su(su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of _14840,[v2 of v1],[v3]),[times2 of v0],[v2]),[term_of(times2)],[times2])))]),[and2 of less(0,v1)],[v2]),[term_of(and2)],[and2])),[less2 of v0],[v2]),[term_of(less2)],[less2])),
+ [problem([x:pnat,v0:pnat]==>y:pnat=>less(0,y)=>less(0,plus(times(v0,y),y)),
+  ind_strat(induction(lemma(pnat_primitive)-[(v0:pnat)-s(v1)])then[base_case(normalize_term([reduction([1,2,2],[times1,equ(pnat,left)]),reduction([2,2],[plus1,equ(pnat,left)])])then[elementary((intro(new[y])then wfftacs)then unfold_iff then(intro(new[v1])then wfftacs)then hyp(v1))]),step_case(ripple(direction_out,wave(direction_out,[1,2,2],[times2,equ(pnat,left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,=>,[],v2)]))then[idtac]))])]),p_ind(v0,lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(y,lambda(v1,v1)),[plus1 of v1],[v2]),[term_of(plus1)],[plus1])),[times1 of v1],[v2]),[term_of(times1)],[times1])),[v1,v2,lambda(v3,su(su(su(lambda(v4,su(v5,[v4 of v3],[v5]))of lambda(v3,lambda(v4,su(lambda(v6,su(su(v8,[v4 of v7],[v8]),[v5 of v6],[v7])),[v2 of v3],[v5]))of(lambda(v4,su(v5,[v4 of v3],[v5]))of _14397)),[v4 of v3],[v5]),[times2 of v1],[v4]),[term_of(times2)],[times2]))]),
+  [problem([x:pnat,v0:pnat,v1:pnat,v2:y:pnat=>less(0,y)=>less(0,plus(times(v1,y),y))]==>y:pnat=>less(0,plus(times(v1,y),y))=>less(0,plus(plus(times(v1,y),y),y)),
+   generalise(plus(times(v1,y),y),v3:pnat),lambda(v3,lambda(v4,su(su(v6,[v5 of v4],[v6]),[v3 of plus(times(v1,v4),v4)],[v5])))of _14264,
+   [problem([x:pnat,v0:pnat,v1:pnat,v2:y:pnat=>less(0,y)=>less(0,plus(times(v1,y),y))]==>v3:pnat=>y:pnat=>less(0,v3)=>less(0,plus(v3,y)),
+    ind_strat(cases(datatype([v3:pnat,s(v4)]))),lambda(v3,pnat_eq(v3,0,su(lambda(v4,lambda(v5,su(v7,[v5 of v4],[v7]))of _14119),[axiom],[v6]),su(su(lambda(v5,su(su(spread(v9,[v4,v10,lambda(v5,lambda(v7,su(v8,[v7 of v5],[v8]))of _14064)]),[v8 of v6],[v9]),[v5 of v3],[v8]))of v7,[term_of(succlemma)],[v7]),[lambda(~,axiom)],[v6]))),
+    [problem([x:pnat,v0:pnat,v1:pnat,v2:y:pnat=>less(0,y)=>less(0,plus(times(v1,y),y)),v3:pnat]==>y:pnat=>less(0,0)=>less(0,plus(0,y)),
+     normalize_term([reduction([1],[less1,equ(u(1),left)]),reduction([],[imp2,equiv(left)])])then[elementary((intro(new[y])then wfftacs)then unfold_iff then intro(explicit(0))then simplify then wfftacs)],lambda(v4,su(su(lambda(v5,su(v6,[v5 of v4],[v6]))of lambda(v4,su(su(spread(v5,[v6,v7,su(v9,[v7 of(lambda(v5,su(v6,[v5 of v4],[v6]))of lambda(y,0))],[v9])]),[imp2 of less(0,plus(0,v4))],[v5]),[term_of(imp2)],[imp2])),[less1 of 0],[v5]),[term_of(less1)],[less1])),
+     [
+     ]) ext _14119,
+     problem([x:pnat,v0:pnat,v1:pnat,v2:y:pnat=>less(0,y)=>less(0,plus(times(v1,y),y)),v3:pnat,v4:pnat]==>y:pnat=>less(0,s(v4))=>less(0,plus(s(v4),y)),
+     normalize_term([reduction([1],[less2,equ(u(1),left)]),reduction([],[imp1,equiv(left)]),reduction([2],[plus2,equ(pnat,left)]),reduction([],[less2,equ(u(1),left)])])then[elementary((intro(new[y])then wfftacs)then unfold_iff then intro(explicit(0))then simplify then wfftacs)],lambda(v5,su(su(lambda(v6,su(v7,[v6 of v5],[v7]))of lambda(v5,su(su(spread(v6,[v7,v8,su(v10,[v8 of(lambda(v6,su(v7,[v6 of v5],[v7]))of lambda(v5,su(su(su(lambda(v6,su(v7,[v6 of v5],[v7]))of lambda(v5,su(su(lambda(v6,su(v7,[v6 of v5],[v7]))of lambda(y,0),[less2 of plus(v4,v5)],[v6]),[term_of(less2)],[less2])),[v6 of v5],[v7]),[plus2 of v4],[v6]),[term_of(plus2)],[plus2])))],[v10])]),[imp1 of less(0,plus(s(v4),v5))],[v6]),[term_of(imp1)],[imp1])),[less2 of v4],[v6]),[term_of(less2)],[less2])),
+     [
+     ]) ext _14064
+    ]) ext _14264
+   ]) ext _14397
+  ]) ext _14840
+ ]) ext _15408
+]).

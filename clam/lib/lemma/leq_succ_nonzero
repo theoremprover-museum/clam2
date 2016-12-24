@@ -1,0 +1,29 @@
+problem([]==>y:pnat=>leq(s(0),y)=>y=0 in pnat=>void,
+intro,lambda(y,_1167),
+[problem([y:pnat]==>leq(s(0),y)=>y=0 in pnat=>void,
+ decide(y=0 in pnat),pnat_eq(y,0,su(_1217,[axiom],[v0]),su(_1225,[lambda(~,axiom)],[v0])),
+ [problem([y:pnat,v0:y=0 in pnat]==>leq(s(0),y)=>y=0 in pnat=>void,
+  sym_eval(equal(v0,right)then[normalize_term([reduction([1],[leq2,equ(u(1),left)]),reduction([],[imp2,equiv(left)])])])then[elementary(istrue)],su(su(su(su(spread(v0,[v1,v2,su(v4,[v2 of 0],[v4])]),[imp2 of (0=0 in pnat=>void)],[v0]),[term_of(imp2)],[imp2]),[leq2 of 0],[v0]),[term_of(leq2)],[leq2]),
+  [
+  ]) ext _1217,
+  problem([y:pnat,v0:y=0 in pnat=>void]==>leq(s(0),y)=>y=0 in pnat=>void,
+  (lemma(succlemma,new[v2])then rename_hyp(v2,[y:pnat,v0:y=0 in pnat=>void]==>leq(s(0),y)=>y=0 in pnat=>void,v1)then thin([v2]))then (elim(v1,on(y),new[v3])then thin([v1]))then[thin([v3])then try wfftacs,(elim(v3,new[v4])then thin([v3]))then[hyp(v0),(elim(v4,new[sy,v5,v1])then thin([v4]))then (rewrite(v5)then thin([v5]))then try wfftacs]],su(lambda(v1,su(su(spread(v4,[sy,v5,_1626]),[v3 of v0],[v4]),[v1 of y],[v3]))of v2,[term_of(succlemma)],[v2]),
+  [problem([y:pnat,v0:y=0 in pnat=>void,sy:pnat]==>leq(s(0),s(sy))=>s(sy)=0 in pnat=>void,
+   elementary(intro(new[v1])then[intro(new[v2])then[clam_arith(v2:s(sy)=0 in pnat),wfftacs],wfftacs]),lambda(v1,lambda(v2,su(su(su(any(v5),[v4 of v2],[v5]),[v3 of sy],[v4]),[term_of(arith1)],[v3]))),
+   [
+   ]) ext _1626
+  ]) ext _1225,
+  problem([y:pnat]==>y in pnat,
+  repeat wfftac,axiom,
+  [
+  ]),
+  problem([y:pnat]==>0 in pnat,
+  repeat wfftac,axiom,
+  [
+  ])
+ ]) ext _1167,
+ problem([]==>pnat in u(1),
+ repeat wfftac,axiom,
+ [
+ ])
+]).

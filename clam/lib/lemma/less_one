@@ -1,0 +1,14 @@
+problem([]==>x:pnat=>less(x,s(0))=>x=0 in pnat,
+repeat dequantify_once,lambda(x,_2416),
+[problem([x:pnat]==>less(x,s(0))=>x=0 in pnat,
+ elim(x),p_ind(x,_2453,[v0,v1,_2459]),
+ [problem([x:pnat]==>less(0,s(0))=>0=0 in pnat,
+  elementary(intro(new[v0])then[identity,wfftacs]),lambda(v0,axiom),
+  [
+  ]) ext _2453,
+  problem([x:pnat,v0:pnat,v1:less(v0,s(0))=>v0=0 in pnat]==>less(s(v0),s(0))=>s(v0)=0 in pnat,
+  sym_eval(normalize_term([reduction([1],[less3,equ(u(1),left)]),reduction([1],[less1,equ(u(1),left)])]))then[elementary(intro(new[v2])then[elim(v2),wfftacs])],su(su(su(su(su(lambda(v2,any(v2)),[less1 of v0],[v2]),[term_of(less1)],[less1]),[v2 of 0],[v3]),[less3 of v0],[v2]),[term_of(less3)],[less3]),
+  [
+  ]) ext _2459
+ ]) ext _2416
+]).

@@ -1,0 +1,4 @@
+problem([]==>t:u(1)=> ({true}\t)<=>{true},
+propositional then wfftacs,lambda(t,lambda(v0,0)&lambda(v0,inl(0))),
+[
+]).

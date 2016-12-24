@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: qrev1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: qrev1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l:int list=>qrev(nil,l)=l in int list,
+simplify,_7713,
+[problem([]==>l:int list=>l=l in int list,
+ repeat intro,lambda(l,axiom),
+ [
+ ]) ext _7713
+]).

@@ -1,0 +1,4 @@
+problem([]==>quicksort(nil)=nil in pnat list,
+simplify then identity,axiom,
+[
+]).

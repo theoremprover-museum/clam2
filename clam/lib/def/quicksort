@@ -1,0 +1,1 @@
+quicksort(l) <==> term_of(quicksort) of l.

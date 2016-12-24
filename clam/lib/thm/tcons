@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: tcons,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: tcons,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>a:int=>l:int list=>x:int list#x=app(l,a::nil)in int list,
+ind_strat(induction([v0::v1],[l:int list])then[base_case([sym_eval([eval_def([2,1,2,2],[app1,equ(left)]),existential(x:int list,a::nil),reduction([],cnc_cons1)]),elementary(intro(new[a])then[identity,wfftacs])]),step_case(ripple(wave([2,1],[app2,equ(left)],[])then[wave([],[cnc_cons1,imp(right)],[x:int list,v0::v3])])then[fertilize(strong,v2)])]),lambda(v0,lambda(v1,lambda(v2,su(su(v4,[v3 of v0],[v4]),[v2 of v1],[v3]))of lambda(l,list_ind(l,lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(v0,(v0::nil)&lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(v0,su(su(su(su(su(v1,[v3 of (lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(a,axiom))],[v1]),[v2 of nil],[v3]),[v1 of nil],[v2]),[cnc_cons1 of v0],[v1]),[term_of(cnc_cons1)],[cnc_cons1]))),[app1 of (v0::nil)],[v1]),[term_of(app1)],[app1])),[v0,v1,v2,lambda(v3,su(su(su(su(lambda(v4,su(v5,[v4 of v3],[v5]))of lambda(a,lambda(exhyp,spread(exhyp,[v3,v4,(v0::v3)&su(su(su(su(su(v6,[v8 of v4],[v6]),[v7 of app(v1,a::nil)],[v8]),[v6 of v3],[v7]),[cnc_cons1 of v0],[v6]),[term_of(cnc_cons1)],[cnc_cons1])]))of su(v3,[v2 of a],[v3])),[v5 of (v3::nil)],[v6]),[v4 of v1],[v5]),[app2 of v0],[v4]),[term_of(app2)],[app2]))])))),
+[
+]).

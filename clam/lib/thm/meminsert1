@@ -1,0 +1,17 @@
+problem([]==>a:int=>b:int=>l:int list=>a=b in int=>member(a,insert(b,l))={true}in u(1),
+normalize([normal(univ_intro),normal(univ_intro),normal(univ_intro),normal(imply_intro)]),lambda(a,lambda(b,lambda(l,lambda(v0,_46785)))),
+[problem([a:int,b:int,l:int list,v0:a=b in int]==>member(a,insert(b,l))={true}in u(1),
+ equal(v0,left),_46776,
+ [problem([a:int,b:int,l:int list]==>member(a,insert(a,l))={true}in u(1),
+  ind_strat(induction(lemma(list_primitive)-[(l:int list)-v1::v0])then[base_case(normalize_term([reduction([2,1,1],[insert1,equ(int list,left)]),reduction([],[member2,imp(right)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,casesplit(disjunction([a<v1=>void,a<v1]))then[wave(direction_out,[2,1,1],[insert3,equ(int list,left)],[])then[casesplit(disjunction([a=v1 in int=>void,a=v1 in int]))then[wave(direction_out,[1,1],[member3,equ(u(1),left)],[]),wave(direction_out,[1,1],[member2,complementary,equ(u(1),left)],[])]],wave(direction_out,[2,1,1],[insert2,complementary,equ(int list,left)],[])])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,pwf_then_fertilize(strong,fertilization_strong(v2)))),idtac,idtac])]),list_ind(l,su(su(su(su(su(su(su(v0,[v2 of axiom],[v0]),[v1 of nil],[v2]),[v0 of a],[v1]),[member2 of a],[v0]),[term_of(member2)],[member2]),[insert1 of a],[v0]),[term_of(insert1)],[insert1]),[v1,v0,v2,lambda(v4,decide(v4,[v5,lambda(v3,su(su(su(su(su(lambda(v5,decide(v5,[v6,lambda(v4,su(su(su(su(su(v2,[v7 of v4],[v5]),[v6 of insert(a,v0)],[v7]),[v5 of v1],[v6]),[member3 of a],[v5]),[term_of(member3)],[member3]))of v6],[v7,lambda(v4,su(su(su(su(su(_46199,[v7 of v4],[v5]),[v6 of insert(a,v0)],[v7]),[v5 of v1],[v6]),[member2 of a],[v5]),[term_of(member2)],[member2]))of v7]))of su(su(su(v6,[v5 of v1],[v6]),[v4 of a],[v5]),[term_of(deceqint)],[v4]),[v6 of v3],[v4]),[v5 of v0],[v6]),[v4 of v1],[v5]),[insert3 of a],[v4]),[term_of(insert3)],[insert3]))of v5],[v6,lambda(v3,su(su(su(su(su(_46066,[v6 of v3],[v4]),[v5 of v0],[v6]),[v4 of v1],[v5]),[insert2 of a],[v4]),[term_of(insert2)],[insert2]))of v6]))of su(su(su(v5,[v4 of v1],[v5]),[v3 of a],[v4]),[term_of(decless2)],[v3])]),
+  [problem([a:int,b:int,l:int list,v1:int,v0:int list,v2:member(a,insert(a,v0))={true}in u(1),v3:a<v1=>void,v4:a=v1 in int]==>{true}={true}in u(1),
+   elementary(unfold_iff then identity),axiom,
+   [
+   ]) ext _46199,
+   problem([a:int,b:int,l:int list,v1:int,v0:int list,v2:member(a,insert(a,v0))={true}in u(1),v3:a<v1]==>member(a,a::v1::v0)={true}in u(1),
+   normalize_term([reduction([],[member2,imp(right)])])then[elementary(unfold_iff then identity)],su(su(su(su(su(v4,[v6 of axiom],[v4]),[v5 of(v1::v0)],[v6]),[v4 of a],[v5]),[member2 of a],[v4]),[term_of(member2)],[member2]),
+   [
+   ]) ext _46066
+  ]) ext _46776
+ ]) ext _46785
+]).

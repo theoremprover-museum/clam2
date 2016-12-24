@@ -1,0 +1,858 @@
+\documentclass{article}
+\usepackage{a4,dream}
+% the following causes \tt\{ to be in cmtt!
+\DeclareTextSymbol{\textbraceleft}{OT1}{'173}
+\DeclareTextSymbol{\textbraceright}{OT1}{'175}
+
+
+\newcommand{\clamversion}{2.7}%no patchlevel here
+
+\def\id#1{\hbox{\it#1}}
+
+\pagestyle{plain}
+
+\title{Clamming for the Complete Klutz\thanks
+{Acknowledgements for the title to the authors of
+{\em Juggling for the Complete Klutz}, and apologies to the reader.}\\
+{\large (for \clam version \clamversion)}}
+
+\author{Helen Lowe\\(updated by Richard Boulton, Ian Green)}
+
+\date{November 1997}
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introduction to this guide}
+
+This document is not meant to replace either the \clam manual
+or the \clam Primer. Rather, it is intended as a quick and easy guide to
+how to enter and prove new theorems in \clam. It is assumed that you
+are already fairly familiar, on a theoretical level, with proof planning
+and the rippling story, or at least that you are becoming acquainted
+and are maybe wanting to actually use \clam to assist with this.
+
+\oyster is an interactive system for proving theorems. The
+\clam-\oyster system lifts \oyster to the level of an automatic
+theorem prover.  We will go through the steps needed in order to prove
+a theorem using \clam, from entering the theorem to saving its
+proof. We give useful tables of figures: explaining ``oysterspeak''
+(i.e., the syntax of the \oyster logic) sufficiently for you to be
+able to type in theorems to \clam, and giving existing definitions,
+equations, and theorems in the \clam subdirectory in a readily
+comprehensible form for easy reference when you are using \clam.
+
+
+
+\section{Experimenting on an existing theorem\label{try-old-thm}}
+
+It is probably a good idea to introduce yourself to \clam by loading
+an existing easy theorem and getting \clam to prove it. 
+Before you start, make sure that
+you can run \clam in {\tt emacs} (see Appendix~\ref{emacs}), and
+that you have set up your {\em own} \clam library (see
+Appendix~\ref{make-own-lib}).
+
+Let us try the theorem {\tt assp}: the associativity of plus, {\em viz.}
+\[ \forall x \forall y \forall z \; \; \; \; x + (y + z) = (x + y) + z \]
+First we must load this theorem, which we do by typing at the \clam
+prompt 
+
+\begin{verbatim}
+| ?- lib_load(thm(assp)).
+\end{verbatim}
+
+One of the files in the {\tt CLAMSRC/lib}\footnote {In this document
+the token {\tt CLAMSRC} represents the full pathname of the \clam
+source directory.  On DReaM machines, this is {\tt
+/usr/local/dream/meta-level/clam/clam.v\clamversion.$x$}, for some $x$.} subdirectory is called
+{\tt needs}, and it records the dependencies between definitions, theorems,
+{\em etc.} For example, multiplication is defined in terms of addition,
+and division and the factorial function are both defined in terms of 
+multiplication. A fragment of the needs file is given in
+Figure~\ref{needs}.  (\clam also has a very simple autoloading
+mechanism which is described below.)
+%
+\begin{figure}[hhh]
+\rule\textwidth{0.02in}
+\begin{verbatim}
+               needs(def(times),       [def(plus)]).
+               needs(def(divides),     [def(times)]).
+                 ...   ...   ...   ...   ...   ...   
+                 ...   ...   ...   ...   ...   ...   
+               needs(def(fac),         [def(times)]).
+                 ...   ...   ...   ...   ...   ...   
+                 ...   ...   ...   ...   ...   ...   
+               needs(thm(assp),        [def(plus),wave(cnc_s)]).
+               needs(thm(assm),        [def(times)]).
+               needs(thm(comm),        [def(times)]).
+                 ...   ...   ...   ...   ...   ...   
+                 ...   ...   ...   ...   ...   ...   
+    % bottom clause to ensure success with no things needed (default case).
+               needs(_,[]).
+\end{verbatim}
+\caption{The {\tt needs} file for recording dependencies\label{needs}}
+\rule\textwidth{0.02in}
+\end{figure}
+%
+Because the {\tt needs} file has an entry
+%
+\begin{verse}
+{\tt needs(thm(assp), $\;\;\;\;\;\;\;\;\;$ [def(plus),wave(cnc\_s)]).}
+\end{verse}
+%
+then when you load {\tt thm(assp)} using \verb|lib-load| you will see
+the following: 
+
+\begin{verbatim}
+Loaded eqn(plus1)
+Loaded eqn(plus2)
+Added rewrite-record for plus1
+Added rewrite-record for plus2
+Added rewrite-record for plus2
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for plus1
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for plus2
+Loaded def(plus)
+Loaded thm(cnc_s)
+Added rewrite-record for cnc_s
+Added rewrite-record for cnc_s
+Added cancel-record for cnc_s
+Loaded thm(assp)
+\end{verbatim}
+
+If you do not get this, then again check your \clam directory,
+in particular the {\tt needs} file.
+For an explanation of this output, see Appendix~\ref{explain}.
+
+Now `select' the theorem by typing
+%
+\begin{verbatim}
+| ?- slct(assp).
+\end{verbatim}
+and plan it by typing
+\begin{verbatim}
+| ?- dplan.
+\end{verbatim} 
+for the depth first planner.  The sequence  of loading, selecting and
+planning has a shorthand:
+\begin{verbatim}
+| ?- plan(assp).
+\end{verbatim} 
+which does all three steps in one go.  
+
+When \clam is searching for a plan, it typically produces lots of
+output: see Appendix~\ref{explain} for an explanation of this,
+but for now note that we end up with the plan:
+
+\begin{verbatim}
+ind_strat([(x:pnat)-s(v0)])
+\end{verbatim}
+
+This is not very informative. The plan can be viewed in more detail by
+typing\footnote{Do not worry about what the arguments mean for the time being.}
+%
+\begin{verse}
+{\tt portray\_level(ind\_strat(\_),\_,99).}
+\end{verse}
+%
+and redisplaying the plan:
+%
+\begin{verbatim}
+| ?- display.
+assp: [] complete autotactic(idtac) 
+==> x:pnat=>
+    y:pnat=>z:pnat=>plus(x,plus(y,z))=plus(plus(x,y),z)in pnat
+by induction([(x:pnat)-s(v0)])then[base_case(...),step_case(...)]
+
+yes
+| ?- 
+\end{verbatim}
+%
+We can now see that the proof is by induction on the variable {\tt x} of type
+{\tt pnat} with separate plans for the base and step cases. Further use of
+{\tt portray\_level}
+%
+\begin{verse}
+{\tt portray\_level(base\_case(\_),\_,99).}
+
+{\tt portray\_level(step\_case(\_),\_,99).}
+\end{verse}
+%
+reveals more detail:
+%
+\begin{verbatim}
+induction([(x:pnat)-s(v0)])then
+  [base_case([sym_eval(...),elementary(...)]),
+   step_case(ripple(...)then
+     [unblock_then_fertilize
+        (strong,unblock_fertilize_lazy(...)thenfertilize(strong,...))])]
+\end{verbatim}
+%
+which is interpreted:
+%
+\begin{enumerate}
+\item induction on x consisting of
+\item (base case) symbolic evaluation
+%(two applications of {\tt plus1}),
+then elementary reasoning
+\item (step case) ripple
+%(three applications of {\tt plus2} and one of {\tt cnc\_s})
+then strong fertilize.
+\end{enumerate}
+%
+%Study the proof given in the green book ({\tt assp} is Theorem 10) 
+%and make sure you can relate the
+%output, at least vaguely, to what you see there. Appendix~\ref{explain}
+%should help.
+
+When you have been successful in getting \clam to plan this
+theorem, you may execute it, if you wish, using {\tt apply\_plan}.
+Then you will want to go ahead and enter your own theorems as
+described in the next section.
+
+%Of course, an interesting question to be answered before you begin is
+%``Is this theorem new to \clam or has someone entered it before
+%me?'' This can be found by looking in the list of all theorems currently
+%entered in the subdirectories {\tt CLAMSRC/lib/thm} and
+%{\tt CLAMSRC/lib/lemma},
+%which is regularly updated and held in
+%{\tt CLAMSRC/info-for-users/clam-thm-list.tex}.
+%The same goes for definitions {\em etc.}, which can be found in
+%the same area
+%({\tt CLAMSRC/info-for-users}).
+
+
+\section{Entering a new theorem\label{try-new-thm}}
+
+Entering a new theorem is generally preceded by loading certain
+definitions since one cannot enter a theorem unless all the
+definitions it mentions are already loaded.  
+
+By way of example, if we wanted to enter the theorem:
+%
+\[ \forall x \forall y  \; \; \; \; \; 
+(y.y).x = x.(y.y)
+\]
+Table~\ref{syntax} gives the \oyster syntax for various mathematical
+and logical expressions. Translate your theorem into this form, and
+enter it with a name you have chosen (preferably suggestive of the
+theorem).  
+
+\paragraph {Create {\tt thm} object}
+In your {\em own\/} library, e.g., {\tt$\sim$/clam/lib}, create a new
+logical object of type {\tt thm}.  This object go in the {\tt thm}
+subdirectory of the library---give the file a suitable name or acronym
+--- preferably reminiscent of the theorem it contains. Since I can't
+think of anything more sensible for now, let us say this one is called
+{\tt mything}.
+
+So the contents of file {\tt$\sim$/clam/lib/thm} will be
+\begin{verbatim}
+problem(
+  []==>x:pnat=>
+         y:pnat=>
+           times(times(y,y),x)=times(x,times(y,y)) in pnat,
+        _,_,_).
+\end{verbatim}
+
+\paragraph {Add definitions}
+You may need to enter new definitions or data structures. Existing
+ones are found in {\tt CLAMSRC/lib/def} and {\tt CLAMSRC/lib/eqn}.
+Add new ones in your library: {\tt$\sim$/clam/lib/def} and
+{\tt$\sim$/clam/lib/eqn}
+
+For this example, we do not need any new definitions. It is probably
+best that your first attempt is on a theorem which does not need any
+new definitions. This example theorem requires the definition of {\tt
+times}, which is found in {\tt CLAMSRC/lib/def/times}.
+
+\paragraph {Extend the {\tt needs} file}
+Various definitions, whether new or existing, may have to appear in
+the {\tt needs} file. If you do not already have your own {\tt needs}
+file, create one by copying {\tt CLAMSRC/lib/needs.pl} to
+{\tt$\sim$/clam/lib/needs.pl}.  Amend your {\tt needs}
+file\footnote{Note that if you change your {\tt needs} file, you will
+need to re-consult it before proceeding, otherwise \clam will not pick
+up the new or amended entries. Do this by typing {\tt
+['$\sim$/clam/lib/needs'].}}  by making an entry of the form
+%
+\begin{verse}
+{\tt needs(thm(mything), [...]).}
+\end{verse}
+%
+You may also need wave rules, 
+lemmas, etc., depending on the theorem, or you
+may need methods other than the default methods. (To see which methods are
+currently default, type `{\tt list\_methods.}' in \clam.) So your entry
+could look something like
+%
+\begin{verse}
+{\tt needs(thm(mything), 
+[def(times),wave(cnc\_s),lemma(assp),mthd(apply\_lemma/\_)]).}
+\end{verse}
+%
+The more idea you have about which wave rules, etc., you need, the
+better your chances of proving the theorem. But don't worry: if you
+don't get it right straight away you will be able to experiment.
+
+One of the things you will have to do, therefore, is to decide what
+should go in the {\tt needs} file entry. In the above example, notice
+that the theorem mentions `{\tt times}', so you will definitely need
+to load the definition of times. Now, `{\tt times}' is defined in
+terms of `plus', but you need not worry about this --- the process of
+recursively loading definitions needed by other definitions has all
+been automated (provided addition of new definitions is carried out
+correctly). Make your own entry in your own copy of the needs file. In
+this case you will need the wave rule
+
+\[ \wf{s(\wh{x})} = \wf{s(\wh{y})} \Rightarrow x = y \]
+which is the theorem {\tt cnc\_s}, so your entry will be
+\begin{verse}
+{\tt needs(thm(mything), [def(times),wave(cnc\_s)]).}
+\end{verse}
+You can stick this anywhere in your copy of the {\tt needs} file provided it
+is before the catch-all clause at the end. Maybe near the beginning is best,
+so you can quickly find your new entries when you want to modify or refer to
+them.
+
+\paragraph {Plan the theorem}
+Having done all this, you can now go back into \clam, type
+\begin{verse}
+{\tt lib\_set(dir(['$\sim$/clam/lib',*])).}
+
+{\tt lib\_load(thm(mything)).} 
+
+{\tt slct(mything).}
+
+{\tt dplan.}
+\end{verse}
+and you are at the same stage as at the
+start of Subsection~\ref{try-old-thm}. 
+
+Notice that the {\tt lib\_set} command specifies a {\em list\/} of
+libraries: \clam searches for logical objects in each of these
+libraries, in order, until it finds the object it is looking for.  By
+putting your private library ahead of the system library (for which
+the literal `{\tt *}' is the abbreviation), \clam  definitions from
+your library before searching the system library.  Also see
+section~\ref{make-own-lib}.
+
+\paragraph {Add lemmas etc.}
+If you do not get a plan, analyse the
+output, keep trying, or go away and think about it --- or issue it as a
+challenge theorem for others.
+
+The entries in the {\tt needs} file may not be sufficient to prove the
+theorem. Once you study \clam's attempts you may gain new insights.
+While experimenting, you can load additional definitions, lemmas (to
+be used as wave-rules), lemmas (to be used as plain rewrite rules),
+theorems (to be used as lemmas by certain methods) and methods.
+%
+\begin{verse}
+{\tt lib\_load(def(...)).}
+
+{\tt lib\_load(wave(...)).}
+
+{\tt lib\_load(red(...)).}
+
+{\tt lib\_load(thm(...)).}
+
+{\tt lib\_load(mthd(...)).}
+
+{\em etc.} 
+\end{verse}
+%
+You may want to load a {\em method} so that it is tried in a particular order.
+Type {\tt list\_methods} to see which methods are already loaded, and in which
+order. Currently this gives
+%
+\begin{verbatim}
+| ?- list_methods.
+
+    base_case/1
+    generalise/2
+    normalize/1
+    ind_strat/1
+
+yes
+\end{verbatim}
+%
+Suppose you want to load the {\tt induction} method in such a way that it is
+tried before (i.e., in preference to) the {\tt ind\_strat} method.
+You do this by typing
+%
+\begin{verse}
+{\tt lib\_load(mthd(induction/\_),before(ind\_strat/\_)).}
+\end{verse}
+%
+If you again type {\tt list\_methods} you will get
+%
+\begin{verbatim}
+    base_case/1
+    generalise/2
+    normalize/1
+    induction/1
+    ind_strat/1
+\end{verbatim}
+
+\section{\oyster speak\label{def-syntax}}
+
+Compare the ``natural'' syntax of the theorem stating the associativity
+of plus:
+%
+\[ \forall x \forall y \forall z \; \; \; \; x + (y + z) = (x + y) + z \]
+%
+with the {\tt assp} file:
+%
+\begin{verbatim}
+problem([]==>
+            x:pnat=>y:pnat=>z:pnat=>
+                      plus(x,plus(y,z))=plus(plus(x,y),z)in pnat,
+        _,_,_).
+\end{verbatim}
+%
+Note first that this starts off with
+%
+\begin{verse}
+{\tt problem([]==>}
+\end{verse}
+%
+(where {\tt []} is the hypothesis list $H$ in the sequent $H \vdash G$, empty
+in this case) and ends with
+%
+\begin{verse}
+{\tt \_,\_,\_).}
+\end{verse}
+%
+These uninstantiated variables can be used to store the proof and the
+extract term if the plan is executed, i.e., if the theorem is proved.
+For an explanation, see Appendix~\ref{guff}.
+
+Other salient points are:
+%
+\begin{enumerate}
+\item
+{\tt x:pnat} means that {\tt x} is of {\em type} {\tt pnat}, i.e.,
+a natural number (`p' for Peano).
+%\item
+%{\tt CLAMSRC/info-for-users/fn-list.txt}
+%gives the names of various types and functions: positive integers,
+%list types, propositions, times, greater than or equal to,
+%less than, factorial, {\em etc.}
+\item
+Table~\ref{syntax} gives other useful syntax.
+\end{enumerate}
+
+\begin{table}[hhh]
+\begin{tabular}{|c|c|l|l|} \hline 
+Symbol      & \oyster{} Syntax   & Example & In \oyster \\ \hline
+$ \rightarrow $       & {\tt => } & $ a \rightarrow b$ 
+                                    & {\tt a=>b } \\ \hline
+$ = $       & {\tt $\cdot$=$\cdot$ in <type>} & $ x=x$ 
+                                    & {\tt x=x in pnat} \\ \hline
+$\forall x$ & {\tt x:pnat=>} & $\forall x \; s(x) > x$ 
+                           & {\tt x:pnat=>greater(s(x),x)} \\ \hline
+$ a \vee b$ & {\tt a$\backslash$b}       & $ x>y\vee x\leq y$ 
+                        &    \verb|greater(x,y)\ leq(x,y)| \\ \hline
+$a \wedge b$ & {\tt x \# y}    & $(x=y \wedge y=z)\rightarrow x=z$ 
+           &  {\tt ((x=y in pnat)\#(y=z in pnat))} \\
+\ & \ & \ & {\tt =>x=z in pnat } \\ \hline
+$\neg a$ & {\tt a=>void} & $x\geq y \rightarrow \neg(x<y)$ 
+                             & {\tt geq(x,y)=>(less(x,y)=>void)} \\ \hline
+$ \exists y. P(y)$ & {\tt y:<type> \# P(y)} & $\forall x \exists y \; y>x$ 
+                            & {\tt x:pnat=>y:pnat\#greater(y,x)} \\ \hline
+\end{tabular}
+\caption{Table of logical connectives, quantifiers, etc. in \clam}
+\label{syntax} 
+\end{table}
+
+All these are straightforward, with the possible exception of expressing
+existential quantification, so we give another example here.
+
+Suppose we want to say
+that, for all positive integers $x$, there exists some list $l$
+of  prime numbers such that the product of the numbers in the list
+is equal to $x$, or
+%
+\[ \forall x:{\bf posint}.\ \exists l:{\bf list(prime)}.\ prodl(l)=x \]
+%
+where $prodl(l)$ is the product of all the elements of the list $l$.
+This is written as
+%
+\begin{verbatim} 
+problem([]==>
+             x:posint=>
+                       l:{prime}list # prodl(l)=x in posint,
+         _,_,_).
+\end{verbatim}
+%
+i.e., $l$ is a list of primes (we have a definition of the type $prime$)
+and the product of $l$ is equal to $x$.
+
+
+%\section{What next?\label{what-next}}
+%
+%Ultimately you should email the pseudo-user {\tt dream} so that your new files
+%may be copied into 
+%the \protect\linebreak{\tt CLAMSRC/lib} directory --- give the 
+%full path name of all your files: for example 
+%\protect\linebreak{\tt $\sim$yourname/clam/lib/thm/mything}.
+%You will also need to give details so that
+%the {\tt needs} subdirectory can be updated with an entry of the form
+%%
+%\begin{verbatim}
+%needs(thm(mything), [def(times), ...]).
+%\end{verbatim}
+%
+%If you are stuck, or things go wrong, ask someone for help. 
+%It is probably something very simple or stupid; but it is not you who
+%are either simple or stupid; there are lots of things which can go wrong
+%when you are new to the system. Some theorems may seem surprisingly
+%difficult to prove; issue these as challenge problems for other members
+%of the group.
+%
+%Eventually, enter the name of the theorem in the green book; use {\tt edgreen}
+%and add an entry to the bottom of the list. See the front of the green
+%book for instructions. Email {\tt dream} to say where the theorem is and what
+%its needs are, so it can be copied to the main {\tt lib} directory for other
+%people to access. This will apply even if you cannot prove it --- let others
+%have a go. Tell us about it, maybe an entry in the green book saying how
+%far you got or what goes wrong. Use {\tt dream} for ``housekeeping''
+%messages, and {\tt dreamers} for more interesting information or queries.
+%{\tt clamusers} may also be used for discussions about \clam.
+
+
+\appendix
+
+\begin{center}
+\section*{Appendices}
+\end{center}
+
+
+\section{Running \clam in {\tt emacs}\label{emacs}}
+
+Although you can simply run \clam by typing {\tt clam}, for most
+purposes it is best to run \clam inside Emacs. This way you can save a
+record of what you have done, edit old commands into new ones, and
+have all the good features that emacs gives you.
+
+To run \clam under Emacs, you need to add some Emacs lisp code to your
+.emacs file.  The files you need are distributed with \clam, and
+may have been installed in the standard place for Emacs.  (You'll need
+to consult your computing support people to find out.)
+
+On the DReaM machines, the support is enabled in Emacs by default, so
+you need only type: {\tt M-x run-clam} within Emacs.  A buffer called
+{\tt *clam*} will appear and \clam will be running inside it.
+
+See the \clam manual for more information concerning font-lock-mode
+etc.
+
+
+\section{Making your own \clam library\label{make-own-lib}}
+
+The {\tt CLAMSRC/lib} directory is as follows:
+%
+\begin{verbatim}
+                         lib
+                          |
+ --------------------------------------------------------------
+ |         |         |          |          |            |     etc.
+def       eqn       thm       lemma       mthd       needs.pl   
+---       ---       ---       -----       ----
+plus     plus1      assp      primelem    induction
+times    plus2      comm      decless     ripple
+etc.     etc.       etc.      etc.        eval_def
+                                          etc.
+\end{verbatim}
+
+In most \clam installations the main library will be write-protected,
+to prevent accidental or deliberate corruption.  To enable a user to
+save plans, proofs and new definitions etc.\ to a library, he or she
+should create a directory structure that mirrors the \clam library
+shown above.  (This should be in an area for which the user has the
+appropriate write permissions.)  The structure of the \clam library
+and the various objects it contains are described in the manual, but
+the tree below shows the complete directory structure that is needed.
+
+\begin{verbatim}
+$HOME/clam/lib/
+      needs.pl
+      def/
+      eqn/
+      thm/
+      lemma/
+      scheme/
+      synth/
+      plan/
+\end{verbatim}
+You will need to copy the {\tt needs} file from the system library.
+To achieve all this, issue the following UNIX commands from your {\tt
+\$HOME} directory:
+\begin{verbatim}
+% mkdir clam; mkdir clam/lib; cd clam/lib
+% mkdir def eqn thm lemma scheme synth plan
+% cp CLAMSRC/lib/needs.pl .
+\end{verbatim}
+
+It is not necessary to copy all of the files from the system library
+to your own library since you can specify the system library as part
+of \clam's library path.  Do this (as earlier):
+%
+\begin{verse}
+{\tt lib\_set(dir(['$\sim$/clam/lib',*])).}
+\end{verse}
+%
+You will also need to set the `save' directory in \clam to be your own
+directory. To do this type (in \clam):
+%
+\begin{verse}
+{\tt lib\_set(sdir('$\sim$/clam/lib')).}
+\end{verse}
+
+
+\section{Explanation of \clam output\label{explain}}
+
+When you typed {\tt lib\_load(thm(assp)).}, you should have obtained the
+output
+%
+\begin{verbatim}
+Loaded eqn(plus1)
+Loaded eqn(plus2)
+Added rewrite-record for plus1
+Added rewrite-record for plus2
+Added rewrite-record for plus2
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for plus1
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for plus2
+Loaded def(plus)
+Loaded thm(cnc_s)
+Added rewrite-record for cnc_s
+Added rewrite-record for cnc_s
+Added cancel-record for cnc_s
+Loaded thm(assp)
+\end{verbatim}
+%
+Let us explain what is happening here.
+%
+\begin{enumerate}
+
+\item
+\clam looks up the {\tt needs} entry for {\tt thm(assp)}. The first
+dependancy is {\tt def(plus)}.
+
+\item There are no dependancies on {\tt def(plus)}.
+\item
+\clam takes the definition of plus from the {\tt lib/def/plus file}.
+This is
+%
+\begin{verse}
+{\tt plus(x,y) <==> p\_ind(x,y,[$\sim$,v,s(v)]).}
+\end{verse}
+%
+i.e., the recursive definition of plus.
+
+\item
+Now \clam picks up all consecutively numbered entries of the form {\tt
+plus$n$} from the {\tt lib/eqn} directory. These are (ignoring the bit
+starting {\tt problem([]==>,...}  and the oyster proof and extract
+term):
+%
+\begin{verse}
+{\tt plus1}: $ \; \; $ {\tt y:pnat => plus(0,y) = y in pnat}
+
+{\tt plus2}: $ \; \; $
+{\tt x:pnat => y:pnat => plus(s(x),y) = s(plus(x,y)) in pnat}
+\end{verse}
+%
+in other words, the usual recursive definition of plus:
+%
+\begin{verse}
+$ plus1: \; \; \; 0 + y = y$
+
+$ plus2: \; \; \; s(x) + y = s(x+y)$
+\end{verse}
+
+\item
+Now \clam adds rewrite records for the equations. All the possible ways
+in which they can be used as rewrites are recorded. Wave rules may be created
+from these later on, as required, by dynamic rippling. Records are also added
+for the ways in which the equations can be used in reduction such that
+reduction will remain terminating. Note that {\tt plus2} can be used from
+right to left as a wave rule but not in reduction.
+%Recursive path ordering?
+This is explained elsewhere, in the literature and documentation.
+
+\item
+Now \clam turns to the other {\tt needs} entry for {\tt thm(assp)},
+{\tt wave(cnc\_s)}.  This instructs \clam to parse the theorem {\tt
+cnc\_s}:
+%
+\[ \forall x \forall y \; \; x=y \rightarrow s(x)=s(y) \]
+%
+as a wave rule.
+So the theorem {\tt cnc\_s} is loaded from {\tt lib/thm} and \clam
+generates rewrite records (and a cancellation record) from it.
+
+\item
+Finally, {\tt assp} itself is loaded from {\tt lib/thm}.
+
+\end{enumerate}
+
+(More detailed information is printed by using {\tt
+trace\_plan/2}---see the manual for more information.)
+
+The output obtained when we use {\tt dplan} to plan the proof is not very
+interesting with the default set of methods. However, if we replace the
+default set of methods with a lower-level set, the output is more
+informative.  We can do this using 
+%
+\begin{verbatim}
+| ?- load_ind_plan(4).
+\end{verbatim}
+(The default is \verb|load_ind_plan(1)|.)
+
+Select the conjecture and start planning
+\begin{verbatim}
+| ?- slct(assp).
+
+yes
+| ?- dplan.
+ 1. DEPTH: 0
+ 2. ==>x:pnat=>y:pnat=>z:pnat=>plus(x,plus(y,z))=plus(plus(x,y),z)in pnat
+ 3. SELECTED METHOD at depth 0: induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)])
+ 4. |DEPTH: 1
+ 5. |x:pnat
+ 6. |==>y:pnat=>z:pnat=>plus(0,plus(y,z))=plus(plus(0,y),z)in pnat
+ 7. |TERMINATING METHOD at depth 1: base_case(...)
+ 8. |DEPTH: 1
+ 9. |v0:pnat
+10. |ih:[RAW,v1:y:pnat=>z:pnat=>plus(v0,plus(y,z))=plus(plus(v0,y),z)in pnat]
+11. |x:pnat
+12. |==>y:pnat=>z:pnat=>
+        plus(``s({v0})''<out>,plus(\y/,\z/))=
+          plus(plus(``s({v0})''<out>,\y/),\z/)in pnat
+13. |TERMINATING METHOD at depth 1: step_case(...)
+14. Clam INFO: Time taken for assp is 540 milliseconds.
+15. induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)]) then 
+      [base_case(...),
+       step_case(...)
+      ]
+\end{verbatim}
+
+\begin{description}
+\item[Line 1]We start at depth 0.
+\item[Line 2]This is the current goal to be proved --- it is the theorem
+itself.
+\item[Line 3]tells us which method \clam has selected. It is induction on
+$x$.
+\item[Line 4]We are now at depth 1.
+\item[Line 5]A  hypothesis (but not an inductive one), declaring that $x$
+is a $pnat$.
+\item[Line 6]The current goal --- we are trying to prove the base
+case of the induction.
+\item[Line 7]tells us that \clam found the {\tt base\_case} method to
+be applicable.  Furthermore, that method produced (on this occasion)
+no subproblems to work on: it closed the branch of the proof tree.
+Such method applications are called {\tt TERMINATING}.
+\item[Line 8]Now we are still at depth 1, the step-case of the induction.
+\item[Line 9]Hypothesis: {\tt v0} (the eigenvariable of the induction)
+is of type $pnat$.
+\item[Line 10]is the annotated induction hypothesis (as signified by
+`{\tt ih:}'.  {\tt RAW} means that this hypothesis has not been used
+in fertilization.  The inductive hypothesis is `labelled' {\tt v1}.
+\item[Line 11] as before, $x$ is a $pnat$.
+\item[Line 12]The induction conclusion: this is our current goal. The
+conclusion is annotated with wave fronts (\verb%``...{...}...''<out>%) and
+sinks (\verb%\.../%).
+\item[Line 13]The {\tt step\_case} method is applicable and it is terminating.
+\item[Line 14]Time taken for this proof-plan search.
+\item[Lines 15]The proof-plan found.
+\end{description}
+
+
+\section{Stored proofs\label{guff}}
+
+If you plan a theorem using \clam, and then apply the plan (use
+{\tt apply\_plan} if you used the depth first planner and {\tt apply\_idplan}
+if you used the iterative deepening search strategy), then the plan will be executed to
+prove the theorem, yielding an \oyster proof.
+
+The \oyster proof, if obtained, can be stored by typing one of the
+following:
+%
+\begin{verse}
+{\tt lib\_save(thm(mything),'$\sim$/clam/lib').}
+
+{\tt lib\_save(thm(mything)).}
+\end{verse}
+%
+The second stores the proof in the
+{\tt thm} subdirectory of the specified \clam library. The third form is
+like the second but uses the save directory specified using
+{\tt lib\_set(sdir(\ldots))} (see Appendix~\ref{make-own-lib}).
+{\bf Warning!}
+If you have not set the save directory to be your own directory, \clam
+will attempt to store the proof in the system directory.
+
+If you want to see what \oyster proofs look like (preferably not
+after a heavy lunch) then type
+%
+\begin{verse}
+{\tt more CLAMSRC/lib/thm/assp}
+\end{verse}
+%
+which reads something like this:
+%
+\begin{verbatim}
+problem([]==>x:pnat=>y:pnat=>z:pnat=>plus(x,plus(y,z))=plus(plus(x,y),z)in pnat,
+ind_strat(induction([(x:pnat)-s(v0)])then[base_case(...),step_case(...)]),
+lambda(x,...),
+[]).
+\end{verbatim}
+%
+i.e.,, loads of guff.
+
+Most of this guff is the proof and the extract term, in \oyster-speak.
+If, having both planned and proved a theorem, you then save it, this is the
+kind of file you will get.
+
+When you are entering a theorem to be proved, of course you do not have
+a proof yet so the proof bits are just uninstantiated variables, entered
+in the usual Prolog way, i.e., as {\tt \_,\_,\_}.
+
+When you have a proof, as above, then it can be checked as follows. The first
+line gives the original statement of the theorem, beginning
+{\tt problem([]==> ...)}. The remaining lines are what the uninstantiated
+variables in
+%
+\begin{verse}
+{\tt problem([]==> ..., \_,\_,\_).}
+\end{verse}
+%
+will be overwritten with if you save the theorem after both planning a proof
+with \clam and executing the plan to give an \oyster proof. The
+second argument is the refinement applied at the top level. In this case,
+induction is used. The third argument is the extract term, and the fourth is
+the list of subproblems generated by the refinement.
+
+
+\nocite{tp4}
+\nocite{pub413}
+\nocite{pub567}
+
+\bibliography{clam}
+\bibliographystyle{plain}
+
+\end{document}
+

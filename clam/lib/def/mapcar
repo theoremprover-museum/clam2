@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: mapcar,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: mapcar,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+mapcar(l,f)<==>list_ind(l,nil,[h,~,recval,f of h::recval]).

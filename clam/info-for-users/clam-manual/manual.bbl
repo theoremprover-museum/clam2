@@ -1,0 +1,224 @@
+\begin{thebibliography}{10}
+
+\bibitem{BasinWalsh94}
+David Basin and Toby Walsh.
+\newblock Termination orders for rippling.
+\newblock In Alan Bundy, editor, {\em 12th International Conference on
+  Automated Deduction}, Lecture Notes in Artificial Intelligence, Vol.~814,
+  pages 466--83, Nancy, France, 1994. Springer-Verlag.
+
+\bibitem{BasinWalsh96}
+David Basin and Toby Walsh.
+\newblock A calculus for and termination of rippling.
+\newblock {\em Journal of Automated Reasoning}, 16(1--2):147--180, 1996.
+
+\bibitem{boyerbook}
+R.S. Boyer and J.S. Moore.
+\newblock {\em A Computational Logic}.
+\newblock Academic Press, 1979.
+\newblock ACM monograph series.
+
+\bibitem{pub349}
+A.~Bundy.
+\newblock The use of explicit plans to guide inductive proofs.
+\newblock In {\em 9th International Conference on Automated Deduction}, pages
+  111--120. Springer-Verlag, 1988.
+\newblock Longer version available as DAI Research Paper No. 349.
+
+\bibitem{oyster-clam}
+A.~Bundy, {van Harmelen} F., C.~Horn, and A.~Smaill.
+\newblock The {Oyster-Clam} system.
+\newblock Research Paper forthcoming, Dept.\ of Artificial Intelligence,
+  University of Edinburgh, 1989.
+\newblock Submitted to CADE-10.
+
+\bibitem{pub567}
+A.~Bundy, A.~Stevens, F.~van Harmelen, A.~Ireland, and A.~Smaill.
+\newblock Rippling: A heuristic for guiding inductive proofs.
+\newblock {\em Artificial Intelligence}, 62:185--253, 1993.
+\newblock Also available from Edinburgh as DAI Research Paper No. 567.
+
+\bibitem{pub413}
+A.~Bundy, F.~{van Harmelen}, J.~Hesketh, and A.~Smaill.
+\newblock Experiments with proof plans for induction.
+\newblock {\em Journal of Automated Reasoning}, 7:303--324, 1991.
+\newblock Earlier version available from Edinburgh as DAI Research Paper No
+  413.
+
+\bibitem{pub419}
+A.~Bundy, F.~{van Harmelen}, J.~Hesketh, A.~Smaill, and A.~Stevens.
+\newblock A rational reconstruction and extension of recursion analysis.
+\newblock In N.S. Sridharan, editor, {\em Proceedings of the Eleventh
+  International Joint Conference on Artificial Intelligence}, pages 359--365.
+  Morgan Kaufmann, 1989.
+\newblock Available from Edinburgh as Research Paper 419.
+
+\bibitem{rp4nn}
+A.~Bundy, F.~{van Harmelen}, and A.~Smaill.
+\newblock Extensions to the rippling-out tactic for guiding inductive proofs.
+\newblock Research Paper 4nn, Dept.\ of Artificial Intelligence, University of
+  Edinburgh, 1989.
+\newblock Submitted to CADE10.
+
+\bibitem{pub459}
+A.~Bundy, F.~van Harmelen, A.~Smaill, and A.~Ireland.
+\newblock Extensions to the rippling-out tactic for guiding inductive proofs.
+\newblock In M.E. Stickel, editor, {\em 10th International Conference on
+  Automated Deduction}, pages 132--146. Springer-Verlag, 1990.
+\newblock Lecture Notes in Artificial Intelligence No. 449. Also available from
+  Edinburgh as DAI Research Paper 459.
+
+\bibitem{sicstus}
+M.~Carlsson and J.~Wid\'{e}n.
+\newblock {SICS}tus prolog user's manual.
+\newblock Research Report {SICS R88007B}, Swedish Institute of Computer Science
+  {SICS}, October 1988.
+\newblock {ISSN} 0283-3638.
+
+\bibitem{primer}
+W.F. Clocksin and C.S. Mellish.
+\newblock {\em Programming in {Prolog}}.
+\newblock Springer Verlag, 1981.
+
+\bibitem{nuprl-book}
+R.L. Constable, S.F. Allen, H.M. Bromley, et~al.
+\newblock {\em Implementing Mathematics with the {Nuprl} Proof Development
+  System}.
+\newblock Prentice Hall, 1986.
+
+\bibitem{Cooper72}
+D.~C. Cooper.
+\newblock Theorem proving in arithmetic without multiplication.
+\newblock In B.~Meltzer and D.~Michie, editors, {\em Machine Intelligence 7},
+  pages 91--99. Elsevier, New York, 1972.
+
+\bibitem{Dyckhoff92}
+Roy Dyckhoff.
+\newblock Contraction-free sequent calculi for intuitionistic logic.
+\newblock {\em Journal of Symbolic Logic}, 57:795--807, 1992.
+
+\bibitem{Forgaard84}
+Randy Forgaard.
+\newblock A program for generating and analyzing term rewriting systems.
+\newblock Master's thesis, Laboratory for Computer Science, MIT, USA, September
+  1984.
+
+\bibitem{bb423}
+J.~Hesketh.
+\newblock Tutorial guide to nurprl proof development system.
+\newblock Blue Book Note 423, Mathematical Reasoning Group, Department of
+  Artificial Intelligence, University of Edinburgh, 1988.
+\newblock NurPRL is the old name of the system now know as Oyster. Blue Book
+  notes are not distributed outside the DReaM group.
+
+\bibitem{wp214}
+C.~Horn.
+\newblock The {Nurprl} proof development system.
+\newblock Working paper 214, Dept.\ of Artificial Intelligence, University of
+  Edinburgh, 1988.
+\newblock The Edinburgh version of Nurprl has been renamed Oyster.
+
+\bibitem{korf}
+Richard Korf.
+\newblock Depth-first iterative-deepening: An optimal admissible tree search.
+\newblock {\em Artificial Intelligence}, 27(1):97--109, 1985.
+\newblock Reprinted as ``optimal path-finding algorithms'' in ``Search in
+  Artificial Intelligence'', L. Kanal, and V. Kumar (eds.), Symbolic
+  Computation Series, Springer Verlag, 1988, pp. 223-267.
+
+\bibitem{martin-lof79}
+Per Martin-L{\"o}f.
+\newblock Constructive mathematics and computer programming.
+\newblock In {\em 6th International Congress for Logic, Methodology and
+  Philosophy of Science}, pages 153--175, Hannover, August 1979.
+\newblock Published by North Holland, Amsterdam. 1982.
+
+\bibitem{negrete-msc}
+S.~Negrete.
+\newblock Proof plans with hints.
+\newblock Master's thesis, Dept.\ of Artificial Intelligence, University of
+  Edinburgh, 1991.
+
+\bibitem{tp8}
+S.~Negrete.
+\newblock {H}int {M}echanism for {C}lam.
+\newblock Technical Paper~8, Dept.\ of Artificial Intelligence, University of
+  Edinburgh, March 1992.
+
+\bibitem{Presburger30}
+Moj{\.z}esz Presburger.
+\newblock {\"U}ber die {V}ollst{\"a}ndigkeit eines gewissen {S}ystems der
+  {A}rithmetik ganzer {Z}ahlen, in welchem die {A}ddition als einzige
+  {O}peration hervortritt.
+\newblock In {\em Sprawozdanie z I Kongresu metematyk{\'o}w slowia{\'n}skich,
+  Warszawa 1929}, pages 92--101, 395. Warsaw, 1930.
+\newblock Annotated English version also available~\cite{Stansifer84}.
+
+\bibitem{quintus}
+Quintus.
+\newblock Quintus prolog user guide and reference manual, sun and vax unix.
+\newblock Technical Report Release 2.2, Quintus Computer Systems, Inc., 1988.
+
+\bibitem{Richardson+98}
+J.D.C Richardson, A.~Smaill, and Ian Green.
+\newblock System description: proof planning in higher-order logic with
+  lambdaclam.
+\newblock In Claude Kirchner and H\'e;\`ene Kirchner, editors, {\em 15th
+  International Conference on Automated Deduction}, volume 1421 of {\em Lecture
+  Notes in Artificial Intelligence}, Lindau, Germany, July 1998.
+
+\bibitem{pub799}
+Alan Smaill and Ian Green.
+\newblock Higher-order annotated terms for proof search.
+\newblock In Joakim von Wright, Jim Grundy, and John Harrison, editors, {\em
+  Theorem Proving in Higher Order Logics: 9th International Conference,
+  TPHOLs'96}, volume 1275 of {\em Lecture Notes in Computer Science}, pages
+  399--414, Turku, Finland, 1996. Springer-Verlag.
+\newblock Also available as DAI Research Paper 799.
+
+\bibitem{Stansifer84}
+Ryan Stansifer.
+\newblock {P}resburger's article on integer arithmetic: {R}emarks and
+  translation.
+\newblock Technical Report TR 84-639, Department of Computer Science, Cornell
+  University, September 1984.
+
+\bibitem{Steinbach94}
+Joachim Steinbach.
+\newblock {\em Termination of rewriting}.
+\newblock PhD thesis, Fachbereich Informatik, Universit\"at Kaiserslautern,
+  Germany, Janurary 1994.
+
+\bibitem{artofprolog}
+L.~Sterling and E.~Shapiro.
+\newblock {\em The Art of Prolog}.
+\newblock MIT Press, Cambridge, Ma., 1986.
+
+\bibitem{bb421}
+F.~van Harmelen.
+\newblock Are proof plans linear? or: what does ``linear'' mean anyway?
+\newblock Blue Book Note 421, Mathematical Reasoning Group, Department of
+  Artificial Intelligence, University of Edinburgh, 1988.
+\newblock Blue Book notes are not distributed outside the DReaM group.
+
+\bibitem{bb539}
+F.~van Harmelen.
+\newblock Clam should be theory free.
+\newblock Blue Book Note 539, Mathematical Reasoning Group, Department of
+  Artificial Intelligence, University of Edinburgh, 1989.
+\newblock Blue Book notes are not distributed outside the DReaM group.
+
+\bibitem{bb538}
+F.~van Harmelen.
+\newblock Generalising weak fertilization.
+\newblock Blue Book Note 538, Mathematical Reasoning Group, Department of
+  Artificial Intelligence, University of Edinburgh, 1989.
+\newblock Blue Book notes are not distributed outside the DReaM group.
+
+\bibitem{colouredrippling}
+Tetsuya Yoshida, Alan Bundy, Ian Green, Toby Walsh, and David Basin.
+\newblock Coloured rippling: An extension of a theorem proving heuristic.
+\newblock Technical Report TBA, Dept.\ of Artificial Intelligence, University
+  of Edinburgh, 1994.
+
+\end{thebibliography}

@@ -1,0 +1,223 @@
+/* -*- Prolog -*-
+ * @(#)$Id: unblock,v 1.8 1998/09/15 16:00:42 img Exp $
+ *
+ * $Log: unblock,v $
+ * Revision 1.8  1998/09/15 16:00:42  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.7  1998/06/10 09:32:27  img
+ * extra context for type instantiation; new clause for conditional weak fert
+ *
+ * Revision 1.6  1996/12/11 14:07:17  img
+ * Merge mthd and smthd libraries.
+ *
+ * Revision 1.9  1996/12/04 13:20:57  img
+ * Deleted (highly) redundant calls to wave_terms_at/3: this unnecessary
+ * since meta_ripple/3 and weaker/2 both account for subterm relation.
+ *
+ * Revision 1.8  1996/07/10  09:04:27  img
+ * Need to ensure that unblocking in a wave-front is free of all
+ * annotation, otherwise ill-formed terms may result.
+ *
+ * Revision 1.7  1996/06/19  08:32:44  img
+ * Explicit unused flag (simplifies comparison of proof plans).
+ *
+ * Revision 1.6  1996/05/23  11:20:41  img
+ * incorrect argument order in reduction_rule/6
+ *
+ * Revision 1.5  1996/05/14  15:59:35  img
+ * Cleaner version, using reduction rules (no labelled rewriting).
+ *
+ * Revision 1.4  1995/10/03  10:30:49  img
+ * position of subterm was incorrect
+ *
+ * Revision 1.3  1995/04/26  09:20:48  img
+ * 	* Weakening moved from wave into unblock
+ *
+ * Revision 1.2  1995/03/01  02:55:36  img
+ * 	* Unblocking for in dynamic rippling:  meta-rippling is
+ * 	  generalized to arbitrary measure-decreasing manipulations
+ * 	  excepting those of the object-logic;  skeleton-invariant
+ * 	  rewrites inside sinks are legitimate under the new notion of
+ * 	  skeleton.
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ */
+
+/* Meta-rippling refers to any measure-decreasing manipulation of the
+ * goal which does not involve manipulation of the object-logic.  This
+ * includes weakening and inverting outward wave-fronts to inwards
+ * wave-fronts.  */
+method(unblock(meta_ripple,unused,unused),
+          H==>G,
+          [matrix(Vars,Matrix,G),
+	   meta_ripple(direction_out,Matrix,NewMatrix) ],
+          [matrix(Vars,NewMatrix,NewG) ],
+          [H==>NewG],
+          idtac ).
+
+/* Weakening is not performed by ripple/6 so we do it here explicitly
+   rather than in the wave method (see wave_rules.pl).  This is
+   arguable; I chose to do it this way because I felt that dropping a
+   skeleton was something we ought not to take lightly.  THIS IS
+   DISABLED AT THE MOMENT BECAUSE unblock(meta_ripple) SUBSUMES IT.
+   However, I expect that meta_ripple/3 will be replaced by
+   fast_meta_ripple/2 which is much faster, but does not weaken.  In
+   this eventuality, unblock(weaken) may be needed.  */
+/* method(unblock(weaken,unused,unused),
+	  Hyps==>Conc,
+          [matrix(Vars, Matrix, Conc),
+ 	   weaker(Matrix, NewMatrix)],
+ 	  [matrix(Vars, NewMatrix, NewConc)],
+ 	  [Hyps==>NewConc],
+ 	  idtac).  */
+ 
+/* Apply a measure-reducing rule to a part of the wave-front.
+   Rewriting in the wave-front ensures that the skeleton is not upset,
+   and, thanks to the measure being insensitive to the terms
+   contained in a wave-front, does not upset the rippling termination
+   measure.   Notices that _certain_ ripple measures are not invariant
+   under such wave-front manipulation!
+
+   Rewriting in the skeleton (i.e., altering the skeleton) is possible
+   if (i) the hypotheses are changed to reflect that, or (ii) the
+   skeleton is in a sink position.  In case (i), there is some
+   question as to whether this is a good idea: certainly in some
+   proofs it is.  Note that there are two cases: (a) rewriting a subterm
+   which is wholly contained in the skeleton (this is readily
+   implemented), and (b), the subterm is in both the wave-front and
+   the skeleton.  It is this second case that might not permit a
+   corresponding rewrite in the hypotheses, and so it is not always
+   possible to maintain skeleton preservation.  
+
+   unblock(sink,...) rewrites inside a sink;
+   unblock(wave-front,...) rewrites inside a wave-front.
+   unblock(skeleton,...) rewrites a term wholly contained within the
+                         skeleton: this is currently unimplemented.
+   All do so using reduction-rules, which are terminating. 
+
+   Note that a further complication concerning rewriting in the
+   hypotheses arises with the use of rewrites bases on implications
+   where polarity restrictions prevent the rule being applied.  */
+
+/* Unblock in a sink.  This is quite simply a rewrite beneath a sink.
+   Since the skeleton of a sink is arbitrary, there is no need to
+   preserve skeleton in such a position.  */
+method(unblock(sink,AbsSinkPos,[Rule,Dir]),
+       H==>G,
+       [matrix(Vars,Matrix,G),append(H,Vars,Context),
+        sinks(_,Sinks,Matrix),			% fetch a sink
+        member(SinkPos,Sinks),
+        exp_at(Matrix,SinkPos,Sink),
+	issink(Sink,Contents),
+        exp_at(Contents, ExpPos, Exp ),
+	\+ExpPos = [0|_],
+        \+ var(Exp),				% not in MOR
+	reduction_rule(Exp,NewExp,C,Dir,TI,Rule,_),
+	append(ExpPos,SinkPos,AbsExpPos),
+        polarity_compatible(Matrix, AbsSinkPos, Dir),
+	instantiate_type_variables(TI,Context),
+        immediate(Context==>C) ],
+       [replace(ExpPos, NewExp, Contents, NewContents ),
+	issink(NewSink,NewContents),
+        replace(SinkPos,NewSink,Matrix,NewMatrix),
+        matrix(Vars,NewMatrix,NewG) ],
+       [H==>NewG],
+       reduction(AbsSinkPos,[Rule,Dir]) ).
+
+/*  Unblock in a wave-front.  */
+method(unblock(wave_front,ExpPos,[Rule,Dir]),
+       H==>G,
+       [matrix(Vars,Matrix,G),append(H,Vars,Context),
+        ann_exp_at(in_hole,in_front,Matrix,ExpPos,Exp),
+	%% and there is no skeleton inside here
+	\+ ExpPos = [0|_],
+        \+ var(Exp),				% not in MOR
+	%% Use of well_annotated/1 is tricky here: assuming that
+	%% Matrix is well-annotated, and Exp is inside a wave-front;
+	%% if Exp contains annotation, it must have a hole as the
+	%% uppermost annotation, in which case it is ill-annotated.
+	%% If it has a wave-front uppermost, Matrix would be
+	%% ill-annotated (contra the assumption).  So we see that if
+	%% Exp is well-annotated, it in fact does not contain any
+	%% annotations.  This is precisely what we want to ensure.
+	%% (We can't use unannotated/1, since that assumes
+	%% well-annotation.) 
+	well_annotated(Exp),
+	reduction_rule(Exp,NewExp,C,Dir,TI,Rule,_),
+        polarity_compatible(Matrix, ExpPos, Dir),
+	instantiate_type_variables(TI,Context),
+        immediate(Context==>C) ],
+       [replace(ExpPos,NewExp,Matrix,NewMatrix),
+        matrix(Vars,NewMatrix,NewG) ],
+       [H==>NewG],
+       reduction(ExpPos,[Rule,Dir]) ).
+
+/* very simple unblockling to simulate conditional weak fertilization.
+   This method is applicable to sequents of the form: 
+    
+   v: x:t=>y:u=>p(x)=>q(x,y) 
+   ==>
+   x:t=>y:u=>p'(x)=>q'(x,y)        where q' is q with some annotation
+                                         p' is an instance of p with
+                                            some sink annotation
+
+   the effects of the method are to strip away the quantifier prefix x
+   and the antecedent p' so that weak fertilization may apply inside
+   q'.  Since p' may contain sinks we need to take the appropriate
+   instance of p (there are no other annotations in p').
+
+   v: y:u=>q*(x,y)
+   x: t
+   w: p''(x)   We might want to drop this?
+   y:u=>q'*(x,y)        where p'' is the erasure of p'
+                        and * denotes the instantiating subst
+ 
+   Note that the instance q* in the new hypothesis may not be
+   suitable for fertilization with the skeleton of q'* in the goal.
+*/
+
+% method(unblock(cwf,unused,unused),
+%        H==>G,
+%        [
+% 	matrix(Vars,Pp=>Qp,G),append(H,Vars,Context),
+% 	annotations(_,[],PpErasure,Pp),
+% 	inductive_hypothesis(Status,Hyp:IndHyp,H),
+% 	(Status = raw; Status = notused(_)),
+%         matrix(IndHypVars,P=>Q,IndHyp),	% find hyp to use for fertilization
+% 
+% 	if(\+IndHypVars==Vars,
+% 	   clam_warning('strange.... skel vars are different.')),
+% 
+% 	freevarsinterm(P,PFV),			% fetch x
+% 	untype(PFVVT,PFV,PFVT),
+% 	subset(PFVVT,Context),			% find types
+% 	delete_all(PFVVT,Vars,NewVars),
+% 	delete_all(NewVars,Vars,Decls),
+% 	matrix(PFV,P,Pf),
+% 	instantiate(H,PFV,Pf,PpErasure,Pvals),
+% 	/* Qp may contain sinks due to variables in Decls which are no
+% 	   longer valid.  These need to be removed.  */
+% 	updated_sinks(Decls,Qp,Q,QpQp),
+% 	s(Q,Pvals,PFV,NewQ),
+% 	s(QpQp,Pvals,PFV,NewQp),
+% 	matrix(NewVars,NewQp,NewG),
+% 	matrix(NewVars,NewQ,NewHyp),
+% 
+% 	inductive_hypothesis([Hyp:IndHyp],[Hyp:NewHyp],H,RevisedH),
+% 	hfree(PV,Context),			%slight overkill here
+% 	append(Decls,[PV:P],ExtraH),
+% 	append(RevisedH,ExtraH,NewH)],
+%        [ ],
+%        [NewH==>NewG],
+%        unblock(cwf,unused,unused) ).
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 

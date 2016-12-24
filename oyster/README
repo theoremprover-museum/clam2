@@ -1,0 +1,11 @@
+--- Oyster release 1.
+
+
+
+
+Type make to get oyster.pdf, the manual.  
+
+Type "make oyster.raw" to get a cut-down version of the Prolog
+source code (same as oyster.pl, but without comments).
+
+

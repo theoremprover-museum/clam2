@@ -1,0 +1,19 @@
+/* -*- Prolog -*-
+ * @(#)$Id: unblock_lazy,v 1.2 1998/06/10 09:33:44 img Exp $
+ *
+ * $Log: unblock_lazy,v $
+ * Revision 1.2  1998/06/10 09:33:44  img
+ * specifiy types of unblocking
+ *
+ * Revision 1.1  1996/12/11 15:09:30  img
+ * Merge of mthd and smthd libraries.
+ *
+ */
+
+iterator_lazy(method,unblock_lazy,submethods,
+	[unblock(meta_ripple,_,_),
+	 unblock(weaken,_,_),
+	 unblock(sink,_,_),
+	 unblock(wave_front,_,_)]).
+	 
+

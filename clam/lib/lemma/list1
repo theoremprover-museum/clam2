@@ -1,0 +1,35 @@
+/*
+ * @(#)$Id: list1,v 1.1 1994/09/16 09:39:18 dream Exp $
+ *
+ * $Log: list1,v $
+ * Revision 1.1  1994/09/16 09:39:18  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>t:u(1)=>hd:t=>tl:t list=>hd::tl=nil in t list=>void,
+repeat intro then wfftacs,lambda(t,lambda(hd,lambda(tl,lambda(v0,_8009)))),
+[problem([t:u(1),hd:t,tl:t list,v0:hd::tl=nil in t list]==>void,
+ seq(list_ind(hd::tl,void=>void,[~,~,~,void])=list_ind(nil,void=>void,[~,~,~,void])in u(1)),lambda(v1,_8106)of _8103,
+ [problem([t:u(1),hd:t,tl:t list,v0:hd::tl=nil in t list]==>list_ind(hd::tl,void=>void,[~,~,~,void])=list_ind(nil,void=>void,[~,~,~,void])in u(1),
+  universe(2),_8115,
+  [problem([t:u(1),hd:t,tl:t list,v0:hd::tl=nil in t list]==>list_ind(hd::tl,void=>void,[~,~,~,void])=list_ind(nil,void=>void,[~,~,~,void])in u(1),
+   subst(over(v1,list_ind(v1,void=>void,[~,~,~,void])=list_ind(nil,void=>void,[~,~,~,void])in u(1)),hd::tl=nil in t list)then[univ_elim(v0),idtac,wfftacs],_8206,
+   [problem([t:u(1),hd:t,tl:t list,v0:hd::tl=nil in t list]==>list_ind(nil,void=>void,[~,~,~,void])=list_ind(nil,void=>void,[~,~,~,void])in u(1),
+    identity,axiom,
+    [
+    ]) ext _8206
+   ]) ext _8115
+  ]) ext _8103,
+  problem([t:u(1),hd:t,tl:t list,v0:hd::tl=nil in t list,v1:list_ind(hd::tl,void=>void,[~,~,~,void])=list_ind(nil,void=>void,[~,~,~,void])in u(1)]==>void,
+  compute(hyp(v1),[[simplify]]),_8447,
+  [problem([t:u(1),hd:t,tl:t list,v0:hd::tl=nil in t list,v1:void= (void=>void)in u(1)]==>void,
+   subst(over(v2,v2),void= (void=>void)in u(1))then[univ_elim(v1),idtac,wfftacs],_8550,
+   [problem([t:u(1),hd:t,tl:t list,v0:hd::tl=nil in t list,v1:void= (void=>void)in u(1)]==>void=>void,
+    intro then wfftacs then hyp(v2),lambda(v2,v2),
+    [
+    ]) ext _8550
+   ]) ext _8447
+  ]) ext _8106
+ ]) ext _8009
+]).

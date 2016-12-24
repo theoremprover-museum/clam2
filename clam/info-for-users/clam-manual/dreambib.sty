@@ -1,0 +1,34 @@
+% dreambib.sty
+% set up the dreambib command to incorportate the dream bibliography 
+% database (img/mrg/3-mar-95)
+
+\def\dreambibstyle{alpha}
+\def\prefix{/usr/local/lib/bib/} % this is where things stay
+\def\dreambib{\prefix external_pre1980,%
+		\prefix external_1980s,%
+		\prefix external_1990s,%
+		\prefix research_papers,%
+		\prefix published_papers,%
+		\prefix working_papers,%
+		\prefix teaching_papers,%
+		\prefix recent_additions}
+\endinput
+
+In a document using this style file, you can access the DReaM
+bibliography database via \dreambib.  Since the DReaM bibliography is
+split accross a few files, the intention is that this will provide an
+easier to use interface.
+
+For example, 
+
+	\bibliography{personalbibs.bib,\dreambib,otherbibs}
+
+gives access to all the entrys in the bib files `personalbibs' and
+otherbibs in additions each of those in the DReaM bibliography.
+
+	\bibliographystyle{\dreambibstyle}
+
+gives the standard DReaM style (well, I think it's standard).
+
+
+

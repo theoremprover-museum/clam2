@@ -1,0 +1,29 @@
+problem([]==>t:u(1)=>phi: (t list=>u(1))=>phi of nil=> 
+(y:t=>phi of (y::nil))=>
+(y:t=>w:t=>x:t list=>phi of (w::x)=>phi of (y::(w::x)))=>
+x:t list=>phi of x,
+autotactic(wfftacs),_2066,
+[problem([]==>phi: (pnat=>u(1))=>phi of 0=> (x:pnat=>phi of x=>phi of s(x))=>x:pnat=>phi of x,
+ universe(2),_2127,
+ [problem([]==>phi: (pnat=>u(1))=>phi of 0=> (x:pnat=>phi of x=>phi of s(x))=>x:pnat=>phi of x,
+  repeat dequantify_once,lambda(phi,_2243),
+  [problem([phi:pnat=>u(1)]==>phi of 0=> (x:pnat=>phi of x=>phi of s(x))=>x:pnat=>phi of x,
+   repeat intro,lambda(v0,lambda(v1,lambda(x,_2312))),
+   [problem([phi:pnat=>u(1),v0:phi of 0,v1:x:pnat=>phi of x=>phi of s(x),x:pnat]==>phi of x,
+    elim(x),p_ind(x,_2378,[v2,v3,_2384]),
+    [problem([phi:pnat=>u(1),v0:phi of 0,v1:x:pnat=>phi of x=>phi of s(x),x:pnat]==>phi of 0,
+     intro,v0,
+     [
+     ]) ext _2378,
+     problem([phi:pnat=>u(1),v0:phi of 0,v1:x:pnat=>phi of x=>phi of s(x),x:pnat,v2:pnat,v3:phi of v2]==>phi of s(v2),
+     elim(v1,on(v2))then repeat intro,su(_2534,[v1 of v2],[v4]),
+     [problem([phi:pnat=>u(1),v0:phi of 0,v1:x:pnat=>phi of x=>phi of s(x),x:pnat,v2:pnat,v3:phi of v2,v4:phi of v2=>phi of s(v2)]==>phi of s(v2),
+      elim(v4)then repeat intro,su(v5,[v4 of v3],[v5]),
+      [
+      ]) ext _2534
+     ]) ext _2384
+    ]) ext _2312
+   ]) ext _2243
+  ]) ext _2127
+ ]) ext _2066
+]).

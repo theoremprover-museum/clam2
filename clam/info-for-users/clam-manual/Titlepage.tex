@@ -1,0 +1,52 @@
+\def\rcsid{$Id: Titlepage.tex,v 1.14 2006/07/11 13:26:11 smaill Exp $}
+\input header
+
+\def\eushield{\scalebox{0.2}{\includegraphics{eushield.ps}}}
+
+\iffalse
+% This section only works if you have the EU crest
+
+{\newdimen\tmpskip
+\setbox0=\hbox{\eushield}
+\tmpskip=\dp0 \advance\tmpskip by \ht0
+
+% construct title page for DAI technical paper
+
+\halign to\hsize{#\hfil\tabskip 0pt plus 1fil&#\hfil\tabskip0pt\cr
+& {\huge\bf The \clam Proof-Planner}\cr\noalign{\vskip 15ex}
+& {\Large\bf User Manual}\cr\noalign{\vskip 14pt}
+& {\large\it and}\cr\noalign{\vskip 14pt}
+& {\Large\bf Programmer Manual}\cr\noalign{\vskip 15ex}
+& {\large\rm \clam version~\version, April 2005}\cr\noalign{\vskip 15ex}
+& \large\it The DReaM Group\cr\noalign{\vskip 14pt}
+\noalign{\vfill}
+& \vtop {\hrule height0pt width0pt depth0pt\eushield}\hfill
+\vtop to \tmpskip{\hrule height0pt width0pt depth0pt\tabskip=0pt
+       \halign{#\hfil\cr
+         {\it Mathematical Reasoning Group}\cr\noalign{\vfil}
+         {\it Institute for Representation and Reasoning}\cr\noalign{\vfil}
+         {\it Division of Informatics}\cr\noalign{\vfil}
+         {\it  University of Edinburgh, Scotland}\cr}}\cr}
+
+}
+\else % don't have the crest
+
+{\halign to\hsize{#\hfil\tabskip 0pt plus 1fil&#\hfil\tabskip0pt\cr
+& {\huge\bf The \clam Proof-Planner}\cr\noalign{\vskip 15ex}
+& {\Large\bf User Manual}\cr\noalign{\vskip 14pt}
+& {\large\it and}\cr\noalign{\vskip 14pt}
+& {\Large\bf Programmer Manual}\cr\noalign{\vskip 15ex}
+& {\large\rm \clam version~\version, July 2006}\cr\noalign{\vskip 15ex}
+& \large\it The DReaM Group\cr\noalign{\vskip 14pt}
+\noalign{\vfill}
+& \vtop to 2cm{\hrule height0pt width0pt depth0pt\tabskip=0pt
+       \halign{#\hfil\cr
+         {\it Mathematical Reasoning Group}\cr\noalign{\vfil}
+         {\it Centre for Intelligent Systems and their Applications}\cr\noalign{\vfil}
+         {\it School of Informatics}\cr\noalign{\vfil}
+         {\it  University of Edinburgh, Scotland}\cr}}\cr}
+
+}
+\fi
+\cleardoublepage
+\input footer

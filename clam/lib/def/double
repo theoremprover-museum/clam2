@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: double,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: double,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+double(n)<==>p_ind(n,0,[p,r,s(s(r))]).

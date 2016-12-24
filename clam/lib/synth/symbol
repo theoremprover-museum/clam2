@@ -1,0 +1,19 @@
+/*
+ * @(#)$Id: symbol,v 1.1 1994/09/16 09:34:53 dream Exp $
+ *
+ * $Log: symbol,v $
+ * Revision 1.1  1994/09/16 09:34:53  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>sym:atom=>{sexp},
+normalize_goal([[unroll,_2155]]),_2136,
+[problem([]==>sym:atom=>rec(sexp,unary\atom\pnat\sexp#sexp),
+ intro_hyps([]),lambda(sym,_2195),
+ [problem([sym:atom]==>rec(sexp,unary\atom\pnat\sexp#sexp),
+  intro(explicit(inr(inl(sym))))then prove_mem,inr(inl(sym)),
+  [
+  ]) ext _2195
+ ]) ext _2136
+]).

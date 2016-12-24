@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: pairlist,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: pairlist,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+pairlist(l1,l2)<==>term_of(pairlist)of l1 of l2.

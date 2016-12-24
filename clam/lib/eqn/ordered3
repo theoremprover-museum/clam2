@@ -1,0 +1,37 @@
+problem([]==>x:int=>y:int=>t:int list=>y<x=>ordered(x::y::t)=void in u(1),
+repeat intro,lambda(x,lambda(y,lambda(t,lambda(v0,_2366)))),
+[problem([x:int,y:int,t:int list,v0:y<x]==>ordered(x::y::t)=void in u(1),
+ simplify,_2375,
+ [problem([x:int,y:int,t:int list,v0:y<x]==>less(y,x,void,list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])]))=void in u(1),
+  reduce(true),axiom,
+  [problem([x:int,y:int,t:int list,v0:y<x]==>void in u(1),
+   intro,axiom,
+   [
+   ]),
+   problem([x:int,y:int,t:int list,v0:y<x]==>list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])in u(1),
+   repeat intro,axiom,
+   [problem([x:int,y:int,t:int list,v0:y<x,v1:int,v2:int list,v3:u(1)]==>lambda(v3_,decide(v3_,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])]))of list_ind(v2,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)])in u(1),
+    beta_reduce,_2720,
+    [problem([x:int,y:int,t:int list,v0:y<x,v1:int,v2:int list,v3:u(1)]==>decide(list_ind(v2,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])])in u(1),
+     elim(v2),list_ind(v2,_2960,[v4,v5,v6,_2968]),
+     [problem([x:int,y:int,t:int list,v0:y<x,v1:int,v2:int list,v3:u(1)]==>decide(list_ind(nil,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])])in u(1),
+      simplify then intro,axiom,
+      [
+      ]) ext _2960,
+      problem([x:int,y:int,t:int list,v0:y<x,v1:int,v2:int list,v3:u(1),v4:int,v5:int list,v6:decide(list_ind(v5,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)]),[~,int],[v5_,spread(v5_,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])])in u(1)]==>decide(list_ind(v4::v5,inl(axiom),[v3_,v4_,~,inr(v3_&v4_&axiom)]),[~,int],[v5_,spread(v5_,[h,v4_,spread(v4_,[~,~,less(h,v1,void,v3)])])])in u(1),
+      simplify,_3100,
+      [problem([x:int,y:int,t:int list,v0:y<x,v1:int,v2:int list,v3:u(1),v4:int,v5:int list,v6:decide(list_ind(v5,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)]),[~,int],[v5_,spread(v5_,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])])in u(1)]==>less(v4,v1,void,v3)in u(1),
+       repeat intro,axiom,
+       [
+       ]) ext _3100
+      ]) ext _2968
+     ]) ext _2720
+    ]) ext _2716
+   ]),
+   problem([x:int,y:int,t:int list,v0:y<x]==>y<x,
+   hyp(v0),v0,
+   [
+   ])
+  ]) ext _2375
+ ]) ext _2366
+]).

@@ -1,0 +1,18 @@
+problem([]==>x:pnat=>x<*s(s(x)),
+quantifier_to_front(x:pnat)then try dequantify_once then do_induction([(x:pnat)-s(s(v0))]),lambda(x,su(lambda(v3,su(su(su(su(su(v8,[v7 of x],[v8]),[v6 of lambda(v0,lambda(v1,_1128))],[v7]),[v5 of _1135],[v6]),[v4 of _1142],[v5]),[v3 of lambda(x,x<*s(s(x)))],[v4]))of v2,[term_of(twos)],[v2])),
+[problem([x:pnat]==>0<*s(s(0)),
+ repeat intro,axiom,
+ [
+ ]) ext _1142,
+ problem([x:pnat]==>s(0)<*s(s(s(0))),
+ repeat intro,axiom,
+ [
+ ]) ext _1135,
+ problem([x:pnat,v0:pnat,v1:v0<*s(s(v0))]==>s(s(v0))<*s(s(s(s(v0)))),
+ arith(<*),axiom,
+ [problem([x:pnat,v0:pnat,v1:v0<*s(s(v0))]==>v0<*s(s(v0)),
+  hyp(v1),v1,
+  [
+  ])
+ ]) ext _1128
+]).

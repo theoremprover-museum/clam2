@@ -1,0 +1,19 @@
+/*
+ * @(#)$Id: number,v 1.1 1994/09/16 09:34:53 dream Exp $
+ *
+ * $Log: number,v $
+ * Revision 1.1  1994/09/16 09:34:53  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>num:pnat=>{sexp},
+normalize_goal([[unroll,_2163]]),_2144,
+[problem([]==>num:pnat=>rec(sexp,unary\atom\pnat\sexp#sexp),
+ intro_hyps([]),lambda(num,_2203),
+ [problem([num:pnat]==>rec(sexp,unary\atom\pnat\sexp#sexp),
+  intro(explicit(inr(inr(inl(num)))))then prove_mem,inr(inr(inl(num))),
+  [
+  ]) ext _2203
+ ]) ext _2144
+]).

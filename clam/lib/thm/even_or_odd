@@ -1,0 +1,7 @@
+problem([]==>x:pnat=>even(x)\odd(x),
+autotactic(wfftacs),_984,
+[problem([]==>x:pnat=>even(x)\odd(x),
+ ind_strat(induction(lemma(twos)-[(x:pnat)-s(s(v0))])then[base_case(sym_eval(normalize_term([reduction([1],[even1,equ(u(1),left)]),reduction([],[or2,equiv(left)])]))then[elementary(istrue)]),base_case(sym_eval(normalize_term([reduction([1],[even2,equ(u(1),left)]),reduction([],[or4,equiv(left)]),reduction([],[odd2,equ(u(1),left)])]))then[elementary(istrue)]),step_case(ripple(direction_out,wave(direction_out,[2],[odd3,equ(u(1),left)],[])then[wave(direction_out,[1],[even3,equ(u(1),left)],[])])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,v1))])]),lambda(x,su(lambda(v3,su(su(su(su(su(v8,[v7 of x],[v8]),[v6 of lambda(v0,lambda(v1,su(su(su(su(v1,[even3 of v0],[v2]),[term_of(even3)],[even3]),[odd3 of v0],[v2]),[term_of(odd3)],[odd3])))],[v7]),[v5 of su(su(su(spread(v0,[v1,v2,su(v4,[v2 of su(0,[term_of(odd2)],[odd2])],[v4])]),[or4 of odd(s(0))],[v0]),[term_of(or4)],[or4]),[term_of(even2)],[even2])],[v6]),[v4 of su(su(su(spread(v0,[v1,v2,su(v4,[v2 of 0],[v4])]),[or2 of odd(0)],[v0]),[term_of(or2)],[or2]),[term_of(even1)],[even1])],[v5]),[v3 of lambda(x,even(x)\odd(x))],[v4]))of v2,[term_of(twos)],[v2])),
+ [
+ ]) ext _984
+]).

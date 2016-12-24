@@ -1,0 +1,27 @@
+problem([]==>{sexp}=>{sexp},
+repeat unfold_def({sexp}),_1183,
+[problem([]==>rec(z,atom\z#z)=>rec(z,atom\z#z),
+ intro,lambda(v0,_1237),
+ [problem([v0:rec(z,atom\z#z)]==>rec(z,atom\z#z),
+  elim(v0),rec_ind(v0,[v3,v4,_1283]),
+  [problem([v0:rec(z,atom\z#z),v1:u(1),v2:v0:v1=>v0 in rec(z,atom\z#z),v3:v0:v1=>rec(z,atom\z#z),v4:atom\v1#v1]==>rec(z,atom\z#z),
+   elim(v4),decide(v4,[v5,_1390],[v6,_1394]),
+   [problem([v0:rec(z,atom\z#z),v1:u(1),v2:v0:v1=>v0 in rec(z,atom\z#z),v3:v0:v1=>rec(z,atom\z#z),v4:atom\v1#v1,v5:atom,v7:v4=inl(v5)in (atom\v1#v1)]==>rec(z,atom\z#z),
+    intro(explicit(symbol(atom(false))))then wfftacs,symbol(atom(false)),
+    [
+    ]) ext _1390,
+    problem([v0:rec(z,atom\z#z),v1:u(1),v2:v0:v1=>v0 in rec(z,atom\z#z),v3:v0:v1=>rec(z,atom\z#z),v4:atom\v1#v1,v6:v1#v1,v8:v4=inr(v6)in (atom\v1#v1)]==>rec(z,atom\z#z),
+    intro(explicit(symbol(atom(true)))),symbol(atom(true)),
+    [problem([v0:rec(z,atom\z#z),v1:u(1),v2:v0:v1=>v0 in rec(z,atom\z#z),v3:v0:v1=>rec(z,atom\z#z),v4:atom\v1#v1,v6:v1#v1,v8:v4=inr(v6)in (atom\v1#v1)]==>symbol(atom(true))in rec(z,atom\z#z),
+     repeat wfftac,axiom,
+     [
+     ])
+    ]) ext _1394
+   ]) ext _1283
+  ]) ext _1237,
+  problem([]==>rec(z,atom\z#z)in u(1),
+  repeat intro,axiom,
+  [
+  ])
+ ]) ext _1183
+]).

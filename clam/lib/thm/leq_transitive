@@ -1,0 +1,23 @@
+problem([]==>x:pnat=>y:pnat=>z:pnat=>leq(x,y)=>leq(y,z)=>leq(x,z),
+autotactic(wfftacs),_988,
+[problem([]==>x:pnat=>y:pnat=>z:pnat=>leq(x,y)=>leq(y,z)=>leq(x,z),
+ repeat intro,lambda(x,lambda(y,lambda(z,lambda(v0,lambda(v1,_1090))))),
+ [problem([x:pnat,y:pnat,z:pnat,v0:leq(x,y),v1:leq(y,z)]==>leq(x,z),
+  lemma(leqtrans),su(_1141,[term_of(leqtrans)],[v2]),
+  [problem([x:pnat,y:pnat,z:pnat,v0:leq(x,y),v1:leq(y,z),v2:x:pnat=>y:pnat=>z:pnat=> (leq(x,y)#leq(y,z))=>leq(x,z)]==>leq(x,z),
+   do_elim_on(v2,[x,y,z],[v2,v3,v4,v5])then (append([v3,v4],[v5],[v3,v4,v5]),thin([v3,v4])),su(su(su(_1290,[v4 of z],[v5]),[v3 of y],[v4]),[v2 of x],[v3]),
+   [problem([x:pnat,y:pnat,z:pnat,v0:leq(x,y),v1:leq(y,z),v2:x:pnat=>y:pnat=>z:pnat=> (leq(x,y)#leq(y,z))=>leq(x,z),v5: (leq(x,y)#leq(y,z))=>leq(x,z)]==>leq(x,z),
+    elim(v5),su(_1422,[v5 of _1429],[v3]),
+    [problem([x:pnat,y:pnat,z:pnat,v0:leq(x,y),v1:leq(y,z),v2:x:pnat=>y:pnat=>z:pnat=> (leq(x,y)#leq(y,z))=>leq(x,z),v5: (leq(x,y)#leq(y,z))=>leq(x,z)]==>leq(x,y)#leq(y,z),
+     repeat intro,v0&v1,
+     [
+     ]) ext _1429,
+     problem([x:pnat,y:pnat,z:pnat,v0:leq(x,y),v1:leq(y,z),v2:x:pnat=>y:pnat=>z:pnat=> (leq(x,y)#leq(y,z))=>leq(x,z),v5: (leq(x,y)#leq(y,z))=>leq(x,z),v3:leq(x,z)]==>leq(x,z),
+     hyp(v3),v3,
+     [
+     ]) ext _1422
+    ]) ext _1290
+   ]) ext _1141
+  ]) ext _1090
+ ]) ext _988
+]).

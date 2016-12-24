@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: lit1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: lit1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>y:int list=>f: (int=>int list=>int list)=>lit(nil,y,f)=y in int list,
+repeat intro,lambda(y,lambda(f,_7457)),
+[problem([y:int list,f:int=>int list=>int list]==>lit(nil,y,f)=y in int list,
+ simplify then repeat intro,axiom,
+ [
+ ]) ext _7457
+]).

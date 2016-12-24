@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: plus2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: plus2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>y:pnat=>plus(s(x),y)=s(plus(x,y))in pnat,
+repeat intro then simplify,lambda(x,lambda(y,axiom)),
+[
+]).

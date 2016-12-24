@@ -1,0 +1,7 @@
+problem([]==>x:pnat=>y:pnat=>plus(x,y)=0 in pnat=>x=0 in pnat#y=0 in pnat,
+ind_strat(induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)])then[base_case(normalize_term([reduction([1,1,1],[plus1,equ(pnat,left)])])then[elementary((intro(new[y])then wfftacs)then unfold_iff then(intro(new[v0])then wfftacs)then intro then[identity,hyp(v0)])]),step_case(ripple(direction_out,wave(direction_out,[1,1,1],[plus2,equ(pnat,left)],[]))then[idtac])]),lambda(x,p_ind(x,lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(y,lambda(v0,axiom&v0)),[plus1 of v0],[v1]),[term_of(plus1)],[plus1])),[v0,v1,lambda(v2,su(su(su(lambda(v3,su(v4,[v3 of v2],[v4]))of _26244,[v3 of v2],[v4]),[plus2 of v0],[v3]),[term_of(plus2)],[plus2]))])),
+[problem([x:pnat,v0:pnat,v1:y:pnat=>plus(v0,y)=0 in pnat=>v0=0 in pnat#y=0 in pnat]==>y:pnat=>s(plus(v0,y))=0 in pnat=>s(v0)=0 in pnat#y=0 in pnat,
+ elementary((intro(new[y])then wfftacs)then unfold_iff then(intro(new[v2])then wfftacs)then clam_arith(v2:s(plus(v0,y))=0 in pnat)),lambda(y,lambda(v2,su(su(su(any(v5),[v4 of v2],[v5]),[v3 of plus(v0,y)],[v4]),[term_of(arith1)],[v3]))),
+ [
+ ]) ext _26244
+]).

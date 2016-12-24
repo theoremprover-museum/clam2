@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: cnc_cons2,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: cnc_cons2,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h1:int=>h2:int=>t:int list=>h1=h2 in int list=>h1::t=h2::t in int list,_,_,_).

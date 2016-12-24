@@ -1,0 +1,4 @@
+problem([]==>n:pnat=>even(double(n)),
+ind_strat(induction(lemma(pnat_primitive)-[(n:pnat)-s(v0)])then[base_case(normalize_term([reduction([1],[double1,equ(pnat,left)]),reduction([],[even1,equ(u(1),left)])])then[elementary(unfold_iff then intro(explicit(0))then simplify then wfftacs)]),step_case(ripple(direction_out,wave(direction_out,[1],[double2,equ(pnat,left)],[])then[wave(direction_out,[],[even3,equ(u(1),left)],[])])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,pwf_then_fertilize(strong,fertilization_strong(v1))))])]),lambda(n,p_ind(n,su(su(0,[term_of(even1)],[even1]),[term_of(double1)],[double1]),[v0,v1,su(su(su(su(v1,[even3 of double(v0)],[v2]),[term_of(even3)],[even3]),[double2 of v0],[v2]),[term_of(double2)],[double2])])),
+[
+]).

@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: union1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: union1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l2:int list=>union(nil,l2)=l2 in int list,
+repeat intro,lambda(l2,_7807),
+[problem([l2:int list]==>union(nil,l2)=l2 in int list,
+ simplify then repeat intro,axiom,
+ [
+ ]) ext _7807
+]).

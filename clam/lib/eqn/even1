@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: even1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: even1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>even(0)={true} in u(1),
+simplify,axiom,
+[
+]).

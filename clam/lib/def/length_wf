@@ -1,0 +1,1 @@
+{length_wf} <==> lambda(u,lambda(v,s(length(u))=length(v)in pnat)).

@@ -1,0 +1,43 @@
+/* -*- Prolog -*-
+ * @(#)$Id: existential,v 1.4 1998/09/15 16:00:34 img Exp $
+ *
+ * $Log: existential,v $
+ * Revision 1.4  1998/09/15 16:00:34  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.3  1997/04/07 11:38:32  img
+ * Document assumption about goal annotation
+ *
+ * Revision 1.2  1996/12/11 14:07:12  img
+ * Merge mthd and smthd libraries.
+ *
+ * Revision 1.4  1996/05/23  11:20:38  img
+ * incorrect argument order in reduction_rule/6
+ *
+ * Revision 1.3  1996/05/14  16:01:53  img
+ * Use reduction rules
+ *
+ * Revision 1.2  1995/06/06  14:34:27  img
+ * 	* Corrected bug in which the method succeeded but with a
+ * 	  faulty result when the variable substition is on R in L = R
+ * 	  (debugged by Julian Richardson).
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ *
+ */
+
+/* The goal is assumed to be unannotated */
+method(existential(Var:Typ1,Value),
+          H==>G,
+          [matrix(Vars,Var:Typ1#(LG = RG in Typ2),G),
+	   ((LG = Exp1,RG = Exp2,NewMat = (NewExp = Exp2 in Typ2)) v 
+	    (RG = Exp1,LG = Exp2,NewMat = (Exp2 = NewExp in Typ2))),
+	   not wave_fronts(_,[_|_],Exp1),
+	   not atomic(Exp1),
+	   replace_all(Var,Value,Exp1,NewExp),
+	   reduction_rule(NewExp,Exp2,C,_,Rule,_)],
+          [matrix(Vars,NewMat,NewG)],
+          [H==>NewG],
+          existential(Var:Typ1,Value)).
+

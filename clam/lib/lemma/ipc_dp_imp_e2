@@ -1,0 +1,42 @@
+problem([]==>a:u(1)=>b:u(1)=>c:u(1)=>d:u(1)=> ((a=>b=>c)=>d)=> ((a#b)=>c)=>d,
+repeat dequantify_once,lambda(a,lambda(b,lambda(c,lambda(d,_10066)))),
+[problem([a:u(1),b:u(1),c:u(1),d:u(1)]==> ((a=>b=>c)=>d)=> ((a#b)=>c)=>d,
+ intro,lambda(v0,_10131),
+ [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d]==> ((a#b)=>c)=>d,
+  intro,lambda(v1,_10198),
+  [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d,v1: (a#b)=>c]==>d,
+   elim(v0),su(_10268,[v0 of _10275],[v2]),
+   [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d,v1: (a#b)=>c]==>a=>b=>c,
+    intro,lambda(v2,_10352),
+    [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d,v1: (a#b)=>c,v2:a]==>b=>c,
+     intro,lambda(v3,_10429),
+     [problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d,v1: (a#b)=>c,v2:a,v3:b]==>c,
+      elim(v1)then repeat intro,su(v4,[v1 of (v2&v3)],[v4]),
+      [
+      ]) ext _10429,
+      problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d,v1: (a#b)=>c,v2:a]==>b in u(1),
+      repeat wfftac,axiom,
+      [
+      ])
+     ]) ext _10352,
+     problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d,v1: (a#b)=>c]==>a in u(1),
+     repeat wfftac,axiom,
+     [
+     ])
+    ]) ext _10275,
+    problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d,v1: (a#b)=>c,v2:d]==>d,
+    hyp(v2),v2,
+    [
+    ]) ext _10268
+   ]) ext _10198,
+   problem([a:u(1),b:u(1),c:u(1),d:u(1),v0: (a=>b=>c)=>d]==> ((a#b)=>c)in u(1),
+   repeat wfftac,axiom,
+   [
+   ])
+  ]) ext _10131,
+  problem([a:u(1),b:u(1),c:u(1),d:u(1)]==> ((a=>b=>c)=>d)in u(1),
+  repeat wfftac,axiom,
+  [
+  ])
+ ]) ext _10066
+]).

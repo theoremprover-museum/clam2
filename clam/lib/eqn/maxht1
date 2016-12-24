@@ -1,0 +1,20 @@
+/*
+ * @(#)$Id: maxht1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: maxht1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:int=>maxht(leaf(n))=0 in pnat,
+intro,lambda(n,_7749),
+[problem([n:int]==>maxht(leaf(n))=0 in pnat,
+ simplify then repeat intro,axiom,
+ [
+ ]) ext _7749,
+ problem([]==>int in u(1),
+ intro,axiom,
+ [
+ ])
+]).

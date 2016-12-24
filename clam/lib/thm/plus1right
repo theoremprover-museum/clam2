@@ -1,0 +1,7 @@
+problem([]==>x:pnat=>plus(x,0)=x in pnat,
+ind_strat(induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)])then[base_case(normalize_term([reduction([1,1],[plus1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[1,1],[plus2,equ(pnat,left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,in,[1],v1)]))then[idtac]))])]),lambda(x,p_ind(x,su(su(axiom,[plus1 of 0],[v0]),[term_of(plus1)],[plus1]),[v0,v1,su(su(su(_226799,[v2 of 0],[v3]),[plus2 of v0],[v2]),[term_of(plus2)],[plus2])])),
+[problem([x:pnat,v0:pnat,v1:plus(v0,0)=v0 in pnat]==>s(v0)=s(v0)in pnat,
+ elementary(unfold_iff then identity),axiom,
+ [
+ ]) ext _226799
+]).

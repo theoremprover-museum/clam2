@@ -1,0 +1,4 @@
+problem([]==>x1:pnat=>x2:pnat=>y:pnat list=>z:pnat list=>x1::y=x2::z in pnat list=>x1=x2 in pnat#y=z in pnat list,
+because,atom(incomplete),
+[
+]).

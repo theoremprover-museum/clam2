@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: intersect2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: intersect2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l1:int list=>intersect(l1,nil)=nil in int list,
+repeat dequantify_once,lambda(l1,_7438),
+[problem([l1:int list]==>intersect(l1,nil)=nil in int list,
+ elim(l1),list_ind(l1,_7474,[v0,v1,v2,_7482]),
+ [problem([l1:int list]==>intersect(nil,nil)=nil in int list,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7474,
+  problem([l1:int list,v0:int,v1:int list,v2:intersect(v1,nil)=nil in int list]==>intersect(v0::v1,nil)=nil in int list,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7482
+ ]) ext _7438
+]).

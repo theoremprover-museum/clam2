@@ -1,0 +1,4 @@
+problem([]==>ty:u(1)=>h:ty=>h2:ty=>t:ty list=>last(h::h2::t)=last(h2::t)in ty list,
+simplify then repeat intro,lambda(ty,lambda(h,lambda(h2,lambda(t,axiom)))),
+[
+]).

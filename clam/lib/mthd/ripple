@@ -1,0 +1,44 @@
+/* -*- Prolog -*-
+ * @(#)$Id: ripple,v 1.8 1997/10/16 10:32:53 img Exp $
+ *
+ * $Log: ripple,v $
+ * Revision 1.8  1997/10/16 10:32:53  img
+ * restrict casesplitting
+ *
+ * Revision 1.7  1997/10/09 17:19:56  img
+ * removed duplicated header
+ *
+ * Revision 1.6  1996/12/11 14:07:13  img
+ * Merge mthd and smthd libraries.
+ *
+ * Revision 1.5  1996/11/02 14:00:41  img
+ * Drop redundant argument in ripple/3.
+ *
+ * Revision 1.4  1996/07/10  08:53:15  img
+ * Slight error in the implemementation of fertilization: it is
+ * conditional on rippling-in, not on the type of fertilization expected.
+ *
+ * Revision 1.3  1995/05/11  16:19:30  img
+ * 	* upgraded from submethod
+ *
+ * Revision 1.2  1995/03/01  02:45:50  img
+ * 	* updates to cope with dynamic rippling
+ *
+ * Revision 1.1  1994/09/16  09:33:29  dream
+ * Initial revision
+ */
+method(ripple(Dir, SubPlan),
+       HG,	
+       [repeat([HG],
+	       Goal :=> SubGoals,
+	       Method,
+	       (member(Method, [wave(Dir,_,_,_),
+				casesplit(disjunction(_)),
+				unblock_then_wave(Dir,_)]),
+		applicable_submethod(Goal, Method, _, SubGoals)),
+	       [SubPlan],
+	       SubGoals),!,
+	SubPlan \= idtac],
+       [strip_redundant_sinks(SubGoals,SubGoalsRS)],
+       SubGoalsRS,
+       SubPlan).

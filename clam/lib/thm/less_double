@@ -1,0 +1,93 @@
+problem([]==>x:pnat=>y:pnat=>x=double(y)in pnat=> (x=0 in pnat=>void)=>less(y,x),
+autotactic(wfftacs),_976,
+[problem([]==>x:pnat=>y:pnat=>x=double(y)in pnat=> (x=0 in pnat=>void)=>less(y,x),
+ intro,lambda(x,_1074),
+ [problem([x:pnat]==>y:pnat=>x=double(y)in pnat=> (x=0 in pnat=>void)=>less(y,x),
+  intro,lambda(y,_1127),
+  [problem([x:pnat,y:pnat]==>x=double(y)in pnat=> (x=0 in pnat=>void)=>less(y,x),
+   intro,lambda(v0,_1179),
+   [problem([x:pnat,y:pnat,v0:x=double(y)in pnat]==> (x=0 in pnat=>void)=>less(y,x),
+    subst(at(2),over(v1,(v1=0 in pnat=>void)=>less(y,v1)),x=double(y)in pnat)then[univ_elim(v0),idtac,wfftacs],_1188,
+    [problem([x:pnat,y:pnat,v0:x=double(y)in pnat]==> (double(y)=0 in pnat=>void)=>less(y,double(y)),
+     thin([x,v0]),_1282,
+     [problem([y:pnat]==> (double(y)=0 in pnat=>void)=>less(y,double(y)),
+      (decide(y=0 in pnat,new[v1])then wfftacs)then[rewrite(v1)then thin([v1]),expand_s_nothin(y,py)then thin([v1,v0])],pnat_eq(y,0,su(_1422,[axiom],[v1]),su(su(lambda(v0,su(su(spread(v4,[py,v5,_1458]),[v3 of v1],[v4]),[v0 of y],[v3]))of v2,[term_of(succlemma)],[v2]),[lambda(~,axiom)],[v1])),
+      [problem([y:pnat]==> (double(0)=0 in pnat=>void)=>less(0,double(0)),
+       sym_eval(normalize_term([reduction([1,1,1,1],[double1,equ(pnat,left)]),reduction([2,2],[double1,equ(pnat,left)]),reduction([2],[less1,equ(u(1),left)])]))then[elementary(intro(new[v0])then[elim(v0)then[identity,hyp(v1)],wfftacs])],su(su(su(su(lambda(v0,su(v1,[v0 of axiom],[v1])),[less1 of 0],[v0]),[term_of(less1)],[less1]),[term_of(double1)],[double1]),[term_of(double1)],[double1]),
+       [
+       ]) ext _1422,
+       problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat)]==> (double(s(py))=0 in pnat=>void)=>less(s(py),double(s(py))),
+       elim(py),p_ind(py,_1809,[v0,v1,_1815]),
+       [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat)]==> (double(s(0))=0 in pnat=>void)=>less(s(0),double(s(0))),
+        sym_eval(normalize_term([reduction([1,1,1,1],[double2,equ(pnat,left)]),reduction([1,1,1,1,1,1],[double1,equ(pnat,left)]),reduction([2,2],[double2,equ(pnat,left)]),reduction([2],[less3,equ(u(1),left)]),reduction([2],[less2,equ(u(1),left)])]))then[elementary(intro(new[v0])then[istrue,wfftacs])],su(su(su(su(su(su(su(su(su(su(lambda(v0,0),[less2 of double(0)],[v0]),[term_of(less2)],[less2]),[v0 of s(double(0))],[v1]),[less3 of 0],[v0]),[term_of(less3)],[less3]),[double2 of 0],[v0]),[term_of(double2)],[double2]),[term_of(double1)],[double1]),[double2 of 0],[v0]),[term_of(double2)],[double2]),
+        [
+        ]) ext _1809,
+        problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0)))]==> (double(s(s(v0)))=0 in pnat=>void)=>less(s(s(v0)),double(s(s(v0)))),
+        intro,lambda(v6,_2368),
+        [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void]==>less(s(s(v0)),double(s(s(v0)))),
+         elim(v1),su(_2554,[v1 of _2561],[v7]),
+         [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void]==>double(s(v0))=0 in pnat=>void,
+          lemma(double2,new[double2])then elim_on(double2,[v0],v7)then rewrite(v7)then thin([double2,v7]),su(su(_2781,[double2 of v0],[v7]),[term_of(double2)],[double2]),
+          [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void]==>s(s(double(v0)))=0 in pnat=>void,
+           elementary(intro(new[v7])then[clam_arith(v7:s(s(double(v0)))=0 in pnat),wfftacs]),lambda(v7,su(su(su(any(v10),[v9 of v7],[v10]),[v8 of s(double(v0))],[v9]),[term_of(arith1)],[v8])),
+           [
+           ]) ext _2781
+          ]) ext _2561,
+          problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(s(v0),double(s(v0)))]==>less(s(s(v0)),double(s(s(v0)))),
+          lemma(double2,new[v8])then elim_on(v8,[v0],v9)then rewrite_hyp(v9,left,v7)then thin([double2,v8,v9]),su(su(_3289,[v8 of v0],[v9]),[term_of(double2)],[v8]),
+          [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(s(v0),s(s(double(v0))))]==>less(s(s(v0)),double(s(s(v0)))),
+           lemma(less3,new[v8])then elim_on(v8,[v0,s(double(v0))],v10)then rewrite_hyp(v10,left,v7)then thin([less3,v8,v10]),su(su(su(_3552,[v9 of s(double(v0))],[v10]),[v8 of v0],[v9]),[term_of(less3)],[v8]),
+           [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0)))]==>less(s(s(v0)),double(s(s(v0)))),
+            lemma(double2,new[double2])then elim_on(double2,[s(v0)],v8)then rewrite(v8)then thin([double2,v8]),su(su(_3810,[double2 of s(v0)],[v8]),[term_of(double2)],[double2]),
+            [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0)))]==>less(s(s(v0)),s(s(double(s(v0))))),
+             lemma(double2,new[double2])then elim_on(double2,[v0],v8)then rewrite(v8)then thin([double2,v8]),su(su(_4059,[double2 of v0],[v8]),[term_of(double2)],[double2]),
+             [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0)))]==>less(s(s(v0)),s(s(s(s(double(v0)))))),
+              lemma(less3,new[less3])then elim_on(less3,[s(v0),s(s(s(double(v0))))],v9)then rewrite(v9)then thin([less3,v9]),su(su(su(_4324,[v8 of s(s(s(double(v0))))],[v9]),[less3 of s(v0)],[v8]),[term_of(less3)],[less3]),
+              [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0)))]==>less(s(v0),s(s(s(double(v0))))),
+               lemma(less3,new[less3])then elim_on(less3,[v0,s(s(double(v0)))],v9)then rewrite(v9)then thin([less3,v9]),su(su(su(_4598,[v8 of s(s(double(v0)))],[v9]),[less3 of v0],[v8]),[term_of(less3)],[less3]),
+               [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0)))]==>less(v0,s(s(double(v0)))),
+                lemma(lesstrans3),su(_4820,[term_of(lesstrans3)],[v8]),
+                [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z)]==>less(v0,s(s(double(v0)))),
+                 do_elim_on(v8,[v0,s(double(v0)),s(s(double(v0)))],[v8,v9,v10,v11])then (append([v9,v10],[v11],[v9,v10,v11]),thin([v9,v10])),su(su(su(_5122,[v10 of s(s(double(v0)))],[v11]),[v9 of s(double(v0))],[v10]),[v8 of v0],[v9]),
+                 [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z),v11: (less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))))=>less(v0,s(s(double(v0))))]==>less(v0,s(s(double(v0)))),
+                  elim(v11),su(_5427,[v11 of _5434],[v9]),
+                  [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z),v11: (less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))))=>less(v0,s(s(double(v0))))]==>less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))),
+                   intro,_5720&_5721,
+                   [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z),v11: (less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))))=>less(v0,s(s(double(v0))))]==>less(s(double(v0)),s(s(double(v0)))),
+                    sym_eval(normalize_term([reduction([],[less3,equ(u(1),left)])])),su(su(su(_6021,[v9 of s(double(v0))],[v10]),[less3 of double(v0)],[v9]),[term_of(less3)],[less3]),
+                    [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z),v11: (less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))))=>less(v0,s(s(double(v0))))]==>less(double(v0),s(double(v0))),
+                     generalise(double(v0),v9:pnat),lambda(v9,su(v10,[v9 of double(v0)],[v10]))of _6328,
+                     [problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z),v11: (less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))))=>less(v0,s(s(double(v0))))]==>v9:pnat=>less(v9,s(v9)),
+                      ind_strat(induction(lemma(pnat_primitive)-[(v9:pnat)-s(v10)])then[base_case(sym_eval(normalize_term([reduction([],[lesszero,equiv(left)])]))then[elementary(intro(new[v10])then[contradiction(v10),wfftacs])]),step_case(ripple(direction_out,unblock_then_wave(direction_out,unblock_lazy([unblock(meta_ripple,unused,unused),idtac])then wave(direction_out,[],[less3,equ(u(1),left)],[])))then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,v12))])]),lambda(v9,p_ind(v9,su(su(spread(v10,[v12,v13,su(v15,[v13 of lambda(v10,su(su(lambda(v12,su(any(v10),[v13 of v12],[v10]))of v10,[v12 of 0],[v13]),[term_of(succ_nonzero_right)],[v12]))],[v15])]),[lesszero of s(0)],[v10]),[term_of(lesszero)],[lesszero]),[v10,v12,su(su(su(v12,[v13 of s(v10)],[v14]),[less3 of v10],[v13]),[term_of(less3)],[less3])])),
+                      [
+                      ]) ext _6328
+                     ]) ext _6021
+                    ]) ext _5720,
+                    problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z),v11: (less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))))=>less(v0,s(s(double(v0))))]==>less(v0,s(double(v0))),
+                    hyp(v7),v7,
+                    [
+                    ]) ext _5721
+                   ]) ext _5434,
+                   problem([y:pnat,v3: (y=0 in pnat=>void)=>v2:pnat#y=s(v2)in pnat,v4:v2:pnat#y=s(v2)in pnat,py:pnat,v5:y=s(py)in pnat,v2:v4=py&v5 in (v2:pnat#y=s(v2)in pnat),v0:pnat,v1: (double(s(v0))=0 in pnat=>void)=>less(s(v0),double(s(v0))),v6:double(s(s(v0)))=0 in pnat=>void,v7:less(v0,s(double(v0))),v8:x:pnat=>y:pnat=>z:pnat=> (less(y,z)#less(x,y))=>less(x,z),v11: (less(s(double(v0)),s(s(double(v0))))#less(v0,s(double(v0))))=>less(v0,s(s(double(v0)))),v9:less(v0,s(s(double(v0))))]==>less(v0,s(s(double(v0)))),
+                   hyp(v9),v9,
+                   [
+                   ]) ext _5427
+                  ]) ext _5122
+                 ]) ext _4820
+                ]) ext _4598
+               ]) ext _4324
+              ]) ext _4059
+             ]) ext _3810
+            ]) ext _3552
+           ]) ext _3289
+          ]) ext _2554
+         ]) ext _2368
+        ]) ext _1815
+       ]) ext _1458
+      ]) ext _1282
+     ]) ext _1188
+    ]) ext _1179
+   ]) ext _1127
+  ]) ext _1074
+ ]) ext _976
+]).

@@ -1,0 +1,34 @@
+problem([]==>x:pnat=>y:pnat=>z:pnat=>leq(x,y)=>leq(x,plus(y,z)),
+quantifier_to_front(y:pnat)then quantifier_to_front(x:pnat)then try dequantify_once then try dequantify_once then do_induction([(x:pnat)-s(v0),(y:pnat)-s(v1)]),lambda(v0,lambda(v1,lambda(v2,lambda(v3,su(su(su(v6,[v5 of v2],[v6]),[v4 of v0],[v5]),[v3 of v1],[v4]))of lambda(v0,lambda(v1,lambda(v2,lambda(v3,su(su(su(v6,[v5 of v2],[v6]),[v4 of v0],[v5]),[v3 of v1],[v4]))of lambda(x,lambda(y,su(lambda(v3,su(su(su(su(su(su(v10,[v9 of lambda(v0,lambda(v1,lambda(v2,_1367)))],[v10]),[v8 of lambda(v0,_1377)],[v9]),[v7 of lambda(v0,_1387)],[v8]),[v6 of y],[v7]),[v5 of x],[v6]),[v3 of lambda(x,lambda(y,z:pnat=>leq(x,y)=>leq(x,plus(y,z))))],[v5]))of v4,[term_of(pairs)],[v4]))))))))),
+[problem([x:pnat,y:pnat,v0:pnat]==>z:pnat=>leq(0,v0)=>leq(0,plus(v0,z)),
+ sym_eval(normalize_term([reduction([1],[leq1,equ(u(1),left)]),reduction([],[imp1,equiv(left)]),reduction([],[leq1,equ(u(1),left)])]))then[elementary(intro(new[z])then[istrue,wfftacs])],lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(v1,su(su(spread(v2,[v3,v4,su(v6,[v4 of (lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(z,0),[leq1 of plus(v0,v1)],[v2]),[term_of(leq1)],[leq1])))],[v6])]),[imp1 of leq(0,plus(v0,v1))],[v2]),[term_of(imp1)],[imp1])),[leq1 of v0],[v2]),[term_of(leq1)],[leq1])),
+ [
+ ]) ext _1387,
+ problem([x:pnat,y:pnat,v0:pnat]==>z:pnat=>leq(v0,0)=>leq(v0,plus(0,z)),
+ sym_eval(normalize_term([reduction([2,2],[plus1,equ(pnat,left)])])),lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of _1786,[plus1 of v1],[v2]),[term_of(plus1)],[plus1])),
+ [problem([x:pnat,y:pnat,v0:pnat]==>z:pnat=>leq(v0,0)=>leq(v0,z),
+  ind_strat(cases(datatype([v0:pnat,s(v1)]))),pnat_eq(v0,0,su(_1878,[axiom],[v3]),su(su(lambda(v2,su(su(spread(v6,[v1,v7,_1914]),[v5 of v3],[v6]),[v2 of v0],[v5]))of v4,[term_of(succlemma)],[v4]),[lambda(~,axiom)],[v3])),
+  [problem([x:pnat,y:pnat,v0:pnat]==>z:pnat=>leq(0,0)=>leq(0,z),
+   sym_eval(normalize_term([reduction([1],[leq1,equ(u(1),left)]),reduction([],[imp1,equiv(left)]),reduction([],[leq1,equ(u(1),left)])]))then[elementary(intro(new[z])then[istrue,wfftacs])],lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(v1,su(su(spread(v2,[v3,v4,su(v6,[v4 of (lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(v1,su(su(lambda(v2,su(v3,[v2 of v1],[v3]))of lambda(z,0),[leq1 of v1],[v2]),[term_of(leq1)],[leq1])))],[v6])]),[imp1 of leq(0,v1)],[v2]),[term_of(imp1)],[imp1])),[leq1 of 0],[v2]),[term_of(leq1)],[leq1])),
+   [
+   ]) ext _1878,
+   problem([x:pnat,y:pnat,v0:pnat,v1:pnat]==>z:pnat=>leq(s(v1),0)=>leq(s(v1),z),
+   sym_eval(normalize_term([reduction([1],[leq2,equ(u(1),left)]),reduction([],[imp2,equiv(left)])]))then[elementary(intro(new[z])then[istrue,wfftacs])],lambda(v2,su(su(lambda(v3,su(v4,[v3 of v2],[v4]))of lambda(v2,su(su(spread(v3,[v4,v5,su(v7,[v5 of (lambda(v3,su(v4,[v3 of v2],[v4]))of lambda(z,0))],[v7])]),[imp2 of leq(s(v1),v2)],[v3]),[term_of(imp2)],[imp2])),[leq2 of v1],[v3]),[term_of(leq2)],[leq2])),
+   [
+   ]) ext _1914
+  ]) ext _1786
+ ]) ext _1377,
+ problem([x:pnat,y:pnat,v0:pnat,v1:pnat,v2:z:pnat=>leq(v0,v1)=>leq(v0,plus(v1,z))]==>z:pnat=>leq(s(v0),s(v1))=>leq(s(v0),plus(s(v1),z)),
+ dequantify_all([z:pnat],[v3])then rewrite(plus2)then requantify([z:pnat],[v3]),lambda(v3,su(su(su(lambda(v4,su(v5,[v4 of v3],[v5]))of _2540,[v4 of v3],[v5]),[plus2 of v1],[v4]),[term_of(plus2)],[plus2])),
+ [problem([x:pnat,y:pnat,v0:pnat,v1:pnat,v2:z:pnat=>leq(v0,v1)=>leq(v0,plus(v1,z))]==>z:pnat=>leq(s(v0),s(v1))=>leq(s(v0),s(plus(v1,z))),
+  dequantify_all([z:pnat],[v3])then rewrite(leq3)then requantify([z:pnat],[v3]),lambda(v3,su(su(su(lambda(v4,su(v5,[v4 of v3],[v5]))of _2702,[v4 of plus(v1,v3)],[v5]),[leq3 of v0],[v4]),[term_of(leq3)],[leq3])),
+  [problem([x:pnat,y:pnat,v0:pnat,v1:pnat,v2:z:pnat=>leq(v0,v1)=>leq(v0,plus(v1,z))]==>z:pnat=>leq(s(v0),s(v1))=>leq(v0,plus(v1,z)),
+   dequantify_all([z:pnat],[v3])then rewrite(leq3)then requantify([z:pnat],[v3]),lambda(v3,su(su(su(lambda(v4,su(v5,[v4 of v3],[v5]))of _2863,[v4 of v1],[v5]),[leq3 of v0],[v4]),[term_of(leq3)],[leq3])),
+   [problem([x:pnat,y:pnat,v0:pnat,v1:pnat,v2:z:pnat=>leq(v0,v1)=>leq(v0,plus(v1,z))]==>z:pnat=>leq(v0,v1)=>leq(v0,plus(v1,z)),
+    hyp(v2),v2,
+    [
+    ]) ext _2863
+   ]) ext _2702
+  ]) ext _2540
+ ]) ext _1367
+]).

@@ -1,0 +1,134 @@
+/*
+ * @(#)$Id: step_case,v 1.19 2005/05/09 18:13:26 smaill Exp $
+ */
+method(step_case(Plan),
+       H==>G,
+       [annotated(G),
+	RippleOutPlan = ripple(direction_out,_),
+        applicable_submethod(H==>G,RippleOutPlan,_,RippleOutSeqsPrePWF),
+	map_list(RippleOutSeqsPrePWF, PrePWF :=> PostPWF-PostPWFPlan, 
+		 ((PostPWFPlan=pw_fertilize(_),
+		     applicable_submethod(PrePWF,PostPWFPlan,_,PostPWF)); (PostPWFPlan=idtac, PostPWF=PrePWF)),
+		 RippleOutSeqsAndPlansPostPWF),
+	zip(RippleOutSeqsAndPlansPostPWF,RippleOutSeqsPostPWF,RippleOutPlansPostPWF),
+	write('RippleOutPlansPostPWF are '), write(RippleOutPlansPostPWF),nl,
+	flatten(RippleOutSeqsPostPWF,RippleOutSeqs),
+	write('RippleOutSeqs are '), write(RippleOutSeqs),nl,
+	write('RippleOutPlan is '), write(RippleOutPlan),nl,
+	map_list(RippleOutSeqs, RippleOutSeq :=>
+		     PostRippleOutSeqs-PostRippleOutPlan,
+		 orelse((/* STRONG FERTILIZATION */
+			 PostRippleOutPlan=unblock_then_fertilize(strong,_),
+			 applicable_submethod(RippleOutSeq,PostRippleOutPlan,
+					      _,PostRippleOutSeqs)),
+			(/* ADDITIONAL RIPPLING (WITH RIPPLING-IN) */
+			 /* It may be possible to W.F. at this stage. */
+			 EarlyWFPlan=unblock_then_fertilize(weak,_),
+			 (applicable_submethod(RippleOutSeq,
+					       EarlyWFPlan,_,EarlyWFSeqs)
+			   -> EarlyWFPossible = yes
+			   ;  EarlyWFPossible = no),
+			 RippleInPlan = ripple(direction_in_or_out,_),
+			 orelse(/* TRY RIPPLING-IN; THEN S.F. ORELSE W.F. */
+			     (applicable_submethod(RippleOutSeq,
+						   RippleInPlan,_,RippleOutInSeqs),
+			      map_list(RippleOutInSeqs,RippleOutInSeq :=>
+					   PostRippleOutInSeqs-PostRippleOutInPlan,
+				       orelse(
+					   /* Possible problem here in that any W.F. cannot be undone */
+					   /* A committment to S.F. seems appropriate here, but W.F. 
+					      is probably something we want to be able to backtrack 
+					      over (since it is not equivalence preserving).  */
+					   once((/* STRONG or WEAK FERTILIZE */
+						 /* This W.F. will not be undone (BUG?) */   
+						 (FertType=strong; FertType=weak),
+						 PostRippleOutInPlan=
+						     unblock_then_fertilize(FertType,_),
+						 applicable_submethod(RippleOutInSeq,
+								      PostRippleOutInPlan,_,
+								      PostRippleOutInSeqs))),
+					   (/* IDTAC (no fertilization possible) */
+					    PostRippleOutInPlan=idtac,
+					    PostRippleOutInSeqs=[RippleOutInSeq])),
+				       PostRippleOutInSeqsPlan),
+			      /* If early W.F. were possible, only allow */
+			      /* rippling-in if it enabled some S.F */
+			      if(EarlyWFPossible=yes,
+				 member(_-unblock_then_fertilize(strong,_),
+					PostRippleOutInSeqsPlan)),
+			      zip(PostRippleOutInSeqsPlan,PostRippleOutInSeqs,
+				  PostRippleOutInPlans),
+			      flatten(PostRippleOutInSeqs,PostRippleOutSeqs),
+			      PostRippleOutPlan=
+				  (RippleInPlan then PostRippleOutInPlans)),
+			     (/* (NO RIPPING-IN POSSIBLE, TRY WEAK FERTILIZATION)
+				 If early W.F. were possible, try that, but allow idtac too
+				 (i.e., this W.F. may be undone).  */
+			      ((EarlyWFPossible=yes,
+				PostRippleOutPlan=EarlyWFPlan,
+				PostRippleOutSeqs=EarlyWFSeqs);
+			       (PostRippleOutSeqs=[RippleOutSeq],
+				PostRippleOutPlan=idtac)))))),
+		 PostRippleOutSeqsPlans),
+	zip(PostRippleOutSeqsPlans,PostRippleOutSeqs,PostRippleOutPlan),
+	write('PostRippleOutPlan is '), write(PostRippleOutPlan),nl,
+	flatten(PostRippleOutSeqs,OutputSequents),
+	Plan = ((RippleOutPlan then RippleOutPlansPostPWF) then PostRippleOutPlan)],
+       [erase_sequents(OutputSequents,OutputSequentsErased)],
+       OutputSequentsErased,
+       step_case(Plan)).
+
+/* The step-case method attempts to apply rippling techniques to the
+   goal in order to acheive fertilization.  Two types of fertilization
+   are possible in general, strong and weak (S.F. and W.F.).
+   S.F. closes a proof branch, so is much preferred over W.F.  W.F. is
+   not equivalence preserving, which suggests that backtracking over
+   W.F. may be needed.  Two types of rippling are available, "in" and
+   "out".  The ripple method is parametrized in order to determine
+   this type.
+
+   The method is as follows.  Try all possible ripplings (i.e.,
+   in_or_out) in an effort to acheive S.F.  Being able to S.F. means
+   that there are no wave-fronts left in the term.  Thus, one can see
+   that rippling cannot ripple beyond the point of a S.F., since
+   rippling requires the movement of wave fronts; if there are none,
+   as is the case when S.F. is applicable, rippling is inapplicable.
+
+   Hence S.F. is achieved by attempting: put the goal into normal form
+   (N.F.) wrt rippling-out then try S.F.  (Note: the N.F. is not
+   unique.)  If that SF fails, continue ripping, with rippling-in,
+   then try S.F.  By the above argument, there is no need for the
+   ripple method to "lazily" determine the applicability of S.F. after
+   each wave rule application.  (Actually, this is not true if the
+   annotation is left in place beneath sinks---however, this rippling
+   beneath sinks cannot affect fertlilization except in bizzare
+   circumstances.  Clam removes annotation from sinks.)
+
+   In cases where S.F. cannot be applied, it may be possible to W.F.
+   There is some choice here as to when to W.F.  Typically, W.F. will
+   be applicable at multiple points in the course of rippling, since
+   one side of the goal will be "weak-fertilizable" whilst the other
+   will contain a ripple-redex. The choice is whether to W.F. or to
+   reduce the redex.  In particular, notice that additional rippling
+   in may not be required to enable W.F.: here this is referred to as
+   "early W.F.".  When early W.F. is possible, tentative rippling-in
+   (computed in the course of finding S.F.) is discarded iff S.F. was
+   not successful.
+
+   From the point of view of implementation, early W.F. is easier,
+   since we W.F. as soon as we can.  However, this might not be
+   sensible, since it may be possible to fully ripple out the other
+   side of the goal.  Furthermore, there is an efficiency
+   consideration.  Recall that we have established (by computing
+   N.F. wrt rippling-out and rippling-in) that S.F. is
+   inapplicable---it is quite wasteful to recompute (segments of)
+   these two reduction sequences.
+
+   Concering backtracking over W.F.  W.F. on the fully rippled goal
+   (wrt in and out rippling) cannot be undone; this is a bug really.
+   W.F. on the fully rippled-out goal can be undone.  */
+
+
+%%% Local Variables: 
+%%% mode: prolog
+%%% End: 

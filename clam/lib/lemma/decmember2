@@ -1,0 +1,13 @@
+problem([]==>v0:int=>l2:int list=>member(v0,l2)\member(v0,l2)=>void,
+lemma(decmember),su(_13538,[term_of(decmember)],[v0]),
+[problem([v0:v0:int=>l2:int list=> (member(v0,l2)=>void)\member(v0,l2)]==>v0:int=>l2:int list=>member(v0,l2)\member(v0,l2)=>void,
+ repeat dequantify_once,lambda(v1,lambda(l2,_13624)),
+ [problem([v0:v0:int=>l2:int list=> (member(v0,l2)=>void)\member(v0,l2),v1:int,l2:int list]==>member(v1,l2)\member(v1,l2)=>void,
+  do_elim_on(v0,[v1,l2],[v0,v2,v3])then (append([v2],[v3],[v2,v3]),thin([v2])),su(su(_13734,[v2 of l2],[v3]),[v0 of v1],[v2]),
+  [problem([v0:v0:int=>l2:int list=> (member(v0,l2)=>void)\member(v0,l2),v1:int,l2:int list,v3: (member(v1,l2)=>void)\member(v1,l2)]==>member(v1,l2)\member(v1,l2)=>void,
+   elim(v3)then[intro(right)then[hyp(v2),wfftacs],intro(left)then[hyp(v4),wfftacs]],decide(v3,[v2,inr(v2)],[v4,inl(v4)]),
+   [
+   ]) ext _13734
+  ]) ext _13624
+ ]) ext _13538
+]).

@@ -1,0 +1,49 @@
+/*
+ * @(#)$Id: generalise,v 1.2 1995/05/28 18:26:55 armando Exp $
+ *
+ * $Log: generalise,v $
+ * Revision 1.2  1995/05/28 18:26:55  armando
+ * Comment char modified
+ *
+ * Revision 1.1  1995/05/24  16:56:25  armando
+ * Initial file
+ *
+ * Revision 1.1.4.1  1995/05/12  10:58:10  armando
+ * Preventing the generalisation of terms of type u(_)
+ *
+ * Revision 1.1  1994/09/16  09:33:29  dream
+ * Initial revision
+ *
+ */
+
+	% GENERALISE METHOD:
+	% Replace a common subterm in both halfs of an
+	% - equality, or
+	% - implication, or
+	% - inequality
+	% by a new variable.
+	% Disallow generalising over object-level variables, and over 
+        % terms containing meta-level variables (too dangerous), and 
+        % over constant object-level terms, and over terms containing 
+        % wave-fronts.
+submethod(generalise(Exp,Var:Type),
+       H==>G,
+       [matrix(Vs,M1,G),
+        sinks(M,_,M1),      % Strip out sinks
+        member(M,[(L=R in _),(L=>R),geq(L,R),leq(L,R),greater(L,R),less(L,R)]),
+        exp_at(L,_,Exp),
+        not atomic(Exp),        % disallow generalising object-level variables
+        not constant(Exp,_),    % Exp must not be a constant term.
+        object_level_term(Exp), % Exp must not contain meta-vars or wave fronts
+        exp_at(R,_,Exp),
+        type_of(Exp,Type),
+ \+ Type=u(_),
+        append(Vs,H,VsH),
+        hfree([Var],VsH)
+       ], 
+       [strip_meta_annotations(G,NewG1),
+        replace_all(Exp,Var,NewG1, NewG)
+       ],
+       [H==>Var:Type=>NewG],
+       generalise(Exp,Var:Type)
+      ).

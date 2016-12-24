@@ -1,0 +1,7 @@
+/*
+ * $Id: README,v 1.1 1994/09/16 09:45:02 dream Exp $
+ */
+Please use XCLAM if you like it, BUT note that it is not supported
+in any way.  We are not working on this particular version of the X
+interface any more, so please don't expect anything.  There is no
+documentation.

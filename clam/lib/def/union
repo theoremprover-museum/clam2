@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: union,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: union,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+union(l1,l2)<==>term_of(union)of l1 of l2.

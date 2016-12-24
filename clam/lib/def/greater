@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: greater,v 1.2 1996/06/11 16:50:13 img Exp $
+ *
+ * $Log: greater,v $
+ * Revision 1.2  1996/06/11 16:50:13  img
+ * Make greater similar to less---thus obviating the need for greater to
+ * depend on less.
+ *
+ * Revision 1.1  1994/09/16  09:37:56  dream
+ * Initial revision
+ */
+
+greater(x,y)<==>term_of(lessgreater)of y of x.

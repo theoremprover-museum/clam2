@@ -1,0 +1,4 @@
+problem([]==>x:pnat=>y:pnat=>geq(plus(x,y),x),
+ind_strat(induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)])then[base_case(normalize_term([reduction([],[geq1,equ(u(1),left)])])then[elementary((intro(new[y])then wfftacs)then unfold_iff then intro(explicit(0))then simplify then wfftacs)]),step_case(ripple(direction_out,wave(direction_out,[1],[plus2,equ(pnat,left)],[])then[wave(direction_out,[],[geq3,equ(u(1),left)],[])])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,pwf_then_fertilize(strong,fertilization_strong(v1))))])]),lambda(x,p_ind(x,lambda(v0,su(su(lambda(v1,su(v2,[v1 of v0],[v2]))of lambda(y,0),[geq1 of plus(0,v0)],[v1]),[term_of(geq1)],[geq1])),[v0,v1,lambda(v2,su(su(su(lambda(v3,su(v4,[v3 of v2],[v4]))of lambda(v2,su(su(su(lambda(v3,su(v4,[v3 of v2],[v4]))of v1,[v3 of v0],[v4]),[geq3 of plus(v0,v2)],[v3]),[term_of(geq3)],[geq3])),[v3 of v2],[v4]),[plus2 of v0],[v3]),[term_of(plus2)],[plus2]))])),
+[
+]).

@@ -1,0 +1,154 @@
+/*
+ * @(#)$Id: ordered4,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: ordered4,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:int=>y:int=>t:int list=> (y<x=>void)=>ordered(x::y::t)=ordered(y::t)in u(1),
+repeat intro,lambda(x,lambda(y,lambda(t,lambda(v0,_7524)))),
+[problem([x:int,y:int,t:int list,v0:y<x=>void]==>ordered(x::y::t)=ordered(y::t)in u(1),
+ compute([[simplify]]=_7594 in _7591),_7533,
+ [problem([x:int,y:int,t:int list,v0:y<x=>void]==>less(y,x,void,list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])]))=ordered(y::t)in u(1),
+  subst(at(2),over(q,q=ordered(y::t)in u(1)),less(y,x,void,list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])]))=list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])in u(1)),_7607,
+  [problem([x:int,y:int,t:int list,v0:y<x=>void]==>less(y,x,void,list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])]))=list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])in u(1),
+   reduce(false),axiom,
+   [problem([x:int,y:int,t:int list,v0:y<x=>void]==>void in u(1),
+    intro,axiom,
+    [
+    ]),
+    problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])in u(1),
+    repeat intro,axiom,
+    [problem([x:int,y:int,t:int list,v0:y<x=>void,v1:int,v2:int list,v3:u(1)]==>lambda(v3_,decide(v3_,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])]))of list_ind(v2,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)])in u(1),
+     compute([[unfold]]in _8437)or list_intro or intro(using(int list))or intro or apply_wfftac or subsetlist_wfftac or term_of_wfftac,_8310,
+     [problem([x:int,y:int,t:int list,v0:y<x=>void,v1:int,v2:int list,v3:u(1)]==>decide(list_ind(v2,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])])in u(1),
+      intro(using(v2=nil in int list\h:int#t:int list#v2=h::t in int list)),axiom,
+      [problem([x:int,y:int,t:int list,v0:y<x=>void,v1:int,v2:int list,v3:u(1)]==>list_ind(v2,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)])in (v2=nil in int list\h:int#t:int list#v2=h::t in int list),
+       elim(v2)then simplify then repeat intro,list_ind(v2,axiom,[v4,v5,v6,axiom]),
+       [
+       ]),
+       problem([x:int,y:int,t:int list,v0:y<x=>void,v1:int,v2:int list,v3:u(1),v4:v2=nil in int list,v6:list_ind(v2,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)])=inl(v4)in (v2=nil in int list)\h:int#t:int list#v2=h::t in int list]==>int in u(1),
+       intro,axiom,
+       [
+       ]),
+       problem([x:int,y:int,t:int list,v0:y<x=>void,v1:int,v2:int list,v3:u(1),v5:h:int#t:int list#v2=h::t in int list,v6:list_ind(v2,inl(axiom),[v3_,v4,~,inr(v3_&v4&axiom)])=inr(v5)in (v2=nil in int list)\h:int#t:int list#v2=h::t in int list]==>spread(v5,[h,v4,spread(v4,[~,~,less(h,v1,void,v3)])])in u(1),
+       repeat wfftac,axiom,
+       [
+       ])
+      ]) ext _8310
+     ]) ext _8306
+    ]),
+    problem([x:int,y:int,t:int list,v0:y<x=>void]==>y<x=>void,
+    intro,v0,
+    [
+    ])
+   ]),
+   problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])=ordered(y::t)in u(1),
+   compute(_9281=[[1]]in _9279),_9151,
+   [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])=term_of(ordered)of (y::t)in u(1),
+    compute(_9428=[[1]]of _9432 in _9426),_9295,
+    [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])=lambda(x,list_ind(x,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])]))of (y::t)in u(1),
+     beta_reduce,_9445,
+     [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])])])=list_ind(y::t,int,[v0,v1,v2,lambda(v3,decide(v3,[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])]))of list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])])in u(1),
+      beta_reduce,_9656,
+      [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])])])=list_ind(y::t,int,[v0,v1,v2,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])])])in u(1),
+       equality,axiom,
+       [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])])])in u(1),
+        compute([[unfold]]in _10162)or list_intro or intro(using(int list))or intro or apply_wfftac or subsetlist_wfftac or term_of_wfftac,_10045,
+        [problem([x:int,y:int,t:int list,v0:y<x=>void]==>decide(list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,y,void,list_ind(t,int,[v0,v1,v2,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])])]))])])])in u(1),
+         intro(using(t=nil in int list\h:int#tl:int list#t=h::tl in int list)),axiom,
+         [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])in (t=nil in int list\h:int#tl:int list#t=h::tl in int list),
+          elim(t),list_ind(t,_10503,[v1,v2,v3,_10511]),
+          [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(nil,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])in (nil=nil in int list\h:int#tl:int list#nil=h::tl in int list),
+           simplify then repeat intro then repeat wfftac,axiom,
+           [
+           ]) ext _10503,
+           problem([x:int,y:int,t:int list,v0:y<x=>void,v1:int,v2:int list,v3:list_ind(v2,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])in (v2=nil in int list\h:int#tl:int list#v2=h::tl in int list)]==>list_ind(v1::v2,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])in (v1::v2=nil in int list\h:int#tl:int list#v1::v2=h::tl in int list),
+           simplify then repeat intro then repeat wfftac,axiom,
+           [
+           ]) ext _10511
+          ]),
+          problem([x:int,y:int,t:int list,v0:y<x=>void,v1:t=nil in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inl(v1)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list]==>int in u(1),
+          intro,axiom,
+          [
+          ]),
+          problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list]==>spread(v2,[h,v4,spread(v4,[~,~,less(h,y,void,list_ind(t,int,[v0,v1,v2_,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2_)])])])]))])])in u(1),
+          repeat wfftac,axiom,
+          [problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1)]==>decide(list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)]),[~,int],[v5,spread(v5,[h,v4_,spread(v4_,[~,~,less(h,v10,void,v12)])])])in u(1),
+           intro(using(v11=nil in int list\h:int#t:int list#v11=h::t in int list)),axiom,
+           [problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1)]==>list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)])in (v11=nil in int list\h:int#t:int list#v11=h::t in int list),
+            elim(v11)then simplify then repeat intro then wfftacs,list_ind(v11,axiom,[v13,v14,v15,axiom]),
+            [
+            ]),
+            problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1),v13:v11=nil in int list,v15:list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)])=inl(v13)in (v11=nil in int list)\h:int#t:int list#v11=h::t in int list]==>int in u(1),
+            intro,axiom,
+            [
+            ]),
+            problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1),v14:h:int#t:int list#v11=h::t in int list,v15:list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)])=inr(v14)in (v11=nil in int list)\h:int#t:int list#v11=h::t in int list]==>spread(v14,[h,v4_,spread(v4_,[~,~,less(h,v10,void,v12)])])in u(1),
+            repeat wfftac,axiom,
+            [
+            ])
+           ]) ext _11193
+          ])
+         ]) ext _10045
+        ]),
+        problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(y::t,int,[v0,v1,v2,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])])])in u(1),
+        repeat wfftac,_12777,
+        [problem([x:int,y:int,t:int list,v0:y<x=>void]==>decide(list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,y,void,list_ind(t,int,[v0,v1,v2,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2)])])])]))])])])in u(1),
+         intro(using(t=nil in int list\h:int#tl:int list#t=h::tl in int list)),axiom,
+         [problem([x:int,y:int,t:int list,v0:y<x=>void]==>list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])in (t=nil in int list\h:int#tl:int list#t=h::tl in int list),
+          elim(t)then simplify then repeat intro then repeat wfftac,list_ind(t,axiom,[v1,v2,v3,axiom]),
+          [
+          ]),
+          problem([x:int,y:int,t:int list,v0:y<x=>void,v1:t=nil in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inl(v1)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list]==>int in u(1),
+          intro,axiom,
+          [
+          ]),
+          problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list]==>spread(v2,[h,v4,spread(v4,[~,~,less(h,y,void,list_ind(t,int,[v0,v1,v2_,decide(list_ind(v1,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)]),[~,int],[v5,spread(v5,[h,v4,spread(v4,[~,~,less(h,v0,void,v2_)])])])]))])])in u(1),
+          repeat wfftac,axiom,
+          [problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1)]==>decide(list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)]),[~,int],[v5,spread(v5,[h,v4_,spread(v4_,[~,~,less(h,v10,void,v12)])])])in u(1),
+           intro(using(v11=nil in int list\h:int#tl:int list#v11=h::tl in int list)),axiom,
+           [problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1)]==>list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)])in (v11=nil in int list\h:int#tl:int list#v11=h::tl in int list),
+            elim(v11)then simplify then repeat intro then repeat wfftac,list_ind(v11,axiom,[v13,v14,v15,axiom]),
+            [
+            ]),
+            problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1),v13:v11=nil in int list,v15:list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)])=inl(v13)in (v11=nil in int list)\h:int#tl:int list#v11=h::tl in int list]==>int in u(1),
+            intro,axiom,
+            [
+            ]),
+            problem([x:int,y:int,t:int list,v0:y<x=>void,v2:h:int#tl:int list#t=h::tl in int list,v3:list_ind(t,inl(axiom),[v3,v4,~,inr(v3&v4&axiom)])=inr(v2)in (t=nil in int list)\h:int#tl:int list#t=h::tl in int list,v1:int,v4:tl:int list#t=v1::tl in int list,v5:v2=v1&v4 in (h:int#tl:int list#t=h::tl in int list),v6:int list,v7:t=v1::v6 in int list,v8:v4=v6&v7 in (tl:int list#t=v1::tl in int list),v9:v1<y=>void,v10:int,v11:int list,v12:u(1),v14:h:int#tl:int list#v11=h::tl in int list,v15:list_ind(v11,inl(axiom),[v3,v4_,~,inr(v3&v4_&axiom)])=inr(v14)in (v11=nil in int list)\h:int#tl:int list#v11=h::tl in int list]==>spread(v14,[h,v4_,spread(v4_,[~,~,less(h,v10,void,v12)])])in u(1),
+            repeat wfftac,axiom,
+            [
+            ])
+           ]) ext _13596
+          ])
+         ]) ext _12777
+        ])
+       ]) ext _9656
+      ]) ext _9445
+     ]) ext _9295
+    ]) ext _9151
+   ]) ext _7607,
+   problem([x:int,y:int,t:int list,v0:y<x=>void,q:u(1)]==>q=ordered(y::t)in u(1)in u(2),
+   repeat wfftac,axiom,
+   [problem([x:int,y:int,t:int list,v0:y<x=>void,q:u(1),v1:int list,v2:int,v3:int list,v4:u(1)]==>decide(list_ind(v3,inl(axiom),[v3_,v4_,~,inr(v3_&v4_&axiom)]),[~,int],[v5,spread(v5,[h,v4_,spread(v4_,[~,~,less(h,v2,void,v4)])])])in u(1),
+    intro(using(v3=nil in int list\h:int#tl:int list#v3=h::tl in int list)),axiom,
+    [problem([x:int,y:int,t:int list,v0:y<x=>void,q:u(1),v1:int list,v2:int,v3:int list,v4:u(1)]==>list_ind(v3,inl(axiom),[v3_,v4_,~,inr(v3_&v4_&axiom)])in (v3=nil in int list\h:int#tl:int list#v3=h::tl in int list),
+     elim(v3)then simplify then repeat intro then repeat wfftac,list_ind(v3,axiom,[v5,v6,v7,axiom]),
+     [
+     ]),
+     problem([x:int,y:int,t:int list,v0:y<x=>void,q:u(1),v1:int list,v2:int,v3:int list,v4:u(1),v5:v3=nil in int list,v7:list_ind(v3,inl(axiom),[v3_,v4_,~,inr(v3_&v4_&axiom)])=inl(v5)in (v3=nil in int list)\h:int#tl:int list#v3=h::tl in int list]==>int in u(1),
+     intro,axiom,
+     [
+     ]),
+     problem([x:int,y:int,t:int list,v0:y<x=>void,q:u(1),v1:int list,v2:int,v3:int list,v4:u(1),v6:h:int#tl:int list#v3=h::tl in int list,v7:list_ind(v3,inl(axiom),[v3_,v4_,~,inr(v3_&v4_&axiom)])=inr(v6)in (v3=nil in int list)\h:int#tl:int list#v3=h::tl in int list]==>spread(v6,[h,v4_,spread(v4_,[~,~,less(h,v2,void,v4)])])in u(1),
+     repeat wfftac,axiom,
+     [
+     ])
+    ]) ext _15246
+   ])
+  ]) ext _7533
+ ]) ext _7524
+]).

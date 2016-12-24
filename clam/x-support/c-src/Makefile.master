@@ -1,0 +1,29 @@
+# Makefile for xclam object files
+# @(#)$Id: Makefile.master,v 1.1 1994/09/16 09:45:20 dream Exp $
+#
+# $Log: Makefile.master,v $
+# Revision 1.1  1994/09/16 09:45:20  dream
+# Initial revision
+#
+
+OBJS= subwindows.o callclam.o mute.o signals.o \
+      utils.o dialog.o menu.o init_colour.o read_write.o
+CC=gcc
+CFLAGS=-ggdb -ansi
+
+all:  xclam
+xclam: $(OBJS)
+	$(CC)  -g -o  xclam  $(OBJS) \
+	     -lXaw -lXmu -lXext -lXt -lX11  -L/usr/lib/X11
+clean:
+	rm -f *.o xclam *~
+
+depend: clean
+	rm -f Makefile
+	make -f Makefile.master CFLAGS='-MMD' all
+	cat Makefile.master *.d >> Makefile
+	rm *.d
+
+# Ensure that the dependancies are pasted in at the end here!
+
+

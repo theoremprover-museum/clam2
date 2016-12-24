@@ -1,0 +1,131 @@
+\def\CLaM{\clam}
+% next is broken
+% \def\vvref#1{\ref{#1}% override bug in varioref package
+%         \@vpageref[\unskip]{#1}%
+%}
+%\newcommand{\reference}[1]{\vvref{#1}}
+\newcommand{\reference}[1]{\vref*{#1}}
+\newcommand{\inx}[1]{\index*{#1}}
+\newcommand{\inxtt}[1]{#1\index{#1=\texttt{#1}}}
+\newcommand{\inxx}[1]{\index{#1}}
+\def\mthddir{../../lib/mthd}
+\newcommand{\defpred}[1]{\index[pred]{#1=\texttt{#1}|textbf}}
+\newcommand{\predinxx}[1]{\index[pred]{#1=\texttt{#1}}}
+\newcommand{\example}[1]{\index{#1|emph}}
+\newcommand{\examplemethod}[1]{\index{method!example!#1={\tt #1}|emph}}
+\newcommand{\examplepred}[1]{\index[pred]{#1={\tt #1}|emph}}
+
+\def\eqdef{\stackrel{{\rm def}}{=}}
+
+\newcommand{\defindex}[1]{\index{#1|textbf}}
+\newcommand{\indexmthd}[1]{\index[mthd]{#1=\texttt{#1}}}
+\newcommand{\defindexmethod}[1]{\index[mthd]{#1=\texttt{#1}|textbf}}
+\newcommand{\f}[1]{{\sf #1}\index[file]{#1=\textsf{#1}}}
+
+% PRINTING PREDICATES and METHODS
+% use tt-font and insert into the predicate index
+\newcommand{\p}[1]{{\tt #1}\predinxx{#1}}
+\newcommand{\m}[1]{{\tt #1}\indexmthd{#1}}
+
+\newif\ifinpredicatedef \inpredicatedeffalse
+
+% Documenting predicates. This can be used for an easily identifiable
+% entry in the manual. Prints predicate surrounded by two horizontal lines,
+% puts predicate/arity in the predicate index.
+% \newenvironment{dodgeypredicate}[2]{\ifinpredicatedef
+%       \nestedpredicateenvironment\else\inpredicatedeftrue
+%         \ifodd\thepage
+%         \vspace{2ex}\hbox{\hbox
+%           {\vbox
+%               {\hrule\vskip1ex
+%                \hbox to\textwidth{{\large\tt #2}\hfil }\vskip1ex
+%                 \hrule\vskip.5ex}\index[pred]{#1|textbf}}\rlap{\raise.7em\hbox to2\marginparsep{\hfill\LARGE\bf !}}}\else
+%         \vspace{2ex}\hbox{\llap{\raise.7em\hbox to2\marginparsep{\LARGE\bf !\hfill}}\hbox
+%           {\vbox
+%               {\hrule\vskip1ex
+%                \hbox to\textwidth{{\large\tt #2}\hfil }\vskip1ex
+%                 \hrule\vskip.5ex}\index[pred]{#1|textbf}}}\fi\noindent\nopagebreak[4]}%
+%         {\inpredicatedeffalse\fi\par\relax }
+% 
+ \newenvironment{predicate}[2]{\ifinpredicatedef
+        \nestedpredicateenvironment\else\inpredicatedeftrue\fi
+        \defpred{#1}\vskip\baselineskip{\samepage
+        \hrule\nopagebreak[4]\vspace{1ex}\nopagebreak[4]\noindent
+        {\large\tt #2}\nopagebreak[4]\vspace{1ex}\nopagebreak
+        [4]\hrule\nopagebreak[4]}\vspace{1ex}\noindent}{\inpredicatedeffalse\par\relax }
+
+
+
+\newenvironment{twopredicates}[4]{\ifinpredicatedef
+        \nestedpredicateenvironment\else\inpredicatedeftrue\fi
+        \defpred{#1}\defpred{#3}\vskip\baselineskip{\samepage\hrule
+        \nopagebreak[4]\vspace{1ex}\nopagebreak[4]\noindent{\large\tt #2}\par
+        \nopagebreak[4]\vspace{1ex}\nopagebreak[4]\noindent
+        {\large\tt #4}\nopagebreak[4]\vspace{1ex}\nopagebreak[4]\hrule
+        \nopagebreak[4]}\vspace{1ex}\noindent}{\inpredicatedeffalse
+        \par\relax }
+
+
+ \newenvironment{method}[2]{\ifinpredicatedef
+        \nestedpredicateenvironment\else\inpredicatedeftrue\fi
+        \examplemethod{#1}\defindexmethod
+        {#1}\vskip\baselineskip{\samepage
+         \hrule\nopagebreak[4]\vspace{1ex}\nopagebreak[4]\noindent
+        {\large\tt #2}\nopagebreak[4]\vspace{1ex}\nopagebreak
+        [4]\hrule\nopagebreak[4]}\vspace{1ex}\noindent}
+        {\inpredicatedeffalse\par\relax }
+
+\def\ncmarginpar#1{\marginpar{\ifodd\thepage #1\hfill\else\hfill #1\fi }}
+
+% Documenting un-nice features of \clam. Will put ``not nice'' in the index,
+% and print a frowny in the margin. 
+\newcommand{\notnice}
+{\ncmarginpar{$\stackrel{\circ\mid\circ}{\frown}$}\index{not nice}}
+
+
+\def\greater{>}
+\def\greaterequal{\geq}
+\def\Multi{\otimes}
+\def\Left{\oplus}
+\def\Right{\ominus}
+\def\Undef{\odot}
+\def\varempty{\emptyset}
+
+\def\Equiv{\sim}                        % equivalence
+\def\quasi{\succeq}
+\def\partial{\succ}
+\def\RPOSeq{\geq}
+\def\RPOS{\greater}
+
+\def\tuple#1{\langle #1\rangle}
+
+
+{\theorembodyfont{\upshape}\newtheorem{defn}{Definition}}
+{\theorembodyfont{\upshape}\newtheorem{remark}{Remark}}
+
+\def\TERM{{\sf TERM}}
+\def\WAT{{\sf WAT}}
+\def\WATS{{\sf WATS}}
+\def\wfoutsym{{\sf wfout}}
+\def\wfinsym{{\sf wfin}}
+\def\whsym{{\sf wh}}
+\def\sinksym{{\sf sink}}
+\def\skels{{\sf skels}}
+\def\erase{{\sf erase}}
+
+
+\def\Reduction{{\sf REDUCTION}}
+\def\Ripple{{\sf RIPPLE}}
+\def\Rewrite{{\sf REWRITE}}
+
+\def\rew{\rightarrow}
+\def\rewrip{\stackrel{\rm rip}{\rew}}
+\def\mimplies{\Rightarrow}
+
+\def\oimplies{\supset}
+\def\oequiv{\equiv}
+\def\oand{\land}
+\def\oor{\lor}
+\def\oneg#1{\neg #1}
+
+\newenvironment{ex}{\paragraph{Example}}{}

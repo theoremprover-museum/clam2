@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: sort2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: sort2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>t:int list=>sort(h::t)=insert(h,sort(t))in int list,
+simplify,_7713,
+[problem([]==>h:int=>t:int list=>list_ind(list_ind(t,nil,[v0,v1,v2,insert(v0,v2)]),h::nil,[v0,v1,v2,less(h,v0,h::v0::v1,v0::v2)])=list_ind(list_ind(t,nil,[v0,v1,v2,insert(v0,v2)]),h::nil,[v0,v1,v2,less(h,v0,h::v0::v1,v0::v2)])in int list,
+ dequantify_once then dequantify_once then identity,lambda(h,lambda(t,axiom)),
+ [
+ ]) ext _7713
+]).

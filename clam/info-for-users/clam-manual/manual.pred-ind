@@ -1,0 +1,435 @@
+\begin{theindex}
+
+  \item \texttt {active-induction-hypothesis/2}, 18
+  \item \texttt {active-inductive-hypothesis/2}, \textbf{11}
+  \item \texttt {add-def/1}, 2
+  \item \texttt {adjust-existential-vars/4}, \textbf{11}
+  \item \texttt {after/2}, \textbf{80}
+  \item \texttt {alw-after/2}, \textbf{80}
+  \item \texttt {alw-imm-after/2}, \textbf{80}
+  \item \texttt {ann-exp-at/3}, \textbf{12}, 16
+  \item \texttt {ann-exp-at/5}, \textbf{12}, 16
+  \item {\tt ann-exp-at/5}, \emph{12}
+  \item \texttt {annotations/4}, \textbf{12}
+  \item \texttt {applicable-anymethod/[1;2;3;4]}, 74, \textbf{74}
+  \item \texttt {applicable-submethod/[1;2;3;4]}, \textbf{73}, 74
+  \item \texttt {applicable-submethod/[2;4]}, 38
+  \item \texttt {applicable/1}, 73, \textbf{73}
+  \item \texttt {applicable/2}, 38, 73, \textbf{73}
+  \item \texttt {applicable/3}, \textbf{73}
+  \item \texttt {applicable/4}, 38, 73, \textbf{73}, 77, 124
+  \item \texttt {applicable/[1;2;3;4]}, 73, 74
+  \item \texttt {applicable/[1;2]}, 73
+  \item \texttt {applicable/[2;4]}, 38
+  \item \texttt {applicable/[3;4]}, 73
+  \item \texttt {apply-ext/1}, 91, \textbf{91}
+  \item \texttt {apply-lemma/1}, 38
+  \item \texttt {apply-plan-check/1}, 91, \textbf{91}
+  \item \texttt {apply-plan/1}, 90, 91, \textbf{91}
+  \item \texttt {apply/1}, 2, 87, 91
+  \item \texttt {autotactic/[0;1]}, 2
+
+  \indexspace
+
+  \item \texttt {backchain-lemma/1}, 38
+  \item \texttt {base-eq/2}, 145
+  \item \texttt {base-eqs/1}, 145
+  \item \texttt {base-rule/2}, 145
+  \item \texttt {base-rules/1}, 145
+  \item \texttt {because/0}, 87
+  \item \texttt {bound/1}, 76, \textbf{76}
+  \item \texttt {bplan/[0;1;2;3]}, \textbf{75}
+
+  \indexspace
+
+  \item \texttt {cancel-rule/2}, \textbf{12}, 103
+  \item \texttt {canonical-form/3}, \textbf{12}, 24
+  \item {\tt canonical-form/3}, \emph{12}
+  \item \texttt {canonical/2}, \textbf{34}, 147, 148
+  \item \texttt {casesplit-suggestion/3}, \textbf{13}, 14, 19, 33
+  \item \texttt {clam-arith/0}, 88
+  \item \texttt {clam-patchlevel-info/0}, 122, \textbf{122}, 151
+  \item \texttt {clam-version/1}, 4, 121, \textbf{122}
+  \item \texttt {comm-proving/0}, 157
+  \item \texttt {complementary-set-dynamic/1}, 153
+  \item \texttt {complementary-set/1}, \textbf{14}, 50, 51, 153
+  \item \texttt {complementary-set/2}, 102
+  \item \texttt {complementary-sets/1}, 14, \textbf{14}, 15
+  \item \texttt {complementary-sets/2}, \textbf{14}
+  \item \texttt {complementary-sets/[1;2]}, 88
+  \item \texttt {complete/1}, 2, 113
+  \item \texttt {consistent-registry/2}, \textbf{15}, 17, 24
+  \item \texttt {consistent/2}, 120
+  \item \texttt {constant/2}, \textbf{34}, 128, 148
+  \item \texttt {consult/1}, 103
+  \item \texttt {contains-wave-fronts/1}, \textbf{15}
+  \item \texttt {cooper/1}, 141
+  \item \texttt {cooper/2}, \textbf{15}
+  \item {\tt cooper/2}, \emph{15}
+  \item \texttt {copy/2}, \textbf{15}
+  \item \texttt {create-def/1}, 2
+  \item \texttt {create-def/2}, 2
+  \item \texttt {create-thm/2}, 2
+
+  \indexspace
+
+  \item \texttt {delete-method/1}, 118
+  \item \texttt {delete-methods/0}, 118, 146
+  \item \texttt {delete-submethod/1}, 118
+  \item \texttt {delete-submethods/0}, 118, 146
+  \item \texttt {delta/1}, 77
+  \item \texttt {dhtplan/[1;2;3;4]}, \textbf{80}
+  \item \texttt {dialect/1}, 121
+  \item \texttt {display/0}, 2, 88
+  \item \texttt {down/[0;1]}, 2
+  \item \texttt {dplan/[0;1;2;3]}, \textbf{74}
+  \item \texttt {dplan/[0;1]}, 75, 76
+  \item \texttt {dplanTeX/[0;1]}, \textbf{75}, 76
+  \item \texttt {dplanTeX[0;1]}, 34, 143
+  \item \texttt {dynamic/1}, 124
+
+  \indexspace
+
+  \item \texttt {elementary/1}, 43
+  \item \texttt {elementary/2}, \textbf{34}, 43
+  \item \texttt {elementary/[0;1;2]}, 150
+  \item \texttt {ensure-loaded/1}, 121
+  \item \texttt {equal-rule/2}, \textbf{15}, 103
+  \item \texttt {ev/2}, \textbf{15}, 32
+  \item \texttt {eval/2}, 2
+  \item \texttt {exists/1}, 146
+  \item \texttt {exp-at/3}, 12, 16, \textbf{16}, 25
+  \item \texttt {exp-at/4}, 16, \textbf{16}
+  \item \texttt {ext2int/2}, 118
+  \item \texttt {extend-registry-prove/3}, \textbf{17}
+  \item \texttt {extend-registry-prove/4}, 25, 45, 120
+  \item \texttt {extending-registry/0}, \textbf{17}, 45, 154
+  \item \texttt {extract/[0;1]}, 2
+
+  \indexspace
+
+  \item \texttt {file-version/1}, 5, \textbf{122}
+  \item \texttt {findall/3}, 36, 147
+  \item \texttt {forall/1}, \textbf{36}
+  \item \texttt {format/[2;3]}, 126
+
+  \indexspace
+
+  \item \texttt {gdhtplan/[1;2;3;4]}, \textbf{80}
+  \item \texttt {gdplan/[0;1;2;3]}, \textbf{77}
+  \item \texttt {goal/[0;1]}, 2
+  \item \texttt {ground-sinks/4}, \textbf{18}
+  \item \texttt {groundp/1}, \textbf{17}
+  \item \texttt {guess-type/3}, 35
+
+  \indexspace
+
+  \item \texttt {hint-context}, 79
+  \item \texttt {hint/6}, 95, 96
+  \item \texttt {hyp-list/[0;1]}, 2
+  \item \texttt {hyp/2}, \textbf{18}
+  \item \texttt {hypothesis/1}, 2
+
+  \indexspace
+
+  \item \texttt {idhtplan/[1;2;3;4]}, \textbf{80}
+  \item \texttt {idplan-max/[1;2]}, 152
+  \item \texttt {idplan/[0;1;2;3]}, \textbf{76}
+  \item \texttt {idplan/[0;1]}, 76
+  \item \texttt {idplanTeX/[0;1]}, \textbf{76}, 89
+  \item \texttt {idplanTeX[0;1]}, 34, 143
+  \item \texttt {idtac/0}, 2, 87
+  \item \texttt {imm-after/2}, \textbf{80}
+  \item \texttt {induction-hypothesis/[3;5]}, 11
+  \item \texttt {induction-suggestion/3}, 13, \textbf{18}, 33
+  \item \texttt {induction/1}, 112
+  \item \texttt {induction/2}, 149
+  \item \texttt {inductive-hypothesis/3}, \textbf{18}
+  \item \texttt {inductive-hypothesis/5}, 18, \textbf{18}
+  \item \texttt {instantiate/3}, \textbf{19}, 20
+  \item \texttt {instantiate/4}, \textbf{20}
+  \item \texttt {is-commutative/2}, 157
+  \item \texttt {is-transitive/2}, 156
+  \item \texttt {issink/2}, \textbf{20}, 116
+  \item \texttt {iswf/4}, \textbf{21}, 116
+  \item \texttt {iswh/2}, \textbf{20}, 116
+  \item \texttt {iterate-lazy/5}, 40, \textbf{40}
+  \item \texttt {iterate-methods/4}, 39, 113
+  \item \texttt {iterate/5}, 40, \textbf{40}
+  \item \texttt {iterator-lazy/4}, 94, 96
+  \item \texttt {iterator/4}, 38, \textbf{38}, 39, 94, 96, 118
+
+  \indexspace
+
+  \item \texttt {join-wave-fronts/3}, \textbf{21}, 27, 31, 34
+
+  \indexspace
+
+  \item \texttt {lib-create/1}, \textbf{99}
+  \item \texttt {lib-create/2}, \textbf{98}, 99
+  \item \texttt {lib-create/[1;2]}, 94, 98
+  \item \texttt {lib-delete/0}, \textbf{100}, 146
+  \item \texttt {lib-delete/1}, 98, \textbf{99}, 100, 145, 146
+  \item \texttt {lib-dir-system/1}, 105, 121, \textbf{122}
+  \item \texttt {lib-dir/1}, 121, \textbf{122}, 145
+  \item \texttt {lib-edit/1}, \textbf{104}, 105
+  \item \texttt {lib-edit/2}, \textbf{104}
+  \item \texttt {lib-edit/[1;2]}, 98, 148
+  \item \texttt {lib-fname-exists/5}, \textbf{122}, 152
+  \item \texttt {lib-load}, 28, 102
+  \item \texttt {lib-load-dep/3}, 90, 91, 98, \textbf{103}, 156
+  \item \texttt {lib-load/1}, 70, \textbf{102}, 104, 153
+  \item \texttt {lib-load/2}, 96, 100, \textbf{100}, 102, 103, \textbf{103}, 104
+  \item \texttt {lib-load/3}, \textbf{102}
+  \item \texttt {lib-load/[1;2;3]}, 90, 91, 98, 103
+  \item \texttt {lib-load/[1;2]}, 25, 114, 145, 146
+  \item \texttt {lib-load/[2;3]}, 102
+  \item \texttt {lib-present /0}, 146
+  \item \texttt {lib-present/0}, \textbf{103}
+  \item \texttt {lib-present/1}, 98, \textbf{103}, 145, 146
+  \item \texttt {lib-save}, 115
+  \item \texttt {lib-save(defeqn(O))}, 98
+  \item \texttt {lib-save/1}, \textbf{104}, 153
+  \item \texttt {lib-save/2}, 94, \textbf{103}, 104
+  \item \texttt {lib-save/[1;2]}, 98, 104
+  \item \texttt {lib-sdir/1}, \textbf{122}, 152
+  \item \texttt {lib-set/1}, 98, 104, \textbf{105}, 122, 148
+  \item \texttt {lib-set/2}, 102
+  \item \texttt {list-methods/0}, \textbf{42}, 70
+  \item \texttt {list-methods/1}, 42, \textbf{42}
+  \item \texttt {list-methods/[0;1]}, 42, 118, 146
+  \item \texttt {list-submethods/0}, 71
+  \item \texttt {list-submethods/[0;1]}, \textbf{42}, 118, 146
+  \item \texttt {listof/3}, 36, \textbf{36}, 147
+  \item \texttt {load-method/[1;2;3]}, 118
+  \item \texttt {load-submethod/[1;2;3]}, 118
+  \item \texttt {load-thm/2}, 2
+
+  \indexspace
+
+  \item \texttt {make/0}, \textbf{123}
+  \item \texttt {make/1}, \textbf{122}
+  \item \texttt {make/[0;1]}, 122, 123
+  \item \texttt {map-list}, 151
+  \item \texttt {map-list-filter/4}, 37, \textbf{37}
+  \item \texttt {map-list-history-filter/5}, \textbf{37}
+  \item \texttt {map-list-history/5}, 37, \textbf{37}
+  \item \texttt {map-list/4}, \textbf{36}, 37
+  \item \texttt {maplist}, 151
+  \item \texttt {mark-potential-waves/2}, \textbf{21}
+  \item \texttt {mark-sinks/3}, \textbf{21}
+  \item \texttt {matches/2}, \textbf{22}, 33
+  \item \texttt {matrix/3}, \textbf{21}, 146
+  \item \texttt {matrix/4}, \textbf{21}
+  \item \texttt {maximally-joined/2}, 21, \textbf{21}, 34, 116
+  \item \texttt {meta-var/1}, \textbf{22}
+  \item \texttt {method/6}, 9, 10, 38, 42, \textbf{42}, 94, 96, 118
+  \item \texttt {mthd-ext/3}, 118
+  \item \texttt {mthd-int/3}, 118
+
+  \indexspace
+
+  \item \texttt {needed/2}, \textbf{97}
+  \item \texttt {needs/2}, 42, 96, \textbf{96}, 97, 100, 103, 145, 154
+  \item \texttt {next/[0;1]}, 2
+  \item \texttt {nf-plus/4}, 154
+  \item \texttt {nf/2}, 154
+  \item \texttt {normal/1}, 38, 85
+  \item \texttt {not/1}, \textbf{37}
+  \item \texttt {notraw-to-used/2}, \textbf{22}, 23
+  \item \texttt {nr-of-occ/3}, \textbf{22}
+
+  \indexspace
+
+  \item \texttt {object-level-term/1}, \textbf{22}, 148
+  \item \texttt {occ/4}, \textbf{22}
+  \item \texttt {or/2}, 38, 40, \textbf{40}, 41, 146
+  \item \texttt {orelse/2}, \textbf{37}, 113, 114
+  \item \texttt {os/1}, 121
+  \item \texttt {oyster-type/3}, 128
+
+  \indexspace
+
+  \item \texttt {plan-all/0}, \textbf{125}
+  \item \texttt {plan-all/1}, \textbf{125}
+  \item \texttt {plan-all/[0;1]}, 125
+  \item \texttt {plan-from/1}, \textbf{125}
+  \item \texttt {plan-from/2}, \textbf{125}
+  \item \texttt {plan-from/[1;2]}, 125
+  \item \texttt {plan-to/1}, \textbf{125}
+  \item \texttt {plan-to/2}, \textbf{125}
+  \item \texttt {plan-to/[1;2]}, 125
+  \item \texttt {plan/1}, \textbf{74}, 75
+  \item \texttt {planner/0}, 72, \textbf{72}
+  \item \texttt {planner/1}, 72, \textbf{72}
+  \item \texttt {planner/2}, 72, \textbf{72}
+  \item \texttt {planner/3}, 72, \textbf{72}
+  \item \texttt {planner/[0;1;2;3]}, 72
+  \item \texttt {plantraced/2}, 125, \textbf{125}
+  \item \texttt {plrty/5}, 128
+  \item \texttt {plus/2}, 95, 97
+  \item \texttt {polarity-compatible/3}, \textbf{23}, 24
+  \item \texttt {polarity/5}, \textbf{22}, 62, 148
+  \item \texttt {pop-portray-type/0}, \textbf{90}
+  \item \texttt {portray-level/3}, 75, 88, 89, \textbf{89}
+  \item \texttt {portray-type/1}, 88, 89, \textbf{89}
+  \item \texttt {portray/1}, 126
+  \item \texttt {portray/2}, 89, \textbf{89}
+  \item \texttt {pos/[0;1]}, 2, 73
+  \item \texttt {precon-matrix/3}, \textbf{23}
+  \item \texttt {print-complementary-sets/1}, 14, \textbf{88}
+  \item \texttt {print-plan/0}, \textbf{88}, 146, 147
+  \item \texttt {print-plan/1}, 88, \textbf{88}
+  \item \texttt {progress/1}, 113
+  \item \texttt {propositional/1}, \textbf{35}
+  \item \texttt {propositional/2}, 141
+  \item \texttt {prove-all/0}, \textbf{125}
+  \item \texttt {prove-all/1}, \textbf{126}
+  \item \texttt {prove-all/[0;1]}, 125
+  \item \texttt {prove-comm/0}, 101, 115
+  \item \texttt {prove-from/1}, \textbf{126}
+  \item \texttt {prove-from/2}, \textbf{126}
+  \item \texttt {prove-from/[1;2]}, 125
+  \item \texttt {prove-to/1}, \textbf{126}
+  \item \texttt {prove-to/2}, \textbf{126}
+  \item \texttt {prove-to/[1;2]}, 125
+  \item \texttt {prove-trans/0}, 101
+  \item \texttt {prove/1}, 91, \textbf{91}
+  \item \texttt {prove/5}, 120
+  \item \texttt {prule/2}, 128
+  \item \texttt {push-portray-type/1}, \textbf{90}
+
+  \indexspace
+
+  \item \texttt {quickly-provable/1}, 101
+
+  \indexspace
+
+  \item \texttt {random-term-instance/3}, 32
+  \item \texttt {raw-to-used/2}, 22
+  \item \texttt {raw-to-used/3}, \textbf{23}
+  \item \texttt {reconsult/1}, 103
+  \item \texttt {recursive/3}, 147
+  \item \texttt {recursive/4}, 147
+  \item \texttt {reduction-rtc/2}, \textbf{23}, 24
+  \item {\tt reduction-rtc/2}, \emph{23}
+  \item \texttt {reduction-rtc/4}, 24, \textbf{24}
+  \item \texttt {reduction-rule/6}, 24, \textbf{25}, 95, 115, 153, 154
+  \item \texttt {reduction-tc/4}, 24, \textbf{24}, 46
+  \item \texttt {refinement/[0;1]}, 2
+  \item \texttt {registry/4}, 24, \textbf{25}, 95, 115, 153
+  \item \texttt {repeat/1}, 2
+  \item \texttt {repeat/6}, 39, \textbf{39}, 40
+  \item \texttt {replace-all/4}, \textbf{25}
+  \item \texttt {replace/4}, \textbf{25}
+  \item \texttt {rewrite-at-pos/3}, 88
+  \item \texttt {rewrite-rule/5}, 93, 130
+  \item \texttt {rewrite-rule/6}, 23, 25, \textbf{26}
+  \item \texttt {rewrite/4}, \textbf{26}
+  \item \texttt {ripple/6}, 23, \textbf{27}, 48, 115
+  \item \texttt {rpos-prove/5}, 17, \textbf{24}
+  \item \texttt {rule/3}, 124
+  \item \texttt {runtime/2}, \textbf{123}
+  \item \texttt {runtime/3}, 123, \textbf{123}
+  \item \texttt {runtime/[2;3]}, 123
+
+  \indexspace
+
+  \item \texttt {save-def/2}, 2
+  \item \texttt {save-thm/2}, 2
+  \item \texttt {saving-dir/1}, 121
+  \item \texttt {scheme/3}, 13, 19, \textbf{27}, 29, 30, 93, 109, 110, 112, 127, 128
+  \item \texttt {scheme/5}, 28, 29, \textbf{29}, 67, 93, 109, 112, 127, 149
+  \item {\tt scheme/5}, \emph{30, 31}
+  \item \texttt {scheme/[3;5]}, 152, 155
+  \item \texttt {schemes/5}, 66
+  \item \texttt {select-method/3}, 77, \textbf{77}
+  \item \texttt {select/[0;1]}, 2, 73, 87
+  \item \texttt {setof/3}, 36, 147
+  \item \texttt {sink-functor/1}, 116
+  \item \texttt {sink-proper/2}, \textbf{31}
+  \item \texttt {sinks/3}, 12, \textbf{31}
+  \item \texttt {skeleton-position/3}, \textbf{31}
+  \item \texttt {slct/[0;1]}, 73, 87, \textbf{87}
+  \item \texttt {snap/0}, 89
+  \item \texttt {snap/[0;1]}, 147
+  \item \texttt {snapshot/0}, 88, \textbf{88}
+  \item \texttt {snapshot/1}, \textbf{88}
+  \item \texttt {snapshot/[0;1]}, 2, 147
+  \item \texttt {source-dir/1}, 121, \textbf{122}, 148
+  \item \texttt {split-wave-fronts/3}, \textbf{31}, 33
+  \item \texttt {stats/2}, 124, \textbf{124}
+  \item \texttt {stats/3}, 123, \textbf{123}, 124, \textbf{124}
+  \item \texttt {stats/[2;3]}, 123
+  \item \texttt {status/[0;1]}, 2
+  \item \texttt {step-eq/2}, 145
+  \item \texttt {step-eqs/1}, 145
+  \item \texttt {step-rule/2}, 145
+  \item \texttt {step-rules/1}, 145
+  \item \texttt {stopoutputTeX/0}, 75
+  \item \texttt {strip-meta-annotations/2}, \textbf{31}
+  \item \texttt {strip-redundant-sinks/2}, \textbf{32}
+  \item \texttt {strip-redundant-waves/2}, \textbf{32}
+  \item \texttt {submethod/6}, 38, \textbf{42}, 94, 96, 118
+  \item \texttt {subsumes/2}, 145
+  \item \texttt {sym-eval/1}, 94
+
+  \indexspace
+
+  \item \texttt {tautology/[0;1;2]}, 150
+  \item \texttt {term-instance/3}, \textbf{32}
+  \item \texttt {then/2}, 2, 38, 41, \textbf{41}, 71, 72, 88
+  \item \texttt {theorem/2}, \textbf{32}, 114
+  \item \texttt {theorem/3}, 114, \textbf{114}
+  \item \texttt {thereis/1}, 35, \textbf{35, 36}, 113, 114, 146
+  \item \texttt {top/0}, 2
+  \item \texttt {trace-plan/2}, \textbf{90}
+  \item \texttt {trace-plan/3}, 26
+  \item \texttt {trans-proving/0}, 156
+  \item \texttt {transitive-pred/1}, 156
+  \item \texttt {trivially-falsifiable/2}, 32, \textbf{32}, 156
+  \item \texttt {try/1}, 2, 38, 40, \textbf{40}
+  \item \texttt {type-of/3}, \textbf{35}
+
+  \indexspace
+
+  \item \texttt {unannotated-hyps/2}, \textbf{33}
+  \item \texttt {unannotated/1}, \textbf{32}
+  \item \texttt {unannotated/2}, 32, \textbf{32}
+  \item \texttt {unblock/3}, 94
+  \item \texttt {unflawed-casesplit-suggestion/3}, 14, 19, \textbf{33}
+  \item \texttt {unflawed-induction-suggestion/3}, 13, 14, 19, \textbf{33}
+  \item \texttt {unifiable/2}, 22, 33, \textbf{33}
+  \item \texttt {unify/2}, 22, 33, \textbf{33}
+  \item \texttt {universal-var/2}, \textbf{33}, 147
+  \item \texttt {universe/[0;1]}, 2
+  \item \texttt {up/0}, 2
+  \item \texttt {using-presburger/0}, 156
+
+  \indexspace
+
+  \item \texttt {v/2}, 113, 146
+  \item \texttt {viplan/[0;1;2;3]}, \textbf{77}
+
+  \indexspace
+
+  \item \texttt {wave-front-functor/1}, 116
+  \item \texttt {wave-fronts/3}, 12, 33, \textbf{33}, 147
+  \item \texttt {wave-hole-functor/1}, 116
+  \item \texttt {wave-rule/1}, 149
+  \item \texttt {wave-rule/3}, 147
+  \item \texttt {wave-terms-at/3}, \textbf{34}
+  \item \texttt {wave/4}, 103, 115
+  \item \texttt {well-annoated/1}, 116
+  \item \texttt {well-annotated/1}, \textbf{34}
+  \item \texttt {wfftac/0}, 87
+  \item \texttt {wfftacs}, 150
+  \item \texttt {wfftacs-status/1}, \textbf{87}
+  \item \texttt {wfftacs/0}, 87
+  \item \texttt {wfftacs/1}, 87, \textbf{87}
+  \item \texttt {writef/1}, \textbf{126}
+  \item \texttt {writef/2}, \textbf{126, 127}
+  \item \texttt {writef/3}, \textbf{126}
+  \item \texttt {writef/[1;2;3]}, 126
+
+\end{theindex}

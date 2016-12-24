@@ -1,0 +1,1 @@
+problem([]==>h:pnat=>tl:pnat list=>less(length(ge(h,tl)),s(length(tl))),_,_,_).

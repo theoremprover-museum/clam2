@@ -1,0 +1,37 @@
+/*
+ * @(#)$Id: insert2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: insert2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>n:int=>h:int=>t:int list=>n<h=>insert(n,h::t)=n::h::t in int list,
+repeat dequantify_once,lambda(n,lambda(h,lambda(t,_7589))),
+[problem([n:int,h:int,t:int list]==>n<h=>insert(n,h::t)=n::h::t in int list,
+ intro,lambda(v0,_7648),
+ [problem([n:int,h:int,t:int list,v0:n<h]==>insert(n,h::t)=n::h::t in int list,
+  simplify then repeat intro,_7657,
+  [problem([n:int,h:int,t:int list,v0:n<h]==>less(n,h,n::h::t,h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)]))=n::h::t in int list,
+   reduce(true),axiom,
+   [problem([n:int,h:int,t:int list,v0:n<h]==>n::h::t in int list,
+    repeat intro,axiom,
+    [
+    ]),
+    problem([n:int,h:int,t:int list,v0:n<h]==>h::list_ind(t,n::nil,[v0,v1,v2,less(n,v0,n::v0::v1,v0::v2)])in int list,
+    repeat intro,axiom,
+    [
+    ]),
+    problem([n:int,h:int,t:int list,v0:n<h]==>n<h,
+    intro,v0,
+    [
+    ])
+   ]) ext _7657
+  ]) ext _7648,
+  problem([n:int,h:int,t:int list]==>n<h in u(1),
+  repeat intro,axiom,
+  [
+  ])
+ ]) ext _7589
+]).

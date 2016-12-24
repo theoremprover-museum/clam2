@@ -1,0 +1,124 @@
+/* -*- Prolog -*-
+ * @(#)$Id: wave,v 1.4 1999/01/07 16:30:25 img Exp $
+ *
+ * $Log: wave,v $
+ * Revision 1.4  1999/01/07 16:30:25  img
+ * Support for ripple-and-cancel reintroduced (currently disabled,
+ * however).  weak_fertilize uses larger_size/2 to try to replace larger
+ * with smaller terms during weak fertilization
+ *
+ * Revision 1.3  1998/09/15 16:00:43  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.2  1998/06/10 08:32:01  img
+ * extend context & type instantiation
+ *
+ * Revision 1.1  1996/12/11 14:08:52  img
+ * Merge mthd and smth libraries.
+ *
+ * Revision 1.11  1996/07/10  09:06:30  img
+ * Cosmetic changes
+ *
+ * Revision 1.10  1995/10/03  13:09:13  img
+ * remove annotations in non-recursive case of complementary wave;  use a
+ * different rule in the non-recursive case than that used in the
+ * recursive case.
+ *
+ * Revision 1.9  1995/05/10  18:21:08  img
+ * 	* cc -> complementary_sets;  tidying up
+ *
+ * Revision 1.8  1995/05/10  03:33:34  img
+ * 	* Complementary wave.  Checks that a ripple is possible via a
+ * 	  conditional rewrite, and that there are complementary
+ * 	  rewrites.  Only the complementary rewrites are performed:
+ * 	  wave-rewrites are left to the other clause.  The mechanism
+ * 	  by which compelentary rules are applied is unsatisfactory
+ * 	  since they are dealt with singly rather than n at a time
+ *
+ * Revision 1.7  1995/04/26  09:20:46  img
+ * 	* Weakening moved from wave into unblock
+ *
+ * Revision 1.6  1995/03/01  03:23:33  img
+ * 	* Dynamic rippling method
+ *
+ * Revision 1.5  1995/02/09  23:47:47  img
+ * 	* Simple wave smthd.  Only ripples out!
+ *
+ * Revision 1.4  1995/01/30  09:14:55  dream
+ * meta-rippling is disabled.  this must be dealt with in a secure manner
+ *
+ * Revision 1.3  1994/09/22  12:03:01  dream
+ * 	* change regular wave to perform rippling dynamically
+ *     	* removed joining and splitting since dynamic rippling uses normal
+ * 	  form only
+ *
+ * Revision 1.2  1994/09/20  15:03:28  dream
+ * 	* use mark_potential_waves/2 instead of potential_waves/2
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ *
+ */
+
+/* Dynamic rippling method.  "Type" restricts the rippling to outwards
+   wave-fronts ("direction_out"), inwards ("direction_in") or either
+   of these ("direction_in_or_out").  This control may be useful when
+   writing plans.  Note that in these cases ripple/6 carries out a
+   check on the sinkability of any inward fronts in NewWaveTerm.
+
+   Type == ripple_and_cancel is similar to "direction_in" but the
+   check on the sinkability of wave-fronts is not carried out.
+
+   We may only rewrite annotated terms: skeleton preserving steps are
+   NOT sufficient since they do not guarantee termination.  One
+   example of this would be rewriting beneath a sink, in a wave-front
+   etc.  These are all "unblocking" operations since they require a
+   termination justification from something other than the wave-rule
+   measure.  */
+
+method(wave(Type,Pos,[Rule,Dir],[]),
+	  Hyps==>Conc,
+          [matrix(Vars, Matrix, Conc),append(Hyps,Vars,Context),
+	   wave_terms_at(Matrix, Pos, WaveTerm),
+	   ripple(Type, WaveTerm, NewWaveTerm, Cond, Rule, Dir,TypeInfo),
+	   polarity_compatible(Matrix, Pos, Dir),
+	   instantiate_type_variables(TypeInfo,Context),
+	   immediate(Context==>Cond)],
+	  [replace(Pos, NewWaveTerm, Matrix, NewMatrix),
+	   matrix(Vars, NewMatrix, NewConc)],
+	  [Hyps==>NewConc],
+	  wave(Type,Pos,[Rule,Dir],[])).
+
+/* Proof plan should be organised to do all n cases in one go, not
+   just one at a time.  
+
+   A complementaty wave-rule is not skeleton preserving: the
+   postconditions remove all annotation from the subgoals.  Really,
+   all this method has to do is identify sequents which are in the
+   non-recursive branches of rippling proofs.  It would be sufficient
+   to leave the sequent untouched, but for removing annotation;
+   however, since it is cheap to apply a rewrite, we do that here as
+   well.  */
+method(wave(Type,Pos,[Rule,complementary,Dir],[]),
+	  Hyps==>Conc,
+          [matrix(Vars, Matrix, Conc), append(Hyps,Vars,Context),
+	   wave_terms_at(Matrix,Pos,M),
+	   %% one of them is a wave-rule, ...
+	   ripple(Type, M, _, WaveCond, _, _,_),% recursive case
+	   unannotated(M,Term),
+	   complementary_set(Cases-Term),
+	   member(WaveCond-_-Dir-_-RecRule,Cases),	% recursive case
+	   %% ... which as already be dealt with in another branch.
+	   %% Next clause ensures we are being used as a complementary wave-rule
+	   member(Cond-RHS-Dir-TI-Rule,Cases),	% non-recursive case
+	   \+ Rule == RecRule,			% and a different rule
+	   polarity_compatible(M, Pos, Dir),	% check polarity ok
+	   instantiate_type_variables(TI,Context),
+	   immediate(Context==>Cond) ],
+	  [replace(Pos, RHS, Matrix, NewMatrix),
+	   matrix(Vars, NewMatrix, NewConcAnn),
+	   unannotated(NewConcAnn,NewConc)	% remove annotation since this 
+						% is a non-ripple case 
+	   ],
+	  [Hyps==>NewConc],
+	  wave(Type,Pos,[Rule,Dir],[])).

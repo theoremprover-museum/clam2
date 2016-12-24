@@ -1,0 +1,21 @@
+problem([]==>x:pnat=>x<*s(x),
+intro,lambda(x,_1189),
+[problem([x:pnat]==>x<*s(x),
+ elim(x),p_ind(x,_1217,[v0,v1,_1223]),
+ [problem([x:pnat]==>0<*s(0),
+  intro,axiom,
+  [
+  ]) ext _1217,
+  problem([x:pnat,v0:pnat,v1:v0<*s(v0)]==>s(v0)<*s(s(v0)),
+  arith(<*),axiom,
+  [problem([x:pnat,v0:pnat,v1:v0<*s(v0)]==>v0<*s(v0),
+   intro,v1,
+   [
+   ])
+  ]) ext _1223
+ ]) ext _1189,
+ problem([]==>pnat in u(1),
+ intro,axiom,
+ [
+ ])
+]).

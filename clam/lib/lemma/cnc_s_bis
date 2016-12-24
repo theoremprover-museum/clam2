@@ -1,0 +1,22 @@
+/*
+ * @(#)$Id: cnc_s_bis,v 1.1 1998/07/30 16:29:13 img Exp $
+ *
+ * $Log: cnc_s_bis,v $
+ * Revision 1.1  1998/07/30 16:29:13  img
+ * *** empty log message ***
+ *
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>y:pnat=>s(x)=s(y)in pnat=>x=y in pnat,
+normalize([normal(imply_intro),normal(univ_intro),normal(univ_intro)]),lambda(x,lambda(y,lambda(v0,_7170))),
+[problem([x:pnat,y:pnat,v0:x=y in pnat]==>s(x)=s(y)in pnat,
+ sym_eval([equal(v0,left)]),_7179,
+ [problem([x:pnat,y:pnat,v0:x=y in pnat]==>s(x)=s(x)in pnat,
+  tautology(identity),axiom,
+  [
+  ]) ext _7179
+ ]) ext _7170
+]).

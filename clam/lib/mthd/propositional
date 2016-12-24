@@ -1,0 +1,21 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: propositional,v 1.2 1997/10/09 17:17:16 img Exp $
+ *
+ * $Log: propositional,v $
+ * Revision 1.2  1997/10/09 17:17:16  img
+ * Unify treatment of annotations
+ *
+ * Revision 1.1  1994/09/16 09:33:29  dream
+ * Initial revision
+ */
+
+method(propositional(I),
+       H==>G,
+       [erase_sequent(H==>G,HH==>GG),
+	matrix(Vs,M,GG),
+	append(Vs,HH,Hyps),
+	propositional(Hyps==>M,I)],
+       [],
+       [],
+       propositional(I)).
+

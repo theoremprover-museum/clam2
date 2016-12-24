@@ -1,0 +1,39 @@
+problem([]==>l:acc(pnat list,{length_wf})=>m:pnat list=>length(l)=length(m)in pnat=>m in acc(pnat list,{length_wf}),
+autotactic(wfftacs),_1976,
+[problem([]==>l:acc(pnat list,{length_wf})=>m:pnat list=>length(l)=length(m)in pnat=>m in acc(pnat list,{length_wf}),
+ repeat unfold_def({length_wf}),_1917,
+ [problem([]==>l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat)))=>m:pnat list=>length(l)=length(m)in pnat=>m in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),
+  intro,lambda(l,_1771),
+  [problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat)))]==>m:pnat list=>length(l)=length(m)in pnat=>m in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),
+   repeat intro,lambda(m,lambda(v0,_1675)),
+   [problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list,v0:length(l)=length(m)in pnat]==>m in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),
+    intro(acc)then beta_normalize(hyp(v1)),axiom,
+    [problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list,v0:length(l)=length(m)in pnat,v2:pnat list,v1:s(length(m))=length(v2)in pnat]==>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),
+     elim(l,wo),wo_ind(l,[v5,v3,_1452]),
+     [problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list,v0:length(l)=length(m)in pnat,v2:pnat list,v1:s(length(m))=length(v2)in pnat,v5:pnat list,v3:v4:{v4:pnat list\lambda(u,lambda(v,s(length(v))=length(u)in pnat))of v4 of v5}=>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat)))]==>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),
+      repeat beta_reduce_plus(hyp(v3)),_1445,
+      [problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list,v0:length(l)=length(m)in pnat,v2:pnat list,v1:s(length(m))=length(v2)in pnat,v5:pnat list,v3:v4:{v4:pnat list\s(length(v5))=length(v4)in pnat}=>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat)))]==>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),
+       elim(v3),su(v4,[v3 of _1091],[v4]),
+       [problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list,v0:length(l)=length(m)in pnat,v2:pnat list,v1:s(length(m))=length(v2)in pnat,v5:pnat list,v3:v4:{v4:pnat list\s(length(v5))=length(v4)in pnat}=>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat)))]==>{v4:pnat list\s(length(v5))=length(v4)in pnat},
+        elim(v5),list_ind(v5,_932,[v4,v6,v7,_922]),
+        [problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list,v0:length(l)=length(m)in pnat,v2:pnat list,v1:s(length(m))=length(v2)in pnat,v5:pnat list,v3:v4:{v4:pnat list\s(length(v5))=length(v4)in pnat}=>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat)))]==>{v4:pnat list\s(length(nil))=length(v4)in pnat},
+         intro(explicit(0::nil)),0::nil,
+         [
+         ]) ext _932,
+         problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list,v0:length(l)=length(m)in pnat,v2:pnat list,v1:s(length(m))=length(v2)in pnat,v5:pnat list,v3:v4:{v4:pnat list\s(length(v5))=length(v4)in pnat}=>v2 in acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),v4:pnat,v6:pnat list,v7:{v4:pnat list\s(length(v6))=length(v4)in pnat}]==>{v4_:pnat list\s(length(v4::v6))=length(v4_)in pnat},
+         intro(explicit(v4::v4::v6)),v4::v4::v6,
+         [
+         ]) ext _922
+        ]) ext _1091
+       ]) ext _1445
+      ]) ext _1452
+     ]) ext _1572
+    ]) ext _1675,
+    problem([l:acc(pnat list,lambda(u,lambda(v,s(length(v))=length(u)in pnat))),m:pnat list]==>l in pnat list,
+    elim(l,wo),wo_ind(l,[v2,v0,axiom]),
+    [
+    ]) ext _514
+   ]) ext _1771
+  ]) ext _1917
+ ]) ext _1976
+]).

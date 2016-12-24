@@ -1,0 +1,57 @@
+/*
+ * @(#)$Id: succlemma3,v 1.1 1994/09/16 09:39:18 dream Exp $
+ *
+ * $Log: succlemma3,v $
+ * Revision 1.1  1994/09/16 09:39:18  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>y:pnat=> (y=0 in pnat=>void)=> (y=s(0)in pnat=>void)=>x:pnat#y=s(s(x))in pnat,
+intro then[idtac,try wfftacs],lambda(y,_7474),
+[problem([y:pnat]==> (y=0 in pnat=>void)=> (y=s(0)in pnat=>void)=>x:pnat#y=s(s(x))in pnat,
+ elim(y),p_ind(y,_7539,[v0,v1,_7545]),
+ [problem([y:pnat]==> (0=0 in pnat=>void)=> (0=s(0)in pnat=>void)=>x:pnat#0=s(s(x))in pnat,
+  repeat intro,lambda(v0,lambda(v1,_7614)),
+  [problem([y:pnat,v0:0=0 in pnat=>void,v1:0=s(0)in pnat=>void]==>x:pnat#0=s(s(x))in pnat,
+   elim(v0)then repeat intro,su(_7687,[v0 of axiom],[v2]),
+   [problem([y:pnat,v0:0=0 in pnat=>void,v1:0=s(0)in pnat=>void,v2:void]==>x:pnat#0=s(s(x))in pnat,
+    elim(v2),any(v2),
+    [
+    ]) ext _7687
+   ]) ext _7614
+  ]) ext _7539,
+  problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat]==> (s(v0)=0 in pnat=>void)=> (s(v0)=s(0)in pnat=>void)=>x:pnat#s(v0)=s(s(x))in pnat,
+  elim(v0),p_ind(v0,_7892,[v2,v3,_7898]),
+  [problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat]==> (s(0)=0 in pnat=>void)=> (s(0)=s(0)in pnat=>void)=>x:pnat#s(0)=s(s(x))in pnat,
+   repeat intro,lambda(v2,lambda(v3,_8025)),
+   [problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat,v2:s(0)=0 in pnat=>void,v3:s(0)=s(0)in pnat=>void]==>x:pnat#s(0)=s(s(x))in pnat,
+    elim(v3)then repeat intro,su(_8156,[v3 of axiom],[v4]),
+    [problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat,v2:s(0)=0 in pnat=>void,v3:s(0)=s(0)in pnat=>void,v4:void]==>x:pnat#s(0)=s(s(x))in pnat,
+     elim(v4),any(v4),
+     [
+     ]) ext _8156
+    ]) ext _8025
+   ]) ext _7892,
+   problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat,v2:pnat,v3: (s(v2)=0 in pnat=>void)=> (s(v2)=s(0)in pnat=>void)=>x:pnat#s(v2)=s(s(x))in pnat]==> (s(s(v2))=0 in pnat=>void)=> (s(s(v2))=s(0)in pnat=>void)=>x:pnat#s(s(v2))=s(s(x))in pnat,
+   intro then intro,lambda(v4,lambda(v5,_8487)),
+   [problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat,v2:pnat,v3: (s(v2)=0 in pnat=>void)=> (s(v2)=s(0)in pnat=>void)=>x:pnat#s(v2)=s(s(x))in pnat,v4:s(s(v2))=0 in pnat=>void,v5:s(s(v2))=s(0)in pnat=>void]==>x:pnat#s(s(v2))=s(s(x))in pnat,
+    intro(v2)then repeat intro,v2&axiom,
+    [
+    ]) ext _8487,
+    problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat,v2:pnat,v3: (s(v2)=0 in pnat=>void)=> (s(v2)=s(0)in pnat=>void)=>x:pnat#s(v2)=s(s(x))in pnat,v4:s(s(v2))=0 in pnat=>void]==> (s(s(v2))=s(0)in pnat=>void)in u(1),
+    repeat intro,axiom,
+    [
+    ]),
+    problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat,v2:pnat,v3: (s(v2)=0 in pnat=>void)=> (s(v2)=s(0)in pnat=>void)=>x:pnat#s(v2)=s(s(x))in pnat]==>s(s(v2))=0 in pnat in u(1),
+    repeat intro,axiom,
+    [
+    ]),
+    problem([y:pnat,v0:pnat,v1: (v0=0 in pnat=>void)=> (v0=s(0)in pnat=>void)=>x:pnat#v0=s(s(x))in pnat,v2:pnat,v3: (s(v2)=0 in pnat=>void)=> (s(v2)=s(0)in pnat=>void)=>x:pnat#s(v2)=s(s(x))in pnat,v4:s(s(v2))=0 in pnat]==>void in u(1),
+    intro,axiom,
+    [
+    ])
+   ]) ext _7898
+  ]) ext _7545
+ ]) ext _7474
+]).

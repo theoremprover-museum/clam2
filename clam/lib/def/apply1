@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: apply1,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: apply1,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+apply1(f,n)<==>f of n.

@@ -1,0 +1,1318 @@
+\def\rcsid{$Id: tactics_util.tex,v 1.12 2003/01/22 19:35:44 smaill Exp $}
+\input header
+
+\chapter [Tactics etc]{Tactics, utilities and libraries}
+\section {The tactics}
+\label{tactics}
+\index {tactics}
+\index {plan execution}
+\inxx{plan execution} 
+After a plan has been constructed by one of the planners, it can be
+executed to construct an actual \oyster proof. For this purpose, \clam
+provides a \inx{tactic} corresponding to each of the methods,\footnote
+{With the exception of the decision procedures for Presburger arithmetic.}
+which, when executed, will perform the proof steps specified by the
+method. Plan execution is particularly simple when the names of
+methods and tactics are identified (as is the case in \clam). Plans
+can simply be executed by passing them to the \oyster predicate
+\p{apply/1}. 
+
+In order to minimise the dependency of \clam\ on different versions of
+\oyster, the tactics of \clam\ assume that \oyster's \inx{autotactic}
+has been switched off (that is, the value of the \inx {autotactic}\index{tactic!autotactic} should be 
+\p{idtac/0}).
+
+A quasi-autotactic is being used in many of {\clam}'s tactics. This
+tactic, called \p{wfftac/0}, or its {\tt repeat}-ed form
+\p{wfftacs/0}, is assumed to solve any goals of the form
+{\tt Expression in Type}. The code of \p{wfftac/0} is somewhat
+dependent on the type of theorem that is being proved. A mechanism has
+been implemented which automatically installs the version of \p{wfftac/0}
+appropriate to the current theorem. In order to make this mechanism
+work, the user should always use the \clam\ predicate \p{slct/[0;1]}
+instead of the \oyster predicate \p{select/[0;1]}.
+
+\begin{predicate}{wfftacs/1}{wfftacs(+Flag)}%
+The \p{wfftacs/1} predicate enables the setting of {\tt wfftacs/0}. 
+{\tt wfftacs(on)} enables {\tt wfftacs/0} and {\tt wfftacs(off)}
+disables {\tt wfftacs/0}. By default {\tt wfftacs/0} is enabled.
+\end{predicate}
+
+\begin{predicate}{wfftacs-status/1}{wfftacs-status(-Flag)}%
+{\tt Flag} is instantiated to the current status of {\tt wfftacs/0}.
+\end{predicate}
+
+\begin{predicate}{slct/[0;1]}{slct(Thm)}%
+The predicates \p{slct/[0;1]} are identical to \p{select/[0;1]} in \oyster,
+except that they also manipulate the definition of \p{wfftac/0} to be
+the right form for the selected theorem.
+Thus, in the context of \clam, \p{slct/[0;1]} should always be used
+instead of \p{select/[0;1]}.
+\end{predicate}
+
+Two tactics are not properly implemented, and rely on the \oyster \notnice
+\p{because/0} inference rule (proof by intimidation) for their
+execution. These tactics are
+\begin{itemize}
+\item
+the \p{clam-arith/0} tactic, called from within the tautology checker
+to compensate for \oyster's abysmal \inx{arithmetic}, and
+\item
+one of the clauses of the \p{rewrite-at-pos/3} tactic which performs
+rewrites. See comments there for an explanation. 
+\end{itemize}
+These improperly implemented tactics print out a ``\inx{proof by
+intimidation}'' warning when executed.
+
+\section {Utilities}
+\label{user-utils}
+
+This section describes some of the utilities which are not strictly
+needed for the functionality of \clam, but which are indispensable for
+making life with \clam\ bearable.
+
+
+
+
+\subsection {Pretty-printing}
+\label{pretty-printer}
+
+\begin{predicate}{print-complementary-sets/1}{print-complementary-sets(+Cs)}%
+This predicate prints complementary sets in a manner which makes
+them somewhat legible.    \verb|Cs| is a complementary set, as
+described under~\p{complementary-sets/[1;2]}.
+
+\paragraph {Example} Given the definition of membership we have:
+
+\begin{verbatim}
+| ?- complementary_sets([member2,member3],P),
+       print_complementary_sets(P).
+(member3)       A=B in int=>void -> member(A,B::C) = member(A,C)
+(member2)       A=B in int       -> member(A,B::C) = {true}
+\end{verbatim}
+
+\end{predicate}
+
+
+Plans are constructed as Prolog terms (using the \p{then/2} functor to
+combine methods into a tree structure). These terms become quickly
+unreadable, and for this purpose \clam\ provides a simple
+\inx{pretty-printer}. This is controlled using the \p{portray-type/1},
+\p{portray-level/3} and the contents of the file \f{portrayTeX.pl}.
+See \reference{sec:portrayal}.
+
+\begin{predicate}{print-plan/1}{print-plan(+Plan)}%
+This predicate prints terms in the manner shown in
+figure~\reference{assp-plan}. The behaviour of this pretty-printer is
+fixed, and cannot be influenced by the user, except by the use of
+the portray machinery (see~\reference{sec:portrayal}).
+\end{predicate}
+
+\begin{predicate}{print-plan/0}{print-plan}%
+This predicate prints the proof underneath the current node in the
+proof tree in the same manner as \p{print-plan/1} prints plans. It can
+be seen as a variation on (abbreviation of) \oyster's \p{display/0}
+predicate.
+\end{predicate}
+
+\begin{predicate}{snapshot/0}{snap}%
+This predicate is as \oyster's pretty print predicate \p{snapshot/0}, except
+that it provides shorter output by suppressing all the hypotheses, and
+only printing goals and inference rules.
+\end{predicate}
+
+\begin{predicate}{snapshot/1}{snap(+File)}%
+As \p{snap/0}, but with output redirected to {\tt File}, rather than
+the current output stream.
+\end{predicate}
+
+
+
+\subsection {Portrayal of terms}
+\label{sec:portrayal}\index{portray}
+There is some degree of user control over the way in which \clam
+prints terms.  It is possible to control the degree of detail shown
+when terms are printed on a term-by-term basis, as well the overall
+format of all prints.  Currently, there are formats for plain ASCII,
+\TeX,  and Emacs.\index{portraying!Emacs}\index{portraying!TeX=\TeX{}}\index{portraying!normal}
+
+A {\em \inx{portray level}\/} governs the amount of information
+displayed by \clam.  This is a natural number less than 100.  The
+higher the portray level, the more detail, the lower the number, less
+detail.
+
+Portray levels can be changed on a term-by-term basis, or for all
+terms.  A portray level is read/written using \p{portray-level/3}.
+
+When a term is printed, \p{portray/2} describes the portrayal
+information for that term.  The appropriate portrayal method is
+selected according to a specific portray level (if there is one), or
+according to the default (if there is not), and according to the
+current \p{portray-type/1}.
+
+The portray type specifies one of plain ASCII, \TeX or Emacs.  Various
+default portrayals for each of these types are defined in
+\f{portrayTeX.pl}. 
+
+\begin{predicate}{portray/2}{portray/2(+T,?Fmt)}%
+
+Term {\tt T} should be printed according to the format information
+{\tt Fmt}.  {\tt Fmt} is a list of the form {\tt T:[L1-P1, L2-P2,
+...]}.  {\tt T} is one of the portray types;  {\tt Li} is a natural
+number less than 100; {\tt Pi} is a list of Prolog terms.
+
+\clam chooses the appropriate element of {\tt Fmt} based on
+\p{portray-type/1}.  Then, the portray level of the term to be printed
+is computed: the first {\tt Pi} such that {\tt Li} is greater than or
+equal to the portray level is obtained.  Then each element of this
+{\tt Pi} is printed in sequence.
+
+For example, we have:
+\begin{verbatim}
+portray(Front, [tex:[99-['\\wfout{',Term,'}']],
+                normal:[99-['``', Term,'''''','<',Dir,'>']],
+                emacs:[99-['wfout(', Term,')']]]) :-
+    stripfront(Front,hard,Dir,Term).
+\end{verbatim}
+Which shows how wave-fronts are portrayed according to the portray
+type.
+
+\begin{verbatim}
+portray(ripple(A,P), [tex:[99-[ripple,'(\ldots)']],
+                       _  :[50-[ripple,'(...)'],
+                            99-['ripple(',A,',',P,')']]]).
+\end{verbatim}
+shows that terms of the form {\tt ripple(A,P)} at portray levels less
+than 50 are printed.
+
+\end{predicate}
+
+\begin{predicate}{portray-level/3}{portray-level(+T,?O,?N)}%
+{\tt T} is a template term; all terms that are printed which {\tt T}
+matches are portrayed at level {\tt O}.  If {\tt N} is non-ground, the
+portray level for those terms is changed from {\tt O} to {\tt N}.
+
+In the special case of {\tt T == default}, the default portray level
+is manipulated.
+
+See also \p{idplanTeX/[0;1]}.
+\end{predicate}
+
+\begin{predicate}{portray-type/1}{portray-type(?T)}%
+{\tt T} is the current portray type.  There is a stack of such types:
+the topmost type is said to be `current'.
+\end{predicate}
+
+\begin{predicate}{pop-portray-type/0}{pop-portray-type}%
+The current portray type is popped from the stack.  The new top
+element on the stack is the current portray type.
+
+If the stack only contains one element, that element cannot be popped
+and {\tt pop-portray-type/0} fails.
+\end{predicate}
+
+\begin{predicate}{push-portray-type/1}{push-portray-type(+T)}%
+{\tt T} becomes the new current portray type.  {\tt T} must be one of
+the following supported types:
+\begin{description}
+\item [{\tt normal}] Normal ASCII output.  This is the default.
+\item [{\tt tex}] The output is suitable for processing with \TeX{}.
+\item [{\tt emacs}] The output is suitable for use with the \clam
+Emacs mode.  This mode provides a limited form of colouring and font
+control to depict annotations etc.
+\end{description}
+\end{predicate}
+
+
+\subsection {Tracing planners}
+\label{tracing}
+\index {planning!tracing}
+\index {tracing}
+\index {tracing!tracing level}
+\index {tracing!preconditions}
+\index {tracing!postconditions}
+In addition to the hint mechanism described in \S\ref{hint-planners} 
+\clam\ provides a very simple tracing package that allows the user to
+monitor the activities of the planners during the planning process.
+The user can set a \inx{tracing level}, using the predicate:
+
+\begin{predicate}{trace-plan/2}{trace-plan(?Current,?New)}%
+{\tt Current} will be unified with the current tracing level.
+If {\tt New} is bound to a non-negative integer, the \inx{tracing level}
+will be set to {\tt New}. If {\tt New} is unbound, it will be unified
+with the current tracing level. Notice that this predicate can be used
+for multiple purposes. Mode {\tt trace-plan(-,-)} can be used to inquire for
+the current tracing level, mode {\tt trace-plan(+,-)} can be used to test
+the current tracing level, mode {\tt trace-plan(-,+)} can be used to set the
+tracing level.
+\end{predicate}
+
+Currently implemented \inx{tracing level}s are:
+\begin{description}
+\item[0\ ] No tracing.
+\item[10] Prints when the iterative-deepening increases \inx{cut-off depth}.
+\item[20] During plan construction, prints which (sub)methods have been
+         selected. During plan execution via \p{apply-plan/1} (see
+         below), prints which method is being executed
+\item [22] Default.
+\item [23] During \p{lib-load/[1;2;3]} and \p{lib-load-dep/3}, show which definitions,
+equations, lemmas etc.\ are loaded.
+\item[30] Prints which (sub)methods are being tested for applicability.
+\item[40] Prints when preconditions and postconditions of (sub)methods
+succeed; \p{lib-load/[1;2;3]} and \p{lib-load-dep/3} give verbose output of all \inx
+{rewrites}\index {rippling!loading rewrite rules} and
+\inx {reduction rule}s\index{reduction rule!loading reduction
+rules}\index{library!reduction rules}\index{library!rewrite rules} added to the database.
+
+\end{description}
+Tracing levels are cumulative. If the current tracing level is set to
+$n$, then all tracing levels $k \leq n$ are active. The gaps between
+the tracing levels have been left to facilitate implementation of
+future levels.
+
+By default, the tracing level is set to 20.\index{tracing!default level}
+
+\subsection {Applying plans \& programs}
+
+The products of {\clam}'s planners are only plans for proofs, they are
+not proofs themselves. In order to produce a proof, we have to apply a
+plan in the object-level logic (in our case \oyster). As described in
+\S\reference{tactics}, plans can be executed simply by passing them as
+an argument to \oyster's \p{apply/1} predicate, because tactics and
+methods have the same name by convention. This produces a single step
+proof, in which the only proof step is the application of the proof
+plan as a single refinement.
+
+However, it is often much nicer to have a proof where each constituent
+method of a plan corresponds to a single proof step. This can be
+achieved by executing a plan using the predicate \p{apply-plan/1}:
+
+\begin{predicate}{apply-plan/1}{apply-plan(+Plan)}%
+This predicate applies {\tt Plan}, and makes each method in {\tt Plan}
+a single refinement step in the proof. Progress of the plan execution
+process can be monitored using the tracing package (tracing
+level 20). A minor variation is:
+\end{predicate}
+
+\begin{predicate}{apply-plan-check/1}{apply-plan-check(+Plan)}%
+This predicate is \p{apply-plan/1}, except that this predicate also
+checks whether the application of each method produces the output
+sequents that are specified in the method's \inx{output-slot}. If this
+check fails, 
+\p{apply-plan-check/1} gives an error message about the failing method
+and its position in the proof tree and fails. 
+\end{predicate}
+
+\begin{predicate}{prove/1}{prove(+Thm)}%
+The \p{prove/1} predicate composes the loading of the 
+definitions relating to the conjecture {\tt Thm} 
+(see \S\reference{library}) with the search and execution of
+a depth-first plan. 
+\end{predicate}
+
+\begin{predicate}{apply-ext/1}{apply-ext(+ArgsList)}%
+The predicate \p{apply-ext/1} provides an interface for
+executing extract terms. An \oyster extract term encodes
+the computational content of an \oyster proof. {\tt ArgsList}
+is the list of arguments required by the extracted function.
+For example, assuming that a synthesis proof for list
+concatenation has been constructed called {\tt append}. Then
+using \p{apply-ext/1} the concatenation of the lists
+{\tt [1,2,3]} and {\tt [4,5,6]} can be achieved as follows:
+\begin{verbatim}
+| ?- apply_ext([[1,2,3],[4,5,6]]).
+(append  [1,2,3] [4,5,6]) = [1,2,3,4,5,6]
+\end{verbatim}
+\end{predicate}
+
+\section {The library mechanism}
+\label{library}
+\index {library}
+
+One of \oyster's notably lacking features is a decent \inx{library}
+mechanism. When proving even moderately complex theorems, it becomes
+very painful to keep track of the \inx{dependencies} between theorems,
+lemmas, definitions, etc. To make life with \clam\ a bit easier,
+\clam\ provides a simple library mechanism which is geared towards the
+needs of \clam. \clam\ distinguishes a number of {\em \inx{logical
+object}s}, which play different roles in constructing proofs and proof
+plans.
+
+
+\subsection {Logical objects}
+\label {logical-objects}
+\index {library!logical object}
+\index {logical object}
+Logical objects are divided into number of different {\em \inx{logical
+object} types}. A logical object is always designated by a term {\tt
+T(N)}, where {\tt T} is the type of the object and {\tt N} the name of
+the object. 
+
+
+Certain behaviours are associated with the loading and saving of the various kinds of logical object: the possible types of logical objects and these behaviours are described below:
+
+\begin{description}
+\item[{\tt \inxtt{plan}}:]
+\index{logical object!plan|texttt}A {\tt plan} logical object
+denotes a proof-plan for some theorem.  These logical objects are
+automatically added to the Prolog environment when a proof-plan for a
+theorem has been found---they cannot be created by a user or be loaded
+from a file (this may change in future versions of \clam{}).
+
+For example, when a proof-plan for a theorem called `{\tt assp}' has
+been found, it can be saved with
+\begin{verbatim}
+lib_save(plan(assp)).
+\end{verbatim}
+The purpose behind saving proof-plans is to better document and
+record \clam's performance for benchmarking and so on.
+
+\item[{\tt \inxtt{thm}}:]
+The {\tt thm} type consists of theorems, corresponding to \oyster
+conjectures.\index{logical object!thm|texttt} There is no distinction
+between a theorem and a conjecture as far as the library mechanism is
+concerned.  Typically, a {\tt thm} is loaded as a conjecture, some
+proof-planning or other theorem proving is carried out, the the
+resulting theorem is saved.
+
+{\tt thm} objects can be loaded and saved.
+
+\item[{\tt \inxtt{lemma}}:]
+A\index{logical object!lemma|texttt} {\tt lemma} also corresponds to an \oyster theorem. However the idea
+of a {\tt lemma} is that it is not a theorem which is interesting in
+its own right, but rather something which is only needed for technical
+reasons.  An example of a lemma would be some boring arithmetic
+equality that \oyster is too brain damaged to deal with. Other theorems
+(of type {\tt thm}) can also be used as lemmas by \clam, but {\tt
+lemma}s should not be used for anything else, whereas {\tt thm}s are
+expected to be used for other purposes as well (e.g. as input for
+planning tasks).  \clam\ is expected to be able to produce proof-plans
+for {\tt thm}s, whereas no such expectation exists for {\tt lemma}s.
+
+\item[{\tt \inxtt{synth}}:]
+A {\tt synth}\index{logical object!synth|texttt} is an \oyster theorem which is only used to synthesize
+the definition of a particular function. In this sense, {\tt synth}s
+are close to {\tt def}s.
+
+{\tt synth} objects are not normally loaded directly by the user: the
+are automatically loaded when a {\tt def} object of the same name is
+loaded.  When loading {\tt def(D)} \clam checks for the presence of
+{\tt synth(D)} in the current libraries.  If such an object is found,
+it is loaded.  Notice that this dependency between {\tt def} and {\tt
+synth} objects is not reflected in the \f{needs.pl} file.
+
+\item[{\tt \inxtt{scheme}}:]
+A {\tt scheme}\index{logical object!scheme|texttt} is an \oyster theorem which proves the validity of a
+particular non-standard induction {\tt scheme}. Thus, a {\tt scheme}
+is typically a higher order theorem. A {\tt scheme} is expected to be
+proved by hand;  loading a scheme via {\tt lib-load(scheme(S))} loads
+{\tt S} and attempts to translate it into the meta-level
+representation of induction schemes used by \p{scheme/3} and
+\p{scheme/5}.
+For example, to justify
+$plus$ induction the following theorem would be proved:
+\begin{verbatim}
+phi:(pnat=>u(2))=>
+  phi of 0=>
+    phi of s(0)=>
+      (x:pnat=>y:pnat=>phi of x=>phi of y=>phi of plus(x,y))=>
+        z:pnat=>phi of z
+\end{verbatim}
+See \p{scheme/3} and \p{scheme/5} for additional information.
+
+Schemes can be loaded and saved.
+
+\item[{\tt \inxtt{wave}}:]
+A {\tt wave}\index{logical object!wave|texttt} is an \oyster theorem like a
+{\tt thm} (that is: \clam\ is expected to be able to construct a
+proof-plan for it\footnote{Though this is not a prerequisite of a {\tt wave} object.}), but the fact that the theorem is marked as a {\tt
+wave} indicates that it can be used as a \inx{wave-rule}.  Such
+wave-rules are stored as rewrite rules (see \S\ref{rewrite-records}
+and \p{rewrite-rule/5}). See~\cite{pub567,BasinWalsh94} for a
+description of wave-rules.
+
+Since wave-rules derive from rewrite rules, there is no sense in which
+the library stores wave-rules, so the idea of loading and saving them
+is rather anomalous.  Loading {\tt wave(W)} object causes \clam to
+load {\tt thm(W)} and then {\em process\/} that {\tt thm} object into
+a rewrite rule.  Notice then that loading a {\tt wave} object
+introduces a {\tt thm} object (of the same name) and a collection of
+rewrite rules from which wave-rules may be later extracted.
+
+Saving {\tt wave(W)} has the dual effect: the object {\tt thm(W)} is
+saved into the library as a theorem.
+
+In the special case that the library mechanism attempts to load a
+collection of wave objects, described via {\tt wave([W1,W2,...,Wn])},
+each of the individual objects {\tt wave(W1)}, through {\tt wave(Wn)} is
+loaded. \clam then attempts some additional processing to extract
+\index*{complementary rewrite rules} from the resulting set of rewrite
+rules.\index {rewrite rules!complementary} (See~\m{wave/4} for more
+information.)
+
+\item[{\tt \inxtt{def}}:]
+A {\tt def}\index{logical object!def|texttt} corresponds to an \oyster
+definition,\index {definitions!\oyster} using \oyster's {\tt
+<==>}\index {\texttt{<"="=>}} operator. \clam\ and \oyster have
+slightly different ideas about what a definition is: \oyster thinks
+that definitions are constructed with {\tt <==>}, whereas \clam\
+thinks that definitions are constructed via \inx{recursion
+equations}\index {definitions!\clam}, which are themselves constructed
+as \oyster theorems of type {\tt eqn}. Thus, for every definition of
+type {\tt def}, there will be a number of corresponding recursion
+equations of type {\tt eqn}.
+
+The library mechanism knows of this dependency and so loading and
+saving {\tt def} objects causes a corresponding loading and saving of
+the equations associated with that definition.  On loading, \clam
+processes the rewrite rules resulting from the {\tt eqn}s in an
+attempt to extract \index*{complementary rewrite rules} from them.  See discussion above under the {\tt wave} entry.
+
+\item[{\tt \inxtt{eqn}}:]
+An {\tt eqn}\index{logical object!eqn|texttt} is an \oyster theorem
+which is to be interpreted as the recursion equation for a particular
+definition of type {\tt def} having the same name.  Equation objects
+are not normally loaded and saved directly: they are loaded/saved as a
+side-effect of loading/saving the corresponding definition.
+
+Saving an individual equation is possible.  It is not possible to load
+an individual equation without referring to the name of the definition
+of which that equation is considered a definition.  For example, {\tt lib-save(def(plus1))} saves the first numbered equation making up the definition of the symbol {\tt plus}.  {\tt lib-load(eqn(plus1))} will report an error.  {\tt lib-load(eqn(plus,plus1))}  will load the equation {\tt plus1} and associate it with the definition of {\tt plus}.
+
+Notice that it is a bad idea to load equations in this way since it
+by-passes \clam's processing for complementary sets, as shown in
+this example:
+\begin{verbatim}
+| ?- lib_load(eqn(plus,plus1)).
+Loaded eqn(plus1)
+Added (=) equ(pnat,left) rewrite-record for plus1
+Added (=) equ(pnat,left) reduction-record for plus1
+Clam WARNING: Loading a single equation will not update any
+              complementary rewrite sets.
+Clam WARNING: You must re-load the entire definition to build these.
+\end{verbatim}
+
+\item[{\tt \inxtt{eqns}}:]
+This\index{logical object!defeqn|texttt} is not really a logical
+object but rather a notational convenience. Call it a pseudo-object.
+It refers to all the {\tt eqn} logical objects collectively.  That is,
+{\tt eqns(D)} is much the same as {\tt eqn(D1)}, through {\tt eqn(Dn)}.
+The advantage of using {\tt eqns(D)} is that complementary set
+processing is carried out on the equations.
+
+\item[{\tt \inxtt{defeqn}}:]
+This\index{logical object!defeqn|texttt} is not really a logical
+object but rather a notational convenience. Call it a
+pseudo-object. It is only to be use in the context of a
+\p{lib-save/2}: Using \p{lib-create/[1;2]} it is possible to create
+{\tt def} objects and their corresponding {\tt eqn} objects and a {\tt
+synth} object at the same time; {\tt defeqn} conveniently refers to
+all of these as a single object for the purpose of saving them and
+immediately re-loading the definition (and so causing the definition, equations and synth to be processed).
+
+{\tt defeqn} objects cannot be loaded.
+
+\item[{\tt \inxtt{red}}:]
+Refers to a {\tt thm} object that has been processed into a reduction
+rule.  Loading {\tt red(R)} causes \clam to load {\tt thm(R)} and then
+attempt to extract a reduction rule from that theorem.  (In this
+respect is quite similar to the loading of a {\tt wave} object.)
+
+No warning or error is reported if \clam cannot extract a reduction
+rule---the {\tt thm} object remains loaded.  Saving a {\tt red} simply
+saves the {\tt thm} from which it it was extracted.
+
+A \inx{reduction rule}\index{logical object!red} is a rule that has
+been shown to be measure decreasing according to the current registry.
+These rules are applied as part of the \inx{symbolic evaluation}
+method (\p{sym-eval/1}) and
+\inx {unblocking} (\p{unblock/3}).  See \S\reference{sec:reduction}
+for more information.  
+
+\item [{\tt \inxtt{redwave}}:]
+Used to refer to a reduction rule and a wave-rule simultaneously
+(again, a pseudo object).  These can be loaded but not saved.
+
+\item[{\tt \inxtt{mthd}}:]
+A {\tt mthd}\index{logical object!mthd|texttt} is a \clam\ method,
+represented either as a \p{method/6} clause, or as an \p{iterator/4}
+(or \p{iterator-lazy/4})
+clause of the form {\tt iterator(method,\ldots,\ldots,\ldots)} (or {\tt
+iterator-lazy(submethod,\ldots,\ldots,\ldots)}).
+
+\item[{\tt \inxtt{smthd}}:]
+A {\tt smthd}\index{logical object!smthd|texttt} is a \clam\ method,
+represented either as a \p{submethod/6} clause, or as an
+\p{iterator/4} (or \p{iterator-lazy/4}) clause of the form {\tt
+iterator(submethod,\ldots,\ldots,\ldots)} (or {\tt
+iterator-lazy(submethod,\ldots,\ldots,\ldots)}).
+
+\item[{\tt \inxtt{hint}}:]
+A {\tt hint}\index{logical object!hint|texttt} is a \clam\ hint-method
+represented as a \p{hint/6} clause.
+
+\item[{\tt \inxtt{trs}}:]
+{\tt trs}\index{logical object!trs|texttt} is the name of a terminating
+rewrite system.  Such a logical object is defined by a collection of
+rules and a collection of registries.  \clam currently only supports
+one {\tt trs}, defined by the rules of \p{reduction-rule/6} and the
+two registries {\tt positive} and {\tt negative}. (See
+\p{registry/4}.)
+\end{description}
+
+Table~\ref{tab:losum} shows a summary of the logical objects.
+\begin{table}
+\begin{tabular}{|l|c|c|l|l|}\hline
+{\sl Object} & {\sl Load?} & {\sl Save?} & {\sl Processing} & {\sl Comment}\\\hline
+plan &     N   &  Y    &     None       & Created by planner\\
+thm  &     Y   &  Y    &     None   & \\
+lemma &    Y   &  Y    &     None   & Interesting only to tactics\\
+synth &    Y   &  Y    &     None  & Loaded automatically with {\tt def} \\
+scheme &   Y   &  Y    & Induction rules & \\
+wave   &   Y   &  y    & RR, CS & based on {\tt thm}\\
+eqn    &   N/R &  Y    & RR, RedR, CS & based on {\tt thm}\\
+eqns   &   Y   &  Y    & RR, RedR, CS & \\
+defeqn &   N   &  Y    & None   & Use only after {\tt lib-create}\\
+red    &   Y   &  Y    & RedR   & based on {\tt thm}\\
+redwave &  Y   &  N    & RR, RedR & {\tt red} and {\tt wave}\\
+mthd    &  Y  & N & &\\
+smthd    &  Y  & N & &\\
+hint    &  Y  & N & &\\
+trs    &  N  & N & &\\\hline
+\end{tabular}
+\label{tab:losum}
+\caption {Summary of logical objects.  Key: RR -- rewrite-rule; RedR -- reduction-rule; CS -- complementary set}
+\end{table}
+
+
+
+
+\paragraph {Example logical objects} \index {logical object!examples}
+Below are some examples for each of the above types of logical
+objects.
+
+\begin{description}
+\item[{\tt \inxtt{thm}}:]
+\begin{verbatim}
+x:pnat=>y:pnat=>plus(x,y)=plus(y,x) in pnat
+\end{verbatim}
+is a theorem of type {\tt thm}.
+
+\item[{\tt \inxtt{def}}:]
+\begin{verbatim}
+plus(x,y) <==> p_ind(x,y,[~,v,s(v)])
+\end{verbatim}
+is a definition of type {\tt def}.
+
+\item[{\tt \inxtt{eqn}}:]
+\begin{verbatim}
+y:pnat=>plus(0,y)=y in pnat
+x:pnat=>y:pnat=>plus(s(x),y)=s(plus(x,y)) in pnat
+\end{verbatim}
+are both recursion equations of type {\tt eqn}, corresponding to the
+definition of \p{plus/2} above.
+
+
+\item[{\tt \inxtt{synth}}:]
+\begin{verbatim}
+x:pnat=>y:pnat=>pnat
+\end{verbatim}
+together with the corresponding proof which
+synthesizes addition would be of type {\tt synth} (defining plus).
+(Notice that such a 
+\inx{synthetic definition} would still need corresponding recursion
+equations to be of any use during proof-plan construction.)
+\item[{\tt \inxtt{lemma}}:]
+\begin{verbatim}
+n:pnat=>
+    m:pnat=>
+        (times(n,m)=0 in pnat=>void)=>m=0 in pnat=>void
+\end{verbatim}
+is a simple theorem about arithmetic that \oyster should know about
+(but doesn't). It is therefore best seen as of type {\tt lemma}, although,
+when we decided to build proof-plans for this statement, it could be
+upgraded to type {\tt thm}.
+
+\item[{\tt \inxtt{wave}}:]
+\begin{verbatim}
+a:pnat=>b:pnat=>c:pnat=>
+    times(plus(b,c),a)=plus(times(b,a),times(c,a))in pnat,
+\end{verbatim}
+although a {\tt thm} in its own right, could be declared as a wave
+rule as well.
+\item[{\tt \inxtt{red}}:] A measure decreasing rewrite rule.
+\begin{verbatim}
+x:pnat=>y:pnat=>plus(x,s(y))=s(plus(x,y)) in pnat.
+\end{verbatim}
+\item[{\tt \inxtt{mthd}}:]
+Any \p{method/6} term described in \S\reference{repertoire} is
+an example of a {\tt mthd}. The other way of making methods is through
+an \p{iterator/4} or \p{iterator-lazy/4} clause:
+\begin{verbatim}
+iterator(method,normalize,submethods,[normal(_)]).
+\end{verbatim}
+\begin{verbatim}
+iterator-lazy(method,normalize,submethods,[normal(_)]).
+\end{verbatim}
+\item[{\tt \inxtt{smthd}}:]
+Any \p{submethod/6} described in \S\reference{repertoire} is an
+example of a {\tt smthd}. The other way of making submethods is
+through an 
+\p{iterator/4} or \p{iterator-lazy/4} clause:
+\begin{verbatim}
+iterator(submethod,ripple_out,methods,[wave(_,_)]).
+\end{verbatim}
+\begin{verbatim}
+iterator-lazy(submethod,ripple_out,methods,[wave(_,_)]).
+\end{verbatim}
+\item[{\tt \inxtt{hint}}:]
+Any \p{hint/6} term described in \S\reference{hint-methods} is
+an example of a {\tt hint}.
+\end{description}
+
+Associated with each logical object type is a functor which can be
+wrapped around the name of an object to indicate its type. Such
+expressions will be called {\em typed \inx{logical object}s}. The
+name of a logical object is always an atom, except for methods,
+whose name is a functor specification of the form {\tt f/n}. Thus, the
+expression {\tt def(plus)} indicates that {\tt plus} is a {\tt
+definition}, and the expression {\tt mthd(base/2)} indicates that {\tt base}
+is a method of arity 2.
+
+Dependencies between logical objects can be registered in \clam\ using
+the \inx {needs file}\index{library!needs file} which is always
+defined in the file \f{needs}.  The predicate \p{needs/2} keeps track
+of the various \inx {dependencies} between logical objects.
+
+\begin{predicate}{needs/2}{needs(+Object,+Needed)}%
+{\tt Object} is a typed logical object, and {\tt Needed} is a list of
+typed logical objects. This indicates that Object needs all the
+objects listed in {\tt Needed}. The \p{needs/2} clauses will be used by
+{\clam}'s \p{lib-load/2} predicate to determine which objects should be
+loaded in which order. Example:\index{needs file!example}
+\begin{verbatim}
+needs(thm(comm),        [def(times)]).
+needs(def(times),       [def(plus)]).
+\end{verbatim}
+states that the theorem {\tt comm} (commutativity of multiplication)
+needs the definition of {\tt times} and that the definition of
+{\tt times} needs the definition of {\tt plus}.
+\clam\ provides a database of predefined \p{needs/2} clauses,
+but this database can be altered by the user via assert/retract
+statements. Warning: loading a set of new 
+\p{needs/2} clauses from a file will result in the built-in database
+being overwritten, so explicit calls to assert/retract must be used.
+(Alternatively, users can take a copy of the built-in database from
+the file \f{needs} in {\clam}'s source directory, and add their own \p{needs/2}
+clauses). The database of \p{needs/2} clauses is order independent.
+\end{predicate}
+
+A number of \inx{dependency rules} are built into \clam, so that they
+do not have to be stated each time:
+\begin{itemize}
+\item
+{\tt needs(def(O), [eqn(O)])}. Thus, whenever a definition is
+loaded, the corresponding recursion equations will also be loaded.
+\item
+{\tt needs(eqn(O), [wave(O),red(O)])}. Thus, whenever a recursion equation is
+loaded, the system will try to regard it as both a wave-rule and as a
+reduction rule.
+\end{itemize}
+
+\begin{predicate}{needed/2}{needed(?Needer,?Needed)}%
+This predicate succeeds if {\tt Needed} is a typed logical object that
+is needed (directly or indirectly) by the typed logical object {\tt Needer},
+according to the \p{needs/2} database.  This predicate can be
+used to interrogate the \p{needs/2} database and effectively provides
+the transitive closure of the \p{needs/2} predicate. It can be used
+both ways round, that is: to inquire which logical objects are needed by
+a given logical object (mode {\tt needed(+,-)}), or to find all logical
+objects that need a given logical object (mode {\tt needed(-,+)}).
+\end{predicate}
+
+\clam\ uses the \p{needs/2} dependency database to automatically load
+all the required logical objects in the correct order. For this purpose,
+it makes certain assumption about the way logical objects are stored in
+files.
+\begin{itemize}
+\item
+Every logical object {\tt O} of type {\tt T} is stored in a file {\tt T/O}. 
+Where {\tt T} denotes a subdirectory of the current library directory.
+For example, the definition of the function \p{plus/2} (the typed logical object 
+{\tt def(plus)}) lives in the file {\tt def/plus}. There are two exceptions to 
+this rule:
+\begin{enumerate}
+\item
+The simplest exception is the {\tt wave} type. Objects of type {\tt
+wave} do {\bf not} live in a {\tt wave}-directory. Instead they live
+in the {\tt thm}-directory. (The only purpose of assigning a logical
+object the {\tt wave}-type is to recognise it as a wave-rule.)
+\item
+The second exception applies to the {\tt eqn} type. As explained
+above, for every object of type {\tt def} (an \oyster definition),
+there will be a number of objects of type {\tt eqn} (the corresponding
+recursion equations). Because there will in general be more than one
+recursion equation per definition, the equations for a {\tt def
+}-object called {\tt O} do not live in a file {\tt eqn/O}, but instead
+may be found as a number of files in the {\tt eqn} directory of the
+library.
+
+Currently, there are two filenaming convensions to indicate the
+numbered equations which belong to some definition:
+\begin{itemize}
+\item files {\tt eqn/O1}, {\tt eqn/O2}, \ldots.  That is, numerals are
+concatenated to the right-hand of the name.  
+\item files {\tt eqn/O.1}, {\tt eqn/O.2}, \ldots.  That is, numerals are
+concatenated to the right-hand of the name separated by a period.
+This second format is to be preferred over the first one.
+\end{itemize}
+In both cases, notice that the equations {\em must be consecutively
+numbered}.
+
+\end{enumerate}
+\end{itemize}
+
+Summarising, the \inx{file naming convention}s of the library mechanism
+are: 
+\begin{itemize}
+\item
+Possible types for logical objects are {\tt thm}, {\tt lemma},
+{\tt synth}, {\tt scheme}, {\tt wave}, {\tt def}, {\tt eqn},
+{\tt mthd} and {\tt smthd}.
+\item
+Any object {\tt O} of type {\tt T} lives in a file {\tt T/O}, except:
+\item
+An object {\tt O} of type {\tt wave} lives in a file {\tt thm/O}, and
+\item
+An object {\tt O} of type {\tt eqn} lives in a file {\tt eqn/O$n$}, with
+$n=0,\ldots,9$.
+\end{itemize}
+
+A number of predicates exists to manipulate these typed logical
+objects:
+\begin{itemize}
+\item 
+\p{lib-create/[1;2]}  allows the interactive user to create definitions
+and corresponding equations from the \clam{} command line.  This is not a
+fully general mechanism in that there are some definitions and
+equations which cannot be created in this way.  However, in most cases
+the user will be able to put it to good use.
+\item
+\p{lib-load/[1;2;3]} and \p{lib-load-dep/3} are used to load objects from files into the
+current Prolog environment.
+\item
+\p{lib-present/1} is used to interrogate the current Prolog
+environment about the presence of typed logical objects.
+\item
+\p{lib-delete/1} is used to delete typed logical objects from
+the current Prolog environment.
+\item
+\p{lib-save/[1;2]} is used to save typed logical objects from
+the current Prolog environment to a file.
+\item
+\p{lib-edit/[1;2]} is used for editing library objects. 
+\item
+\p{lib-set/1} is used for setting some global parameters that
+affect the library mechanism.
+\end{itemize}
+
+These predicates will be discussed below:
+
+
+\begin{predicate}{lib-create/2}{lib-create(defeqn(+O),+Dir)}%
+\index {library!creating definitions}
+\index {creating definitions}
+Create a {\tt defeqn} pseudo-object (pseudo in that it is really a
+collection of a {\tt def} and one or more {\tt eqn}s, and a {\tt
+synth}).
+
+{\tt lib-create} allows the interactive user to create a {\tt def} and
+then give one or more corresponding equations ({\tt eqn}s). The {\tt
+synth} object is also created.  The equations may be conditional.
+Once created, these definitions and equations must be saved (using
+\p{lib-save(defeqn(O))}) in order to process them ready to be used by
+\clam{} during proof-planning. 
+
+To create a definition, the user interactively provides a type for
+{\tt O}: it is assumed that types are in uncurried form: however, they
+are automatically converted into curried form internally.
+
+Then the user enters a number of equations describing {\tt O}. The
+enumeration of the equations is terminated by the token `{\tt eod.}',
+meaning ``end of definition''.  All entry is terminated by a period
+`{\tt .}'.
+
+Equations have the following general form (note the period):
+\begin{verbatim}
+    LHS = RHS.
+\end{verbatim}
+or, if they are conditional equations, 
+\begin{verbatim}
+    COND => LHS = RHS.
+\end{verbatim}
+
+At the end of this process {\tt lib-create} has
+\begin{itemize}
+\item made a {\tt def} object for {\tt O}:
+\begin{center}
+        \verb|O(x1, ..., xn) <==> term_of(synth(O))|
+\end{center}
+\item created a {\tt synth} object.  This is a theorem of the type
+entered above.  This theorem must be proven by the user.
+
+\item made a number of {\tt eqn} objects, on per equation entered.
+Each of these is a theorem that is to be proved.  Again, these proofs
+are left to the user. 
+\end{itemize}
+The proofs referred to above constitute a (constructive) demonstration
+that there exists a total, primitive recursive function which
+satisfies the equations given. 
+
+
+\paragraph {Example.}
+\index {library!creating definitions} A definition of the function $nat\_plus$ is
+given, and the familiar equations for it are then enumerated.  Proofs
+are left as an exercise.
+
+\begin{verbatim}
+| ?- lib_create(defeqn(nat_plus)).
+Enter type for nat_plus: (pnat # pnat)=>pnat.
+Enter equations for nat_plus ("eod." to finish)
+nat_plus1: nat_plus(0,x) = x.
+nat_plus2: nat_plus(s(x),y) = s(nat_plus(x,y)).
+nat_plus3: eod.
+Definition of nat_plus completed.
+Use lib_save(defeqn(nat_plus)) to save and register your definition.
+\end{verbatim}
+
+NB. \clam{} does not automatically save your definitions, nor does it
+register the equations.  This means that they will be ignored by
+\clam{} during proof-planning.  To register them, you must use {\tt
+lib-save(defeqn(nat-plus))}, which saves the objects associated with
+the {\tt defeqn} object and then immediately reloads them.
+
+\begin{verbatim}
+| ?- lib_save(defeqn(nat_plus),'lib-save').
+Saved def(nat_plus)
+Saved synth(nat_plus)
+Saved eqn(nat_plus1)
+Saved eqn(nat_plus2)
+Registering these definitions...
+Loaded synth(nat_plus)
+Clam WARNING: Theorem nat_plus has status incomplete
+Loaded eqn(nat_plus1)
+Clam WARNING: Theorem nat_plus1 has status incomplete
+Loaded eqn(nat_plus2)
+Clam WARNING: Theorem nat_plus2 has status incomplete
+Added rewrite-record for nat_plus1
+Added rewrite-record for nat_plus2
+Added rewrite-record for nat_plus2
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for nat_plus1
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for nat_plus2
+Loaded def(nat_plus)
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{lib-create/1}{lib-create(defeqn(+O))}%
+As \p{lib-create/2}, with {\tt Dir} defaulting to the current
+directory.
+\end{predicate}
+
+\begin{predicate}{lib-delete/1}{lib-delete(?T(?O))}%
+{\tt T(O)} will be unified with a logical object present in the
+current database, and this object will be deleted from the
+database. The predicate tries to maintain database consistency by
+deleting all aspects of the specified object.  For instance, if a {\tt
+def} is deleted, the corresponding {\tt eqn}s are also deleted, and if
+present, so is the {\tt synth} associated with it.  Equations are
+deleted if they are present and numbered consecutively from $1$;
+consistency may be lost when individual {\tt eqn}s are deleted thus
+destroying the consecutive numbering.
+
+The simplest use of this predicate is to delete a
+single fully specified object:
+\begin{verbatim}
+:- lib_delete(thm(assp)).
+\end{verbatim}
+However, by partially specifying {\tt T(O)} and backtracking over
+\p{lib-delete/1}, it is possible to delete more than one object at
+once. For instance:
+\begin{verbatim}
+:- lib_delete(mthd(M)),fail.
+\end{verbatim}
+will delete all methods from the system.
+
+\paragraph {Deleting reduction rules.}
+\index {library!deleting reduction rules}
+\index {deleting reduction rules}
+\index {reduction rule!deleting rules}
+When a reduction rule is deleted, the registry\index{registry} is not
+changed even though the remaining rules may be terminating under more
+general registry.  For example,\example {library!deleting reduction
+rules}
+\begin{verbatim}
+| ?- lib_delete(red(nat_plus2)).
+Deleting reduction record for nat_plus2...done
+Clam info:
+  Some rewrite rules have been removed from the TRS; However,
+Clam info:
+  any possible weakenings of the registry have not been made.
+\end{verbatim}
+\end{predicate}
+
+\begin{predicate}{lib-delete/0}{lib-delete}%
+This predicate deletes all logical objects from the current
+environment.
+\end{predicate}
+
+\begin{predicate}{lib-load/2}{lib-load(+T(+O),+Dir)}%
+This predicate will load a logical object {\tt O} of type {\tt T} from the
+corresponding file(s) in directory {\tt Dir}, using the file-name
+conventions described above. Furthermore, it will also (and first)
+load all logical objects which are needed by {\tt O} (directly and
+indirectly), according to the \p{needs/2} database. All these
+auxiliary objects are also loaded from directory {\tt Dir}. {\tt Dir}
+can be specified as a relative directory from the current directory or
+as an absolute pathname. 
+
+Instead of a single typed logical object, the first argument can also
+be a list of typed logical objects, in which case \p{lib-load/2} will
+iterate over all elements of the list.  Failure to load any of these
+objects will prevent all subsequent objects from being loaded.
+
+If the typed logical object {\tt T(O)}, or any of the objects it needs
+directly or indirectly, are already loaded, they will not be loaded
+again.
+
+For logical objects of type {\tt def(D)} \clam{} loads as many {\em
+consecutively numbered\/} equations of the form {\tt eqn(D$n$)} as can
+be found in the library (starting from $n=1$), and these will be added
+to the reduction rule\index {reduction rule}s
+database.\index{reduction rule!adding rules}
+
+Definitions having a type of the form $A=>A=u(1)$ (that is, binary
+predicates) are given special attention.  For such definitions \clam
+attempts to show that the defined symbol is
+transitive\index{transitive predicates}, by
+setting up and trying to prove a conjecture stating the transitivity
+of the symbol\index{transitivity}.  \clam uses the predicate
+\p{quickly-provable/1} for these proofs.  The flag \p{prove-trans/0}
+can be used to switch this facility off.  If {\tt trans-proving/0} is
+retracted, \clam does not attempt any automatic processing of
+transitivity proofs.
+
+Definitions having a type of the form $A => A => B$ (that is, binary
+functions) can also given special attention if the flag \p{prove-comm/0}
+is set. If it is, then for such definitions \clam attempts to show that
+the defined symbol commutative, i.e. that $f(x,y)=f(y,x)$, by setting up
+and trying to prove a conjecture stating the commutativity of the
+symbol\index{commutativity}.  \clam uses the predicate
+\p{quickly-provable/1} for these proofs. If the symbol is found to be
+commutative, then commuted versions of all defining equations for the
+symbol are loaded, where the original equation is of the form$f(A, B)
+\Rightarrow g(f(C, D))$ and the added equation is of the form: $f(B, A)
+\Rightarrow g(f(D, C))$. This could be extended to equations where the
+LHS only contains $f$ as a subexpression, where the LHS or RHS contains
+multiple occurrences of $f$, etc. The rewriting tactics have
+not been extended to cope with these commuted equations, which is why
+the facility is by default turned off. 
+
+
+\begin{ex}The following examples illustrate the behaviour of {\tt lib-load}.
+\begin{verbatim}
+| ?- asserta(comm_proving). % set comm_proving flag.
+| ?- trace_plan(_,23).   % show what is loaded by lib-load
+| ?- lib_load([def(plus),def(geq)]).
+Loaded eqn(plus1)
+Loaded eqn(plus2)
+Added (=) equ(pnat,left) rewrite-record for plus1
+Added (=) equ(pnat,left) rewrite-record for plus2
+Added (=) equ(pnat,right) rewrite-record for plus2
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for plus1
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(pnat,left) reduction-record for plus2
+Loaded def(plus)
+Clam INFO: Definition def(plus) has the type of a binary function.
+Clam INFO: Trying to show it is commutative.
+Clam INFO: Proved def(plus) to be commutative.
+Clam INFO: Adding commuted versions of wave rules.
+Clam INFO: Note, need to add code for tactics for commuted wave rules soon.
+Clam INFO: Added commuted wave rule (equ(pnat,right)) for equation plus2.
+Clam INFO: Added commuted wave rule (equ(pnat,left)) for equation plus2.
+Clam INFO: Added commuted wave rule (equ(pnat,left)) for equation plus1.
+Loaded synth(leq)
+Loaded eqn(geq1)
+Loaded eqn(geq2)
+Loaded eqn(geq3)
+Added (=) equ(u(1),left) rewrite-record for geq1
+Added (=) equ(u(1),left) rewrite-record for geq2
+Added (=) equ(u(1),left) rewrite-record for geq3
+Added (=) equ(u(1),right) rewrite-record for geq3
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(u(1),left) reduction-record for geq1
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(u(1),left) reduction-record for geq2
+Clam INFO: [Extended registry positive] 
+Clam INFO: [Extended registry negative] 
+Added (=) equ(u(1),left) reduction-record for geq3
+Loaded def(geq)
+Clam INFO: Definition def(geq) has the type of a binary function.
+Clam INFO: Trying to show it is commutative.
+Clam INFO: Failed to prove def(geq) commutative.
+Clam INFO: Definition def(geq) has the type of a transitive relation.
+Clam INFO: Trying to show it is indeed transitive.
+Clam INFO: Proved def(geq) to be transitive.
+
+yes
+| ?- 
+\end{verbatim}
+First {\tt plus} is loaded---notice how {\tt plus1} and {\tt plus2}
+are automatically loaded when {\tt def(plus)} is loaded, and shown to
+be measure decreasing reduction rules.  Then {\tt geq} is loaded.  
+
+\begin{verbatim}
+?- lib_load([def(plus),thm(assp),thm(comp)])]).
+\end{verbatim}
+first loaded the definition of {\tt plus}, then loads two {\tt thm}
+objects: {\tt assp} then {\tt comp}.
+\end{ex}
+\end{predicate}
+
+\begin{predicate}{lib-load/1}{lib-load(+T(+O))}%
+This is as \p{lib-load/2}, but the {\tt Path} argument will be the
+default library path, as set by \p{lib-set/2}.
+\end{predicate}
+
+\begin{predicate}{lib-load/1}{lib-load(wave(+OList))}%
+A specialised version of the \p{lib-load} predicate which allows us to
+recognise arbitrary \inx{complementary set}s of rewrites.  {\tt OList}
+must be a list of theorems which are be treated as a set of
+complementary set of rewrites.  They are handed
+to~\p{complementary-set/2} for processing.
+\end{predicate}
+
+\begin{predicate}{lib-load/3}{lib-load(+Mthd(+M),+Pos,+Dir)}%
+These forms of the {\tt lib-load} predicate are meant only for logical
+objects of types {\tt\inx{mthd}} or {\tt \inx{smthd}} (in other words,
+{\tt Mthd} is one of the atoms {\tt mthd} or {\tt smthd}, and
+{\tt M} is of the form {\tt f/n}). For these objects we want to be able to
+specify the relative location where they are to be inserted into the
+database. For this purpose the second argument of \p{lib-load/[2;3]}
+can be a position. {\tt Pos} can be one of the following four values,
+each specifying a position in the database where the (sub)method
+{\tt M} is to be inserted: 
+\begin{itemize}
+\item {\tt \inx{first}}
+{\tt M} is inserted as the first item in the database.
+\item {\tt \inx{last}}
+{\tt M} is inserted as the last item in the database.
+\item {\tt \inx{before} F/N}
+{\tt M} is inserted just before the method {\tt F/N} in the database.
+\item {\tt \inx{after} F/N}
+{\tt M} is inserted just after the method {\tt F/N} in the database.
+\end{itemize}
+If the {\tt Pos} argument is not specified (as in
+{\tt lib-load(mthd(M),Dir)} or {\tt lib-load(mthd(M))}), the default
+value for {\tt Pos} is {\tt last} unless the specified method {\tt M}
+already occurs in the database, in which case the default value for
+{\tt Pos} is the current position of {\tt M}.
+
+No more than one copy of any (sub)method ever occurs in the database.
+Thus, reloading a (sub)method into the database results in removing
+the old copy of the (sub)method. In this way, \p{lib-load/[1;2;3]}
+resembles the Prolog predicate \p{reconsult/1} and not the predicate
+\p{consult/1}. Because of this, the easiest way to move a method from
+one position in the database to a new position is to reload the
+method, while specifying its new position.
+Notice that a (sub)method is allowed to have more than one clause
+(such as the \p{wave/4} method), but the above enforces that these
+clauses must appear consecutively in the (sub)methods database.
+
+Examples of the use of these predicates are:\index{library!loading methods}
+\begin{verbatim}
+:- lib_load(mthd(induction/1),after(ind_strat/1)).
+:- lib_load(mthd(identity/0),first).
+:- lib_load(mthd(sym_eval/1),last).
+\end{verbatim}
+\end{predicate}
+
+
+\begin{predicate}{lib-load/2}{lib-load(+Mthd(+M),+Pos)}%
+As lib-load(+Mthd(+M),+Pos,+Dir) except that {\tt Dir}
+is instantiated to be the current library directory. 
+\end{predicate}
+
+\begin{predicate}{lib-load-dep/3}{lib-load-dep(+Thing,?Dep,+Dir)}%
+This is a version of \p{lib-load/2} for loading logical object {\tt
+Thing} from the library in director {\tt Dir}.  {\tt lib-load-dep/3}
+does not use the \p{needs/2} database.  It automatically analyses the
+logical object in question ({\tt Thing} may be any of {\tt thm, red,
+wave, lemma, eqn}) and determines which definitions must be loaded for
+{\tt Thing} to be loaded.  This is does recursively, and hence
+calculates the dependancies beteween theorems and definitions etc. 
+
+{\tt Dep} is a tree showing the objects upon which {\tt Thing}
+depends. 
+
+Notice that there is no sanity check on these dependancies: if a {\tt
+def} object refers to itself recursively {\tt lib-load-dep/3} is
+likely to diverge.  (This scenario is illegal anyway as far as Oyster
+is concerned.)
+
+
+For example,
+\begin{verbatim}
+| ?- lib_load_dep(thm(rotlen),D,lib).
+D = [def(rotate)-[def(app)-[],def(tl)-[],def(hd)-[]],
+     def(length)-[],def(app)-[]]
+yes.
+\end{verbatim}
+
+\end{predicate}
+
+
+\begin{predicate}{lib-present/1}{lib-present(?T(?O))}%
+{\tt T(O)} will be unified with a typed logical object in the current
+environment. This can be used to test for the presence of a specified
+logical object, or to generate a set of logical objects from the
+environment on backtracking, by partially specifying {\tt T(O)}.
+
+NB: whilst cancellation (see~\p{cancel-rule/2}) and equality
+(see~\p{equal-rule/2}) records are not library objects, they will be
+displayed as such by {\tt lib-present/1}.
+\end{predicate}
+
+\begin{predicate}{lib-present/0}{lib-present}%
+This predicate prints the names of all logical objects in the current
+environment.  
+
+NB: whilst cancellation (see~\p{cancel-rule/2}) and equality
+(see~\p{equal-rule/2}) records are not library objects, they will be
+displayed as such by {\tt lib-present/0}.
+
+\end{predicate}
+
+\begin{predicate}{lib-save/2}{lib-save(+T(+O),+Dir)}%
+This predicate will save a logical object {\tt O} of type {\tt T} in a
+file in directory {\tt Dir}, using the file-name conventions described
+above. Notice that it will {\bf not} save any of the objects that are
+needed by {\tt O}. The only exception to this is when saving a {\tt
+def} object, when all the corresponding recursion equations will also
+be saved in directory {\tt Dir}. The only two exceptions to this are
+when
+\begin{enumerate}
+\item  saving a {\tt def} object, when all the corresponding recursion
+equations will also be saved in directory {\tt Dir}, and,
+
+\item  when saving a {\tt defeqn} object, which saves the
+corresponding {\tt def} object, and the associated equations, and the
+{\tt synth} object. 
+
+\item when saving a {\tt plan} object, the following information is
+recorded in the library:
+        \begin{itemize}
+        \item the name of the theorem for which the plan was
+              constructed;
+        \item the version number of \clam{} that produced the plan; 
+        \item the \clam{} environment---all logical objects present at
+              the time the proof-planning was carried out {\em with
+              the exception of {\tt plan} objects}.
+        \end{itemize}
+This information is useful when comparing proof-plans across different
+versions of \clam{} and different collections of methods.  It allows a
+user to reproduce precisely the environment in which a plan was found.
+Future versions of \clam{} will provide support for storing multiple
+plans for a single theorem in the library.
+\end{enumerate}
+
+As for \p{lib-load/2}, the first argument can also be a list of typed
+logical objects, in which case \p{lib-save/2} will iterate over all
+elements of the list, and {\tt O} may also be a list of logical
+objects of type {\tt T}, in which case each is saved in list order.
+
+When saving objects of type {\tt def(D)}, a each {\em consecutively
+numbered\/} theorem called {\tt D$n$} is saved (from $n=1$).  Compare
+with \p{lib-load/1}.
+
+Since (sub)methods are not created on-line by Prolog or \oyster programming
+(unlike {\tt def}s, {\tt thm}s etc.), \p{lib-save/[1;2]} will not
+work for (sub)methods. However, if this is felt as a restriction it
+can easily be lifted. 
+\end{predicate}
+
+\begin{predicate}{lib-save/1}{lib-save(+T(+O))}%
+As \p{lib-save/2}, with {\tt Dir} defaulting to the current directory. 
+\end{predicate}
+
+\begin{predicate}{lib-edit/1}{lib-edit(+Mthd)}%
+For those users who do not use Emacs-like interfaces, this predicate
+allows editing of library objects from within \clam. At the
+moment, it only allows editing of methods. If
+{\tt Mthd} is a (sub)method specification, calling this predicate will
+edit the specified (sub)method in the default library directory. After
+editing ends, {\tt Mthd} is automatically (re)loaded into the system.
+
+The \inx{editor} that is used for the editing operation is taken from the
+shell environment variable {\sc \inx{visual}}, or, if this is not set, from
+the shell environment variable {\sc \inx{editor}}, or if this is not set
+either, will default to {\tt \inx{vi}}.
+
+Since in \inx {SICStus Prolog} it is impossible to find out the values
+of environment variables, the editor will always default {\tt vi}.  Of
+course, it is still possible to affect the value of the editor using
+the \p{lib-set/1} predicate.
+\end{predicate}
+
+\begin{predicate}{lib-edit/2}{lib-edit(+Mthd,+Dir)}%
+As \p{lib-edit/1}, except that {\tt Mthd} is not taken from the
+default library directory, but from directory {\tt Dir} instead.
+\end{predicate}
+
+\begin{predicate}{lib-set/1}{lib-set(+P)}%
+This predicate can be used to set various parameters which affect the
+behaviour of {\clam}'s library. Currently, the value of {\tt P} can be:
+\begin{description}
+\item[{\tt dir(+P)}]
+This will change the value of the library search directory
+path\defindex{library!search path}  to
+{\tt P}. {\tt P} is a list of directories; the special token
+`\verb|*|' may appear in the list to indicate that \clam{} should
+search the system directory at that point.  For
+example,\example{library!search path}
+\begin{verbatim}
+    lib_set(dir(['~joseph/clam/lib','*'])).
+\end{verbatim}
+allows searching of user {\tt arthur}'s personal \clam{} library
+before the default library is searched.  The default system
+library\index{library!default search path}
+may be found using \p{lib-dir-system/1}, but this directory cannot be
+changed.  {\tt lib-set(dir(['*']))} is the default path setting.
+
+Currently, local needs files\index{library!needs file} are not supported, so this means that a
+single needs file must reflect dependencies across all libraries.
+This will be improved in a future release.
+
+\item[{\tt sdir(+D)}]
+This will change the value of the default library saving directory\index{library!saving directory} to
+{\tt D}. {\tt D} is a directory.  For example,\example{library!saving directory}
+\begin{verbatim}
+    lib_set(sdir('~arthur/clam/lib-new')).
+\end{verbatim}
+Subsequent {\tt lib-save}'s will use that directory by default. 
+  
+\item[{\tt editor(+E)}]
+This will change the value of the editor\index{library!editor} to {\tt E}.
+\end{description}
+\end{predicate}
+
+\input footer
+

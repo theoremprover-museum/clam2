@@ -1,0 +1,130 @@
+\begin{theindex}
+
+  \item \textsf {annotations.pl}, 155
+  \item \textsf {applicable.pl}, 124
+
+  \indexspace
+
+  \item \textsf {boot.pl}, 123
+
+  \indexspace
+
+  \item \textsf {clamtrace.tex}, 75
+  \item \textsf {config/hints.pl}, 144
+  \item \textsf {config/methods.pl}, 143, 156
+  \item \textsf {config/tactics.pl}, 143, 151, 156, 157
+
+  \indexspace
+
+  \item \textsf {dialect-support}, 121, 123
+  \item \textsf {dialect-support/}, 143
+
+  \indexspace
+
+  \item \textsf {elementary.pl}, 128
+  \item \textsf {examples.pl}, 125, 126, 150
+
+  \indexspace
+
+  \item \textsf {img}, 152
+  \item \textsf {info-for-users}, 75, 150
+  \item \textsf {info-for-users/}, 143
+
+  \indexspace
+
+  \item \textsf {lib}, 143
+  \item \textsf {lib-buffer/}, 143
+  \item \textsf {lib-save/}, 143
+  \item \textsf {lib/}, 143
+  \item \textsf {library.pl}, 156, 157
+  \item \textsf {libs.pl}, 121, 123
+  \item \textsf {low-level-code/}, 143
+
+  \indexspace
+
+  \item \textsf {make}, 121
+  \item \textsf {make/clam.v\version .DIA}, 143
+  \item \textsf {make/clamlib.v\version .DIA}, 143
+  \item \textsf {make/Makefile}, 143
+  \item \textsf {make/oyster.DIA}, 143
+  \item \textsf {Makefile}, 121, 123
+  \item \textsf {meta-level-support/cancellation.pl}, 144
+  \item \textsf {meta-level-support/dp}, 144
+  \item \textsf {meta-level-support/elementary.pl}, 144
+  \item \textsf {meta-level-support/hint-context.pl}, 144
+  \item \textsf {meta-level-support/hint-pre.pl}, 144
+  \item \textsf {meta-level-support/method-con.pl}, 144
+  \item \textsf {meta-level-support/method-pre.pl}, 144
+  \item \textsf {meta-level-support/methodical.pl}, 144
+  \item \textsf {meta-level-support/propositional.pl}, 144
+  \item \textsf {meta-level-support/recursive.pl}, 144
+  \item \textsf {meta-level-support/reduction.pl}, 144
+  \item \textsf {meta-level-support/schemes.pl}, 144
+  \item \textsf {meta-level-support/so.pl}, 144
+  \item \textsf {meta-level-support/tactics-wf.pl}, 144
+  \item \textsf {meta-level-support/tactics.pl}, 144
+  \item \textsf {meta-level-support/wave-rules.pl}, 144
+  \item \textsf {method-con}, 145
+  \item \textsf {method-db.pl}, 117
+  \item \textsf {method-pre}, 145
+  \item \textsf {method-pre.pl}, 128
+  \item \textsf {methodical.pl}, 113
+
+  \indexspace
+
+  \item \textsf {needs}, 96, 97
+  \item \textsf {needs.pl}, 92, 150, 151, 156
+  \item \textsf {NEWS}, 143
+  \item \textsf {nip}, 146
+
+  \indexspace
+
+  \item \textsf {object-level-support/oyster-theory.pl}, 144
+  \item \textsf {oyster-theory}, 145
+
+  \indexspace
+
+  \item \textsf {plan-id.pl}, 152
+  \item \textsf {portrayTeX.pl}, 88, 89
+  \item \textsf {proof-planning/applicable.pl}, 144
+  \item \textsf {proof-planning/library.pl}, 144
+  \item \textsf {proof-planning/method-db.pl}, 144
+  \item \textsf {proof-planning/plan-bf.pl}, 144
+  \item \textsf {proof-planning/plan-df.pl}, 144
+  \item \textsf {proof-planning/plan-dht.pl}, 144
+  \item \textsf {proof-planning/plan-gdf.pl}, 144
+  \item \textsf {proof-planning/plan-gdht.pl}, 144
+  \item \textsf {proof-planning/plan-id.pl}, 144
+  \item \textsf {proof-planning/plan-idht.pl}, 144
+  \item \textsf {proof-planning/plan-toy.pl}, 144
+  \item \textsf {proof-planning/plan-vi.pl}, 144
+  \item \textsf {proof-planning/portrayTeX.pl}, 75
+  \item \textsf {proof-planning/stats.pl}, 144
+  \item \textsf {proof-planning/util.pl}, 144
+
+  \indexspace
+
+  \item \textsf {README}, 143
+  \item \textsf {reduction.pl}, 153, 154
+
+  \indexspace
+
+  \item \textsf {schemes.pl}, 112, 127
+  \item \textsf {stats.pl}, 123
+  \item \textsf {sysdep.pl}, 121, 123
+
+  \indexspace
+
+  \item \textsf {tactics}, 145
+  \item \textsf {tactics-wff}, 145
+  \item \textsf {tactics.pl}, 112
+
+  \indexspace
+
+  \item \textsf {util.pl}, 128
+
+  \indexspace
+
+  \item \textsf {writef.pl}, 144
+
+\end{theindex}

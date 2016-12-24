@@ -1,0 +1,20 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: identity,v 1.2 1998/09/15 16:00:38 img Exp $
+ *
+ * $Log: identity,v $
+ * Revision 1.2  1998/09/15 16:00:38  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.1  1994/09/16 09:33:29  dream
+ * Initial revision
+ *
+ */
+
+	% IDENTITY METHOD: too simple for words.	
+method(identity,
+       _ ==> G,
+       [matrix(_,MM,G),
+        annotations(_,_,X = X in _,MM)],
+       [],
+       [],
+       identity).

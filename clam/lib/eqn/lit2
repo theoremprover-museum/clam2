@@ -1,0 +1,19 @@
+/*
+ * @(#)$Id: lit2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: lit2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>t:int list=>y:int list=>f: (int=>int list=>int list)=>lit(h::t,y,f)=f of h of lit(t,y,f)in int list,
+repeat dequantify_once,lambda(h,lambda(t,lambda(y,lambda(f,_7490)))),
+[problem([h:int,t:int list,y:int list,f:int=>int list=>int list]==>lit(h::t,y,f)=f of h of lit(t,y,f)in int list,
+ simplify,_7499,
+ [problem([h:int,t:int list,y:int list,f:int=>int list=>int list]==>f of h of list_ind(t,y,[h_,t_,r,f of h_ of r])=f of h of list_ind(t,y,[h,t_,r,f of h of r])in int list,
+  intro(at(1))then repeat intro,axiom,
+  [
+  ]) ext _7499
+ ]) ext _7490
+]).

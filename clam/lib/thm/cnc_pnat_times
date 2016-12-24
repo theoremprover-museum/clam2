@@ -1,0 +1,19 @@
+/*
+ * @(#)$Id: cnc_pnat_times,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: cnc_pnat_times,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>y:pnat=>z:pnat=>y=z in pnat=>times(x,y)=times(x,z)in pnat,
+normalize([normal(imply_intro),normal(univ_intro),normal(univ_intro),normal(univ_intro)]),lambda(x,lambda(y,lambda(z,lambda(v0,_7893)))),
+[problem([x:pnat,y:pnat,z:pnat,v0:y=z in pnat]==>times(x,y)=times(x,z)in pnat,
+ sym_eval([equal(v0,left)]),_7902,
+ [problem([x:pnat,y:pnat,z:pnat,v0:y=z in pnat]==>times(x,y)=times(x,y)in pnat,
+  tautology(identity),axiom,
+  [
+  ]) ext _7902
+ ]) ext _7893
+]).

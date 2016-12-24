@@ -1,0 +1,23 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: unblock_then_fertilize,v 1.1 1996/12/11 14:08:49 img Exp $
+ *
+ * $Log: unblock_then_fertilize,v $
+ * Revision 1.1  1996/12/11 14:08:49  img
+ * Merge mthd and smth libraries.
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ */
+
+/* Try to fertilize; use unblocking if that enables it. Does not allow
+   branching inside unblock_lazy  */
+method(unblock_then_fertilize(Type,Plan),
+       HG,	
+       [Plan = (Unblock then Fertilize),
+	Unblock=unblock_fertilize_lazy(_),
+	applicable_submethod(HG,Unblock,_,[SubGoal]),
+	Fertilize=fertilize(Type,_),
+	applicable_submethod(SubGoal,Fertilize,_,SubGoals)],
+       [],
+       SubGoals,
+       Plan ).

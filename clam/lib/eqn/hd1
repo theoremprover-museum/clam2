@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: hd1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: hd1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>hd(nil)=0 in int,
+simplify then repeat intro,axiom,
+[
+]).

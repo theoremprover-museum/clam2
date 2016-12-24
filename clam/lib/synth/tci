@@ -1,0 +1,52 @@
+problem([]==>t:u(1)=>x:pnat=>r:(t=>t=>u(1))=>t=>t=>u(1),
+universe(2),_1241,
+[problem([]==>t:u(1)=>x:pnat=>r:(t=>t=>u(1))=>t=>t=>u(1),
+ intro,lambda(t,_1147),
+ [problem([t:u(1)]==>x:pnat=>r:(t=>t=>u(1))=>t=>t=>u(1),
+  intro,lambda(x,_1096),
+  [problem([t:u(1),x:pnat]==>r:(t=>t=>u(1))=>t=>t=>u(1),
+   elim(x),p_ind(x,_1043,[v0,v1,_1035]),
+   [problem([t:u(1),x:pnat]==>r:(t=>t=>u(1))=>t=>t=>u(1),
+    intro,lambda(r,_987),
+    [problem([t:u(1),x:pnat,r:t=>t=>u(1)]==>t=>t=>u(1),
+     hyp(r),r,
+     [
+     ]) ext _987,
+     problem([t:u(1),x:pnat]==>(t=>t=>u(1))in u(2),
+     repeat wfftac,axiom,
+     [
+     ])
+    ]) ext _1043,
+    problem([t:u(1),x:pnat,v0:pnat,v1:r:(t=>t=>u(1))=>t=>t=>u(1)]==>r:(t=>t=>u(1))=>t=>t=>u(1),
+    pure(intro),lambda(r,_842),
+    [problem([t:u(1),x:pnat,v0:pnat,v1:r:(t=>t=>u(1))=>t=>t=>u(1),r:t=>t=>u(1)]==>t=>t=>u(1),
+     elim(v1,on(r)),su(_754,[v1 of r],[v2]),
+     [problem([t:u(1),x:pnat,v0:pnat,v1:r:(t=>t=>u(1))=>t=>t=>u(1),r:t=>t=>u(1)]==>r in(t=>t=>u(1)),
+      intro,axiom,
+      [
+      ]),
+      problem([t:u(1),x:pnat,v0:pnat,v1:r:(t=>t=>u(1))=>t=>t=>u(1),r:t=>t=>u(1),v2:t=>t=>u(1),v3:v2=v1 of r in(t=>t=>u(1))]==>t=>t=>u(1),
+      intro(explicit(power(t,v0,v2))),power(t,v0,v2),
+      [problem([t:u(1),x:pnat,v0:pnat,v1:r:(t=>t=>u(1))=>t=>t=>u(1),r:t=>t=>u(1),v2:t=>t=>u(1),v3:v2=v1 of r in(t=>t=>u(1))]==>power(t,v0,v2)in(t=>t=>u(1)),
+       repeat wfftac,axiom,
+       [
+       ])
+      ]) ext _754
+     ]) ext _842,
+     problem([t:u(1),x:pnat,v0:pnat,v1:r:(t=>t=>u(1))=>t=>t=>u(1)]==>(t=>t=>u(1))in u(2),
+     repeat wfftac,axiom,
+     [
+     ])
+    ]) ext _1035
+   ]) ext _1096,
+   problem([t:u(1)]==>pnat in u(2),
+   intro,axiom,
+   [
+   ])
+  ]) ext _1147,
+  problem([]==>u(1)in u(2),
+  intro,axiom,
+  [
+  ])
+ ]) ext _1241
+]).

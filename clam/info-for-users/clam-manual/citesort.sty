@@ -1,0 +1,48 @@
+% Donald's revisions to citesort, it still gags on non-numbers.
+%
+% tempcnta: the lowest citation number seen (so far) that hasn't been done
+% tempcntb: the highest citation number printed so far
+%
+\input cite.sty
+
+\newcount\@cite@temp % the citation number we're looking at
+
+\def\@cmpresscites{%
+  \@ifundefined {b@\@citeb}%
+    {\@h@ld \@citea {\bf ?}\let\@h@ld\relax
+    \@warning {Citation `\@citeb ' on page \thepage \space undefined}}%
+  % else, defined
+    {\@tempcnta\maxdimen \@for \@scan@cites:=\@tempa\do {%
+       \expandafter\let \expandafter\@B@scan \csname b@\@scan@cites\endcsname
+       \ifx\@B@scan\relax \else % defined
+          \@cite@temp\@B@scan\relax
+       \fi
+       \ifnum\@cite@temp >\@tempcntb % select the next one to list
+          \ifnum\@cite@temp <\@tempcnta
+             \@tempcnta\@cite@temp
+       \fi\fi
+       }% end for loop
+     \ifnum\@tempcnta <\maxdimen % found one to do
+       \advance\@tempcntb\@ne
+       \ifnum\@tempcnta=\@tempcntb %   Number follows previous--hold on to it
+          \ifx\@h@ld\relax
+             \edef\@h@ld{\@citea \number\@tempcnta}%
+          \else
+             \edef\@h@ld{\hbox{--}\penalty\@highpenalty \number\@tempcnta}%
+          \fi
+       \else %  non-successor--dump what's held and do this one
+          \@tempcntb\@tempcnta
+          \@h@ld \@citea \number\@tempcnta \let\@h@ld\relax
+       \fi
+     \fi % no more
+  }% end ifundefined
+  \let\@citea\@citepunct
+}
+
+%%    To put space after the comma, use:
+ \def\@citea{,\penalty\@highpenalty\hskip.13em plus.1em minus.1em}
+%%    For no space after comma, use:
+%% \def\@citea{,\penalty\@highpenalty}%
+
+%% end of citesort.sty
+

@@ -1,0 +1,41 @@
+problem([]==>pnat=>pnat,
+autotactic(wfftacs),_1185,
+[problem([]==>pnat=>pnat,
+ intro(new[x]),lambda(x,_1219),
+ [problem([x:pnat]==>pnat,
+  elim(x,cv),cv_ind(x,[v2,v0,_1248]),
+  [problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat]==>pnat,
+   decide(v2=0 in pnat),pnat_eq(v2,0,su(_1309,[axiom],[v1]),su(_1317,[lambda(~,axiom)],[v1])),
+   [problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat]==>pnat,
+    intro(explicit(s(0))),s(0),
+    [
+    ]) ext _1309,
+    problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat=>void]==>pnat,
+    decide(v2=s(0)in pnat),pnat_eq(v2,s(0),su(_1468,[axiom],[v3]),su(_1476,[lambda(~,axiom)],[v3])),
+    [problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat=>void,v3:v2=s(0)in pnat]==>pnat,
+     intro(explicit(s(0))),s(0),
+     [
+     ]) ext _1468,
+     problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat=>void,v3:v2=s(0)in pnat=>void]==>pnat,
+     elim(v0,on(pred(v2))),su(_1649,[v0 of pred(v2)],[v4]),
+     [problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat=>void,v3:v2=s(0)in pnat=>void]==>p_ind(v2,0,[a,~,a])<*v2,
+      expand_s(v2)then simplify then elementary,su(su(su(spread(v4,[v5,v6,su(su(v7,[v4 of v5],[v7]),[term_of(plesssucc)],[v4])]),[v5 of v1],[v4]),[v4 of v2],[v5]),[term_of(succlemma)],[v4]),
+      [
+      ]) ext _1665,
+      problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat=>void,v3:v2=s(0)in pnat=>void,v4:pnat,v5:v4=v0 of pred(v2)in pnat]==>pnat,
+      elim(v0,on(pred(pred(v2)))),su(_1925,[v0 of pred(pred(v2))],[v6]),
+      [problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat=>void,v3:v2=s(0)in pnat=>void,v4:pnat,v5:v4=v0 of pred(v2)in pnat]==>p_ind(pred(v2),0,[a,~,a])<*v2,
+       expand_ss(v2)then simplify then elementary,su(su(su(su(spread(v7,[v6,v8,su(su(v9,[v7 of v6],[v9]),[term_of(plesssucc2)],[v7])]),[v6 of v3],[v7]),[v7 of v1],[v6]),[v6 of v2],[v7]),[term_of(succlemma3)],[v6]),
+       [
+       ]) ext _1943,
+       problem([x:pnat,v2:pnat,v0:v1:{v1:pnat\v1<*v2}=>pnat,v1:v2=0 in pnat=>void,v3:v2=s(0)in pnat=>void,v4:pnat,v5:v4=v0 of pred(v2)in pnat,v6:pnat,v7:v6=v0 of pred(pred(v2))in pnat]==>pnat,
+       intro(explicit(plus(v4,v6))),plus(v4,v6),
+       [
+       ]) ext _1925
+      ]) ext _1649
+     ]) ext _1476
+    ]) ext _1317
+   ]) ext _1248
+  ]) ext _1219
+ ]) ext _1185
+]).

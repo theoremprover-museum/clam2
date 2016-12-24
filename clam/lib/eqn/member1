@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: member1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: member1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>m:int=>member(m,nil)=void in u(1),
+repeat intro then simplify,lambda(m,axiom),
+[
+]).

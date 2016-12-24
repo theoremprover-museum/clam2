@@ -1,0 +1,9 @@
+*.bbl
+*.blg
+*.*-idx
+*.*-ind
+*.idx
+*.toc
+*.ilg
+*.ind
+

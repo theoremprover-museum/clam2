@@ -1,0 +1,371 @@
+/*
+ * @(#)$Id: nat_list_pair,v 1.1 1994/09/16 09:34:14 dream Exp $
+ *
+ * $Log: nat_list_pair,v $
+ * Revision 1.1  1994/09/16 09:34:14  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>phi: (pnat=>int list=>u(2))=>p:pnat=>l:int list=> (x:pnat=>phi of x of nil)=> (y:int list=>phi of 0 of y)=> (a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t))=>phi of p of l,
+universe(3),_1001,
+[problem([]==>phi: (pnat=>int list=>u(2))=>p:pnat=>l:int list=> (x:pnat=>phi of x of nil)=> (y:int list=>phi of 0 of y)=> (a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t))=>phi of p of l,
+ repeat intro then wfftacs,lambda(phi,lambda(p,lambda(l,lambda(v0,lambda(v1,lambda(v2,_1265)))))),
+ [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t)]==>phi of p of l,
+  seq(a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)),lambda(v3,_1426)of _1423,
+  [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t)]==>a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),
+   repeat intro then wfftacs,lambda(a,_1581),
+   [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int))]==>phi of fst(a)of snd(a),
+    elim(a,wo),wo_ind(a,[v5,v3,_1738]),
+    [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4)]==>phi of fst(v5)of snd(v5),
+     elim(v5)then simplify,spread(v5,[v4,v6,_1950]),
+     [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list)]==>phi of v4 of v6,
+      seq(v4=0 in pnat\y:pnat#v4=s(y)in pnat,new[zz]),lambda(zz,_2212)of _2209,
+      [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list)]==>v4=0 in pnat\y:pnat#v4=s(y)in pnat,
+       apply_lemma(decpnat),su(su(v9,[v8 of v4],[v9]),[term_of(decpnat)],[v8]),
+       [
+       ]) ext _2209,
+       problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat]==>phi of v4 of v6,
+       elim(zz),decide(zz,[v8,_2739],[v9,_2743]),
+       [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v8:v4=0 in pnat,v10:zz=inl(v8)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat)]==>phi of v4 of v6,
+        rewrite(v8),_2753,
+        [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v8:v4=0 in pnat,v10:zz=inl(v8)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat)]==>phi of 0 of v6,
+         univ_elim,su(v9,[v1 of v6],[v9]),
+         [
+         ]) ext _2753
+        ]) ext _2739,
+        problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat)]==>phi of v4 of v6,
+        seq(v6=nil in int list\h:int#t:int list#v6=h::t in int list),lambda(v8,_3709)of _3706,
+        [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat)]==>v6=nil in int list\h:int#t:int list#v6=h::t in int list,
+         lemma(declist),su(_4051,[term_of(declist)],[v8]),
+         [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),v8:t:u(1)=>x:t list=>x=nil in t list\h:t#tl:t list#x=h::tl in t list]==>v6=nil in int list\h:int#t:int list#v6=h::t in int list,
+          elim_on(v8,[int,v6])then try hyp(v12),su(su(v12,[v10 of v6],[v12]),[v8 of int],[v10]),
+          [
+          ]) ext _4051
+         ]) ext _3706,
+         problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),v8:v6=nil in int list\h:int#t:int list#v6=h::t in int list]==>phi of v4 of v6,
+         elim(v9),spread(v9,[y,v10,_4849]),
+         [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),v8:v6=nil in int list\h:int#t:int list#v6=h::t in int list,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat)]==>phi of v4 of v6,
+          rewrite(v10),_4859,
+          [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),v8:v6=nil in int list\h:int#t:int list#v6=h::t in int list,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat)]==>phi of s(y)of v6,
+           lemma(declist),su(_5648,[term_of(declist)],[v13]),
+           [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),v8:v6=nil in int list\h:int#t:int list#v6=h::t in int list,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:t:u(1)=>x:t list=>x=nil in t list\h:t#tl:t list#x=h::tl in t list]==>phi of s(y)of v6,
+            do_elim_on(v13,[int,v6],[v13,v14,v15])then (append([v14],[v15],[v14,v15]),thin([v14])),su(su(_6152,[v14 of v6],[v15]),[v13 of int],[v14]),
+            [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),v8:v6=nil in int list\h:int#t:int list#v6=h::t in int list,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:t:u(1)=>x:t list=>x=nil in t list\h:t#tl:t list#x=h::tl in t list,v15:v6=nil in int list\h:int#tl:int list#v6=h::tl in int list]==>phi of s(y)of v6,
+             thin([v8,v13])then elim(v15),decide(v15,[v8,_6681],[v13,_6685]),
+             [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v15:v6=nil in int list\h:int#tl:int list#v6=h::tl in int list,v8:v6=nil in int list,v14:v15=inl(v8)in (v6=nil in int list\h:int#tl:int list#v6=h::tl in int list)]==>phi of s(y)of v6,
+              subst(over(v13,phi of s(y)of v13),v6=nil in int list)then[univ_elim(v8),idtac,wfftacs],_6695,
+              [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v15:v6=nil in int list\h:int#tl:int list#v6=h::tl in int list,v8:v6=nil in int list,v14:v15=inl(v8)in (v6=nil in int list\h:int#tl:int list#v6=h::tl in int list)]==>phi of s(y)of nil,
+               univ_elim,su(v13,[v0 of s(y)],[v13]),
+               [
+               ]) ext _6695,
+               problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v15:v6=nil in int list\h:int#tl:int list#v6=h::tl in int list,v8:v6=nil in int list,v14:v15=inl(v8)in (v6=nil in int list\h:int#tl:int list#v6=h::tl in int list),v13:int list,v16:int list=>u(2)]==>v16 in (int list=>u(3)),
+               subrange_wfftac then wfftacs,axiom,
+               [
+               ]) ext _7655
+              ]) ext _6681,
+              problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),zz:v4=0 in pnat\y:pnat#v4=s(y)in pnat,v9:y:pnat#v4=s(y)in pnat,v11:zz=inr(v9)in (v4=0 in pnat\y:pnat#v4=s(y)in pnat),y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v15:v6=nil in int list\h:int#tl:int list#v6=h::tl in int list,v13:h:int#tl:int list#v6=h::tl in int list,v16:v15=inr(v13)in (v6=nil in int list\h:int#tl:int list#v6=h::tl in int list)]==>phi of s(y)of v6,
+              thin([zz,v15,v16])then elim(v13),spread(v13,[h,v8,_8630]),
+              [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:h:int#tl:int list#v6=h::tl in int list,h:int,v8:tl:int list#v6=h::tl in int list,v11:v13=h&v8 in (h:int#tl:int list#v6=h::tl in int list)]==>phi of s(y)of v6,
+               thin([v11])then elim(v8),spread(v8,[tl,v11,_9038]),
+               [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:h:int#tl:int list#v6=h::tl in int list,h:int,v8:tl:int list#v6=h::tl in int list,tl:int list,v11:v6=h::tl in int list,v14:v8=tl&v11 in (tl:int list#v6=h::tl in int list)]==>phi of s(y)of v6,
+                subst(over(v15,phi of s(y)of v15),v6=h::tl in int list)then[univ_elim(v11),idtac,wfftacs],_9048,
+                [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:h:int#tl:int list#v6=h::tl in int list,h:int,v8:tl:int list#v6=h::tl in int list,tl:int list,v11:v6=h::tl in int list,v14:v8=tl&v11 in (tl:int list#v6=h::tl in int list)]==>phi of s(y)of (h::tl),
+                 elim_on(v2,[y,h,tl]),su(su(su(_9911,[v16 of tl],[v17]),[v15 of h],[v16]),[v2 of y],[v15]),
+                 [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:h:int#tl:int list#v6=h::tl in int list,h:int,v8:tl:int list#v6=h::tl in int list,tl:int list,v11:v6=h::tl in int list,v14:v8=tl&v11 in (tl:int list#v6=h::tl in int list),v17:phi of y of tl=>phi of s(y)of (h::tl)]==>phi of s(y)of (h::tl),
+                  elim(v17)then try hyp(_10378),su(v15,[v17 of _10387],[v15]),
+                  [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:h:int#tl:int list#v6=h::tl in int list,h:int,v8:tl:int list#v6=h::tl in int list,tl:int list,v11:v6=h::tl in int list,v14:v8=tl&v11 in (tl:int list#v6=h::tl in int list),v17:phi of y of tl=>phi of s(y)of (h::tl)]==>phi of y of tl,
+                   thin([v0,v1,v2,a,v12,v13,v8,v14,v17]),_10398,
+                   [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>phi of y of tl,
+                    elim(v3,on(y&tl)),su(_11043,[v3 of (y&tl)],[v0]),
+                    [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>y&tl in{v4: (pnat#int list)\listnatpairord(int)of v4 of v5},
+                     intro,axiom,
+                     [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>y&tl in (pnat#int list),
+                      repeat wfftac,axiom,
+                      [
+                      ]),
+                      problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>listnatpairord(int)of (y&tl)of v5,
+                      repeat wfftac,_11471,
+                      [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>listnatpairord(int)of (y&tl)of v5,
+                       simplify,_11672,
+                       [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>h2:int#spread(v5,[a,~,a])&spread(v5,[~,b,b])=s(y)&h2::tl in (pnat#int list),
+                        intro(h)then wfftacs,h&_12104,
+                        [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>spread(v5,[a,~,a])&spread(v5,[~,b,b])=s(y)&h::tl in (pnat#int list),
+                         subst(over(v0,spread(v0,[a,~,a])&spread(v0,[~,b,b])=s(y)&h::tl in (pnat#int list)),v5=v4&v6 in (pnat#int list))then[univ_elim(v7),idtac,wfftacs],_12113,
+                         [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>spread(v4&v6,[a,~,a])&spread(v4&v6,[~,b,b])=s(y)&h::tl in (pnat#int list),
+                          simplify,_12412,
+                          [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>v4&v6=s(y)&h::tl in (pnat#int list),
+                           intro,axiom,
+                           [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>v4=s(y)in pnat,
+                            equality,axiom,
+                            [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>v4 in pnat,
+                             repeat wfftac,axiom,
+                             [
+                             ]),
+                             problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>s(y)in pnat,
+                             repeat wfftac,axiom,
+                             [
+                             ])
+                            ]),
+                            problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list]==>v6=h::tl in int list,
+                            hyp(v11),v11,
+                            [
+                            ])
+                           ]) ext _12412
+                          ]) ext _12113
+                         ]) ext _12104
+                        ]) ext _11672
+                       ]) ext _11471
+                      ]),
+                      problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list,v0:pnat#int list]==>listnatpairord(int)of v0 of v5 in u(3),
+                      intro(u(1)),axiom,
+                      [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list,v0:pnat#int list]==>listnatpairord(int)of v0 of v5 in u(1),
+                       repeat wfftac,axiom,
+                       [
+                       ])
+                      ])
+                     ]),
+                     problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,h:int,tl:int list,v11:v6=h::tl in int list,v0:phi of fst(y&tl)of snd(y&tl)]==>phi of y of tl,
+                     compute(hyp(v0),[[simplify]])then hyp(v0),v0,
+                     [
+                     ]) ext _11043
+                    ]) ext _10398
+                   ]) ext _10387
+                  ]) ext _9911
+                 ]) ext _9048,
+                 problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),a:acc(pnat#int list,listnatpairord(int)),v5:pnat#int list,v3:v4:{v4: (pnat#int list)\listnatpairord(int)of v4 of v5}=>phi of fst(v4)of snd(v4),v4:pnat,v6:int list,v7:v5=v4&v6 in (pnat#int list),v9:y:pnat#v4=s(y)in pnat,y:pnat,v10:v4=s(y)in pnat,v12:v9=y&v10 in (y:pnat#v4=s(y)in pnat),v13:h:int#tl:int list#v6=h::tl in int list,h:int,v8:tl:int list#v6=h::tl in int list,tl:int list,v11:v6=h::tl in int list,v14:v8=tl&v11 in (tl:int list#v6=h::tl in int list),v15:int list,v16:int list=>u(2)]==>v16 in (int list=>u(3)),
+                 subrange_wfftac then wfftacs,axiom,
+                 [
+                 ]) ext _14276
+                ]) ext _9038
+               ]) ext _8630
+              ]) ext _6685
+             ]) ext _6152
+            ]) ext _5648
+           ]) ext _4859
+          ]) ext _4849
+         ]) ext _3709
+        ]) ext _2743
+       ]) ext _2212
+      ]) ext _1950
+     ]) ext _1738
+    ]) ext _1581
+   ]) ext _1423,
+   problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)]==>phi of p of l,
+   elim(v3,on(p&l))then wfftacs,su(_14873,[v3 of (p&l)],[v4]),
+   [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)]==>p&l in acc(pnat#int list,listnatpairord(int)),
+    intro(at(3),acc,new[v4,v5]),axiom,
+    [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)]==>p&l in (pnat#int list),
+     repeat wfftac,axiom,
+     [
+     ]),
+     problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l)]==>v5 in acc(pnat#int list,listnatpairord(int)),
+     elim(v5),spread(v5,[v6,v7,_15425]),
+     [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list)]==>v6&v7 in acc(pnat#int list,listnatpairord(int)),
+      seq(e:pnat=>f:int list=>e&f in acc(pnat#int list,listnatpairord(int))),lambda(v9,_15689)of _15686,
+      [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list)]==>e:pnat=>f:int list=>e&f in acc(pnat#int list,listnatpairord(int)),
+       intro then wfftacs,lambda(e,_164439),
+       [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat]==>f:int list=>e&f in acc(pnat#int list,listnatpairord(int)),
+        elim(e),p_ind(e,_164682,[v9,v10,_164688]),
+        [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat]==>f:int list=>0&f in acc(pnat#int list,listnatpairord(int)),
+         repeat intro then wfftacs,lambda(f,_164935),
+         [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat,f:int list]==>0&f in acc(pnat#int list,listnatpairord(int)),
+          intro(acc)then wfftacs,axiom,
+          [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat,f:int list,v10:pnat#int list,v9:listnatpairord(int)of v10 of (0&f)]==>v10 in acc(pnat#int list,listnatpairord(int)),
+           compute(hyp(v9),[[simplify]]),_165186,
+           [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat,f:int list,v10:pnat#int list,v9:h2:int#0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list)]==>v10 in acc(pnat#int list,listnatpairord(int)),
+            elim(v9),spread(v9,[h2,v11,_165751]),
+            [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat,f:int list,v10:pnat#int list,v9:h2:int#0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list),h2:int,v11:0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list),v12:v9=h2&v11 in (h2:int#0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list))]==>v10 in acc(pnat#int list,listnatpairord(int)),
+             thin([v0,v1,v2,v3,v8,v9]),_165761,
+             [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,e:pnat,f:int list,v10:pnat#int list,h2:int,v11:0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list)]==>v10 in acc(pnat#int list,listnatpairord(int)),
+              seq(fst(0&f)=fst(s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b]))in pnat),lambda(v0,_166381)of _166378,
+              [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,e:pnat,f:int list,v10:pnat#int list,h2:int,v11:0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list)]==>fst(0&f)=fst(s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b]))in pnat,
+               subst(over(v0,fst(v0)=fst(s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b]))in pnat),0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list))then[univ_elim(v11),idtac,wfftacs],_166390,
+               [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,e:pnat,f:int list,v10:pnat#int list,h2:int,v11:0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list)]==>fst(s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b]))=fst(s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b]))in pnat,
+                intro then wfftacs,axiom,
+                [
+                ]) ext _166390
+               ]) ext _166378,
+               problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,e:pnat,f:int list,v10:pnat#int list,h2:int,v11:0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list),v0:fst(0&f)=fst(s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b]))in pnat]==>v10 in acc(pnat#int list,listnatpairord(int)),
+               compute(hyp(v0),[[simplify]]=[[simplify]]in _167093),_166887,
+               [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,e:pnat,f:int list,v10:pnat#int list,h2:int,v11:0&f=s(spread(v10,[a,~,a]))&h2::spread(v10,[~,b,b])in (pnat#int list),v0:0=s(spread(v10,[a,~,a]))in pnat]==>v10 in acc(pnat#int list,listnatpairord(int)),
+                clam_arith,atom(incomplete),
+                [
+                ]) ext _166887
+               ]) ext _166381
+              ]) ext _165761
+             ]) ext _165751
+            ]) ext _165186
+           ]) ext _165182
+          ]) ext _164935
+         ]) ext _164682,
+         problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int))]==>f:int list=>s(v9)&f in acc(pnat#int list,listnatpairord(int)),
+         repeat intro then wfftacs,lambda(f,_167573),
+         [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list]==>s(v9)&f in acc(pnat#int list,listnatpairord(int)),
+          thin([phi,v0,v1,v2,v3,v4,v5]),_167582,
+          [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list]==>s(v9)&f in acc(pnat#int list,listnatpairord(int)),
+           elim(f),list_ind(f,_167968,[v0,v1,v2,_167976]),
+           [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list]==>s(v9)&nil in acc(pnat#int list,listnatpairord(int)),
+            intro(acc)then wfftacs,axiom,
+            [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v1:pnat#int list,v0:listnatpairord(int)of v1 of (s(v9)&nil)]==>v1 in acc(pnat#int list,listnatpairord(int)),
+             compute(hyp(v0),[[simplify]]),_168092,
+             [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v1:pnat#int list,v0:h2:int#s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list)]==>v1 in acc(pnat#int list,listnatpairord(int)),
+              elim(v0),spread(v0,[h2,v2,_168385]),
+              [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v1:pnat#int list,v0:h2:int#s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list),h2:int,v2:s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list),v3:v0=h2&v2 in (h2:int#s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list))]==>v1 in acc(pnat#int list,listnatpairord(int)),
+               thin([v3,v10,v0])then seq(nil=h2::spread(v1,[~,b,b])in int list),lambda(v0,_168698)of _168695,
+               [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,f:int list,v1:pnat#int list,h2:int,v2:s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list)]==>nil=h2::spread(v1,[~,b,b])in int list,
+                seq(snd(s(v9)&nil)=snd(s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b]))in int list),lambda(v0,_168885)of _168882,
+                [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,f:int list,v1:pnat#int list,h2:int,v2:s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list)]==>snd(s(v9)&nil)=snd(s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b]))in int list,
+                 subst(over(v0,snd(v0)=snd(s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b]))in int list),s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list))then[univ_elim(v2),idtac,wfftacs],_168894,
+                 [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,f:int list,v1:pnat#int list,h2:int,v2:s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list)]==>snd(s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b]))=snd(s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b]))in int list,
+                  identity,axiom,
+                  [
+                  ]) ext _168894
+                 ]) ext _168882,
+                 problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,f:int list,v1:pnat#int list,h2:int,v2:s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list),v0:snd(s(v9)&nil)=snd(s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b]))in int list]==>nil=h2::spread(v1,[~,b,b])in int list,
+                 compute(hyp(v0),[[simplify]])then hyp(v0),v0,
+                 [
+                 ]) ext _168885
+                ]) ext _168695,
+                problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,f:int list,v1:pnat#int list,h2:int,v2:s(v9)&nil=s(spread(v1,[a,~,a]))&h2::spread(v1,[~,b,b])in (pnat#int list),v0:nil=h2::spread(v1,[~,b,b])in int list]==>v1 in acc(pnat#int list,listnatpairord(int)),
+                clam_arith,atom(incomplete),
+                [
+                ]) ext _168698
+               ]) ext _168385
+              ]) ext _168092
+             ]) ext _168088
+            ]) ext _167968,
+            problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int))]==>s(v9)&v0::v1 in acc(pnat#int list,listnatpairord(int)),
+            intro(acc)then wfftacs,axiom,
+            [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:listnatpairord(int)of v4 of (s(v9)&v0::v1)]==>v4 in acc(pnat#int list,listnatpairord(int)),
+             compute(hyp(v3),[[simplify]]),_169828,
+             [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list)]==>v4 in acc(pnat#int list,listnatpairord(int)),
+              elim(v3),spread(v3,[h2,v5,_170197]),
+              [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),v8:v3=h2&v5 in (h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list))]==>v4 in acc(pnat#int list,listnatpairord(int)),
+               thin([v8]),_170207,
+               [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list)]==>v4 in acc(pnat#int list,listnatpairord(int)),
+                elim(v4),spread(v4,[v8,v11,_170781]),
+                [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v8&v11 in acc(pnat#int list,listnatpairord(int)),
+                 rewrite_hyp(v12,left,v5),_170791,
+                 [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(spread(v8&v11,[a,~,a]))&h2::spread(v8&v11,[~,b,b])in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v8&v11 in acc(pnat#int list,listnatpairord(int)),
+                  compute(hyp(v5),[[simplify]]),_171081,
+                  [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v8&v11 in acc(pnat#int list,listnatpairord(int)),
+                   seq(v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int))),lambda(v13,_171671)of _171668,
+                   [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int)),
+                    universe(1),_171680,
+                    [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int)),
+                     intro,axiom,
+                     [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v8&v11=v9&v1 in (pnat#int list),
+                      intro,axiom,
+                      [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v8=v9 in pnat,
+                       seq(fst(s(v9)&v0::v1)=fst(s(v8)&h2::v11)in pnat),lambda(v13,_172776)of _172773,
+                       [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>fst(s(v9)&v0::v1)=fst(s(v8)&h2::v11)in pnat,
+                        subst(over(v13,fst(v13)=fst(s(v8)&h2::v11)in pnat),s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list))then[univ_elim(v5),idtac,wfftacs],_172785,
+                        [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>fst(s(v8)&h2::v11)=fst(s(v8)&h2::v11)in pnat,
+                         simplify,_173125,
+                         [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>s(v8)=s(v8)in pnat,
+                          identity,axiom,
+                          [
+                          ]) ext _173125
+                         ]) ext _172785
+                        ]) ext _172773,
+                        problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:fst(s(v9)&v0::v1)=fst(s(v8)&h2::v11)in pnat]==>v8=v9 in pnat,
+                        compute(hyp(v13),[[simplify]]),_173665,
+                        [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:s(v9)=s(v8)in pnat]==>v8=v9 in pnat,
+                         intro(s)then hyp(v13),axiom,
+                         [
+                         ]) ext _173665
+                        ]) ext _172776
+                       ]),
+                       problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>v11=v1 in int list,
+                       seq(list_ind(snd(s(v9)&v0::v1),nil,[~,t,~,t])=list_ind(snd(s(v8)&h2::v11),nil,[~,t,~,t])in int list),lambda(v13,_174551)of _174548,
+                       [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>list_ind(snd(s(v9)&v0::v1),nil,[~,t,~,t])=list_ind(snd(s(v8)&h2::v11),nil,[~,t,~,t])in int list,
+                        subst(over(v13,list_ind(snd(v13),nil,[~,t,~,t])=list_ind(snd(s(v8)&h2::v11),nil,[~,t,~,t])in int list),s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list))then[univ_elim(v5),idtac,wfftacs],_174560,
+                        [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>list_ind(snd(s(v8)&h2::v11),nil,[~,t,~,t])=list_ind(snd(s(v8)&h2::v11),nil,[~,t,~,t])in int list,
+                         identity,axiom,
+                         [
+                         ]) ext _174560
+                        ]) ext _174548,
+                        problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:list_ind(snd(s(v9)&v0::v1),nil,[~,t,~,t])=list_ind(snd(s(v8)&h2::v11),nil,[~,t,~,t])in int list]==>v11=v1 in int list,
+                        compute(hyp(v13),[[simplify]]),_175256,
+                        [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:v1=v11 in int list]==>v11=v1 in int list,
+                         equality then wfftacs,axiom,
+                         [
+                         ]) ext _175256
+                        ]) ext _174551
+                       ])
+                      ]),
+                      problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list)]==>listnatpairord(int)in ((pnat#int list)=> (pnat#int list)=>u(1)),
+                      repeat wfftac,axiom,
+                      [
+                      ])
+                     ]) ext _171680
+                    ]) ext _171668,
+                    problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int))]==>v8&v11 in acc(pnat#int list,listnatpairord(int)),
+                    subst(over(v14,v14 in acc(pnat#int list,listnatpairord(int))),v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int))),_176132,
+                    [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int))]==>v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int)),
+                     hyp(v13),v13,
+                     [
+                     ]),
+                     problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int))]==>v9&v1 in acc(pnat#int list,listnatpairord(int)),
+                     elim(v10,on(v1))then wfftacs then hyp(_177067),su(v14,[v10 of v1],[v14]),
+                     [
+                     ]) ext _176132,
+                     problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int)),v14:acc(pnat#int list,listnatpairord(int))]==>v14 in acc(pnat#int list,listnatpairord(int))in u(3),
+                     intro(u(1)),axiom,
+                     [problem([p:pnat,l:int list,v6:pnat,v7:int list,e:pnat,v9:pnat,v10:f:int list=>v9&f in acc(pnat#int list,listnatpairord(int)),f:int list,v0:int,v1:int list,v2:s(v9)&v1 in acc(pnat#int list,listnatpairord(int)),v4:pnat#int list,v3:h2:int#s(v9)&v0::v1=s(spread(v4,[a,~,a]))&h2::spread(v4,[~,b,b])in (pnat#int list),h2:int,v5:s(v9)&v0::v1=s(v8)&h2::v11 in (pnat#int list),v8:pnat,v11:int list,v12:v4=v8&v11 in (pnat#int list),v13:v8&v11=v9&v1 in acc(pnat#int list,listnatpairord(int)),v14:acc(pnat#int list,listnatpairord(int))]==>v14 in acc(pnat#int list,listnatpairord(int))in u(1),
+                      repeat wfftac,axiom,
+                      [
+                      ])
+                     ])
+                    ]) ext _171671
+                   ]) ext _171081
+                  ]) ext _170791
+                 ]) ext _170781
+                ]) ext _170207
+               ]) ext _170197
+              ]) ext _169828
+             ]) ext _169824
+            ]) ext _167976
+           ]) ext _167582
+          ]) ext _167573
+         ]) ext _164688
+        ]) ext _164439
+       ]) ext _15686,
+       problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v5:pnat#int list,v4:listnatpairord(int)of v5 of (p&l),v6:pnat,v7:int list,v8:v5=v6&v7 in (pnat#int list),v9:e:pnat=>f:int list=>e&f in acc(pnat#int list,listnatpairord(int))]==>v6&v7 in acc(pnat#int list,listnatpairord(int)),
+       elim_on(v9,[v6,v7])then try hyp(_177976),su(su(v11,[v10 of v7],[v11]),[v9 of v6],[v10]),
+       [
+       ]) ext _15689
+      ]) ext _15425
+     ]),
+     problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)]==>acc(pnat#int list,listnatpairord(int))in u(3),
+     intro,axiom,
+     [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)]==> (pnat#int list)in u(3),
+      repeat wfftac,axiom,
+      [
+      ]),
+      problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)]==>listnatpairord(int)in ((pnat#int list)=> (pnat#int list)=>u(3)),
+      compute([[unfold]]in _178500),_178329,
+      [problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a)]==>lambda(x,lambda(y,h2:int#fst(y)&snd(y)=s(fst(x))&h2::snd(x)in (pnat#int list)))in ((pnat#int list)=> (pnat#int list)=>u(3)),
+       repeat wfftac,axiom,
+       [
+       ]) ext _178329
+      ])
+     ])
+    ]) ext _14890,
+    problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:a:pnat=>h:int=>t:int list=>phi of a of t=>phi of s(a)of (h::t),v3:a:acc(pnat#int list,listnatpairord(int))=>phi of fst(a)of snd(a),v4:phi of fst(p&l)of snd(p&l)]==>phi of p of l,
+    compute(hyp(v4),[[simplify]])then hyp(v4),v4,
+    [
+    ]) ext _14873
+   ]) ext _1426
+  ]) ext _1265,
+  problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:y:int list=>phi of 0 of y,v2:pnat,v3:int,v4:int list,v5:phi of v2 of v4,v6:int list=>u(2)]==>v6 in (int list=>u(3)),
+  subrange_wfftac then wfftacs,axiom,
+  [
+  ]) ext _178919,
+  problem([phi:pnat=>int list=>u(2),p:pnat,l:int list,v0:x:pnat=>phi of x of nil,v1:int list,v2:int list=>u(2)]==>v2 in (int list=>u(3)),
+  subrange_wfftac then wfftacs,axiom,
+  [
+  ]) ext _179048
+ ]) ext _1001
+]).

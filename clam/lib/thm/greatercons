@@ -1,0 +1,10 @@
+problem([]==>h:int=>t:int list=>greater(length(h::t),length(t)),
+normalize_term([reduction([1],[length2,equ(pnat,left)])]),lambda(v0,lambda(v1,su(su(su(lambda(v2,su(su(v4,[v3 of v1],[v4]),[v2 of v0],[v3]))of _226200,[v2 of v1],[v3]),[length2 of v0],[v2]),[term_of(length2)],[length2]))),
+[problem([]==>h:int=>t:int list=>greater(s(length(t)),length(t)),
+ generalise(length(t),v0:pnat),lambda(v0,lambda(v1,lambda(v2,su(su(su(v5,[v4 of v2],[v5]),[v3 of v1],[v4]),[v0 of length(v2)],[v3]))))of _226108,
+ [problem([]==>v0:pnat=>h:int=>t:int list=>greater(s(v0),v0),
+  ind_strat(induction(lemma(pnat_primitive)-[(v0:pnat)-s(v1)])then[base_case(normalize_term([reduction([],[greater2,equ(u(1),left)])])then[elementary((intro(new[h])then wfftacs)then(intro(new[t])then wfftacs)then unfold_iff then intro(explicit(0))then simplify then wfftacs)]),step_case(ripple(direction_out,unblock_then_wave(direction_out,unblock_lazy([unblock(meta_ripple,unused,unused),idtac])then wave(direction_out,[],[greater3,equ(u(1),left)],[])))then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,pwf_then_fertilize(strong,fertilization_strong(v2))))])]),lambda(v0,p_ind(v0,lambda(v1,lambda(v2,su(su(lambda(v3,su(su(v5,[v4 of v2],[v5]),[v3 of v1],[v4]))of lambda(h,lambda(t,0)),[greater2 of 0],[v3]),[term_of(greater2)],[greater2]))),[v1,v2,lambda(v3,lambda(v4,su(su(su(lambda(v5,su(su(v7,[v6 of v4],[v7]),[v5 of v3],[v6]))of v2,[v5 of v1],[v6]),[greater3 of s(v1)],[v5]),[term_of(greater3)],[greater3])))])),
+  [
+  ]) ext _226108
+ ]) ext _226200
+]).

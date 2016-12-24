@@ -1,0 +1,43 @@
+/*
+ * @(#)$Id: twos,v 1.1 1994/09/16 09:34:14 dream Exp $
+ *
+ * $Log: twos,v $
+ * Revision 1.1  1994/09/16 09:34:14  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>phi: (pnat=>u(2))=>phi of 0=>phi of s(0)=> (x:pnat=>phi of x=>phi of s(s(x)))=>z:pnat=>phi of z,
+universe(3),_7160,
+[problem([]==>phi: (pnat=>u(2))=>phi of 0=>phi of s(0)=> (x:pnat=>phi of x=>phi of s(s(x)))=>z:pnat=>phi of z,
+ repeat intro then wfftacs,lambda(phi,lambda(v0,lambda(v1,lambda(v2,lambda(z,_7311))))),
+ [problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat]==>phi of z,
+  seq(phi of z#phi of s(z),new[v3]),lambda(v3,_7408)of _7405,
+  [problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat]==>phi of z#phi of s(z),
+   elim(z),p_ind(z,_7494,[v3,v4,_7500]),
+   [problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat]==>phi of 0#phi of s(0),
+    repeat intro,v0&v1,
+    [
+    ]) ext _7494,
+    problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat,v3:pnat,v4:phi of v3#phi of s(v3)]==>phi of s(v3)#phi of s(s(v3)),
+    elim(v4)then intro then wfftacs,spread(v4,[v5,v6,_7712&_7713]),
+    [problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat,v3:pnat,v4:phi of v3#phi of s(v3),v5:phi of v3,v6:phi of s(v3),v7:v4=v5&v6 in (phi of v3#phi of s(v3))]==>phi of s(v3),
+     repeat intro,v6,
+     [
+     ]) ext _7712,
+     problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat,v3:pnat,v4:phi of v3#phi of s(v3),v5:phi of v3,v6:phi of s(v3),v7:v4=v5&v6 in (phi of v3#phi of s(v3))]==>phi of s(s(v3)),
+     elim(v2,on(v3))then wfftacs,su(_8005,[v2 of v3],[v8]),
+     [problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat,v3:pnat,v4:phi of v3#phi of s(v3),v5:phi of v3,v6:phi of s(v3),v7:v4=v5&v6 in (phi of v3#phi of s(v3)),v8:phi of v3=>phi of s(s(v3))]==>phi of s(s(v3)),
+      elim(v8)then try intro,su(v9,[v8 of v5],[v9]),
+      [
+      ]) ext _8005
+     ]) ext _7713
+    ]) ext _7500
+   ]) ext _7405,
+   problem([phi:pnat=>u(2),v0:phi of 0,v1:phi of s(0),v2:x:pnat=>phi of x=>phi of s(s(x)),z:pnat,v3:phi of z#phi of s(z)]==>phi of z,
+   elim(v3)then repeat intro,spread(v3,[v4,v5,v4]),
+   [
+   ]) ext _7408
+  ]) ext _7311
+ ]) ext _7160
+]).

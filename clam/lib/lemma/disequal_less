@@ -1,0 +1,9 @@
+problem([]==>x:pnat=>y:pnat=> (x=y in pnat=>void)=>less(x,y)\less(y,x),
+repeat dequantify_once,lambda(x,lambda(y,_1549)),
+[problem([x:pnat,y:pnat]==> (x=y in pnat=>void)=>less(x,y)\less(y,x),
+ induction([(x:pnat)-s(v0),(y:pnat)-s(v1)]),su(lambda(v3,su(su(su(su(su(su(v10,[v9 of lambda(v0,lambda(v1,lambda(v2,_1663)))],[v10]),[v8 of lambda(v0,_1673)],[v9]),[v7 of lambda(v0,_1683)],[v8]),[v6 of y],[v7]),[v5 of x],[v6]),[v3 of lambda(x,lambda(y,(x=y in pnat=>void)=>less(x,y)\less(y,x)))],[v5]))of v4,[term_of(pairs)],[v4]),
+ [problem([x:pnat,y:pnat,v0:pnat]==> (0=v0 in pnat=>void)=>less(0,v0)\less(v0,0),_,_,_) ext _1683,
+  problem([x:pnat,y:pnat,v0:pnat]==> (v0=0 in pnat=>void)=>less(v0,0)\less(0,v0),_,_,_) ext _1673,
+  problem([x:pnat,y:pnat,v0:pnat,v1:pnat,v2: (v0=v1 in pnat=>void)=>less(v0,v1)\less(v1,v0)]==> (s(v0)=s(v1)in pnat=>void)=>less(s(v0),s(v1))\less(s(v1),s(v0)),_,_,_) ext _1663
+ ]) ext _1549
+]).

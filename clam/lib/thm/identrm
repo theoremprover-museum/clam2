@@ -1,0 +1,10 @@
+problem([]==>x:pnat=>times(x,s(0))=x in pnat,
+ind_strat(induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)])then[base_case(normalize_term([reduction([1,1],[times1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[1,1],[times2,equ(pnat,left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,in,[1],v1)]))then[idtac]))])]),lambda(x,p_ind(x,su(su(axiom,[times1 of s(0)],[v0]),[term_of(times1)],[times1]),[v0,v1,su(su(su(_246578,[v2 of s(0)],[v3]),[times2 of v0],[v2]),[term_of(times2)],[times2])])),
+[problem([x:pnat,v0:pnat,v1:times(v0,s(0))=v0 in pnat]==>plus(v0,s(0))=s(v0)in pnat,
+ ind_strat(induction(lemma(pnat_primitive)-[(v0:pnat)-s(v2)])then[base_case(normalize_term([reduction([1,1],[plus1,equ(pnat,left)])])then[elementary(unfold_iff then identity)]),step_case(ripple(direction_out,wave(direction_out,[1,1],[plus2,equ(pnat,left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,pwf_then_fertilize(weak,fertilize_left_or_right([weak_fertilize(left,in,[1],v3)]))then[idtac]))])]),p_ind(v0,su(su(axiom,[plus1 of s(0)],[v2]),[term_of(plus1)],[plus1]),[v2,v3,su(su(su(_246345,[v4 of s(0)],[v5]),[plus2 of v2],[v4]),[term_of(plus2)],[plus2])]),
+ [problem([x:pnat,v0:pnat,v1:times(v0,s(0))=v0 in pnat,v2:pnat,v3:plus(v2,s(0))=s(v2)in pnat]==>s(s(v2))=s(s(v2))in pnat,
+  elementary(unfold_iff then identity),axiom,
+  [
+  ]) ext _246345
+ ]) ext _246578
+]).

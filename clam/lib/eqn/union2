@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: union2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: union2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l1:int list=>union(l1,nil)=l1 in int list,
+repeat intro,lambda(l1,_7514),
+[problem([l1:int list]==>union(l1,nil)=l1 in int list,
+ elim(l1),list_ind(l1,_7550,[v0,v1,v2,_7558]),
+ [problem([l1:int list]==>union(nil,nil)=nil in int list,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7550,
+  problem([l1:int list,v0:int,v1:int list,v2:union(v1,nil)=v1 in int list]==>union(v0::v1,nil)=v0::v1 in int list,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7558
+ ]) ext _7514
+]).

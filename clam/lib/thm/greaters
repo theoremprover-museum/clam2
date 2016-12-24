@@ -1,0 +1,4 @@
+problem([]==>x:pnat=>greater(s(x),x),
+ind_strat(induction(lemma(pnat_primitive)-[(x:pnat)-s(v0)])then[base_case(normalize_term([reduction([],[greater2,equ(u(1),left)])])then[elementary(unfold_iff then intro(explicit(0))then simplify then wfftacs)]),step_case(ripple(direction_out,unblock_then_wave(direction_out,unblock_lazy([unblock(meta_ripple,unused,unused),idtac])then wave(direction_out,[],[greater3,equ(u(1),left)],[])))then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,pwf_then_fertilize(strong,fertilization_strong(v1))))])]),lambda(x,p_ind(x,su(su(0,[greater2 of 0],[v0]),[term_of(greater2)],[greater2]),[v0,v1,su(su(su(v1,[v2 of v0],[v3]),[greater3 of s(v0)],[v2]),[term_of(greater3)],[greater3])])),
+[
+]).

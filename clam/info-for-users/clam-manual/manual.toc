@@ -1,0 +1,165 @@
+\contentsline {paragraph}{Acknowledgements.}{3}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}The purpose of this document and how to read it}{1}
+\contentsline {section}{\numberline {1.2}What is \clam ?}{1}
+\contentsline {section}{\numberline {1.3}Required knowledge}{2}
+\contentsline {section}{\numberline {1.4}Related reading}{2}
+\contentsline {section}{\numberline {1.5}Structure of this note}{3}
+\contentsline {section}{\numberline {1.6}Notation}{4}
+\contentsline {section}{\numberline {1.7}Version control}{4}
+\contentsline {part}{I\hspace {1em}User Manual}{7}
+\contentsline {chapter}{\numberline {2}Proof-planning}{9}
+\contentsline {section}{\numberline {2.1}Simple Methods}{9}
+\contentsline {section}{\numberline {2.2}The method language}{11}
+\contentsline {subsection}{\numberline {2.2.1}The method language: predicates}{11}
+\contentsline {paragraph}{Example}{12}
+\contentsline {paragraph}{Example}{14}
+\contentsline {paragraph}{Example}{15}
+\contentsline {paragraph}{Example}{17}
+\contentsline {paragraph}{Example}{18}
+\contentsline {paragraph}{Example}{19}
+\contentsline {paragraph}{Example}{23}
+\contentsline {paragraph}{Example.}{24}
+\contentsline {paragraph}{Example}{28}
+\contentsline {paragraph}{Example}{30}
+\contentsline {paragraph}{Example}{30}
+\contentsline {paragraph}{Example}{31}
+\contentsline {paragraph}{Example}{31}
+\contentsline {subsection}{\numberline {2.2.2}Oyster\xspace specific predicates}{34}
+\contentsline {subsection}{\numberline {2.2.3}The method language: connectives}{35}
+\contentsline {subsection}{\numberline {2.2.4}Compound methods}{37}
+\contentsline {subsubsection}{\numberline {2.2.4.1}Calling other (sub)methods}{38}
+\contentsline {subsubsection}{\numberline {2.2.4.2}Iterating (sub)methods}{38}
+\contentsline {subsubsection}{\numberline {2.2.4.3}Calling fail-safe (sub)methods}{40}
+\contentsline {subsubsection}{\numberline {2.2.4.4}Disjunctively combining (sub)methods}{40}
+\contentsline {subsubsection}{\numberline {2.2.4.5}Sequentially combining (sub)methods}{41}
+\contentsline {section}{\numberline {2.3}The method database}{41}
+\contentsline {subsection}{\numberline {2.3.1}Current repertoire of (sub)methods}{42}
+\contentsline {paragraph}{Rippling.}{48}
+\contentsline {paragraph}{Complementary rewriting.}{50}
+\contentsline {paragraph}{When meta-rippling is needed.}{54}
+\contentsline {subsection}{\numberline {2.3.2}Default configuration of methods and submethods}{70}
+\contentsline {section}{\numberline {2.4}The basic planners}{71}
+\contentsline {subsection}{\numberline {2.4.1}The basic planning mechanism}{71}
+\contentsline {subsection}{\numberline {2.4.2}The depth-first planner}{74}
+\contentsline {subsection}{\numberline {2.4.3}The breadth-first planner}{75}
+\contentsline {subsection}{\numberline {2.4.4}The iterative-deepening planner}{76}
+\contentsline {subsection}{\numberline {2.4.5}The best-first planner}{77}
+\contentsline {section}{\numberline {2.5}The hint planners}{78}
+\contentsline {subsection}{\numberline {2.5.1}The hint-methods and hint-contexts}{79}
+\contentsline {subsection}{\numberline {2.5.2}The hint planners}{79}
+\contentsline {subsection}{\numberline {2.5.3}The definition of hints}{80}
+\contentsline {subsection}{\numberline {2.5.4}The interactive session}{81}
+\contentsline {subsection}{\numberline {2.5.5}Meta-Hints}{83}
+\contentsline {chapter}{\numberline {3}Tactics etc}{87}
+\contentsline {section}{\numberline {3.1}The tactics}{87}
+\contentsline {section}{\numberline {3.2}Utilities}{88}
+\contentsline {subsection}{\numberline {3.2.1}Pretty-printing}{88}
+\contentsline {paragraph}{Example}{88}
+\contentsline {subsection}{\numberline {3.2.2}Portrayal of terms}{89}
+\contentsline {subsection}{\numberline {3.2.3}Tracing planners}{90}
+\contentsline {subsection}{\numberline {3.2.4}Applying plans \& programs}{91}
+\contentsline {section}{\numberline {3.3}The library mechanism}{92}
+\contentsline {subsection}{\numberline {3.3.1}Logical objects}{92}
+\contentsline {paragraph}{Example logical objects}{95}
+\contentsline {paragraph}{Example.}{99}
+\contentsline {paragraph}{Deleting reduction rules.}{100}
+\contentsline {paragraph}{Example}{101}
+\contentsline {part}{II\hspace {1em}Programmer Manual}{107}
+\contentsline {chapter}{\numberline {4}Representations}{109}
+\contentsline {section}{\numberline {4.1}Induction schemes}{109}
+\contentsline {paragraph}{\inx {primitive induction}}{110}
+\contentsline {paragraph}{\inx {two-step induction}}{110}
+\contentsline {paragraph}{\inx {plus induction}}{110}
+\contentsline {paragraph}{\inx {simple prime induction}}{111}
+\contentsline {paragraph}{\inx {simple simultaneous induction}}{111}
+\contentsline {paragraph}{\inx {simultaneous induction}}{111}
+\contentsline {paragraph}{\inx {primitive recursion}}{112}
+\contentsline {paragraph}{\inx {structural induction}}{112}
+\contentsline {section}{\numberline {4.2}Iterating methods}{113}
+\contentsline {section}{\numberline {4.3}Caching mechanism}{114}
+\contentsline {subsection}{\numberline {4.3.1}Theorem records}{114}
+\contentsline {subsection}{\numberline {4.3.2}Reduction records}{115}
+\contentsline {subsection}{\numberline {4.3.3}Rewrite records}{115}
+\contentsline {subsection}{\numberline {4.3.4}Proof-plan records}{115}
+\contentsline {subsection}{\numberline {4.3.5}Rewrite-rule records}{115}
+\contentsline {section}{\numberline {4.4}Wave-fronts, holes and sinks}{116}
+\contentsline {subsection}{\numberline {4.4.1}Well-annotated terms}{116}
+\contentsline {section}{\numberline {4.5}Induction hypotheses}{116}
+\contentsline {section}{\numberline {4.6}methods}{117}
+\contentsline {chapter}{\numberline {5}Implementation}{119}
+\contentsline {section}{\numberline {5.1}Induction preconditions}{119}
+\contentsline {section}{\numberline {5.2}Rippling implementation}{119}
+\contentsline {section}{\numberline {5.3}RPOS implementation}{119}
+\contentsline {subsection}{\numberline {5.3.1}Overview}{119}
+\contentsline {subsection}{\numberline {5.3.2}Registry}{119}
+\contentsline {subsubsection}{\numberline {5.3.2.1}Quasi-precedence: {\tt Prec}}{119}
+\contentsline {subsubsection}{\numberline {5.3.2.2}Status function: {\tt Tau}}{120}
+\contentsline {subsection}{\numberline {5.3.3}Lifting}{120}
+\contentsline {subsection}{\numberline {5.3.4}Ordering problems}{120}
+\contentsline {chapter}{\numberline {6}Utilities}{121}
+\contentsline {section}{\numberline {6.1}New versions}{121}
+\contentsline {subsection}{\numberline {6.1.1}Make package}{122}
+\contentsline {section}{\numberline {6.2}Porting code to other Prolog dialects}{123}
+\contentsline {section}{\numberline {6.3}Statistics package}{123}
+\contentsline {subsection}{\numberline {6.3.1}Debugging utilities}{125}
+\contentsline {subsection}{\numberline {6.3.2}Benchmarking}{125}
+\contentsline {subsection}{\numberline {6.3.3}Pretty printing}{126}
+\contentsline {subsection}{\numberline {6.3.4}Writef package}{126}
+\contentsline {section}{\numberline {6.4}Theory-free}{127}
+\contentsline {chapter}{\numberline {A}Rippling and Reduction}{129}
+\contentsline {section}{\numberline {A.1}Introduction}{129}
+\contentsline {paragraph}{Notation}{129}
+\contentsline {section}{\numberline {A.2}Rewriting}{129}
+\contentsline {subsection}{\numberline {A.2.1}Polarity}{129}
+\contentsline {subsection}{\numberline {A.2.2}Clam\xspace 's rewrite rules}{130}
+\contentsline {section}{\numberline {A.3}Annotations and rippling}{131}
+\contentsline {subsection}{\numberline {A.3.1}Syntax of well-annotated terms}{131}
+\contentsline {paragraph}{Example}{132}
+\contentsline {paragraph}{Example}{132}
+\contentsline {subsection}{\numberline {A.3.2}Wave-rules and rippling}{133}
+\contentsline {subsection}{\numberline {A.3.3}Rippling in Clam\xspace }{133}
+\contentsline {subsubsection}{\numberline {A.3.3.1}Static rippling}{134}
+\contentsline {subsubsection}{\numberline {A.3.3.2}Dynamic rippling}{134}
+\contentsline {subsection}{\numberline {A.3.4}Role of sinks}{134}
+\contentsline {paragraph}{Example.}{134}
+\contentsline {section}{\numberline {A.4}Reduction}{135}
+\contentsline {subsection}{\numberline {A.4.1}Simplification orderings}{135}
+\contentsline {subsection}{\numberline {A.4.2}Recursive path ordering with status (RPOS)}{135}
+\contentsline {subsubsection}{\numberline {A.4.2.1}Precedence, status and registry}{135}
+\contentsline {paragraph}{Remark.}{137}
+\contentsline {subsubsection}{\numberline {A.4.2.2}Lifting RPOS}{137}
+\contentsline {subsection}{\numberline {A.4.3}Computing the registry dynamically}{137}
+\contentsline {subsubsection}{\numberline {A.4.3.1}Rewriting, polarity and reduction rules}{137}
+\contentsline {section}{\numberline {A.5}Labelled term rewriting}{138}
+\contentsline {subsection}{\numberline {A.5.1}Labelled rewrite system}{139}
+\contentsline {subsection}{\numberline {A.5.2}Labelled term rewriting (LTR)}{139}
+\contentsline {subsection}{\numberline {A.5.3}Reduction strategy}{140}
+\contentsline {paragraph}{Soundness}{140}
+\contentsline {paragraph}{Completeness}{140}
+\contentsline {chapter}{\numberline {B}Decision procedures}{141}
+\contentsline {section}{\numberline {B.1}Intuitionistic propositional logic}{141}
+\contentsline {section}{\numberline {B.2}Presburger arithmetic}{141}
+\contentsline {chapter}{\numberline {C}Appendix}{143}
+\contentsline {section}{\numberline {C.1}The organisation of the source files}{143}
+\contentsline {section}{\numberline {C.2}Release Notes}{144}
+\contentsline {subsection}{\numberline {C.2.1}CVS and Clam\xspace }{145}
+\contentsline {subsection}{\numberline {C.2.2}Version 1.1, May 1989}{145}
+\contentsline {subsection}{\numberline {C.2.3}Version 1.2, June 1989}{146}
+\contentsline {subsection}{\numberline {C.2.4}Version 1.3, October 1989}{147}
+\contentsline {subsection}{\numberline {C.2.5}Version 1.4, December 1989}{148}
+\contentsline {subsection}{\numberline {C.2.6}Version 2.1, November 1993}{149}
+\contentsline {subsection}{\numberline {C.2.7}Version 2.2, August 1994 ({\tt CLAM\_2\_2\_0})}{150}
+\contentsline {subsection}{\numberline {C.2.8}Version 2.3 patchlevel 5, 6 May 1995}{151}
+\contentsline {subsection}{\numberline {C.2.9}Version 2.3 patchlevel 6, 18 July 1995 {\tt CLAM\_2\_3\_6}}{151}
+\contentsline {subsection}{\numberline {C.2.10}Version 2.4 patchlevel 0, 3 October 1995 {\tt CLAM\_2\_4\_0}}{152}
+\contentsline {subsection}{\numberline {C.2.11}Version 2.5 patchlevel 0, 21 June 1996 {\tt CLAM\_2\_5\_0}}{153}
+\contentsline {subsection}{\numberline {C.2.12}Version 2.6 patchlevel 3, 1 October 1997 {\tt CLAM\_2\_6\_3}}{155}
+\contentsline {subsection}{\numberline {C.2.13}Version 2.7 patchlevel 0 {\tt CLAM\_2\_7\_0}}{155}
+\contentsline {subsection}{\numberline {C.2.14}Version 2.7 patchlevel 1 {\tt CLAM\_2\_7\_1}}{155}
+\contentsline {subsection}{\numberline {C.2.15}Version 2.7, patchlevel 2 {\tt CLAM\_2\_7\_2}}{156}
+\contentsline {subsection}{\numberline {C.2.16}Version 2.8, patchlevel 0, February 1999 {\tt CLAM\_2\_8\_0}}{156}
+\contentsline {subsection}{\numberline {C.2.17}Version 2.8, patchlevel 1, 7th April 1999 {\tt CLAM\_2\_8\_1}}{156}
+\contentsline {subsection}{\numberline {C.2.18}Version 2.8, patchlevel 2, 18th May 1999 {\tt CLAM\_2\_8\_2}}{157}
+\contentsline {subsection}{\numberline {C.2.19}Version 2.8, patchlevel 3, 26th April 2005 {\tt CLAM\_2\_8\_3}}{157}
+\contentsline {subsection}{\numberline {C.2.20}Version 2.8, patchlevel 4, July 2006 {\tt CLAM\_2\_8\_4}}{157}

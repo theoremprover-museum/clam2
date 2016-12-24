@@ -1,0 +1,73 @@
+problem([]==>t:u(1)=>phi:(t list=>u(1))=>(y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y)=>y:t list=>phi of y,
+comm('use acc type & inverse image of less under length'),lambda(v0,_3161)of axiom,
+[problem([]==>t:u(1)=>phi:(t list=>u(1))=>(y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y)=>y:t list=>phi of y,
+ universe(2),_3152,
+ [problem([]==>t:u(1)=>phi:(t list=>u(1))=>(y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y)=>y:t list=>phi of y,
+  autotactic(wfftacs),_3067,
+  [problem([]==>t:u(1)=>phi:(t list=>u(1))=>(y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y)=>y:t list=>phi of y,
+   intro,lambda(t,_2905),
+   [problem([t:u(1)]==>phi:(t list=>u(1))=>(y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y)=>y:t list=>phi of y,
+    repeat intro,lambda(phi,lambda(v0,lambda(y,_2812))),
+    [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list]==>phi of y,
+     seq(l:acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))=>phi of l),lambda(v1,_2695)of _2698,
+     [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list]==>l:acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))=>phi of l,
+      intro,lambda(l,_2586),
+      [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>phi of l,
+       elim(l,wo)then beta_normalize(hyp(v1)),wo_ind(l,[v3,v1,_2460]),
+       [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2]==>phi of v3,
+        elim(v0,on(v3)),su(_2311,[v0 of v3],[v2]),
+        [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3]==>phi of v3,
+         elim(v2),su(_2125,[v2 of _2121],[v4]),
+         [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3]==>x:t list=>less(length(x),length(v3))=>phi of x,
+          repeat intro,lambda(x,lambda(v4,_1941)),
+          [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3,x:t list,v4:less(length(x),length(v3))]==>phi of x,
+           pure(elim(v1,on(x))),su(_1749,[v1 of x],[v5]),
+           [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3,x:t list,v4:less(length(x),length(v3))]==>x in{v2:t list\less(length(v2),length(v3))},
+            pure(intro),axiom,
+            [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3,x:t list,v4:less(length(x),length(v3))]==>x in t list,
+             repeat wfftac,axiom,
+             [
+             ]),
+             problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3,x:t list,v4:less(length(x),length(v3))]==>less(length(x),length(v3)),
+             hyp(v4),v4,
+             [
+             ]),
+             problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3,x:t list,v4:less(length(x),length(v3)),v5:t list]==>less(length(v5),length(v3))in u(2),
+             repeat wfftac,axiom,
+             [
+             ])
+            ]),
+            problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3,x:t list,v4:less(length(x),length(v3)),v5:phi of x]==>phi of x,
+            hyp(v5),v5,
+            [
+            ]) ext _1749
+           ]) ext _1941
+          ]) ext _2121,
+          problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,l:acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),v3:t list,v1:v2:{v2:t list\less(length(v2),length(v3))}=>phi of v2,v2:(x:t list=>less(length(x),length(v3))=>phi of x)=>phi of v3,v4:phi of v3]==>phi of v3,
+          hyp(v4),v4,
+          [
+          ]) ext _2125
+         ]) ext _2311
+        ]) ext _2460
+       ]) ext _2586
+      ]) ext _2698,
+      problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,v1:l:acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))=>phi of l]==>phi of y,
+      elim(v1,on(y)),su(_964,[v1 of y],[v2]),
+      [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,v1:l:acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))=>phi of l]==>y in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+       lemma(length_tc_acc_wf),su(_837,[term_of(length_tc_acc_wf)],[v2]),
+       [problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,v1:l:acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))=>phi of l,v2:t:u(1)=>l:t list=>l in acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))]==>y in acc(t list,lambda(u,lambda(v,less(length(u),length(v))))),
+        do_elim_on(v2,[t,y],[v2,v3,v4])then(append(_651,[_648],[v3,v4]),thin(_651)),su(su(v4,[v3 of y],[v4]),[v2 of t],[v3]),
+        [
+        ]) ext _837
+       ]) ext _953,
+       problem([t:u(1),phi:t list=>u(1),v0:y:t list=>(x:t list=>less(length(x),length(y))=>phi of x)=>phi of y,y:t list,v1:l:acc(t list,lambda(u,lambda(v,less(length(u),length(v)))))=>phi of l,v2:phi of y]==>phi of y,
+       hyp(v2),v2,
+       [
+       ]) ext _964
+      ]) ext _2695
+     ]) ext _2812
+    ]) ext _2905
+   ]) ext _3067
+  ]) ext _3152
+ ]) ext _3161
+]).

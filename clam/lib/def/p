@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: p,v 1.2 1997/10/09 17:08:28 img Exp $
+ *
+ * $Log: p,v $
+ * Revision 1.2  1997/10/09 17:08:28  img
+ * fixes
+ *
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ */
+
+/* partial predecessor */
+p(s)<==>p_ind(s,void,[x,~,x]).

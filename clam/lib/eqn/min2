@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: min2,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: min2,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>min(x,0)=0 in pnat,
+repeat intro then simplify,lambda(x,_7874),
+[problem([x:pnat]==>pless(x,0,x,0)=0 in pnat,
+ elim(x),p_ind(x,_7908,[v0,v1,_7914]),
+ [problem([x:pnat]==>pless(0,0,0,0)=0 in pnat,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7908,
+  problem([x:pnat,v0:pnat,v1:pless(v0,0,v0,0)=0 in pnat]==>pless(s(v0),0,s(v0),0)=0 in pnat,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _7914
+ ]) ext _7874
+]).

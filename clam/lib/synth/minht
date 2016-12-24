@@ -1,0 +1,30 @@
+problem([]==>t:int tree=>pnat,
+simplify,_7487,
+[problem([]==>t:rec(z,int\z#z)=>pnat,
+ intro,lambda(t,_7530),
+ [problem([t:rec(z,int\z#z)]==>pnat,
+  elim(t),rec_ind(t,[v2,v3,_7567]),
+  [problem([t:rec(z,int\z#z),v0:u(1),v1:t:v0=>t in rec(z,int\z#z),v2:t:v0=>pnat,v3:int\v0#v0]==>pnat,
+   elim(v3),decide(v3,[v4,_7656],[v5,_7660]),
+   [problem([t:rec(z,int\z#z),v0:u(1),v1:t:v0=>t in rec(z,int\z#z),v2:t:v0=>pnat,v3:int\v0#v0,v4:int,v6:v3=inl(v4)in (int\v0#v0)]==>pnat,
+    intro(0)then repeat intro,0,
+    [
+    ]) ext _7656,
+    problem([t:rec(z,int\z#z),v0:u(1),v1:t:v0=>t in rec(z,int\z#z),v2:t:v0=>pnat,v3:int\v0#v0,v5:v0#v0,v7:v3=inr(v5)in (int\v0#v0)]==>pnat,
+    elim(v5),spread(v5,[v4,v6,_7887]),
+    [problem([t:rec(z,int\z#z),v0:u(1),v1:t:v0=>t in rec(z,int\z#z),v2:t:v0=>pnat,v3:int\v0#v0,v5:v0#v0,v7:v3=inr(v5)in (int\v0#v0),v4:v0,v6:v0,v8:v5=v4&v6 in (v0#v0)]==>pnat,
+     intro(explicit(s(min(v2 of v4,v2 of v6)))),s(min(v2 of v4,v2 of v6)),
+     [problem([t:rec(z,int\z#z),v0:u(1),v1:t:v0=>t in rec(z,int\z#z),v2:t:v0=>pnat,v3:int\v0#v0,v5:v0#v0,v7:v3=inr(v5)in (int\v0#v0),v4:v0,v6:v0,v8:v5=v4&v6 in (v0#v0)]==>s(min(v2 of v4,v2 of v6))in pnat,
+      simplify then repeat intro,axiom,
+      [
+      ])
+     ]) ext _7887
+    ]) ext _7660
+   ]) ext _7567
+  ]) ext _7530,
+  problem([]==>rec(z,int\z#z)in u(1),
+  repeat intro,axiom,
+  [
+  ])
+ ]) ext _7487
+]).

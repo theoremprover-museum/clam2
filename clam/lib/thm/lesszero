@@ -1,0 +1,26 @@
+/*
+ * @(#)$Id: lesszero,v 1.1 1996/06/12 10:10:53 img Exp $
+ *
+ * $Log: lesszero,v $
+ * Revision 1.1  1996/06/12 10:10:53  img
+ * This used to be two equations from eqn: it is more properly a thm.
+ *
+ */
+problem([]==>x:pnat=>less(0,x)<=>x=0 in pnat=>void,
+repeat dequantify_once,lambda(x,_14004),
+[problem([x:pnat]==>less(0,x)<=>x=0 in pnat=>void,
+ elim(x)then simplify then repeat intro,p_ind(x,lambda(v0,lambda(v1,v0))&lambda(v0,_14063),[v0,v1,lambda(v2,lambda(v3,_14078))&lambda(v2,_14081)]),
+ [problem([x:pnat,v0:0=0 in pnat=>void]==>void,
+  elim(v0)then[identity,hyp(v1)],su(v1,[v0 of axiom],[v1]),
+  [
+  ]) ext _14063,
+  problem([x:pnat,v0:pnat,v1:less(0,v0)<=>v0=0 in pnat=>void,v2:int,v3:s(v0)=0 in pnat]==>void,
+  clam_arith(v3:s(v0)=0 in pnat),su(su(su(any(v6),[v5 of v3],[v6]),[v4 of v0],[v5]),[term_of(arith1)],[v4]),
+  [
+  ]) ext _14078,
+  problem([x:pnat,v0:pnat,v1:less(0,v0)<=>v0=0 in pnat=>void,v2:s(v0)=0 in pnat=>void]==>int,
+  intro(0),0,
+  [
+  ]) ext _14081
+ ]) ext _14004
+]).

@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: min,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: min,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+min(x,y)<==>pless(x,y,x,y).

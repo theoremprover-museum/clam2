@@ -1,0 +1,14 @@
+/*
+ *
+ * $Id: node,v 1.1 1995/06/10 15:40:52 armando Exp $
+ * 
+ * $Log: node,v $
+ * Revision 1.1  1995/06/10 15:40:52  armando
+ * Reinserted into the main trunk
+ *
+ * Revision 1.1.4.3  1995/05/29  17:11:46  armando
+ * Comment char changed
+ *
+ */
+
+node(l,r)<==>inr(l&r).

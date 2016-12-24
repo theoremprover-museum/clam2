@@ -1,0 +1,17 @@
+problem([]==>x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),
+autotactic(wfftacs),_1114,
+[problem([]==>x:pnat=>y:pnat=>less(x,y)\x=y in pnat\less(y,x),
+ intro,lambda(x,_1196),
+ [problem([x:pnat]==>y:pnat=>less(x,y)\x=y in pnat\less(y,x),
+  ind_strat(induction(lemma(pairs)-[(x:pnat)-s(v1),(y:pnat)-s(v0)])then[base_case(sym_eval(normalize_term([reduction([2,2],[less1,equ(u(1),left)])]))),base_case(sym_eval(normalize_term([reduction([1],[less1,equ(u(1),left)])]))),step_case(ripple(direction_out,wave(direction_out,[1],[less3,equ(u(1),left)],[])then[wave(direction_out,[2,2],[less3,equ(u(1),left)],[])then[wave(direction_out,[1,2],[cnc_s,imp(right)],[])]])then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,v2))])]),lambda(y,su(lambda(v3,su(su(su(su(su(su(v10,[v9 of lambda(v1,lambda(v0,lambda(v2,su(su(su(su(su(su(su(lambda(v3,su(su(decide(v3,[v4,inl(v4)],[v6,inr(decide(v6,[v4,inl(su(v7,[v5 of v4],[v7]))],[v7,inr(v7)]))]),[v4 of v0],[v5]),[cnc_s of v1],[v4]))of v2,[term_of(cnc_s)],[cnc_s]),[v3 of v1],[v4]),[less3 of v0],[v3]),[term_of(less3)],[less3]),[v3 of v0],[v4]),[less3 of v1],[v3]),[term_of(less3)],[less3]))))],[v10]),[v8 of lambda(v0,su(su(_1616,[less1 of v0],[v1]),[term_of(less1)],[less1]))],[v9]),[v7 of lambda(v0,su(su(_1647,[less1 of v0],[v1]),[term_of(less1)],[less1]))],[v8]),[v6 of y],[v7]),[v5 of x],[v6]),[v3 of lambda(x,lambda(y,less(x,y)\x=y in pnat\less(y,x)))],[v5]))of v4,[term_of(pairs)],[v4])),
+  [problem([x:pnat,y:pnat,v0:pnat]==>less(0,v0)\0=v0 in pnat\void,
+   casesplit(datatypef([v0:pnat,s(v1)]))then[elementary(intro(right)then[intro(left)then[identity,wfftacs],wfftacs]),sym_eval(normalize_term([reduction([1],[less2,equ(u(1),left)])]))then[elementary(intro(left)then[istrue,wfftacs])]],pnat_eq(v0,0,su(inr(inl(axiom)),[axiom],[v3]),su(su(lambda(v2,su(su(spread(v6,[v1,v7,su(su(inl(0),[less2 of v1],[v2]),[term_of(less2)],[less2])]),[v5 of v3],[v6]),[v2 of v0],[v5]))of v4,[term_of(succlemma)],[v4]),[lambda(~,axiom)],[v3])),
+   [
+   ]) ext _1647,
+   problem([x:pnat,y:pnat,v0:pnat]==>void\v0=0 in pnat\less(0,v0),
+   casesplit(datatypef([v0:pnat,s(v1)]))then[elementary(intro(right)then[intro(left)then[identity,wfftacs],wfftacs]),sym_eval(normalize_term([reduction([2,2],[less2,equ(u(1),left)])]))then[elementary(intro(right)then[intro(right)then[istrue,wfftacs],wfftacs])]],pnat_eq(v0,0,su(inr(inl(axiom)),[axiom],[v3]),su(su(lambda(v2,su(su(spread(v6,[v1,v7,su(su(inr(inr(0)),[less2 of v1],[v2]),[term_of(less2)],[less2])]),[v5 of v3],[v6]),[v2 of v0],[v5]))of v4,[term_of(succlemma)],[v4]),[lambda(~,axiom)],[v3])),
+   [
+   ]) ext _1616
+  ]) ext _1196
+ ]) ext _1114
+]).

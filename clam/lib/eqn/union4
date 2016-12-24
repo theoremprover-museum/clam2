@@ -1,0 +1,241 @@
+/*
+ * @(#)$Id: union4,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: union4,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int=>t:int list=>l2:int list=> (member(h,l2)=>void)=>union(h::t,l2)=h::union(t,l2)in int list,
+repeat dequantify_once,lambda(h,lambda(t,lambda(l2,_7982))),
+[problem([h:int,t:int list,l2:int list]==> (member(h,l2)=>void)=>union(h::t,l2)=h::union(t,l2)in int list,
+ intro,lambda(v0,_8046),
+ [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void]==>union(h::t,l2)=h::union(t,l2)in int list,
+  compute([[unfold]]=_8117 in _8114),_8055,
+  [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void]==>term_of(union)of (h::t)of l2=h::union(t,l2)in int list,
+   compute([[expand]]of (h::t)of l2=h::union(t,l2)in int list),_8130,
+   [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void]==>lambda(l1,list_ind(l1,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))]))of (h::t)of l2=h::union(t,l2)in int list,
+    compute([[1]]of _8351=_8348 in _8345),_8227,
+    [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void]==>list_ind(h::t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2=h::union(t,l2)in int list,
+     compute([[1]]of _8482=_8479 in _8476),_8364,
+     [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void]==>lambda(l2,lambda(v3,decide(v3,[~,list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2],[~,h::list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2]))of (term_of(memberdec)of h of l2))of l2=h::union(t,l2)in int list,
+      lemma(memberlem),su(_8694,[term_of(memberlem)],[v1]),
+      [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int)]==>lambda(l2,lambda(v3,decide(v3,[~,list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2],[~,h::list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2]))of (term_of(memberdec)of h of l2))of l2=h::union(t,l2)in int list,
+       elim(v1,on(h),new[v2])then[wfftacs,elist(v2,[l2])],su(su(_8987,[v2 of l2],[v3]),[v1 of h],[v2]),
+       [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>lambda(l2,lambda(v3,decide(v3,[~,list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2],[~,h::list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2]))of (term_of(memberdec)of h of l2))of l2=h::union(t,l2)in int list,
+        elim(v3),su(_9350,[v3 of _9357],[v4]),
+        [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>member(h,l2)=>void,
+         intro,v0,
+         [
+         ]) ext _9357,
+         problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>lambda(l2,lambda(v3,decide(v3,[~,list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2],[~,h::list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2]))of (term_of(memberdec)of h of l2))of l2=h::union(t,l2)in int list,
+         compute([[1]]=_9928 in _9925),_9556,
+         [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>lambda(v3,decide(v3,[~,list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2],[~,h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2]))of (term_of(memberdec)of h of l2)=h::union(t,l2)in int list,
+          subst(over(v5,lambda(v3,decide(v3,[~,list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2],[~,h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2]))of v5=h::union(t,l2)in int list),term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)),_9941,
+          [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),
+           hyp(v4),v4,
+           [
+           ]),
+           problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>lambda(v3,decide(v3,[~,list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2],[~,h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2]))of inr(lambda(u,u))=h::union(t,l2)in int list,
+           compute([[2]]=_11085 in _11082),_10722,
+           [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2=h::union(t,l2)in int list,
+            simplify then equality,axiom,
+            [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2 in int list,
+             repeat intro,axiom,
+             [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2 in int list,
+              intro(using(int list=>int list)),axiom,
+              [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])in (int list=>int list),
+               repeat intro,axiom,
+               [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,l2_:int list]==>lambda(v3,decide(v3,[~,v7 of l2_],[~,v5::v7 of l2_]))of (term_of(memberdec)of v5 of l2_)in int list,
+                simplify,_12219,
+                [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,l2_:int list]==>decide(list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)]),[~,v7 of l2_],[~,v5::v7 of l2_])in int list,
+                 intro(using(int\int=>int)),axiom,
+                 [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,l2_:int list]==>list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)])in (int\int=>int),
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,l2_:int list,v8:int,v10:list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)])=inl(v8)in int\int=>int]==>v7 of l2_ in int list,
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,l2_:int list,v9:int=>int,v10:list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)])=inr(v9)in int\int=>int]==>v5::v7 of l2_ in int list,
+                  repeat intro,axiom,
+                  [
+                  ])
+                 ]) ext _12219
+                ]) ext _12215
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>l2 in int list,
+               intro,axiom,
+               [
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int list]==>v5 in int list,
+               intro,axiom,
+               [
+               ])
+              ]) ext _11657
+             ]),
+             problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>h::list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2 in int list,
+             repeat intro,axiom,
+             [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2 in int list,
+              intro(using(int list=>int list)),axiom,
+              [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])in (int list=>int list),
+               repeat intro,axiom,
+               [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,v8:int list]==>lambda(v3,decide(v3,[~,v7 of v8],[~,v5::v7 of v8]))of (term_of(memberdec)of v5 of v8)in int list,
+                simplify,_14950,
+                [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,v8:int list]==>decide(list_ind(v8,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)]),[~,v7 of v8],[~,v5::v7 of v8])in int list,
+                 intro(using(int\int=>int)),axiom,
+                 [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,v8:int list]==>list_ind(v8,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)])in (int\int=>int),
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,v8:int list,v9:int,v11:list_ind(v8,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)])=inl(v9)in int\int=>int]==>v7 of v8 in int list,
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int,v6:int list,v7:int list=>int list,v8:int list,v10:int=>int,v11:list_ind(v8,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v5,v1,inl(v5),v3)])=inr(v10)in int\int=>int]==>v5::v7 of v8 in int list,
+                  repeat intro,axiom,
+                  [
+                  ])
+                 ]) ext _14950
+                ]) ext _14946
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int)]==>l2 in int list,
+               intro,axiom,
+               [
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int list]==>v5 in int list,
+               intro,axiom,
+               [
+               ])
+              ]) ext _14388
+             ])
+            ]) ext _10722
+           ]) ext _9941,
+           problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int]==>lambda(v3,decide(v3,[~,list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2],[~,h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2]))of v5=h::union(t,l2)in int list in u(1),
+           repeat intro,axiom,
+           [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int]==>lambda(v3,decide(v3,[~,list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2],[~,h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2]))of v5 in int list,
+            simplify,_165727,
+            [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int]==>decide(v5,[~,list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2],[~,h::list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2])in int list,
+             repeat intro,axiom,
+             [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int]==>list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2 in int list,
+              intro(using(int list=>int list)),axiom,
+              [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int]==>list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])in (int list=>int list),
+               repeat intro,axiom,
+               [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int,v9:int list,v10:int list=>int list,l2_:int list]==>lambda(v3,decide(v3,[~,v10 of l2_],[~,v7::v10 of l2_]))of (term_of(memberdec)of v7 of l2_)in int list,
+                simplify,_167073,
+                [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int,v9:int list,v10:int list=>int list,l2_:int list]==>decide(list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v7,v1,inl(v7),v3)]),[~,v10 of l2_],[~,v7::v10 of l2_])in int list,
+                 intro(using(int\int=>int)),axiom,
+                 [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int,v9:int list,v10:int list=>int list,l2_:int list]==>list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v7,v1,inl(v7),v3)])in (int\int=>int),
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int,v9:int list,v10:int list=>int list,l2_:int list,v11:int,v13:list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v7,v1,inl(v7),v3)])=inl(v11)in int\int=>int]==>v10 of l2_ in int list,
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int,v9:int list,v10:int list=>int list,l2_:int list,v12:int=>int,v13:list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v7,v1,inl(v7),v3)])=inr(v12)in int\int=>int]==>v7::v10 of l2_ in int list,
+                  repeat intro,axiom,
+                  [
+                  ])
+                 ]) ext _167073
+                ]) ext _167069
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int]==>l2 in int list,
+               intro,axiom,
+               [
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v8:v5=inl(v6)in int\int=>int,v7:int list]==>v7 in int list,
+               intro,axiom,
+               [
+               ])
+              ]) ext _166441,
+              problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int]==>list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])of l2 in int list,
+              intro(using(int list=>int list)),axiom,
+              [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int]==>list_ind(t,lambda(l2_,l2_),[v0,~,v2,lambda(l2_,lambda(v3,decide(v3,[~,v2 of l2_],[~,v0::v2 of l2_]))of (term_of(memberdec)of v0 of l2_))])in (int list=>int list),
+               repeat intro,axiom,
+               [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int,v9:int list,v10:int list=>int list,l2_:int list]==>lambda(v3,decide(v3,[~,v10 of l2_],[~,v6::v10 of l2_]))of (term_of(memberdec)of v6 of l2_)in int list,
+                simplify,_169850,
+                [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int,v9:int list,v10:int list=>int list,l2_:int list]==>decide(list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)]),[~,v10 of l2_],[~,v6::v10 of l2_])in int list,
+                 intro(using(int\int=>int)),axiom,
+                 [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int,v9:int list,v10:int list=>int list,l2_:int list]==>list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)])in (int\int=>int),
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int,v9:int list,v10:int list=>int list,l2_:int list,v11:int,v13:list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)])=inl(v11)in int\int=>int]==>v10 of l2_ in int list,
+                  repeat intro,axiom,
+                  [
+                  ]),
+                  problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int,v9:int list,v10:int list=>int list,l2_:int list,v12:int=>int,v13:list_ind(l2_,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)])=inr(v12)in int\int=>int]==>v6::v10 of l2_ in int list,
+                  repeat intro,axiom,
+                  [
+                  ])
+                 ]) ext _169850
+                ]) ext _169846
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int]==>l2 in int list,
+               intro,axiom,
+               [
+               ]),
+               problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v7:int=>int,v8:v5=inr(v7)in int\int=>int,v6:int list]==>v6 in int list,
+               intro,axiom,
+               [
+               ])
+              ]) ext _169212
+             ]) ext _165727
+            ]) ext _165723,
+            problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int]==>union(t,l2)in int list,
+            simplify then repeat intro,_172014,
+            [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int]==>list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])of l2 in int list,
+             intro(using(int list=>int list)),axiom,
+             [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int]==>list_ind(t,lambda(l2,l2),[v0,~,v2,lambda(l2,lambda(v3,decide(v3,[~,v2 of l2],[~,v0::v2 of l2]))of (term_of(memberdec)of v0 of l2))])in (int list=>int list),
+              repeat intro,axiom,
+              [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v7:int list,v8:int list=>int list,v9:int list]==>lambda(v3,decide(v3,[~,v8 of v9],[~,v6::v8 of v9]))of (term_of(memberdec)of v6 of v9)in int list,
+               simplify,_172830,
+               [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v7:int list,v8:int list=>int list,v9:int list]==>decide(list_ind(v9,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)]),[~,v8 of v9],[~,v6::v8 of v9])in int list,
+                intro(using(int\int=>int)),axiom,
+                [problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v7:int list,v8:int list=>int list,v9:int list]==>list_ind(v9,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)])in (int\int=>int),
+                 repeat intro,axiom,
+                 [
+                 ]),
+                 problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v7:int list,v8:int list=>int list,v9:int list,v10:int,v12:list_ind(v9,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)])=inl(v10)in int\int=>int]==>v8 of v9 in int list,
+                 repeat intro,axiom,
+                 [
+                 ]),
+                 problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int,v7:int list,v8:int list=>int list,v9:int list,v11:int=>int,v12:list_ind(v9,inr(lambda(v1,v1)),[v1,v2,v3,int_eq(v6,v1,inl(v6),v3)])=inr(v11)in int\int=>int]==>v6::v8 of v9 in int list,
+                 repeat intro,axiom,
+                 [
+                 ])
+                ]) ext _172830
+               ]) ext _172826
+              ]),
+              problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int]==>l2 in int list,
+              intro,axiom,
+              [
+              ]),
+              problem([h:int,t:int list,l2:int list,v0:member(h,l2)=>void,v1:e:int=>l:int list=> (member(e,l)=>void)=>term_of(memberdec)of e of l=inr(lambda(u,u))in (int\int=>int),v2:l:int list=> (member(h,l)=>void)=>term_of(memberdec)of h of l=inr(lambda(u,u))in (int\int=>int),v3: (member(h,l2)=>void)=>term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v4:term_of(memberdec)of h of l2=inr(lambda(u,u))in (int\int=>int),v5:int\int=>int,v6:int list]==>v6 in int list,
+              intro,axiom,
+              [
+              ])
+             ]) ext _172014
+            ]) ext _172010
+           ])
+          ]) ext _9556
+         ]) ext _9350
+        ]) ext _8987
+       ]) ext _8694
+      ]) ext _8364
+     ]) ext _8227
+    ]) ext _8130
+   ]) ext _8055
+  ]) ext _8046,
+  problem([h:int,t:int list,l2:int list]==> (member(h,l2)=>void)in u(1),
+  simplify then repeat intro,axiom,
+  [problem([h:int,t:int list,l2:int list,v0:int,v1:int list,v2:u(1),v3:h=v0 in int]==>{true}in u(1),
+   simplify then intro,axiom,
+   [
+   ]) ext _174846
+  ])
+ ]) ext _7982
+]).

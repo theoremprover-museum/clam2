@@ -1,0 +1,111 @@
+\begin{theindex}
+
+  \item \texttt {apply-ext/1}, 150
+  \item \texttt {apply-lemma/1}, \textbf{68}, 69, 71, 146
+
+  \indexspace
+
+  \item \texttt {backchain-lemma/1}, \textbf{68}, 71
+  \item \texttt {base-case-cs/1}, 154
+  \item \texttt {base-case/1}, 48, \textbf{48}, 67, 70, 71, 150
+  \item \texttt {base-rule/2}, 149
+  \item \texttt {base-rules/1}, 149
+  \item \texttt {base/2}, 149
+
+  \indexspace
+
+  \item \texttt {cancellation/2}, \textbf{55}, 71
+  \item \texttt {casesplit/1}, \textbf{50}, 55, 71, 149
+
+  \indexspace
+
+  \item \texttt {elementary/1}, \textbf{42}, 48, 71, 155, 156
+  \item \texttt {equal/2}, \textbf{43}, 46, 71
+  \item \texttt {eval-def/2}, 10, 11, 40, \textbf{45}, 46, 149, 153, 154
+  \item \texttt {existential/2}, 46, \textbf{46}, 71, 149
+
+  \indexspace
+
+  \item \texttt {fertilization-strong/1}, \textbf{56}, 71
+  \item \texttt {fertilization-weak/1}, \textbf{57}, 71
+  \item \texttt {fertilize-left-or-right/2}, \textbf{58}, 71
+  \item \texttt {fertilize-left/2}, 145, 146
+  \item \texttt {fertilize-right/2}, 145, 146
+  \item \texttt {fertilize-then-ripple/1}, \textbf{58}, 71
+  \item \texttt {fertilize/2}, \textbf{56}, 71, 145, 146, 149
+
+  \indexspace
+
+  \item \texttt {generalise/2}, 32, \textbf{64}, 70, 148
+
+  \indexspace
+
+  \item \texttt {identity/0}, \textbf{67}
+  \item \texttt {ind-strat-I/1}, 147, 149, 150
+  \item \texttt {ind-strat-II/1}, 147, 150
+  \item \texttt {ind-strat-III/1}, 147
+  \item \texttt {ind-strat/1}, \textbf{66}, 67, 70, 71, 150, 156
+  \item \texttt {induction-min/2}, 150
+  \item \texttt {induction/1}, \textbf{65}, 67, 71, 72, 152, 155
+  \item \texttt {induction/2}, 149
+  \item \texttt {iterate/5}, 150
+
+  \indexspace
+
+  \item \texttt {lemma/1}, 146
+
+  \indexspace
+
+  \item \texttt {normal/1}, 67, 71
+  \item \texttt {normalize-term/1}, 24, \textbf{46}, 71
+  \item \texttt {normalize/1}, 67, \textbf{67}, 70, 150
+
+  \indexspace
+
+  \item \texttt {propositional/1}, \textbf{43}, 155
+  \item \texttt {propositional/2}, 43
+  \item \texttt {pwf-then-fertilize/2}, 22, \textbf{69}
+  \item \texttt {pwf/1}, \textbf{69}, 156
+
+  \indexspace
+
+  \item \texttt {reduction/2}, 17, 25, \textbf{44}, 46, 154
+  \item \texttt {repeat/7}, 150
+  \item \texttt {ripple-and-cancel/1}, \textbf{58}, 71, 154
+  \item \texttt {ripple/1}, 149
+  \item \texttt {ripple/2}, 55, \textbf{55}, 71
+
+  \indexspace
+
+  \item \texttt {step-case/1}, 62, \textbf{62}, 67, 71, 150, 154, 156
+  \item \texttt {step-rule/2}, 149
+  \item \texttt {step-rules/1}, 149
+  \item \texttt {step/2}, 149
+  \item \texttt {sym-eval-cs/1}, 154
+  \item \texttt {sym-eval/1}, 39, 44, 46, \textbf{47}, 48, 71, 149, 154
+
+  \indexspace
+
+  \item \texttt {then/2}, 146
+  \item \texttt {try/1}, 146
+
+  \indexspace
+
+  \item \texttt {unblock-fertilize-lazy/1}, 71
+  \item \texttt {unblock-lazy/1}, 40, 55, \textbf{55}, 71
+  \item \texttt {unblock-then-fertilize/2}, 71
+  \item \texttt {unblock-then-wave/2}, 55, 71
+  \item \texttt {unblock/2}, 51
+  \item \texttt {unblock/3}, 27, 49, \textbf{51}, 55, 71, 149
+
+  \indexspace
+
+  \item \texttt {wave/3}, 150
+  \item \texttt {wave/4}, 27, \textbf{48}, 50, \textbf{50}, 55, 71, 93, 149
+  \item \texttt {weak-fertilization/4}, 18
+  \item \texttt {weak-fertilize-left/1}, 59, 71
+  \item \texttt {weak-fertilize-right/1}, 59, 71
+  \item \texttt {weak-fertilize/2}, 59
+  \item \texttt {weak-fertilize/4}, 32, 59, \textbf{59}, 71, 156
+
+\end{theindex}

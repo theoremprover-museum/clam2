@@ -1,0 +1,34 @@
+problem([]==>l:pnat list=>geq(length(l),0)#(l=nil in pnat list=>void)=>less(length(tl(l)),length(l)),
+repeat dequantify_once,lambda(l,_1458),
+[problem([l:pnat list]==>geq(length(l),0)#(l=nil in pnat list=>void)=>less(length(tl(l)),length(l)),
+ intro,_1403&_1404,
+ [problem([l:pnat list]==>geq(length(l),0),
+  sym_eval(normalize_term([reduction([],[geq1,equ(u(1),left)])]))then[elementary(istrue)],su(su(0,[geq1 of length(l)],[v0]),[term_of(geq1)],[geq1]),
+  [
+  ]) ext _1403,
+  problem([l:pnat list]==>(l=nil in pnat list=>void)=>less(length(tl(l)),length(l)),
+  elim(l),list_ind(l,_1289,[v0,v1,v2,_1279]),
+  [problem([l:pnat list]==>(nil=nil in pnat list=>void)=>less(length(tl(nil)),length(nil)),
+   elementary(intro(new[v0])then[elim(v0)then[identity,elim(v1)],wfftacs]),lambda(v0,su(any(v1),[v0 of axiom],[v1])),
+   [
+   ]) ext _1289,
+   problem([l:pnat list,v0:pnat,v1:pnat list,v2:(v1=nil in pnat list=>void)=>less(length(tl(v1)),length(v1))]==>(v0::v1=nil in pnat list=>void)=>less(length(tl(v0::v1)),length(v0::v1)),
+   intro,lambda(v3,_1112),
+   [problem([l:pnat list,v0:pnat,v1:pnat list,v2:(v1=nil in pnat list=>void)=>less(length(tl(v1)),length(v1)),v3:v0::v1=nil in pnat list=>void]==>less(length(tl(v0::v1)),length(v0::v1)),
+    sym_eval(normalize_term([reduction([1,1],[tl2,equ(_1001 list,left)]),reduction([2],[length2,equ(pnat,left)])])),su(su(su(su(su(su(su(su(_955,[v5 of v1],[v6]),[v4 of v0],[v5]),[length2 of pnat],[v4]),[term_of(length2)],[length2]),[v5 of v1],[v6]),[v4 of v0],[v5]),[tl2 of pnat],[v4]),[term_of(tl2)],[tl2]),
+    [problem([l:pnat list,v0:pnat,v1:pnat list,v2:(v1=nil in pnat list=>void)=>less(length(tl(v1)),length(v1)),v3:v0::v1=nil in pnat list=>void]==>less(length(v1),s(length(v1))),
+     generalise(length(v1),v4:pnat),lambda(v4,su(v5,[v4 of length(v1)],[v5]))of _803,
+     [problem([l:pnat list,v0:pnat,v1:pnat list,v2:(v1=nil in pnat list=>void)=>less(length(tl(v1)),length(v1)),v3:v0::v1=nil in pnat list=>void]==>v4:pnat=>less(v4,s(v4)),
+      ind_strat(induction(lemma(pnat_primitive)-[(v4:pnat)-s(v5)])then[base_case(sym_eval(normalize_term([reduction([],[less2,equ(u(1),left)])]))then[elementary(istrue)]),step_case(ripple(direction_out,unblock_then_wave(direction_out,unblock_lazy([unblock(meta_ripple,unused,unused),idtac])then wave(direction_out,[],[less3,equ(u(1),left)],[])))then[unblock_then_fertilize(strong,unblock_fertilize_lazy([idtac])then fertilize(strong,v6))])]),lambda(v4,p_ind(v4,su(su(0,[less2 of 0],[v5]),[term_of(less2)],[less2]),[v5,v6,su(su(su(v6,[v7 of s(v5)],[v8]),[less3 of v5],[v7]),[term_of(less3)],[less3])])),
+      [
+      ]) ext _803
+     ]) ext _955
+    ]) ext _1112,
+    problem([l:pnat list,v0:pnat,v1:pnat list,v2:(v1=nil in pnat list=>void)=>less(length(tl(v1)),length(v1))]==>(v0::v1=nil in pnat list=>void)in u(1),
+    repeat wfftac,axiom,
+    [
+    ])
+   ]) ext _1279
+  ]) ext _1404
+ ]) ext _1458
+]).

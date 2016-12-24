@@ -1,0 +1,2 @@
+/* all elements of l < x */
+le(x,l) <==> term_of(le) of x of l.

@@ -1,0 +1,68 @@
+/*
+ * @(#)$Id: greater3,v 1.2 1996/06/11 17:04:47 img Exp $
+ *
+ * $Log: greater3,v $
+ * Revision 1.2  1996/06/11 17:04:47  img
+ * Correct equations for these predicates.
+ *
+ * Revision 1.1  1994/09/16  09:38:16  dream
+ * Initial revision
+ */
+
+problem([]==>x:pnat=>y:pnat=>greater(s(x),s(y))=greater(x,y)in u(1),
+repeat dequantify_once,lambda(x,lambda(y,_13874)),
+[problem([x:pnat,y:pnat]==>greater(s(x),s(y))=greater(x,y)in u(1),
+ simplify,_13883,
+ [problem([x:pnat,y:pnat]==>p_ind(y,lambda(y__,pnat_eq(y__,0,void,{true})),[~,v1,lambda(y__,pnat_eq(y__,0,void,spread(term_of(succlemma)of y__ of lambda(~,axiom),[v6_,~,v1 of v6_])))])of x=p_ind(y,lambda(y_,pnat_eq(y_,0,void,{true})),[~,v1,lambda(y_,pnat_eq(y_,0,void,spread(term_of(succlemma)of y_ of lambda(~,axiom),[v6,~,v1 of v6])))])of x in u(1),
+  equality,axiom,
+  [problem([x:pnat,y:pnat]==>p_ind(y,lambda(y__,pnat_eq(y__,0,void,{true})),[~,v1,lambda(y__,pnat_eq(y__,0,void,spread(term_of(succlemma)of y__ of lambda(~,axiom),[v6_,~,v1 of v6_])))])of x in u(1),
+   repeat wfftac,axiom,
+   [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y__:pnat,v2:y__=0 in pnat=>void]==>spread(term_of(succlemma)of y__ of lambda(~,axiom),[v6_,~,v1 of v6_])in u(1),
+    intro(using(x:pnat#y__=s(x)in pnat)),axiom,
+    [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y__:pnat,v2:y__=0 in pnat=>void]==>term_of(succlemma)of y__ of lambda(~,axiom)in (x:pnat#y__=s(x)in pnat),
+     repeat wfftac,axiom,
+     [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y__:pnat,v2:y__=0 in pnat=>void,~ :y__=0 in pnat]==>axiom in void,
+      elim(v2),su(_14397,[v2 of _14404],[v3]),
+      [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y__:pnat,v2:y__=0 in pnat=>void,~ :y__=0 in pnat]==>y__=0 in pnat,
+       intro,~,
+       [
+       ]) ext _14404,
+       problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y__:pnat,v2:y__=0 in pnat=>void,~ :y__=0 in pnat,v3:void]==>axiom in void,
+       elim(v3),any(v3),
+       [
+       ]) ext _14397
+      ]) ext _14327
+     ]),
+     problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y__:pnat,v2:y__=0 in pnat=>void,v3:pnat,v4:y__=s(v3)in pnat,v5:term_of(succlemma)of y__ of lambda(~,axiom)=v3&v4 in (x:pnat#y__=s(x)in pnat)]==>v1 of v3 in u(1),
+     repeat intro,axiom,
+     [
+     ])
+    ]) ext _14140
+   ]),
+   problem([x:pnat,y:pnat]==>p_ind(y,lambda(y_,pnat_eq(y_,0,void,{true})),[~,v1,lambda(y_,pnat_eq(y_,0,void,spread(term_of(succlemma)of y_ of lambda(~,axiom),[v6,~,v1 of v6])))])of x in u(1),
+   repeat wfftac,axiom,
+   [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y_:pnat,v2:y_=0 in pnat=>void]==>spread(term_of(succlemma)of y_ of lambda(~,axiom),[v6,~,v1 of v6])in u(1),
+    intro(using(x:pnat#y_=s(x)in pnat)),axiom,
+    [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y_:pnat,v2:y_=0 in pnat=>void]==>term_of(succlemma)of y_ of lambda(~,axiom)in (x:pnat#y_=s(x)in pnat),
+     repeat wfftac,axiom,
+     [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y_:pnat,v2:y_=0 in pnat=>void,~ :y_=0 in pnat]==>axiom in void,
+      elim(v2),su(_15024,[v2 of _15031],[v3]),
+      [problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y_:pnat,v2:y_=0 in pnat=>void,~ :y_=0 in pnat]==>y_=0 in pnat,
+       intro,~,
+       [
+       ]) ext _15031,
+       problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y_:pnat,v2:y_=0 in pnat=>void,~ :y_=0 in pnat,v3:void]==>axiom in void,
+       elim(v3),any(v3),
+       [
+       ]) ext _15024
+      ]) ext _14954
+     ]),
+     problem([x:pnat,y:pnat,v0:pnat,v1:pnat=>u(1),y_:pnat,v2:y_=0 in pnat=>void,v3:pnat,v4:y_=s(v3)in pnat,v5:term_of(succlemma)of y_ of lambda(~,axiom)=v3&v4 in (x:pnat#y_=s(x)in pnat)]==>v1 of v3 in u(1),
+     repeat intro,axiom,
+     [
+     ])
+    ]) ext _14767
+   ])
+  ]) ext _13883
+ ]) ext _13874
+]).

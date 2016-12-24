@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: flattenmc3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: flattenmc3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>h:int nestedlist=>t:int nestedlist=>l:int list=>flattenmc(inr(h)::t,l)=flattenmc(h,flattenmc(t,l))in int list,_,_,_).

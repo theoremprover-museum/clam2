@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: pred,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: pred,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+pred(s)<==>p_ind(s,0,[a,~,a]).

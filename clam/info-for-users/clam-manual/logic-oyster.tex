@@ -1,0 +1,75 @@
+\subsection {\oyster specific predicates}
+There are a great many ways in which \clam implicitly assumes that its
+object-logic is type theory, \oyster in particular.  This section
+documents some predicates which are very specific to \oyster.
+
+
+\begin{predicate}{canonical/2}{canonical(?Term,?Type)}%
+{\tt Term} is a canonical member of {\tt Type} (see readings on Type
+Theory (e.g. \cite{nuprl-book}) for a precise definition of
+canonical). Although it is possible to call this predicate in mode
+{\tt canonical(-,+)}, to generate all canonical members of a given
+type, this is in general not very useful (typically, types have an
+infinite number of canonical members), and the only useful mode is of
+course {\tt canonical(+,?)}, to check whether a given element is
+canonical in a type.
+
+Currently, this predicate does not contain a full definition canonical
+\notnice members of all types in Oyster, and should be extended when
+and if needed.
+\end{predicate}
+
+\begin{predicate}{constant/2}{constant(?C,?T)}%
+{\tt C} is a constant of type {\tt T}. The only useful mode is of
+course {\tt constant(+,-)}, since mode {\tt constant(-,?)} would just
+generate an infinite number of constants of type {\tt T}xxxxs.
+\end{predicate}
+
+\begin{predicate}{elementary/2}{elementary(+S,?T)}%
+{\tt T} is an Oyster tactic which proves sequent {\tt S}. All
+annotations appearing in {\tt S} are ignored (removed).  The proof is
+restricted to a limited amount propositional reasoning and a limited
+amount of non-propositional reasoning.
+
+It is hard to characterise the class of sequents provable by {\tt
+elementary/2}:
+\begin{itemize}
+\item It is almost a decision procedure for intuitionistic
+      propositional sequents.
+\item It spots identities ({\tt X=X in T}).
+\item It removes universally quantified variables from the goal and
+      sees if the remainder is a tautology ({\tt x:pnat=>f(x)=>f(x)}).
+\item It knows a little bit about the structure of types such as
+      uniqueness properties, e.g., that no number is equal to its own 
+      successor and that no number's successor is equal to zero. \inxx{arithmetic}
+\end{itemize}
+
+If {\tt S} is a list of sequents then {\tt T} is the corresponding
+list of tactics.
+
+{\tt elementary/2} requires that certain \inx{lemmas} are loaded from the
+library: this dependency is reflected in the \inx{needs file}.
+\end{predicate}
+
+\begin{predicate}{propositional/1}{propositional(+S,?T)}%
+{\tt S} is a derivable sequent of intuitionistic propositional logic,
+and {\tt T} is an Oyster tactic to prove this to be the case.
+\end{predicate}
+
+\begin{predicate}{type-of/3}{type-of(+H,+Exp, ?Type)}%
+Guesses (or checks) the {\tt Type} of {\tt Exp}, presumed to be
+well-typed in context {\tt H}. This is of course in
+general undecidable in Martin L\"{o}f's Type Theory, which is why I
+used the word guess.  On backtracking it enumerates all educated
+guesses (see \p{guess-type/3}).
+
+{\small\begin{verbatim}
+| ?- type_of([],lambda(u,lambda(v,member(u,v))),T).
+T = int=>int list=>u(1)
+
+| ?- type_of([],lambda(u,app(u,u)::nil),T).
+T = _7317 list=> (_7317 list)list 
+\end{verbatim}
+}
+\end{predicate}
+

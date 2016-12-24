@@ -1,0 +1,11 @@
+/*
+ * @(#)$Id: maxht,v 1.2 1996/06/19 09:31:38 img Exp $
+ *
+ * $Log: maxht,v $
+ * Revision 1.2  1996/06/19 09:31:38  img
+ * *** empty log message ***
+ *
+ * Revision 1.1  1994/09/16  09:37:56  dream
+ * Initial revision
+ */
+maxht(t)<==>term_of(maxht) of t.

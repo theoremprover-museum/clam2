@@ -1,0 +1,16 @@
+/*
+ * @(#)$Id: geq2,v 1.2 1996/06/11 17:04:39 img Exp $
+ *
+ * $Log: geq2,v $
+ * Revision 1.2  1996/06/11 17:04:39  img
+ * Correct equations for these predicates.
+ *
+% Revision 1.1  1994/09/16  09:38:16  dream
+% Initial revision
+%
+ */
+
+problem([]==>x:pnat=>geq(0,s(x))=void in u(1),
+repeat intro then wfftacs then simplify then identity,lambda(x,axiom),
+[
+]).

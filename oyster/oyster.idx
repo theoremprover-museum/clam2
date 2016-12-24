@@ -1,0 +1,250 @@
+\indexentry{info@\texttt  {info}}{1}
+\indexentry{create\_def@\texttt  {create\_def}}{3}
+\indexentry{operator declarations}{5}
+\indexentry{ext@\texttt  {ext}}{5}
+\indexentry{$==>$}{5}
+\indexentry{$<==>$}{5}
+\indexentry{$:$}{5}
+\indexentry{$=>$}{5}
+\indexentry{$\#$}{5}
+\indexentry{\char '134\relax @\texttt  {\char '134\relax }}{5}
+\indexentry{$///$}{5}
+\indexentry{$\leadsto $}{5}
+\indexentry{$in$}{5}
+\indexentry{$=$}{5}
+\indexentry{$<$}{5}
+\indexentry{$<=$}{5}
+\indexentry{$+$}{5}
+\indexentry{$-$}{5}
+\indexentry{$*$}{5}
+\indexentry{$/$}{5}
+\indexentry{mod@\texttt  {mod}}{5}
+\indexentry{$\&$}{5}
+\indexentry{$::$}{5}
+\indexentry{of@\texttt  {of}}{5}
+\indexentry{list@\texttt  {list}}{5}
+\indexentry{operator declarations}{6}
+\indexentry{:=@\texttt  {:=}}{6}
+\indexentry{=:@\texttt  {=:}}{6}
+\indexentry{dynvalue@\texttt  {dynvalue}}{6}
+\indexentry{cleandatabase@\texttt  {cleandatabase}}{7}
+\indexentry{store@\texttt  {store}}{7}
+\indexentry{stored@\texttt  {stored}}{7}
+\indexentry{unstore@\texttt  {unstore}}{7}
+\indexentry{unstoreall@\texttt  {unstoreall}}{7}
+\indexentry{$\triangle _{=:}$}{8}
+\indexentry{$\vartheta _{\it  universe}$}{8}
+\indexentry{$\vartheta _{\it  autotactic}$}{8}
+\indexentry{treeassign@\texttt  {treeassign}}{8}
+\indexentry{extractterm@\texttt  {extractterm}}{9}
+\indexentry{create\_thm@\texttt  {create\_thm}}{9}
+\indexentry{add\_thm@\texttt  {add\_thm}}{9}
+\indexentry{load\_thm@\texttt  {load\_thm}}{10}
+\indexentry{save\_thm@\texttt  {save\_thm}}{10}
+\indexentry{create\_def@\texttt  {create\_def}}{10}
+\indexentry{add\_def@\texttt  {add\_def}}{10}
+\indexentry{save\_def@\texttt  {save\_def}}{11}
+\indexentry{current\_def@\texttt  {current\_def}}{11}
+\indexentry{erase\_def@\texttt  {erase\_def}}{11}
+\indexentry{erasethm@\texttt  {erasethm}}{11}
+\indexentry{writep@\texttt  {writep}}{11}
+\indexentry{writel@\texttt  {writel}}{11}
+\indexentry{autotactic@\texttt  {autotactic}}{11}
+\indexentry{select@\texttt  {select}}{12}
+\indexentry{$\vartheta _{\it  theorem}$}{12}
+\indexentry{$\vartheta _{\it  pos}$}{12}
+\indexentry{pos@\texttt  {pos}}{12}
+\indexentry{cproblem}{12}
+\indexentry{top@\texttt  {top}}{13}
+\indexentry{up@\texttt  {up}}{13}
+\indexentry{down@\texttt  {down}}{13}
+\indexentry{next@\texttt  {next}}{13}
+\indexentry{generate\_sons@\texttt  {generate\_sons}}{14}
+\indexentry{screensize@\texttt  {screensize}}{14}
+\indexentry{cscreensize@\texttt  {cscreensize}}{14}
+\indexentry{shift@\texttt  {shift}}{14}
+\indexentry{cshift@\texttt  {cshift}}{14}
+\indexentry{fringe@\texttt  {fringe}}{14}
+\indexentry{cfringe@\texttt  {cfringe}}{14}
+\indexentry{display@\texttt  {display}}{15}
+\indexentry{snapshot@\texttt  {snapshot}}{15}
+\indexentry{write\_hyp@\texttt  {write\_hyp}}{15}
+\indexentry{status@\texttt  {status}}{16}
+\indexentry{goal@\texttt  {goal}}{16}
+\indexentry{hyp\_list@\texttt  {hyp\_list}}{16}
+\indexentry{hypothesis@\texttt  {hypothesis}}{17}
+\indexentry{refinement@\texttt  {refinement}}{17}
+\indexentry{extract@\texttt  {extract}}{17}
+\indexentry{autotactic@\texttt  {autotactic}}{17}
+\indexentry{universe@\texttt  {universe}}{17}
+\indexentry{status0@\texttt  {status0}}{17}
+\indexentry{polish@\texttt  {polish}}{17}
+\indexentry{polishl@\texttt  {polishl}}{18}
+\indexentry{apply@\texttt  {apply}}{19}
+\indexentry{unfold@\texttt  {unfold}}{19}
+\indexentry{universe@\texttt  {universe}}{19}
+\indexentry{proving@\texttt  {proving}}{19}
+\indexentry{autotactic@\texttt  {autotactic}}{19}
+\indexentry{undo@\texttt  {undo}}{20}
+\indexentry{pure@\texttt  {pure}}{20}
+\indexentry{$\vartheta _{\it  status}$}{20}
+\indexentry{increment@\texttt  {increment}}{20}
+\indexentry{operator declarations}{21}
+\indexentry{then@\texttt  {then}}{21}
+\indexentry{or@\texttt  {or}}{21}
+\indexentry{repeat@\texttt  {repeat}}{21}
+\indexentry{complete@\texttt  {complete}}{21}
+\indexentry{try@\texttt  {try}}{21}
+\indexentry{idtac@\texttt  {idtac}}{21}
+\indexentry{prove}{21}
+\indexentry{then@\texttt  {then}}{21}
+\indexentry{or@\texttt  {or}}{21}
+\indexentry{repeat@\texttt  {repeat}}{22}
+\indexentry{complete@\texttt  {complete}}{22}
+\indexentry{try@\texttt  {try}}{22}
+\indexentry{user tactic}{23}
+\indexentry{tactic@\texttt  {tactic}}{23}
+\indexentry{tactic@\texttt  {tactic}}{23}
+\indexentry{tactic@\texttt  {tactic}}{24}
+\indexentry{fold@\texttt  {fold}}{24}
+\indexentry{idtaclist@\texttt  {idtaclist}}{25}
+\indexentry{provelist@\texttt  {provelist}}{25}
+\indexentry{makesubgoals@\texttt  {makesubgoals}}{25}
+\indexentry{intro@\texttt  {intro}}{26}
+\indexentry{elim@\texttt  {elim}}{26}
+\indexentry{equality@\texttt  {equality}}{26}
+\indexentry{decide@\texttt  {decide}}{26}
+\indexentry{simplify@\texttt  {simplify}}{26}
+\indexentry{compute@\texttt  {compute}}{26}
+\indexentry{reduce@\texttt  {reduce}}{26}
+\indexentry{reduce@\texttt  {reduce}}{26}
+\indexentry{subst@\texttt  {subst}}{26}
+\indexentry{seq@\texttt  {seq}}{27}
+\indexentry{thin@\texttt  {thin}}{27}
+\indexentry{hyp@\texttt  {hyp}}{27}
+\indexentry{arith@\texttt  {arith}}{27}
+\indexentry{unroll@\texttt  {unroll}}{27}
+\indexentry{repeat@\texttt  {repeat}}{27}
+\indexentry{or@\texttt  {or}}{27}
+\indexentry{repeat@\texttt  {repeat}}{27}
+\indexentry{complete@\texttt  {complete}}{27}
+\indexentry{try@\texttt  {try}}{27}
+\indexentry{pure@\texttt  {pure}}{27}
+\indexentry{operator declarations}{28}
+\indexentry{new@\texttt  {new}}{28}
+\indexentry{constructor rules}{30}
+\indexentry{refinement rules}{30}
+\indexentry{realisation rules}{30}
+\indexentry{membership rules}{30}
+\indexentry{noequal@\texttt  {noequal}}{30}
+\indexentry{equality rules}{30}
+\indexentry{selector rules}{30}
+\indexentry{refinement rules}{31}
+\indexentry{membership rules}{31}
+\indexentry{derived rule}{31}
+\indexentry{equality rules}{31}
+\indexentry{rulename@\texttt  {rulename}}{32}
+\indexentry{derived@\texttt  {derived}}{32}
+\indexentry{atom type}{32}
+\indexentry{Unary type}{33}
+\indexentry{void type}{34}
+\indexentry{pnat type}{35}
+\indexentry{natural numbers}{35}
+\indexentry{pless type scheme}{38}
+\indexentry{int type}{41}
+\indexentry{less type scheme}{44}
+\indexentry{list type}{48}
+\indexentry{disjoint union type}{50}
+\indexentry{function type}{53}
+\indexentry{dependent function type}{56}
+\indexentry{product type}{60}
+\indexentry{dependent product type}{62}
+\indexentry{quotient type}{65}
+\indexentry{subset type}{67}
+\indexentry{recursive type}{70}
+\indexentry{acc type}{73}
+\indexentry{membership type scheme}{75}
+\indexentry{equality type scheme}{75}
+\indexentry{universes}{77}
+\indexentry{equal\_combine@\texttt  {equal\_combine}}{83}
+\indexentry{mark@\texttt  {mark}}{84}
+\indexentry{copy@\texttt  {copy}}{84}
+\indexentry{markf@\texttt  {markf}}{84}
+\indexentry{writeclause@\texttt  {writeclause}}{85}
+\indexentry{decideequal@\texttt  {decideequal}}{85}
+\indexentry{allequals@\texttt  {allequals}}{85}
+\indexentry{equals@\texttt  {equals}}{85}
+\indexentry{extractequal@\texttt  {extractequal}}{85}
+\indexentry{syntax@\texttt  {syntax}}{86}
+\indexentry{syntax0@\texttt  {syntax0}}{86}
+\indexentry{ttt@\texttt  {ttt}}{86}
+\indexentry{tttl@\texttt  {tttl}}{88}
+\indexentry{ttl1@\texttt  {ttl1}}{88}
+\indexentry{$\tau _{var}$}{88}
+\indexentry{fairly\_nonalphanum@\texttt  {fairly\_nonalphanum}}{88}
+\indexentry{idtail@\texttt  {idtail}}{89}
+\indexentry{writeterm@\texttt  {writeterm}}{89}
+\indexentry{writeterm0@\texttt  {writeterm0}}{89}
+\indexentry{wdecl@\texttt  {wdecl}}{89}
+\indexentry{wterm@\texttt  {wterm}}{90}
+\indexentry{wterml@\texttt  {wterml}}{91}
+\indexentry{standardform@\texttt  {standardform}}{91}
+\indexentry{par@\texttt  {par}}{91}
+\indexentry{weight@\texttt  {weight}}{91}
+\indexentry{prepare@\texttt  {prepare}}{92}
+\indexentry{quote@\texttt  {quote}}{92}
+\indexentry{fringe@\texttt  {fringe}}{92}
+\indexentry{s@\texttt  {s}}{92}
+\indexentry{pairing\_of@\texttt  {pairing\_of}}{93}
+\indexentry{substituted@\texttt  {substituted}}{93}
+\indexentry{substitutedlist@\texttt  {substitutedlist}}{95}
+\indexentry{slist@\texttt  {slist}}{95}
+\indexentry{shyp@\texttt  {shyp}}{95}
+\indexentry{freevarsinterm@\texttt  {freevarsinterm}}{95}
+\indexentry{freevarinterm@\texttt  {freevarinterm}}{96}
+\indexentry{appears@\texttt  {appears}}{96}
+\indexentry{modify@\texttt  {modify}}{96}
+\indexentry{convertible@\texttt  {convertible}}{97}
+\indexentry{convertlist@\texttt  {convertlist}}{97}
+\indexentry{pnat,pless,s\_subterm,s\_strip@\texttt  {pnat,pless,s\_subterm,s\_strip}}{97}
+\indexentry{illegal\_rec\_type@\texttt  {illegal\_rec\_type}}{98}
+\indexentry{appears\_in@\texttt  {appears\_in}}{98}
+\indexentry{type@\texttt  {type}}{99}
+\indexentry{type0@\texttt  {type0}}{100}
+\indexentry{rewrite@\texttt  {rewrite}}{100}
+\indexentry{eval@\texttt  {eval}}{101}
+\indexentry{evallist@\texttt  {evallist}}{104}
+\indexentry{evalcond@\texttt  {evalcond}}{104}
+\indexentry{compute\_old@\texttt  {compute\_old}}{104}
+\indexentry{compute\_list@\texttt  {compute\_list}}{104}
+\indexentry{compute\_using@\texttt  {compute\_using}}{104}
+\indexentry{compute\_list@\texttt  {compute\_list}}{105}
+\indexentry{compute\_list\_save@\texttt  {compute\_list\_save}}{105}
+\indexentry{correct\_tag@\texttt  {correct\_tag}}{106}
+\indexentry{compute@\texttt  {compute}}{106}
+\indexentry{verify\_tagging@\texttt  {verify\_tagging}}{106}
+\indexentry{verify\_unfold@\texttt  {verify\_unfold}}{106}
+\indexentry{tag\_for@\texttt  {tag\_for}}{107}
+\indexentry{imm\_subterms@\texttt  {imm\_subterms}}{108}
+\indexentry{thin\_hyps@\texttt  {thin\_hyps}}{109}
+\indexentry{extend\_thin@\texttt  {extend\_thin}}{109}
+\indexentry{replace\_hyps@\texttt  {replace\_hyps}}{109}
+\indexentry{diff@\texttt  {diff}}{110}
+\indexentry{genvar@\texttt  {genvar}}{111}
+\indexentry{genint@\texttt  {genint}}{111}
+\indexentry{decimal@\texttt  {decimal}}{111}
+\indexentry{level@\texttt  {level}}{111}
+\indexentry{free@\texttt  {free}}{111}
+\indexentry{extend@\texttt  {extend}}{111}
+\indexentry{freevar@\texttt  {freevar}}{111}
+\indexentry{notused@\texttt  {notused}}{111}
+\indexentry{decl@\texttt  {decl}}{112}
+\indexentry{copy@\texttt  {copy}}{112}
+\indexentry{readfile@\texttt  {readfile}}{112}
+\indexentry{tab@\texttt  {tab}}{112}
+\indexentry{small\_letter@\texttt  {small\_letter}}{112}
+\indexentry{capital\_letter@\texttt  {capital\_letter}}{112}
+\indexentry{digit@\texttt  {digit}}{112}
+\indexentry{underscore@\texttt  {underscore}}{112}
+\indexentry{apostroph@\texttt  {apostroph}}{112}
+\indexentry{toggle@\texttt  {toggle}}{112}

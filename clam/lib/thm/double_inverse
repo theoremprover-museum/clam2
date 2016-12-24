@@ -1,0 +1,30 @@
+problem([]==>x:pnat=>even(x)=>z:pnat#x=double(z)in pnat,
+quantifier_to_front(x:pnat)then try dequantify_once then do_induction([(x:pnat)-s(s(v0))]),lambda(x,su(lambda(v3,su(su(su(su(su(v8,[v7 of x],[v8]),[v6 of lambda(v0,lambda(v1,_1176))],[v7]),[v5 of _1183],[v6]),[v4 of _1190],[v5]),[v3 of lambda(x,even(x)=>z:pnat#x=double(z)in pnat)],[v4]))of v2,[term_of(twos)],[v2])),
+[problem([x:pnat]==>even(0)=>z:pnat#0=double(z)in pnat,
+ sym_eval(normalize_term([reduction([1],[even1,equ(u(1),left)]),reduction([],[imp1,equiv(left)])])then[existential(z:pnat,0)then[normalize_term([reduction([2,1],[double1,equ(pnat,left)])])]])then[elementary(identity)],su(su(su(spread(v0,[v1,v2,su(v4,[v2 of (0&su(axiom,[term_of(double1)],[double1]))],[v4])]),[imp1 of (z:pnat#0=double(z)in pnat)],[v0]),[term_of(imp1)],[imp1]),[term_of(even1)],[even1]),
+ [
+ ]) ext _1190,
+ problem([x:pnat]==>even(s(0))=>z:pnat#s(0)=double(z)in pnat,
+ sym_eval(normalize_term([reduction([1],[even2,equ(u(1),left)]),reduction([],[imp2,equiv(left)])]))then[elementary(unfold_def_all(_1500<=>_1501)then intro(explicit(0))then simplify then wfftacs)],su(su(su(spread(v0,[v1,v2,su(v4,[v2 of 0],[v4])]),[imp2 of (z:pnat#s(0)=double(z)in pnat)],[v0]),[term_of(imp2)],[imp2]),[term_of(even2)],[even2]),
+ [
+ ]) ext _1183,
+ problem([x:pnat,v0:pnat,v1:even(v0)=>z:pnat#v0=double(z)in pnat]==>even(s(s(v0)))=>z:pnat#s(s(v0))=double(z)in pnat,
+ ripple(direction_out,wave(direction_out,[1],[even3,equ(u(1),left)],[]))then[unblock_then_fertilize(weak,unblock_fertilize_lazy([idtac])then fertilize(weak,fertilize_then_ripple(fertilize_left_or_right(left,[weak_fertilize(left,=>,[],v1)]))))],su(su(lambda(v2,lambda(v3,su(su(v5,[v2 of v4],[v5]),[v1 of v3],[v4])))of _1712,[even3 of v0],[v2]),[term_of(even3)],[even3]),
+ [problem([x:pnat,v0:pnat,v1:even(v0)=>z:pnat#v0=double(z)in pnat]==> (z:pnat#v0=double(z)in pnat)=>z:pnat#s(s(v0))=double(z)in pnat,
+  autotactic(wfftacs),_1762,
+  [problem([x:pnat,v0:pnat,v1:even(v0)=>z:pnat#v0=double(z)in pnat]==> (z:pnat#v0=double(z)in pnat)=>z:pnat#s(s(v0))=double(z)in pnat,
+   intro,lambda(v2,_1922),
+   [problem([x:pnat,v0:pnat,v1:even(v0)=>z:pnat#v0=double(z)in pnat,v2:z:pnat#v0=double(z)in pnat]==>z:pnat#s(s(v0))=double(z)in pnat,
+    elim(v2),spread(v2,[z,v3,_2016]),
+    [problem([x:pnat,v0:pnat,v1:even(v0)=>z:pnat#v0=double(z)in pnat,v2:z:pnat#v0=double(z)in pnat,z:pnat,v3:v0=double(z)in pnat,v4:v2=z&v3 in (z:pnat#v0=double(z)in pnat)]==>z_:pnat#s(s(v0))=double(z_)in pnat,
+     intro(s(z)),s(z)&_2154,
+     [problem([x:pnat,v0:pnat,v1:even(v0)=>z:pnat#v0=double(z)in pnat,v2:z:pnat#v0=double(z)in pnat,z:pnat,v3:v0=double(z)in pnat,v4:v2=z&v3 in (z:pnat#v0=double(z)in pnat)]==>s(s(v0))=double(s(z))in pnat,
+      sym_eval(equal(v3,right)then[normalize_term([reduction([2,1],[double2,equ(pnat,left)])])])then[elementary(identity)],su(su(axiom,[double2 of z],[v3]),[term_of(double2)],[double2]),
+      [
+      ]) ext _2154
+     ]) ext _2016
+    ]) ext _1922
+   ]) ext _1762
+  ]) ext _1712
+ ]) ext _1176
+]).

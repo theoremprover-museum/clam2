@@ -1,0 +1,22 @@
+/*
+ * @(#)$Id: rotate3,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: rotate3,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>x:pnat=>l:int list=>l=nil in int list=>rotate(s(x),l)=nil in int list,
+repeat dequantify_once,lambda(x,lambda(l,_7608)),
+[problem([x:pnat,l:int list]==>l=nil in int list=>rotate(s(x),l)=nil in int list,
+ repeat intro,lambda(v0,_7662),
+ [problem([x:pnat,l:int list,v0:l=nil in int list]==>rotate(s(x),l)=nil in int list,
+  subst(over(v1,rotate(s(x),v1)=nil in int list),l=nil in int list)then[univ_elim(v0),idtac,wfftacs],_7671,
+  [problem([x:pnat,l:int list,v0:l=nil in int list]==>rotate(s(x),nil)=nil in int list,
+   simplify then repeat intro,axiom,
+   [
+   ]) ext _7671
+  ]) ext _7662
+ ]) ext _7608
+]).

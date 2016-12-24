@@ -1,0 +1,69 @@
+/* -*- Prolog -*-
+ * @@(#)$Id: fertilization_strong,v 1.7 1999/02/04 16:40:19 img Exp $
+ *
+ * $Log: fertilization_strong,v $
+ * Revision 1.7  1999/02/04 16:40:19  img
+ * adjustment for tactic
+ *
+ * Revision 1.6  1999/01/26 10:37:11  img
+ * corrected comment
+ *
+ * Revision 1.5  1999/01/11 12:26:27  img
+ * Strong fertilization is terminating method
+ *
+ * Revision 1.4  1998/11/10 16:10:02  img
+ * Reorganised methods and integrated piecewise fertilization.
+ *
+ * Revision 1.3  1998/09/15 16:00:34  img
+ * use immediate/[1,2]; indentation changes
+ *
+ * Revision 1.2  1998/06/10 08:37:21  img
+ * Multiple s.f.'s may be possible, so do them all.  This means that
+ * s.f. is no longer closing (see step_case which must now account for
+ * this possibility).
+ *
+ * Revision 1.1  1996/12/11 15:09:21  img
+ * Merge of mthd and smthd libraries.
+ *
+ * Revision 1.2  1996/12/04  13:14:51  img
+ * Use inductive_hypothesis.
+ *
+ * Revision 1.1  1994/09/16  09:34:27  dream
+ * Initial revision
+ */
+
+/* Look for an instance of an inductive hypothesis in the goal.  For
+   such a term to exist it must either be the case that the goal does
+   not contain wave-fronts, or, the top of the the matrix is a
+   wave-front and this front has one or more holes, each of which is
+   an instance of some hypothesis.  */
+
+method(fertilization_strong(Hyp),
+       H==>G,
+       [matrix(_,Matrix,G),
+	/* simple instance */
+        inductive_hypothesis(Status,Hyp:Hypothesis,H),
+        instantiate(H,[],Hypothesis,Matrix,_) ],
+       [],
+       [],
+       fertilization_strong(Hyp)).
+
+method(fertilization_strong(HypsNs),
+       H==>G,
+       [matrix(Vs,Matrix,G),
+	findall(AHyp-[N],
+		(ann_exp_at(Matrix,[N],Hole),
+		 inductive_hypothesis(Status,AHyp:Hypothesis,H),
+		 instantiate(H,[],Hypothesis,Hole,_)),HypsNs),
+        \+ HypsNs = []],
+       [zip(HypsNs,Hyps,Ns),
+	raw_to_used(H,Hyps,NewH),
+	erase(Matrix,UMatrix),
+	/* each of the positions N is S.F. */
+	replace_foldr(Ns,{true},UMatrix,NewMatrix),
+	matrix(Vs,NewMatrix,NewG)],
+       [NewH==>NewG],				%step case will remove ann. from H
+       fertilization_strong(HypsNs)).
+
+
+

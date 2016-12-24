@@ -1,0 +1,18 @@
+/* -*- Mode: Prolog -*-
+ * @(#)$Id: unblock_fertilize_lazy,v 1.3 1998/06/10 09:33:09 img Exp $
+ *
+ * $Log: unblock_fertilize_lazy,v $
+ * Revision 1.3  1998/06/10 09:33:09  img
+ * conditional weak fertilize
+ *
+ * Revision 1.2  1996/12/11 15:07:23  img
+ * New methods for lazy application of unblocking.
+ *
+ */
+
+/* Avoid use of unblock(meta_ripple,_,_) during fertilization */
+iterator_lazy(method,unblock_fertilize_lazy,submethods,
+	      [unblock(sink,_,_),
+	       unblock(wave_front,_,_),
+	       unblock(cwf,_,_)]).
+

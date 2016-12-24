@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: grsqsuc,v 1.1 1994/09/16 09:35:20 dream Exp $
+ *
+ * $Log: grsqsuc,v $
+ * Revision 1.1  1994/09/16 09:35:20  dream
+ * Initial revision
+ *
+ */
+
+problem([]==> n:pnat=>greater(n,s(0))=>greater(times(n,n),s(n)),_,_,_).

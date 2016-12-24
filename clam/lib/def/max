@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: max,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: max,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+max(x,y)<==>pless(x,y,y,x).

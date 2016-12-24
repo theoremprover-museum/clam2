@@ -1,0 +1,23 @@
+/*
+ * @(#)$Id: rotate1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: rotate1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l:int list=>rotate(0,l)=l in int list,
+repeat dequantify_once,lambda(l,_8757),
+[problem([l:int list]==>rotate(0,l)=l in int list,
+ elim(l),list_ind(l,_8793,[v0,v1,v2,_8801]),
+ [problem([l:int list]==>rotate(0,nil)=nil in int list,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _8793,
+  problem([l:int list,v0:int,v1:int list,v2:rotate(0,v1)=v1 in int list]==>rotate(0,v0::v1)=v0::v1 in int list,
+  simplify then repeat intro,axiom,
+  [
+  ]) ext _8801
+ ]) ext _8757
+]).

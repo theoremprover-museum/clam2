@@ -1,0 +1,13 @@
+/*
+ * @(#)$Id: pnatapp1,v 1.1 1994/09/16 09:38:16 dream Exp $
+ *
+ * $Log: pnatapp1,v $
+ * Revision 1.1  1994/09/16 09:38:16  dream
+ * Initial revision
+ *
+ */
+
+problem([]==>l:pnat list=>pnatapp(nil,l)=l in pnat list,
+repeat intro then simplify then repeat intro,lambda(l,axiom),
+[
+]).

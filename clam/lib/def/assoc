@@ -1,0 +1,10 @@
+/*
+ * @(#)$Id: assoc,v 1.1 1994/09/16 09:37:56 dream Exp $
+ *
+ * $Log: assoc,v $
+ * Revision 1.1  1994/09/16 09:37:56  dream
+ * Initial revision
+ *
+ */
+
+assoc(x,l)<==>term_of(assoc)of x of l.
